@@ -1,9 +1,9 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import { getJobsList } from "../service/job-services.js";
 
 const jobRouter = express.Router();
 
-jobRouter.get("/", async (req, res) => {
+jobRouter.get("/", async (req: Request, res: Response) => {
   console.log("jobs GET request");
   const result = await getJobsList();
 
@@ -14,7 +14,7 @@ jobRouter.get("/", async (req, res) => {
   }
 });
 
-jobRouter.post("/add", async (req, res) => {
+jobRouter.post("/add", async (req: Request, res: Response) => {
   console.log("job POST request", req.body);
 });
 
