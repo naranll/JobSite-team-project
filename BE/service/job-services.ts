@@ -1,4 +1,4 @@
-import Job from "../model/job.js";
+import Job from "../model/job";
 
 export const getJobsList = async () => {
   return await Job.find({}).then((res) => {
