@@ -19,12 +19,24 @@ const UserSchema = new mongoose.Schema({
     unique: true,
     required: true,
   },
-  applied_jobs: [String],
-  posted_jobs: [String],
-  skills: {
-    type: Schema.Types.Array, // or String
-    ref: "skill",
-  },
+  applied_jobs: [
+    {
+      type: Schema.Types.String,
+      ref: "application",
+    },
+  ],
+  posted_jobs: [
+    {
+      type: Schema.Types.String,
+      ref: "job",
+    },
+  ],
+  skills: [
+    {
+      type: Schema.Types.String, // or String
+      ref: "skill",
+    },
+  ],
   image: String,
 });
 
