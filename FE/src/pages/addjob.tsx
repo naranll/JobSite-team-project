@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "../styles/addjob.module.css";
 import { useRouter } from "next/router";
+import { JobType } from "@/util/Types";
+import axios from "axios";
 
 export default function AddJob(): JSX.Element {
   const router = useRouter();
@@ -11,13 +13,20 @@ export default function AddJob(): JSX.Element {
 
     const target = event.currentTarget.elements;
 
-    const newJob = {
+    const newJob: JobType = {
       title: target.title.value,
       description: target.description.value,
       payment: target.payment.value,
     };
     console.log("add new job working", newJob);
-    router.push("/success");
+    axios
+      .post("http://localhost:8080/addjob", newJob)
+      .then((res) => {
+        if (res.data.success) {
+          router.push("/success");
+        }
+      })
+      .catch((err) => console.log(err));
   }
 
   return (

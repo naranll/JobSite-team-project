@@ -8,7 +8,7 @@ const port = 8080;
 
 app.use(cors());
 app.use(express.json());
-app.use("/jobs", jobRouter);
+app.use(jobRouter);
 
 app.listen(port, () => {
   console.log(`⚡️ [server]: Server is running at http://localhost:${port}`);

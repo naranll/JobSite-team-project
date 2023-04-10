@@ -7,9 +7,9 @@ const jobSchema = new mongoose.Schema(
       type: Schema.Types.String,
       ref: "user",
     },
-    title: { type: String, required: true },
-    description: { type: String, required: true },
-    requirement: { type: String, required: true },
+    title: { type: String },
+    description: { type: String },
+    requirement: { type: String },
     created_date: { type: Date, default: Date.now }, // could use moment npm later
     updated: { type: Date, default: Date.now },
     state: { type: Boolean, default: false },
@@ -18,7 +18,7 @@ const jobSchema = new mongoose.Schema(
       enum: ["type1", "type2", "type3"],
       default: "type1",
     },
-    wage: { type: Number, required: true },
+    payment: { type: Number },
     category: {
       type: Schema.Types.String,
       ref: "category",
