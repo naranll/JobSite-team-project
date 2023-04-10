@@ -1,7 +1,7 @@
-import Job from "../model/Job";
+// import Job from "../model/Job";
 
-export const getJobsList = async () => {
-  return await Job.find({}).then((res) => {
-    return res;
-  });
-};
+// export const addJobsList = async (job) => {
+//   return await Job.save({}).then((res) => {
+//     return res;
+//   });
+// };
