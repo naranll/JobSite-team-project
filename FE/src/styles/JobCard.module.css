@@ -1,0 +1,17 @@
+.jobCard {
+  border: 1px solid white;
+  padding: 30px;
+  border-radius: 8px;
+  width: 500px;
+  background-color: rgb(142, 199, 239);
+  color: rgb(0, 0, 0);
+}
+
+.jobCard .cardDisc {
+  margin: 20px;
+}
+
+.jobCard .cardmoney {
+  display: flex;
+  margin-left: 80%;
+}
