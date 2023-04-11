@@ -13,20 +13,20 @@ export default function Home(props: { jobs: JobType[] }): JSX.Element {
       </div>
       {jobs.map((job: JobType, index: number) => (
         <div key={index}>
-          <JobCard />
+          <JobCard {...job} />
         </div>
       ))}
     </div>
   );
 }
 
-// export async function getStaticProps() {
-//   const response = await fetch("http://localhost:8080/jobs");
-//   const jobs = await response.json();
-
-//   return {
-//     props: {
-//       jobs: jobs,
-//     },
-//   };
-// }
+export async function getStaticProps() {
+  const response = await fetch("http://localhost:8080/jobs");
+  const jobs = await response.json();
+  console.log(jobs);
+  return {
+    props: {
+      jobs: jobs,
+    },
+  };
+}
