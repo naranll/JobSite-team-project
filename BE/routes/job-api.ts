@@ -31,4 +31,25 @@ jobRouter.get("/jobs", async (req: Request, res: Response) => {
   }
 });
 
+jobRouter.get("/jobs/job_id", async (req: Request, res: Response) => {
+  console.log("generating path");
+  try {
+    const query = await Job.find({}).select({ _id: 1 });
+    return res.status(200).send(query);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+jobRouter.get("/jobs/:id", async (req: Request, res: Response) => {
+  console.log("id request", req.params.id);
+
+  try {
+    const result = await Job.findOne({ _id: req.params.id });
+    res.status(200).send(result);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 export default jobRouter;
