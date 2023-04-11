@@ -4,3 +4,8 @@ export type JobType = {
   description: string;
   payment: number;
 };
+
+export type userType = {
+  username: string;
+  password: string;
+};

@@ -11,6 +11,9 @@ export default function Header(): JSX.Element {
       <Link href={`/addjob`}>
         <div className={styles.post}>Post</div>
       </Link>
+      <Link href={"/user/login"}>
+        <div>LogIn</div>
+      </Link>
     </div>
   );
 }
