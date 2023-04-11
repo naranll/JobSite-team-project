@@ -1,15 +1,11 @@
 # job-site
 
 Narandelgerekh
-
 Yunchir
-
 Baljinnyam
 
-Andy
+======================
 
-Read Me change by Naraa~
+JobSite ERD
 
-testIsssue yunchir
-
-Read me change Balja
+![jobsite_erd](https://github.com/naranll/JobSite-FE/blob/main/public/erd.png)
