@@ -1,3 +1,9 @@
 export default function Register(): JSX.Element {
-  return <div>Register</div>;
+  return (
+    <div>
+      <form>
+        <label></label>
+      </form>
+    </div>
+  );
 }
