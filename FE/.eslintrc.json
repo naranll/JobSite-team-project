@@ -34,9 +34,7 @@
         "@typescript-eslint/no-unnecessary-type-assertion": "error",
         "@typescript-eslint/require-await": "error",
         "@typescript-eslint/return-await": "error",
-        "arrow-body-style": ["error", "as-needed"],
-        "unicorn/prefer-module": "off",
-        "unicorn/filename-case": ["error", { "case": "kebabCase" }]
+        "arrow-body-style": ["error", "as-needed"]
       }
     },
     {
@@ -48,7 +46,7 @@
       }
     },
     {
-      "files": ["*.js", "*.ts", "pages/**/*.tsx", "pages/**/*.jsx"], // for other js files & nextjs pages
+      "files": ["*.js", "*.ts"], // for other js files
       "rules": {
         "unicorn/prefer-module": "off",
         "unicorn/filename-case": ["error", { "case": "kebabCase" }]
@@ -60,6 +58,12 @@
       "rules": {
         "unicorn/prefer-module": "off",
         "unicorn/filename-case": ["error", { "case": "camelCase" }]
+      }
+    },
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "rules": {
+        "camelcase": ["error", { "properties": "always" }]
       }
     }
   ]
