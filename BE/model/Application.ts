@@ -11,9 +11,8 @@ const ApplicationSchema = new mongoose.Schema({
     ref: "user",
   },
   state: {
-    type: Boolean,
-
-    default: false,
+    type: String,
+    enum: ["active", "inactive"],
   },
 });
 
