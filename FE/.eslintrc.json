@@ -8,6 +8,7 @@
     "next",
     "next/core-web-vitals"
   ],
+  "plugins": ["eslint-plugin-unicorn"],
   "parserOptions": {
     "ecmaVersion": 2018,
     "sourceType": "module",
@@ -16,7 +17,7 @@
   "overrides": [
     {
       "files": ["*.ts", "**/*.ts", "*.tsx", "**/*.tsx"],
-      "excludedFiles": "*.test.js",
+      "excludedFiles": ["*.test.js"],
       "rules": {
         "import/first": "error",
         // "@typescript-eslint/explicit-function-return-type": "error",
@@ -33,11 +34,14 @@
         "@typescript-eslint/no-unnecessary-type-assertion": "error",
         "@typescript-eslint/require-await": "error",
         "@typescript-eslint/return-await": "error",
-        "arrow-body-style": ["error", "as-needed"]
+        "arrow-body-style": ["error", "as-needed"],
+        "unicorn/prefer-module": "off",
+        "unicorn/filename-case": ["error", { "case": "kebabCase" }]
       }
     },
     {
-      "files": ["*.jsx", "*.tsx"], // for JSX Component
+      "files": ["*.jsx", "*.tsx", "!^\\[.*]\\.tsx$"], // for JSX Component
+      "excludedFiles": ["!^\\[.*]\\.tsx$"],
       "rules": {
         "unicorn/prefer-module": "off",
         "unicorn/filename-case": ["error", { "case": "pascalCase" }]
@@ -50,6 +54,7 @@
         "unicorn/filename-case": ["error", { "case": "kebabCase" }]
       }
     },
+
     {
       "files": ["use[A-Z]*.js", "use[A-Z]*.ts"], // for React hooks
       "rules": {
