@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import styles from "../../styles/Login.module.css";
-import { userType } from "@/util/types";
+import { UserType } from "@/util/types";
 import Link from "next/link";
 // import { useRouter } from "next/router";
 // import axios from "axios";
@@ -12,8 +13,8 @@ export default function Login(): JSX.Element {
 
     const target = event.currentTarget.elements;
 
-    const userLogin: userType = {
-      username: target.username.value,
+    const userLogin: UserType = {
+      email: target.email.value,
       password: target.password.value,
     };
     console.log("user login", userLogin);
@@ -30,8 +31,8 @@ export default function Login(): JSX.Element {
         <div className={styles.wrapper}>
           <div className={styles.wrapFrom}>
             <label>
-              <p>User name:</p>
-              <input type="text" name="username" />
+              <p>Email:</p>
+              <input type="email" name="email" />
             </label>
             <label>
               <p>Password:</p>
