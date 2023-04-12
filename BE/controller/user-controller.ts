@@ -14,12 +14,6 @@ userRouter.get("/users", async (req: Request, res: Response) => {
   }
 });
 
-userRouter.post(".register", async (req: Request, res: Response) => {
-  console.log("user Register huselt", req.body);
-
-  const data = req.body;
-});
-
 userRouter.post("/users/add", async (req: Request, res: Response) => {
   console.log("user Post request", req.body);
   try {
@@ -31,12 +25,21 @@ userRouter.post("/users/add", async (req: Request, res: Response) => {
   }
 });
 
+userRouter.post("/user/register", async (req: Request, res: Response) => {
+  console.log("user Register huselt", req.body);
+  try {
+    const data = req.body;
+    const result = await addUser(data);
+    res.status(200).send(result);
+  } catch (error) {
+    console.log({ error: "Failed" });
+  }
+});
+
 userRouter.post("/user/login", async (req: Request, res: Response) => {
   console.log("user add POST request", req.body);
-
   try {
     const { username, password } = req.body;
-
     if (!username && password) {
       res.status(400).json({
         success: false,
