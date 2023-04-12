@@ -1,4 +1,4 @@
-import { JobType } from "@/util/Types";
+import { JobType } from "@/util/types";
 import { GetStaticProps, GetStaticPropsContext } from "next";
 import Style from "../../styles/JobCard.module.css";
 

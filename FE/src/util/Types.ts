@@ -5,7 +5,11 @@ export type JobType = {
   payment: number;
 };
 
-export type userType = {
-  username: string;
+export type UserType = {
+  firstName: string;
+  lastName: string;
   password: string;
+  email: string;
+  gender: string;
+  phoneNumber: number;
 };

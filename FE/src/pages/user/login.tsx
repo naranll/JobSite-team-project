@@ -1,5 +1,5 @@
 import styles from "../../styles/Login.module.css";
-import { userType } from "@/util/Types";
+import { userType } from "@/util/types";
 import Link from "next/link";
 // import { useRouter } from "next/router";
 // import axios from "axios";

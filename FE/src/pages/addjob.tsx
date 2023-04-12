@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../styles/addjob.module.css";
 import { useRouter } from "next/router";
-import { JobType } from "@/util/Types";
+import { JobType } from "@/util/types";
 import axios from "axios";
 
 export default function AddJob(): JSX.Element {
