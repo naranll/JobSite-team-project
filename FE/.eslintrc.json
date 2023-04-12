@@ -37,8 +37,15 @@
       }
     },
     {
-      "files": ["*.jsx", "**/*.tsx", "**/**/*.tsx", "!^\\[.*]\\.tsx$"], // for JSX Component
-      "excludedFiles": ["^\\[.*]\\.tsx$"],
+      "files": [
+        "*.jsx",
+        "**/*.tsx",
+        "**/**/*.tsx",
+        "!^\\[.*]\\.tsx$",
+        "!./src/pages/*",
+        "!./src/pages/**/*"
+      ], // for JSX Component
+      "excludedFiles": ["^\\[.*]\\.tsx$", "./src/pages/*", "./src/pages/**/*"],
       "rules": {
         "unicorn/prefer-module": "off",
         "unicorn/filename-case": ["error", { "case": "pascalCase" }]
