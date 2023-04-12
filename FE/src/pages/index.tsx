@@ -1,5 +1,5 @@
 import JobCard from "@/components/JobCard";
-import { JobType } from "@/util/Types";
+import { JobType } from "@/util/types";
 import styles from "../styles/Main.module.css";
 // import Layout from "@/components/Layout";
 import Link from "next/link";
