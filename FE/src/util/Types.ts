@@ -6,10 +6,10 @@ export type JobType = {
 };
 
 export type UserType = {
-  firstName: string;
-  lastName: string;
+  firstName?: string;
+  lastName?: string;
   password: string;
   email: string;
-  gender: string;
-  phoneNumber: number;
+  gender?: string;
+  phoneNumber?: number;
 };
