@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
+import "../config/mongo-config";
 
-const UserSchema = new mongoose.Schema(
+const UserSchema: Schema = new mongoose.Schema(
   {
     firstName: String,
     lastName: String,
