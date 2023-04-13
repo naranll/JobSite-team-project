@@ -1,20 +1,25 @@
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
 
-const ApplicationSchema = new mongoose.Schema({
-  job: {
-    type: Schema.Types.String,
-    ref: "job",
+const ApplicationSchema = new mongoose.Schema(
+  {
+    job: {
+      type: Schema.Types.String,
+      ref: "job",
+    },
+    applicant: {
+      type: Schema.Types.String,
+      ref: "user",
+    },
+    state: {
+      type: String,
+      enum: ["active", "inactive"],
+    },
   },
-  applicant: {
-    type: Schema.Types.String,
-    ref: "user",
-  },
-  state: {
-    type: String,
-    enum: ["active", "inactive"],
-  },
-});
+  {
+    collection: "applications",
+  }
+);
 
 const Application = mongoose.model(
   "application",
