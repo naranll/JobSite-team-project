@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
 import { UserType } from "../util/types";
-=======
-import { userType } from "../util/types";
->>>>>>> Stashed changes
 import User from "../model/User";
 
 export const getUsers = async () => {
@@ -11,7 +7,6 @@ export const getUsers = async () => {
   });
 };
 
-<<<<<<< Updated upstream
 export const addUser = async (data: UserType) => {
   const newUser = new User(data);
   console.log("newUser;", newUser);
@@ -36,10 +31,3 @@ export const checkUser = async (data: UserType) => {
     return false;
   }
 };
-=======
-export const addUser = async (data: userType) => {
-  const newUser = new User(data);
-  const result = await newUser.save();
-  return result;
-};
->>>>>>> Stashed changes
