@@ -6,3 +6,9 @@ export type UserType = {
   phoneNumber: number;
   email: string;
 };
+
+export type ApplicationType = {
+  job: string;
+  applicant: string;
+  state: string;
+};
