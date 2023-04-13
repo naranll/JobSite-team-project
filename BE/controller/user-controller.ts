@@ -18,14 +18,19 @@ userRouter.post("/user/register", async (req: Request, res: Response) => {
   console.log("user Register huselt", req.body);
   try {
     const data = req.body;
-    const result = await addUser(data);
+    console.log(data);
+
+    const newUser = new User(data);
+    console.log("newUser;", newUser);
+    const result = await newUser.save();
     console.log("result:", result);
+
     res.status(200).json({
       success: true,
       data: result,
     });
   } catch (error) {
-    console.log({ error: "Failed" });
+    console.log({ error: error });
   }
 });
 
