@@ -11,3 +11,5 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
+
+export default mongoose.connection;

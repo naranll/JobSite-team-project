@@ -2,11 +2,11 @@
 import styles from "../../styles/Login.module.css";
 import { UserType } from "@/util/types";
 import Link from "next/link";
-// import { useRouter } from "next/router";
-// import axios from "axios";
+import { useRouter } from "next/router";
+import axios from "axios";
 
 export default function Login(): JSX.Element {
-  //   const router = useRouter();
+  const router = useRouter();
 
   function submitHandler(event: any): void {
     event.preventDefault();
@@ -18,10 +18,16 @@ export default function Login(): JSX.Element {
       password: target.password.value,
     };
     console.log("user login", userLogin);
-    // axios
-    //   .post("http://localhost:8080/user/login")
-    //   .then((res) => console.log(res))
-    //   .catch((err) => console.log(err));
+    axios
+      .post(`http://localhost:8080/user/login`, userLogin)
+      .then((res) => {
+        if (res.data.success) {
+          router.push("/success");
+        } else {
+          console.log("fail");
+        }
+      })
+      .catch((err) => console.log(err));
   }
 
   return (

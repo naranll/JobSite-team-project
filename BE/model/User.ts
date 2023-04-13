@@ -1,28 +1,33 @@
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
 
-const UserSchema = new mongoose.Schema({
-  first_name: String,
-  last_name: String,
-  password: { type: String, required: true },
-  gender: {
-    type: String,
-    enum: ["male", "female", "other"],
-    required: false,
+const UserSchema = new mongoose.Schema(
+  {
+    firstName: String,
+    lastName: String,
+    password: { type: String, required: true },
+    gender: {
+      type: String,
+      enum: ["male", "female", "other"],
+      required: false,
+    },
+    joinDate: {
+      type: Date,
+      default: Date.now,
+    },
+    phoneNumber: { type: Number, unique: true },
+    email: {
+      type: String,
+      unique: true,
+      required: true,
+    },
+    skills: [{ skill: String, level: String }],
+    image: String,
   },
-  join_date: {
-    type: Date,
-    default: Date.now,
-  },
-  phone_number: { type: Number, unique: true },
-  email: {
-    type: String,
-    unique: true,
-    required: true,
-  },
-  skills: [{ skill: String, level: String }],
-  image: String,
-});
+  {
+    collection: "users",
+  }
+);
 
 const User = mongoose.model("user", UserSchema, "users");
 
