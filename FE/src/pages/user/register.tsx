@@ -18,7 +18,7 @@ export default function Register(): JSX.Element {
       password: event.target.password.value,
       email: event.target.email.value,
       gender: event.target.gender.value,
-      phoneNumber: event.target.phone_number.value,
+      phoneNumber: event.target.phoneNumber.value,
     };
 
     console.log("new User", data);
@@ -38,7 +38,7 @@ export default function Register(): JSX.Element {
       <form onSubmit={submitHandler}>
         <label>
           <p>First name:</p>
-          <input id="first_name" name="firstName" type="text" />
+          <input id="firstName" name="firstName" type="text" />
         </label>
         <label>
           <p>Last name:</p>
