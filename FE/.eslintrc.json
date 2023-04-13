@@ -45,7 +45,12 @@
         "!./src/pages/*",
         "!./src/pages/**/*"
       ], // for JSX Component
-      "excludedFiles": ["^\\[.*]\\.tsx$", "./src/pages/*", "./src/pages/**/*"],
+      "excludedFiles": [
+        "^\\[.*]\\.tsx$",
+        "./src/pages/*",
+        "./src/pages/**/*",
+        "!^_/.*.tsx$"
+      ],
       "rules": {
         "unicorn/prefer-module": "off",
         "unicorn/filename-case": ["error", { "case": "pascalCase" }]
