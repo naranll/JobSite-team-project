@@ -3,21 +3,21 @@ import { Schema } from "mongoose";
 
 const jobSchema = new mongoose.Schema(
   {
-    posted_by: {
+    postedBy: {
       type: Schema.Types.String,
       ref: "user",
     },
     title: { type: String },
     description: { type: String },
     requirement: { type: String },
-    created_date: { type: Date, default: Date.now }, // could use moment npm later
+    createdDate: { type: Date, default: Date.now }, // could use moment npm later
     updated: { type: Date, default: Date.now },
     state: {
       type: String,
       enum: ["active", "pause", "finished"],
       default: "active",
     },
-    contract_type: {
+    contractType: {
       type: String,
       enum: ["part-time", "full-time"],
       default: "part-time",

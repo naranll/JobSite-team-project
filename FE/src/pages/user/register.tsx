@@ -35,7 +35,7 @@ export default function Register(): JSX.Element {
 
   return (
     <div className={styles.wrapper}>
-      <form onSubmit={submitHandler}>
+      <form onSubmit={(e) => submitHandler(e)}>
         <label>
           <p>First name:</p>
           <input id="firstName" name="firstName" type="text" />
