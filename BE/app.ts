@@ -1,7 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
 import "./config/mongo-config";
-import jobRouter from "./routes/job-api";
+import jobRouter from "./controller/job-controller";
 import userRouter from "./controller/user-controller";
 
 const app: Express = express();
