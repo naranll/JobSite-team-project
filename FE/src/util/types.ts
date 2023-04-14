@@ -3,6 +3,8 @@ export type JobType = {
   title: string;
   description: string;
   payment: number;
+  createdDate: Date;
+  contractType: string;
 };
 
 export type UserType = {
