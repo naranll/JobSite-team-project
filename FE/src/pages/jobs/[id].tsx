@@ -9,8 +9,12 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
       <div className={Style.jobCard}>
         <h1 className={Style.cardTitle}>{job.title}</h1>
         <p className={Style.cardDisc}>{job.description}</p>
-        <span className={Style.cardmoney}>{job.payment}</span>
+        <span className={Style.cardmoney}>{job.payment}$</span>
+        <p className={Style.contractType}>{job.contractType}</p>
       </div>
+      <button onClick={() => console.log("clicked")} className={Style.button}>
+        Apply
+      </button>
     </div>
   );
 }
@@ -36,7 +40,6 @@ export const getStaticProps: GetStaticProps<JobProps> = async ({
 }: GetStaticPropsContext) => {
   const res = await fetch(`http://localhost:8080/jobs/${params?.id}`);
   const resjson = await res.json();
-  //   console.log("ene yu veee????", resjson);
   return {
     props: {
       data: resjson,
