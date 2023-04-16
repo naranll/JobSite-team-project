@@ -2,24 +2,24 @@ import Link from "next/link";
 import * as Logos from "./icons/Logos";
 
 export default function SideMenu(): JSX.Element {
-  const navlinkStyle = "flex items-center gap-[15px] text-2xl font-bold mb-4";
+  const navlinkStyle = "flex items-center gap-[15px] text-xl font-bold mb-4 hover:underline hover:decoration-solid active:bg-white active:text-[#9F69B8]";
   return (
-    <div className="max-w-[287px] w-full h-screen py-[56px] text-white bg-gradient-to-b from-[#9F69B8] to-[#4D8BCC]"> 
-      <h1 className="w-[227px] m-auto mb-[52px] flex items-center gap-[13px] text-3xl font-black"><Logos.MenuLogo/> Dashboard</h1>
+    <div className="w-1/5 h-screen py-9 sticky top-0 text-white bg-gradient-to-b from-[#9F69B8] to-[#4D8BCC]"> 
+      <h1 className="w-[227px] m-auto mb-[52px] flex items-center gap-[13px] text-2xl font-black"><Logos.MenuLogo/>Dashboard</h1>
       <ul className="w-[227px] h-[500px] m-auto">
         <Link href="/">
-          <li className={navlinkStyle}><Logos.HomeLogo/> Home</li>
+          <li className={navlinkStyle}><Logos.HomeLogo/>Home</li>
         </Link>
-        <Link href="/">
+        <Link href="/jobs">
           <li className={navlinkStyle}><Logos.JobLogo/>Jobs</li>
         </Link>
-        <Link href="/">
+        <Link href="/users">
           <li className={navlinkStyle}><Logos.UserLogo/>Users</li>
         </Link>
-        <Link href="/" >
+        <Link href="/applications" >
           <li className={navlinkStyle}><Logos.ApplicationLogo/>Applications</li>
         </Link>
-        <Link href="/">
+        <Link href="/admin">
           <li className={navlinkStyle}><Logos.AdminLogo/>Admin</li>
         </Link>
       </ul>
