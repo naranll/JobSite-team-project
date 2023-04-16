@@ -1,29 +1,25 @@
 import Link from "next/link";
+import LogoDashboard from "./icons/LogoDashboard";
 
 export default function SideMenu(): JSX.Element {
+  const navlinkStyle = "text-2xl font-bold mb-4";
   return (
-    <div>
-      <ul className="w-48 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+    <div className="max-w-[287px] w-full h-screen py-[56px] text-white bg-gradient-to-b from-[#9F69B8] to-[#4D8BCC]"> 
+      <h1 className="w-[227px] m-auto mb-[52px] flex items-center gap-[13px] text-3xl font-black"><LogoDashboard/> Dashboard</h1>
+      <ul className="w-[227px] h-[500px] m-auto border-solid border-2 border-black">
         <Link
           href="/"
-          className="block w-full px-4 py-2 text-white bg-blue-700 border-b border-gray-200 rounded-t-lg cursor-pointer dark:bg-gray-800 dark:border-gray-60"
         >
-          <li>Dashboard</li>
-        </Link>
-        <Link
-          href="/"
-          className="block w-full px-4 py-2 border-b border-gray-200 cursor-pointer hover:bg-gray-100 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
-        >
-          <li>Jobs</li>
+          <li className={navlinkStyle}>Jobs</li>
         </Link>
         <Link href="/">
-          <li>Users</li>
+          <li className={navlinkStyle}>Users</li>
+        </Link>
+        <Link href="/" >
+          <li className={navlinkStyle}>Applications</li>
         </Link>
         <Link href="/">
-          <li>Applications</li>
-        </Link>
-        <Link href="/">
-          <li>Admin</li>
+          <li className={navlinkStyle}>Admin</li>
         </Link>
       </ul>
     </div>
