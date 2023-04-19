@@ -11,11 +11,7 @@ export class JobController {
   findAll(): Promise<Job[]> {
     return this.jobService.findAll();
   }
-<<<<<<< HEAD
-  @Post('add')
-=======
   @Post('job/add')
->>>>>>> 222329b (job-crud)
   createJob(@Body() body: Jobdto): Promise<Job> {
     console.log('request body ', body);
     return this.jobService.addJob(body);

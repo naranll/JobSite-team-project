@@ -5,11 +5,7 @@ import { JobController } from './job.controller';
 import { JobService } from './job.service';
 
 @Module({
-<<<<<<< HEAD
-  imports: [MongooseModule.forFeature([{ name: 'jobs', schema: JobSchema }])],
-=======
   imports: [MongooseModule.forFeature([{ name: 'title', schema: JobSchema }])],
->>>>>>> 222329b (job-crud)
   controllers: [JobController],
   providers: [JobService],
 })
