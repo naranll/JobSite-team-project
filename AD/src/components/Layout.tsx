@@ -2,14 +2,6 @@ import { ReactNode } from "react";
 import Head from "next/head";
 import SideMenu from "./SideMenu";
 import Header from "./Header";
-// import { Inter } from "@next/font/google";
-
-// const inter = Inter({
-//   subsets: ['latin'],
-//   variable: "--font-inter",
-// })
-
-// const inter2 = Inter();
 
 interface PropType {
   children: ReactNode;
