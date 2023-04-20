@@ -1,6 +1,7 @@
 import Link from "next/link";
 import * as Logos from "./icons/Logos";
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
+import React from "react";
 
 type menuPageType = {
   page: string;
@@ -37,15 +38,15 @@ const menuPages: Array<menuPageType> = [
 ];
 
 export default function SideMenu(): JSX.Element {
-  const [currentPage, setCurrentPage] = useState("/");
+  const [currentPage, setCurrentPage] = useState("Home");
 
   useEffect(() => {
     if (localStorage.getItem("pageValue")) {
-      setCurrentPage(
-        menuPages.find(
-          (menuPage) => menuPage.page === localStorage.getItem("pageValue")
-        )
+      const currentPageValue: menuPageType | undefined = menuPages.find(
+        (menuPage: menuPageType) =>
+          menuPage.page === localStorage.getItem("pageValue")
       );
+      currentPageValue && setCurrentPage(currentPageValue.page);
     }
   }, []);
 
@@ -55,7 +56,9 @@ export default function SideMenu(): JSX.Element {
   }
 
   const navlinkStyle =
-    "flex items-center gap-[15px] text-xl font-bold mb-4 hover:underline hover:decoration-solid active:bg-white active:text-[#9F69B8]";
+    "flex items-center gap-[15px] p-2 mb-4 text-xl font-bold border-2 border-transparent hover:border-2 hover:border-white hover:rounded-full active:rounded-full active:bg-white active:text-[#9F69B8]";
+  const activeLinkStyle =
+    "border-2 rounded-full border-solid border-white bg-white text-[#9F69B8]";
 
   return (
     <div className="w-1/5 h-screen py-9 sticky top-0 text-white bg-gradient-to-b from-[#9F69B8] to-[#4D8BCC]">
@@ -70,7 +73,13 @@ export default function SideMenu(): JSX.Element {
             href={menuPage.url}
             onClick={() => currentPageHandler(menuPage.page)}
           >
-            <li className={navlinkStyle}>
+            <li
+              className={
+                currentPage == menuPage.page
+                  ? navlinkStyle.concat(",", activeLinkStyle)
+                  : navlinkStyle
+              }
+            >
               {menuPage.logo}
               {menuPage.page}
             </li>
