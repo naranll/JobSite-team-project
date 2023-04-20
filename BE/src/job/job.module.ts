@@ -5,7 +5,7 @@ import { JobController } from './job.controller';
 import { JobService } from './job.service';
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: 'title', schema: JobSchema }])],
+  imports: [MongooseModule.forFeature([{ name: 'jobs', schema: JobSchema }])],
   controllers: [JobController],
   providers: [JobService],
 })
