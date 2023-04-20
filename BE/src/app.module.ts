@@ -9,6 +9,7 @@ import { UserModule } from './user/user.module';
   imports: [
     ConfigModule.forRoot(),
     MongooseModule.forRoot(`${process.env.MONGO_DB_CONNECT}`),
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
