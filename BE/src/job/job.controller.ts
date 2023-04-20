@@ -11,6 +11,7 @@ export class JobController {
   findAll(): Promise<Job[]> {
     return this.jobService.findAll();
   }
+  
   @Post('add')
   createJob(@Body() body: Jobdto): Promise<Job> {
     console.log('request body ', body);
