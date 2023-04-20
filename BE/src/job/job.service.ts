@@ -7,7 +7,11 @@ import { Jobdto } from './job.dto';
 @Injectable()
 export class JobService {
   constructor(
+<<<<<<< HEAD
     @InjectModel('jobs') private jobModel: Model<Job>,
+=======
+    @InjectModel('job') private jobModel: Model<Job>,
+>>>>>>> 222329b (job-crud)
     @InjectConnection() private connection: Connection,
   ) {}
 
