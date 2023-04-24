@@ -2,6 +2,7 @@ import { Date } from 'mongoose';
 
 export class UserDto {
   firstName: string;
+  password: string;
   lastName: string;
   gender: string;
   joinDate: Date;

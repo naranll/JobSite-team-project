@@ -19,4 +19,17 @@ export class JobService {
   async findAll(): Promise<Job[]> {
     return this.jobModel.find().exec();
   }
+
+  async findJob(id: string): Promise<Job> {
+    console.log('find Job id', id);
+    const result = await this.jobModel.findById(id).exec();
+    console.log(' found job', result);
+    return result;
+  }
+
+  async generateStaticId(): Promise<Job[]> {
+    const query = await this.jobModel.find({}).select({ _id: 1 });
+    console.log('static paths', query);
+    return query;
+  }
 }

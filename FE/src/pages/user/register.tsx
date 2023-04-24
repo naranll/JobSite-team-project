@@ -24,7 +24,7 @@ export default function Register(): JSX.Element {
     console.log("new User", data);
 
     axios
-      .post("http://localhost:8080/user/register", data)
+      .post("http://localhost:5000/user/register", data)
       .then((res) => {
         if (res.data.success) {
           router.push("/success");

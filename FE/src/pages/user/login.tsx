@@ -1,34 +1,36 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import styles from "../../styles/Login.module.css";
-import { UserType } from "@/util/types";
+// import { UserType } from "@/util/types";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import axios from "axios";
+// import { useRouter } from "next/router";
+// import axios from "axios";
+import { useUserContext } from "../../../context/UserContext";
 
 export default function Login(): JSX.Element {
-  const router = useRouter();
+  const { submitHandler } = useUserContext();
+  // const router = useRouter();
 
-  function submitHandler(event: any): void {
-    event.preventDefault();
+  // function submitHandler(event: any): void {
+  //   event.preventDefault();
 
-    const target = event.currentTarget.elements;
+  //   const target = event.currentTarget.elements;
 
-    const userLogin: UserType = {
-      email: target.email.value,
-      password: target.password.value,
-    };
-    console.log("user login", userLogin);
-    axios
-      .post(`http://localhost:8080/user/login`, userLogin)
-      .then((res) => {
-        if (res.data.success) {
-          router.push("/success");
-        } else {
-          console.log("fail");
-        }
-      })
-      .catch((err) => console.log(err));
-  }
+  //   const userLogin: UserType = {
+  //     email: target.email.value,
+  //     password: target.password.value,
+  //   };
+  //   console.log("user login", userLogin);
+  //   axios
+  //     .post(`http://localhost:8080/user/login`, userLogin)
+  //     .then((res) => {
+  //       if (res.data.success) {
+  //         router.push("/success");
+  //       } else {
+  //         console.log("fail");
+  //       }
+  //     })
+  //     .catch((err) => console.log(err));
+  // }
 
   return (
     <div className={styles.wrap}>
