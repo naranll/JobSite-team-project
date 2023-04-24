@@ -8,12 +8,10 @@ export default function Jobs(): JSX.Element {
       <table className="w-full table-auto border border-collapse border-slate-950 bg-white">
         <thead>
           <tr className="[&>*]:border [&>*]:border-slate-950">
-            {jobsData.map((job, i) => {
-              for (const keys in job) {
-                console.log(keys);
-                return <th key={i}>{keys}</th>;
-              }
-            })}
+            <th>one</th>
+            <th>two</th>
+            <th>three</th>
+            <th>four</th>
           </tr>
         </thead>
         <tbody className="">

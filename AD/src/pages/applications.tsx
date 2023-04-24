@@ -10,6 +10,7 @@ export default function Applications(): JSX.Element {
             <th>one</th>
             <th>two</th>
             <th>three</th>
+            <th>four</th>
           </tr>
         </thead>
         <tbody className="">
