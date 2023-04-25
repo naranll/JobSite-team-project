@@ -56,7 +56,7 @@ export default function SideMenu(): JSX.Element {
   }
 
   const navlinkStyle =
-    "w-[200px] flex items-center gap-[15px] p-2 mb-4 text-xl font-bold border-2 border-transparent hover:border-2 hover:border-white hover:rounded-full active:rounded-full active:bg-white active:text-[#9F69B8]";
+    "flex items-center gap-[12px] p-2 mb-4 text-xl font-bold border-2 border-transparent hover:border-2 hover:border-white hover:rounded-full active:rounded-full active:bg-white active:text-[#9F69B8]";
   const activeLinkStyle =
     "border-2 rounded-full border-solid border-white bg-white text-[#9F69B8]";
 
@@ -66,7 +66,7 @@ export default function SideMenu(): JSX.Element {
         <Logos.MenuLogo />
         Dashboard
       </h1>
-      <ul className="w-[227px] h-[500px] m-auto">
+      <ul className="w-auto h-[500px] m-auto">
         {menuPages.map((menuPage: menuPageType, i: number) => (
           <Link
             key={i}
