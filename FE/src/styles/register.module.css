@@ -1,3 +1,20 @@
 .wrapper {
-  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.titles{
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  text-align: start;
+  margin-left: 135px;
+  gap: 10px;
+}
+
+.inputs{
+  margin: 5px 0px 15px 0px;
 }
