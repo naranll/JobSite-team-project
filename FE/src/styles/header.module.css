@@ -51,15 +51,21 @@
 .menuBtn{
   color: #fff;
 }
+.menuBtnHidden{
+  color: #fff;
+  display: none;
+}
 
 .filters {
   position: absolute;
-  top: 0;
+  /* top: 30px; */
+  left: -15px;
   display: flex;
   flex-direction: column;
   background-color: #ffffff;
   height: 100vh;
   width: 250px ;
+  justify-content: center;
 }
 
 .sidenav {
@@ -77,6 +83,7 @@
 
 .closebtn {
   margin-right: 20px;
+  color: #ffffff;
 }
 
 .sidenav a {
