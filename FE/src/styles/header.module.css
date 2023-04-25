@@ -16,9 +16,100 @@
 }
 .menu {
   font-size: 20px;
-  background-color: white;
   height: 31px;
   width: 55px;
   margin-left: 16px;
   text-align: center;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: grey;
+  height: 52px;
+  align-items: center;
+}
+.post {
+  background-color: #3a4c8d;
+  width: 55px;
+  height: 33px;
+  margin-right: 16px;
+  text-align: center;
+  color: white;
+  font-size: 20px;
+}
+.menu {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  color: #000000;
+  text-align: center;
+  width: 50px;
+  height: 10px;
+}
+
+.menuBtn{
+  color: #fff;
+}
+.menuBtnHidden{
+  color: #fff;
+  display: none;
+}
+
+.filters {
+  position: absolute;
+  /* top: 30px; */
+  left: -15px;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  height: 100vh;
+  width: 250px ;
+  justify-content: center;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.closebtn {
+  margin-right: 20px;
+  color: #ffffff;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+#mainBtn {
+  transition: margin-left 0.5s;
+  position: absolute;
+  padding: 16px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {
+    padding-top: 15px;
+  }
+  .sidenav a {
+    font-size: 18px;
+  }
 }
