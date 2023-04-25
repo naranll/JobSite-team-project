@@ -3,7 +3,7 @@ import {jobsData} from "@/utils/dummyData";
 
 export default function Jobs(): JSX.Element {
   const buttonStyle =
-    "h-[36px] p-2 flex items-center text-white font-bold border-2 border-solid border-[#318ec2] bg-[#318ec2] rounded-[10px]";
+    "h-[36px] p-2 flex items-center text-white font-semibold border-2 border-solid border-[#318ec2] bg-[#318ec2] rounded-[10px]";
   return (
     <div>
       <form className="flex justify-between p-2 border-2 border-solid border-slate-200 bg-white">
@@ -36,4 +36,15 @@ export default function Jobs(): JSX.Element {
       </table>
     </div>
   );
+}
+
+export async function getStaticProps(){
+  const response = await fetch("");
+  const jobs = await response.json();
+  console.log("response from fetch", jobs);
+  return{
+    props: {
+      jobs: jobs,
+    }
+  }
 }

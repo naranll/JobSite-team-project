@@ -2,7 +2,7 @@ import Row from "@/components/Row";
 
 export default function Users(): JSX.Element {
   const buttonStyle =
-    "h-[36px] p-2 flex items-center text-white font-bold border-2 border-solid border-[#318ec2] bg-[#318ec2] rounded-[10px]";
+    "h-[36px] p-2 flex items-center text-white font-semibold border-2 border-solid border-[#318ec2] bg-[#318ec2] rounded-[10px]";
   return (
     <div>
       <form className="flex justify-end p-2 border-2 border-solid border-slate-200 bg-white">
@@ -27,10 +27,7 @@ export default function Users(): JSX.Element {
         </thead>
         <tbody className="">
           {[1, 2, 3].map((mynum: number, i: number) => {
-            const user = {
-              my: mynum,
-            };
-
+            console.log("user rows")
             return <Row key={i} rowNumber={i} />;
           })}
         </tbody>

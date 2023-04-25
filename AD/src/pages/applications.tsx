@@ -2,7 +2,7 @@ import Row from "../components/Row";
 
 export default function Applications(): JSX.Element {
   const buttonStyle =
-    "h-[36px] p-2 flex items-center text-white font-bold border-2 border-solid border-[#318ec2] bg-[#318ec2] rounded-[10px]";
+    "h-[36px] p-2 flex items-center text-white font-semibold border-2 border-solid border-[#318ec2] bg-[#318ec2] rounded-[10px]";
   return (
     <div>
       <form className="flex justify-end p-2 border-2 border-solid border-slate-200 bg-white">
@@ -10,13 +10,13 @@ export default function Applications(): JSX.Element {
           <input
             type="search"
             placeholder="Search"
-            className="h-[36px] py-2 px-5 bg-[#dee6ec] rounded-full"
+            className="h-[36px] py-2 px-5 rounded-full bg-[#dee6ec]"
           />
           <div className={buttonStyle}>Filter</div>
         </div>
       </form>
 
-      <table className="w-full table-fixed border-2 border-solid border-slate-200 bg-white rounded-md">
+      <table className="w-full table-fixed border-2 border-solid rounded-md border-slate-200 bg-white ">
         <thead>
           <tr className="[&>*]:border [&>*]:border-slate-200">
             <th className="w-[40px]">No.</th>
