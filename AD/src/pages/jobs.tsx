@@ -1,9 +1,10 @@
 import Row from "../components/Row";
-import {jobsData} from "@/utils/dummyData";
+import { JobType } from "@/utils/types";
+import { buttonStyle } from "@/styles/tagstyles";
 
-export default function Jobs(): JSX.Element {
-  const buttonStyle =
-    "h-[36px] p-2 flex items-center text-white font-semibold border-2 border-solid border-[#318ec2] bg-[#318ec2] rounded-[10px]";
+export default function Jobs(props: { jobs: JobType[] }): JSX.Element {
+  const { jobs } = props;
+
   return (
     <div>
       <form className="flex justify-between p-2 border-2 border-solid border-slate-200 bg-white">
@@ -28,9 +29,9 @@ export default function Jobs(): JSX.Element {
           </tr>
         </thead>
         <tbody>
-          {jobsData.map((job, i: number) => {
-            console.log(job);
-            return <Row key={i} rowNumber={i} />;
+          {jobs.map((job: JobType, i: number) => {
+            console.log("job row", job);
+            return <Row key={i} rowNumber={i} {...job} />;
           })}
         </tbody>
       </table>
@@ -38,13 +39,13 @@ export default function Jobs(): JSX.Element {
   );
 }
 
-export async function getStaticProps(){
-  const response = await fetch("");
+export async function getStaticProps() {
+  const response = await fetch("http://localhost:5000/job/all");
   const jobs = await response.json();
   console.log("response from fetch", jobs);
-  return{
+  return {
     props: {
       jobs: jobs,
-    }
-  }
+    },
+  };
 }

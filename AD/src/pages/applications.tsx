@@ -1,8 +1,11 @@
+import { ApplicationType } from "@/utils/types";
 import Row from "../components/Row";
+import { buttonStyle } from "@/styles/tagstyles";
 
-export default function Applications(): JSX.Element {
-  const buttonStyle =
-    "h-[36px] p-2 flex items-center text-white font-semibold border-2 border-solid border-[#318ec2] bg-[#318ec2] rounded-[10px]";
+export default function Applications( props: {applications: ApplicationType[]}): JSX.Element {
+  const {applications} = props;
+  console.log("applications", applications)
+
   return (
     <div>
       <form className="flex justify-end p-2 border-2 border-solid border-slate-200 bg-white">
@@ -28,12 +31,22 @@ export default function Applications(): JSX.Element {
           </tr>
         </thead>
         <tbody>
-          {[1, 2, 3].map((mynum: number, i: number) => {
-            console.log(mynum);
+          {applications.map((application: ApplicationType, i: number) => {
+            console.log("application row", application);
             return <Row key={i} rowNumber={i} />;
           })}
         </tbody>
       </table>
     </div>
   );
+}
+
+export async function getStaticProps(){
+  const response = await fetch("http://localhost:5000/application/all");
+  const applications = await response.json();
+  return{
+    props: {
+      applications: applications,
+    }
+  }
 }
