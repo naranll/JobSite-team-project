@@ -42,7 +42,7 @@ export const UserContextProvider = ({ children }: UserProviderType) => {
       .then((res) => {
         console.log("response", res);
         if (res.status === 201) {
-          setUser(res.data.firstName);
+          setUser(res.data);
           router.push("/success");
         } else {
           console.log("fail");

@@ -1,4 +1,6 @@
 export default function AppliedJob(): JSX.Element {
+    
+    
     return(
         <div>
             <div>
@@ -6,4 +8,5 @@ export default function AppliedJob(): JSX.Element {
             </div>
         </div>
     )
+
 }

@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ApplicationSchema } from './application.schema';
 import { MongooseModule } from '@nestjs/mongoose';
-import { ApplicationController } from 'src/application/application.controller';
-import { ApplicationService } from 'src/application/application.service';
+import { ApplicationController } from './application.controller';
+import { ApplicationService } from './application.service';
 
 @Module({
   imports: [
@@ -13,4 +13,4 @@ import { ApplicationService } from 'src/application/application.service';
   controllers: [ApplicationController],
   providers: [ApplicationService],
 })
-export class applicationModuel {}
+export class applicationModule {}
