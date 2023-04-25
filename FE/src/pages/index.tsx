@@ -30,7 +30,8 @@ export default function Home(props: { jobs: JobType[] }): JSX.Element {
 }
 
 export async function getStaticProps() {
-  const response = await fetch("http://localhost:5000/job/all");
+  try {
+  const response = await fetch("http://localhost:6000/job/all");
   const jobs = await response.json();
   console.log(jobs);
   return {
@@ -38,4 +39,7 @@ export async function getStaticProps() {
       jobs: jobs,
     },
   };
+} catch (error) {
+    console.log("error:", error);
+}
 }

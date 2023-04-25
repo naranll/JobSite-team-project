@@ -37,20 +37,20 @@ export default function Register(): JSX.Element {
     <div className={styles.wrapper}>
       <form onSubmit={(e) => submitHandler(e)}>
         <label>
-          <p>First name:</p>
-          <input id="firstName" name="firstName" type="text" />
+          <p className={styles.titles}>First name:</p>
+          <input className={styles.inputs} id="firstName" name="firstName" type="text" />
         </label>
         <label>
-          <p>Last name:</p>
-          <input name="lastName" type="text" />
+          <p className={styles.titles}>Last name:</p>
+          <input className={styles.inputs} name="lastName" type="text" />
         </label>
         <label>
-          <p>Email:</p>
-          <input name="email" type="text" />
+          <p className={styles.titles}>Email:</p>
+          <input className={styles.inputs} name="email" type="text" />
         </label>
         <label>
-          <p>Password:</p>
-          <input name="password" type="password" />
+          <p className={styles.titles}>Password:</p>
+          <input className={styles.inputs} name="password" type="password" />
         </label>
         <label>
           <p>gender:</p>
@@ -64,7 +64,7 @@ export default function Register(): JSX.Element {
           </select>
         </label>
         <label>
-          <p>Phone number:</p>
+          <p className={styles.titles}>Phone number:</p>
           <input type="number" name="phoneNumber" />
         </label>
         <button type="submit">Submit</button>
