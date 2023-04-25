@@ -8,6 +8,7 @@ export type JobType = {
 };
 
 export type UserType = {
+  _id? :string;
   firstName?: string;
   lastName?: string;
   password: string;

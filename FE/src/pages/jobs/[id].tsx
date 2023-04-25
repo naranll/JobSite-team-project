@@ -2,10 +2,20 @@ import { JobType } from "@/util/types";
 import { GetStaticProps, GetStaticPropsContext } from "next";
 import Style from "../../styles/JobCard.module.css";
 import { useUserContext } from "../../../context/UserContext";
+import axios from "axios";
 
 export default function Job({ data: job }: { data: JobType }): JSX.Element {
   const { user } = useUserContext();
   console.log("jobPage:", job);
+
+  function handleApply() {
+    console.log("Job Id",job._id)
+    console.log("User id",user._id)
+
+    const newApply = {jobId: job._id, userId: user._id}
+
+    axios.post('http://localhost:5000/application/add', newApply).then((res) => console.log(res))
+  }
   return (
     <div>
       {user ? (
@@ -17,7 +27,7 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
             <p className={Style.contractType}>{job.contractType}</p>
           </div>
           <button
-            onClick={() => console.log("clicked")}
+            onClick={handleApply}
             className={Style.button}
           >
             Apply
