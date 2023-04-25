@@ -3,19 +3,22 @@ import { useUserContext } from "../../context/UserContext";
 import styles from "../styles/header.module.css";
 import Link from "next/link";
 
+
 export default function Header(): JSX.Element {
   const { user, handleLogout } = useUserContext();
   const [offanvas, setOffcanvas] = useState(false)
+  // const [visible, setVisible] = useState(false)
+
 
   return (
     <div className={styles.header}>
       <div className={styles.menu}>
-        <div id="mainBtn">
-          <span className={styles.menuBtn} onClick={() => setOffcanvas(true)}>&#9776;</span>
+        <div  id="mainBtn">
+          <span className={`${offanvas?styles.menuBtnHidden: styles.menuBtn} `} onClick={() =>{ setOffcanvas(true)}}>&#9776;</span>
         </div>
         {offanvas ? (
           <div id="mySidenav" className="sidenav">
-            <a className="closebtn" onClick={() => setOffcanvas(false)}>
+            <a className={styles.closebtn} onClick={() => setOffcanvas(false)}>
               &times;
             </a>
             <div className={styles.filters}>
@@ -31,6 +34,7 @@ export default function Header(): JSX.Element {
           </div>
         ) : null}
       </div>
+    
       <Link href={`/`}>
         
       <div>Logo</div>
