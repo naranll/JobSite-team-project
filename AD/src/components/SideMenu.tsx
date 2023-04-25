@@ -56,12 +56,12 @@ export default function SideMenu(): JSX.Element {
   }
 
   const navlinkStyle =
-    "flex items-center gap-[15px] p-2 mb-4 text-xl font-bold border-2 border-transparent hover:border-2 hover:border-white hover:rounded-full active:rounded-full active:bg-white active:text-[#9F69B8]";
+    "w-[200px] flex items-center gap-[15px] p-2 mb-4 text-xl font-bold border-2 border-transparent hover:border-2 hover:border-white hover:rounded-full active:rounded-full active:bg-white active:text-[#9F69B8]";
   const activeLinkStyle =
     "border-2 rounded-full border-solid border-white bg-white text-[#9F69B8]";
 
   return (
-    <div className="w-1/5 h-screen py-9 sticky top-0 text-white bg-gradient-to-b from-[#9F69B8] to-[#4D8BCC]">
+    <div className="w-1/5 h-screen px-3 py-9 sticky top-0 text-white bg-gradient-to-b from-[#9F69B8] to-[#4D8BCC]">
       <h1 className="w-[227px] m-auto mb-[52px] flex items-center gap-[13px] text-2xl font-black">
         <Logos.MenuLogo />
         Dashboard

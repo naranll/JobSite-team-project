@@ -2,24 +2,35 @@ import Row from "../components/Row";
 import {jobsData} from "@/utils/dummyData";
 
 export default function Jobs(): JSX.Element {
+  const buttonStyle =
+    "h-[36px] p-2 flex items-center text-white font-bold border-2 border-solid border-[#318ec2] bg-[#318ec2] rounded-[10px]";
   return (
     <div>
-      <p>job</p>
-      <table className="w-full table-auto border border-collapse border-slate-950 bg-white">
+      <form className="flex justify-between p-2 border-2 border-solid border-slate-200 bg-white">
+        <div className={buttonStyle}>Add New +</div>
+        <div className="flex gap-2">
+          <input
+            type="search"
+            placeholder="Search"
+            className="h-[36px] py-2 px-5 bg-[#dee6ec] rounded-full"
+          />
+          <div className={buttonStyle}>Filter</div>
+        </div>
+      </form>
+      <table className="w-full table-fixed border-2 border-solid border-slate-200 rounded bg-white">
         <thead>
-          <tr className="[&>*]:border [&>*]:border-slate-950">
-            {jobsData.map((job, i) => {
-              for (const keys in job) {
-                console.log(keys);
-                return <th key={i}>{keys}</th>;
-              }
-            })}
+          <tr className="[&>*]:h-[40px] [&>*]:border [&>*]:border-slate-200 rounded-md">
+            <th className="w-[40px]">No.</th>
+            <th>id</th>
+            <th>created</th>
+            <th>title</th>
+            <th>status</th>
           </tr>
         </thead>
-        <tbody className="">
+        <tbody>
           {jobsData.map((job, i: number) => {
             console.log(job);
-            return <Row key={i} />;
+            return <Row key={i} rowNumber={i} />;
           })}
         </tbody>
       </table>
