@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { useUserContext } from "../../context/UserContext";
+import {useState} from "react";
+import {useUserContext} from "../../context/UserContext";
 import styles from "../styles/header.module.css";
 import Link from "next/link";
 
 export default function Header(): JSX.Element {
-  const { user, handleLogout } = useUserContext();
+  const {user, handleLogout} = useUserContext();
   const [offanvas, setOffcanvas] = useState(false);
   // const [visible, setVisible] = useState(false)
 
@@ -17,20 +17,16 @@ export default function Header(): JSX.Element {
         {offanvas ? (
           <div id="mySidenav" className="sidenav">
             <div className={styles.filters}>
-              {user ? (
-                <div>
-                  <div>Hi! {user.firstName}</div>
-                  <button onClick={handleLogout}>Log out</button>
-                </div>
-              ) : (
-                <Link href={"/user/login"}>
-                  <div>LogIn</div>
-                </Link>
-              )}
-              <Link href={`/user/appliedjobs`}>
+              <Link
+                href={`/user/appliedjobs`}
+                onClick={() => setOffcanvas(false)}
+              >
                 <div>Applied jobs</div>
               </Link>
-              <Link href={`/user/postedjobs`}>
+              <Link
+                href={`/user/postedjobs`}
+                onClick={() => setOffcanvas(false)}
+              >
                 <div>Posted jobs</div>
               </Link>
             </div>
