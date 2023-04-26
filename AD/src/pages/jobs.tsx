@@ -21,10 +21,10 @@ export default function Jobs(props: {jobs: JobType[]}): JSX.Element {
         <thead>
           <tr className="[&>*]:h-[40px] [&>*]:border [&>*]:border-slate-200 rounded-md">
             <th className="w-[40px]">No.</th>
-            <th>id</th>
+            <th className="w-[250px]">id</th>
             <th>created</th>
             <th>title</th>
-            <th>status</th>
+            <th>state</th>
           </tr>
         </thead>
         <tbody>

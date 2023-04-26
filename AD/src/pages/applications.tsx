@@ -24,11 +24,11 @@ export default function Applications(props: {
         <thead>
           <tr className="[&>*]:border [&>*]:border-slate-200">
             <th className="w-[40px]">No.</th>
-            <th>id</th>
+            <th className="w-[250px]">id</th>
             <th>created</th>
             <th>applicant</th>
             <th>job</th>
-            <th>status</th>
+            <th>state</th>
           </tr>
         </thead>
         <tbody>

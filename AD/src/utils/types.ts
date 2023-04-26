@@ -1,19 +1,18 @@
-import {ObjectId} from "mongoose";
-
 export type JobType = {
   _id: string;
   title: string;
   description: string;
   payment: number;
-  createdDate?: Date;
-  updatedDate?: Date;
+  created_date?: Date;
+  updatedDate: Date;
   contractType?: string;
+  state? : string;
 };
 
 export type UserType = {
   _id: string;
   firstName?: string;
-  lastName?: string;
+  lastName: string;
   password: string;
   gender?: string;
   joinDate?: Date;
@@ -25,9 +24,9 @@ export type UserType = {
 
 export type ApplicationType = {
   _id: string;
-  jobId: ObjectId;
-  userId: ObjectId;
-  createdAt: Date;
+  jobId: string;
+  userId: string;
+  createdAt?: Date;
   updatedAt?: Date;
   state?: string;
 };

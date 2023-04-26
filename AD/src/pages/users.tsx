@@ -21,7 +21,7 @@ export default function Users(props: {users: UserType[]}): JSX.Element {
         <thead>
           <tr className="[&>*]:border [&>*]:border-slate-200">
             <th className="w-[40px]">No.</th>
-            <th>id</th>
+            <th className="w-[250px]">id</th>
             <th>Name</th>
             <th>Phone</th>
             <th>Email</th>
