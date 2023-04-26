@@ -6,7 +6,7 @@ export default function Applications(props: {
   applications: ApplicationType[];
 }): JSX.Element {
   const {applications} = props;
-  console.log("applications", applications);
+  // console.log("applications", applications);
 
   return (
     <div>
@@ -21,7 +21,7 @@ export default function Applications(props: {
         </div>
       </form>
 
-      <table className="w-full table-fixed border-2 border-solid rounded-md border-slate-200 bg-white ">
+      <table className="w-full table-auto border-2 border-solid rounded-md border-slate-200 bg-white ">
         <thead>
           <tr className="[&>*]:border [&>*]:border-slate-200">
             <th className="w-[40px]">No.</th>

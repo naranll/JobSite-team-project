@@ -4,7 +4,7 @@ import {buttonStyle} from "@/styles/tagstyles";
 
 export default function Users(props: {users: UserType[]}): JSX.Element {
   const {users} = props;
-  console.log("all users", users);
+  // console.log("all users", users);
 
   return (
     <div>
@@ -18,7 +18,7 @@ export default function Users(props: {users: UserType[]}): JSX.Element {
           <div className={buttonStyle}>Filter</div>
         </div>
       </form>
-      <table className="w-full table-fixed border-2 border-solid border-slate-200 bg-white rounded-md">
+      <table className="w-full table-auto border-2 border-solid border-slate-200 bg-white rounded-md">
         <thead>
           <tr className="[&>*]:border [&>*]:border-slate-200">
             <th className="w-[40px]">No.</th>

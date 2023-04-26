@@ -18,7 +18,7 @@ export default function Jobs(props: {jobs: JobType[]}): JSX.Element {
           <div className={buttonStyle}>Filter</div>
         </div>
       </form>
-      <table className="w-full table-fixed border-2 border-solid border-slate-200 rounded bg-white">
+      <table className="w-full table-auto border-2 border-solid border-slate-200 rounded bg-white">
         <thead>
           <tr className="[&>*]:h-[40px] [&>*]:border [&>*]:border-slate-200 rounded-md">
             <th className="w-[40px]">No.</th>

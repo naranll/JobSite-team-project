@@ -9,11 +9,23 @@ interface PropType {
 }
 
 export default function Row({rowData}: PropType): JSX.Element {
-  const {data} = rowData.data;
-  console.log("data", data);
+  const {data} = rowData;
+  // console.log("data", data);
+
+  function dataTypeChecker(object: any) {
+    if (object.firstName) {
+      console.log("user");
+    } else if (object.title) {
+      console.log("job");
+    } else {
+      console.log("application");
+    }
+  }
+
   function rowClickHandler() {
     console.log("row id");
   }
+  dataTypeChecker(data);
 
   return (
     <tr
@@ -21,7 +33,7 @@ export default function Row({rowData}: PropType): JSX.Element {
       className="[&>*]:border [&>*]:border-slate-200 [&>*]:p-2 "
     >
       <td>{rowData.rowNumber + 1}</td>
-      <td>{}</td>
+      <td>{data._id}</td>
       <td>lorem lorem</td>
       <td>lorem</td>
       <td>lorem</td>
