@@ -1,6 +1,6 @@
 import styles from "../../styles/register.module.css";
-import { useRouter } from "next/router";
-import { UserType } from "@/util/types";
+import {useRouter} from "next/router";
+import {UserType} from "@/util/types";
 import axios from "axios";
 
 export default function Register(): JSX.Element {
@@ -24,7 +24,7 @@ export default function Register(): JSX.Element {
     console.log("new User", data);
 
     axios
-      .post("http://localhost:5000/user/register", data)
+      .post("http://localhost:8008/user/register", data)
       .then((res) => {
         if (res.data.success) {
           router.push("/success");
@@ -38,7 +38,12 @@ export default function Register(): JSX.Element {
       <form onSubmit={(e) => submitHandler(e)}>
         <label>
           <p className={styles.titles}>First name:</p>
-          <input className={styles.inputs} id="firstName" name="firstName" type="text" />
+          <input
+            className={styles.inputs}
+            id="firstName"
+            name="firstName"
+            type="text"
+          />
         </label>
         <label>
           <p className={styles.titles}>Last name:</p>

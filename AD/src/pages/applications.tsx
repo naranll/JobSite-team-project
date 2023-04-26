@@ -44,7 +44,7 @@ export default function Applications(props: {
 }
 
 export async function getStaticProps() {
-  const response = await fetch("http://localhost:6000/application/all");
+  const response = await fetch("http://localhost:8008/application/all");
   const applications = await response.json();
   return {
     props: {

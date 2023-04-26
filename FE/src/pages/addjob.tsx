@@ -1,12 +1,12 @@
 import React from "react";
 import styles from "../styles/addjob.module.css";
-import { useRouter } from "next/router";
-import { JobType } from "@/util/types";
+import {useRouter} from "next/router";
+import {JobType} from "@/util/types";
 import axios from "axios";
-import { useUserContext } from "../../context/UserContext";
+import {useUserContext} from "../../context/UserContext";
 
 export default function AddJob(): JSX.Element {
-  const { user } = useUserContext();
+  const {user} = useUserContext();
   const router = useRouter();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -22,7 +22,7 @@ export default function AddJob(): JSX.Element {
     };
     console.log("add new job working", newJob);
     axios
-      .post("http://localhost:5000/addjob", newJob)
+      .post("http://localhost:8008/addjob", newJob)
       .then((res) => {
         if (res.data.success) {
           router.push("/success");

@@ -40,7 +40,7 @@ export default function Users(props: {users: UserType[]}): JSX.Element {
 }
 
 export async function getStaticProps() {
-  const response = await fetch("http://localhost:6000/user/all");
+  const response = await fetch("http://localhost:8008/user/all");
   const users = await response.json();
   console.log("users in static", users);
   return {

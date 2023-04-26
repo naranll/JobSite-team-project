@@ -42,7 +42,8 @@ export default function Jobs(props: {jobs: JobType[]}): JSX.Element {
 
 export async function getStaticProps() {
   try {
-    const response = await fetch("http://localhost:6000/job/all");
+    const response = await fetch("http://localhost:8008/job/all");
+    console.log("response", response);
     const jobs = await response.json();
     console.log("response from fetch", jobs);
     return {
@@ -54,7 +55,7 @@ export async function getStaticProps() {
     console.log("fetch error", error);
     return {
       props: {
-        msg: "error",
+        jobs: "not fetched",
       },
     };
   }
