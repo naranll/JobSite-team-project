@@ -12,20 +12,24 @@ export default function Row({rowData}: PropType): JSX.Element {
   const {data} = rowData;
   // console.log("data", data);
 
-  function dataTypeChecker(object: any) {
-    if (object.firstName) {
-      console.log("user");
-    } else if (object.title) {
-      console.log("job");
-    } else {
-      console.log("application");
-    }
-  }
+  const user = data as UserType;
+  const job = data as JobType;
+  const application = data as ApplicationType;
+
+  // function dataTypeChecker(object: any) {
+  //   if (object.firstName) {
+  //     console.log("user");
+  //   } else if (object.title) {
+  //     console.log("job");
+  //   } else {
+  //     console.log("application");
+  //   }
+  // }
 
   function rowClickHandler() {
     console.log("row id");
   }
-  dataTypeChecker(data);
+  // dataTypeChecker(data);
 
   return (
     <tr
@@ -34,7 +38,7 @@ export default function Row({rowData}: PropType): JSX.Element {
     >
       <td>{rowData.rowNumber + 1}</td>
       <td>{data._id}</td>
-      <td>lorem lorem</td>
+      <td>{user.firstName || job.createdDate || application.createdAt}</td>
       <td>lorem</td>
       <td>lorem</td>
     </tr>
