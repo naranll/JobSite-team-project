@@ -9,12 +9,14 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
   console.log("jobPage:", job);
 
   function handleApply() {
-    console.log("Job Id",job._id)
-    console.log("User id",user._id)
+    console.log("Job Id", job._id);
+    console.log("User id", user?._id);
 
-    const newApply = {jobId: job._id, userId: user._id}
+    const newApply = { jobId: job._id, userId: user?._id };
 
-    axios.post('http://localhost:5000/application/add', newApply).then((res) => console.log(res))
+    axios
+      .post("http://localhost:8008/application/add", newApply)
+      .then((res) => console.log(res));
   }
   return (
     <div>
@@ -26,10 +28,7 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
             <span className={Style.cardmoney}>{job.payment}$</span>
             <p className={Style.contractType}>{job.contractType}</p>
           </div>
-          <button
-            onClick={handleApply}
-            className={Style.button}
-          >
+          <button onClick={handleApply} className={Style.button}>
             Apply
           </button>
         </div>
@@ -41,7 +40,7 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
 }
 
 export const getStaticPaths = async () => {
-  const result = await fetch(`http://localhost:5000/job/job_id`);
+  const result = await fetch(`http://localhost:8008/job/job_id`);
   const resJob = await result.json();
   const paths = await resJob.map((id: { _id: string }) => ({
     params: { id: id._id },
@@ -59,7 +58,7 @@ interface JobProps {
 export const getStaticProps: GetStaticProps<JobProps> = async ({
   params,
 }: GetStaticPropsContext) => {
-  const res = await fetch(`http://localhost:5000/job/${params?.id}`);
+  const res = await fetch(`http://localhost:8008/job/${params?.id}`);
   const resjson = await res.json();
   return {
     props: {
