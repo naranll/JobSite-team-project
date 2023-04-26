@@ -1,6 +1,5 @@
 import Row from "@/components/Row";
 import {UserType} from "@/utils/types";
-import {buttonStyle} from "@/styles/tagstyles";
 
 export default function Users(props: {users: UserType[]}): JSX.Element {
   const {users} = props;
@@ -8,17 +7,17 @@ export default function Users(props: {users: UserType[]}): JSX.Element {
 
   return (
     <div>
-      <form className="flex justify-end p-2 border-2 border-solid border-slate-200 bg-white">
+      <form className="subHeaderStyle justify-end">
         <div className="flex gap-2">
           <input
             type="search"
             placeholder="Search"
-            className="h-[36px] py-2 px-5 bg-[#dee6ec] rounded-full"
+            className="searchBarStyle"
           />
-          <div className={buttonStyle}>Filter</div>
+          <div className="buttonStyle">Filter</div>
         </div>
       </form>
-      <table className="w-full table-auto border-2 border-solid border-slate-200 bg-white rounded-md">
+      <table className="tableStyle">
         <thead>
           <tr className="[&>*]:border [&>*]:border-slate-200">
             <th className="w-[40px]">No.</th>

@@ -10,16 +10,36 @@
   src: url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 } */
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+.buttonStyle{
+  height: 36px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  background-color: #318ec2;
+  color: white;
+  font-weight: 600;
+  border: 2px solid #318ec2;
+  border-radius: 10px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+.tableStyle{
+  width: 100%;
+  table-layout: auto;
+  background-color: white;
+  border: 2px solid #e2e8f0;
+  border-radius: 6px;
+}
+
+.subHeaderStyle{
+  display: flex;
+  background-color: white;
+  padding: 8px;
+  border: 2px solid #e2e8f0;
+}
+
+.searchBarStyle{
+  height: 36px;
+  padding: 8px 20px;
+  background-color: #dee6ec;
+  border-radius: 12rem;
 }
