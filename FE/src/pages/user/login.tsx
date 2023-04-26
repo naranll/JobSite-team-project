@@ -34,23 +34,32 @@ export default function Login(): JSX.Element {
 
   return (
     <div className={styles.wrap}>
-      <h2 className={styles.title}>Login</h2>
+      <h2 className={styles.title}>Job<span className={styles.titleNow}>Site</span></h2>
       <form onSubmit={submitHandler} className={styles.form}>
         <div className={styles.wrapper}>
           <div className={styles.wrapFrom}>
-            <label>
-              <p>Email:</p>
-              <input type="email" name="email" />
-            </label>
-            <label>
-              <p>Password:</p>
-              <input type="password" name="password" />
-            </label>
+          <label>
+          <p className={styles.h3title}>Email</p>
+          <input className={styles.logInInput} name="password" type="password" />
+        </label>
+          <label>
+          <p className={styles.h3title}>Password</p>
+          <input className={styles.logInInput} name="email" type="email" />
+        </label>
           </div>
+          <Link href={`/user/forgetpassword`}>
+            <span className={styles.forgetPassword}>
+            Forget password
+            
+            </span>
+          </Link>
           <div className={styles.buttons}>
+          
             <button type="submit" className={styles.login}>
               Log in
             </button>
+
+            <span className={styles.solid}>.</span>
             <Link href={`/user/register`}>
               <input
                 placeholder="register"
@@ -58,7 +67,9 @@ export default function Login(): JSX.Element {
                 className={styles.register}
               />
             </Link>
+            
           </div>
+          
         </div>
       </form>
     </div>
