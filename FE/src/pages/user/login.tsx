@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import styles from "../../styles/Login.module.css";
 // import { UserType } from "@/util/types";
-import Link from "next/link";
 // import { useRouter } from "next/router";
 // import axios from "axios";
+import Link from "next/link";
+import styles from "../../styles/Login.module.css";
 import { useUserContext } from "../../../context/UserContext";
 
 export default function Login(): JSX.Element {
@@ -33,34 +33,43 @@ export default function Login(): JSX.Element {
   // }
 
   return (
+    <div className={styles.logInFrom}>
     <div className={styles.wrap}>
-      <h2 className={styles.title}>Login</h2>
+      <h2 className={styles.title}>Job <span className={styles.titleNow}>Now</span></h2>
       <form onSubmit={submitHandler} className={styles.form}>
         <div className={styles.wrapper}>
+          
+
           <div className={styles.wrapFrom}>
-            <label>
-              <p>Email:</p>
-              <input type="email" name="email" />
+            <label >
+              <input className={styles.logInInput} type="email" name="email" placeholder="Email"/>
             </label>
-            <label>
-              <p>Password:</p>
-              <input type="password" name="password" />
+            <label >
+              <input className={styles.logInInput} type="password" name="password" placeholder="Password"/>
             </label>
           </div>
           <div className={styles.buttons}>
-            <button type="submit" className={styles.login}>
-              Log in
-            </button>
-            <Link href={`/user/register`}>
+          <Link href={`/user/register`}>
               <input
                 placeholder="register"
                 disabled
                 className={styles.register}
               />
             </Link>
+            <button type="submit" className={styles.login}>
+              Log in
+            </button>
+            
           </div>
+          <Link href={`/user/forgetpassword`}>
+            <span className={styles.forgetPassword}>
+            Forget password
+            <span className={styles.solid}>.</span>
+            </span>
+          </Link>
         </div>
       </form>
+    </div>
     </div>
   );
 }
