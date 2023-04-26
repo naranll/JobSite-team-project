@@ -61,9 +61,10 @@ export default function Login(): JSX.Element {
             </button>
             
           </div>
-          <Link href={`/forget password`}>
+          <Link href={`/user/forgetpassword`}>
             <span className={styles.forgetPassword}>
             Forget password
+            <span className={styles.solid}>.</span>
             </span>
           </Link>
         </div>

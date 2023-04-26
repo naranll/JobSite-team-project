@@ -62,4 +62,31 @@
 .forgetPassword{
   display: flex;
   text-align: center;
+  justify-content: center;
+  margin-top: 15px;
+  background-color: #fffafa;
+  z-index: 99;
+  
+
 }
+
+.solid{
+  position: absolute ;
+  color: #ffffff;
+  border-bottom: solid 1px #00000032;
+  width: 76%;
+  top: 455px;
+}
+
+/* .forgetPassword {    
+  width: 1000px;     
+  text-align: center;     
+  border-bottom: 1px solid #000;     
+  line-height: 0.1em;    
+  margin: 10px 0 20px;  
+}   
+
+ .solid {      
+  background:#fff;      
+  padding:0 10px;  
+} */
