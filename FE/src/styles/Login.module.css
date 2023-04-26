@@ -22,27 +22,72 @@
 .title {
   text-align: center;
   color: #000000;
-  margin-bottom: 10px;
-  
+
+  margin-top: 10px;
+}
+
+.h3title{
+  text-align: start;
+  margin-left: 20px;
+  color: #5C6BC0;
+  margin-top: 10px;
+
 }
 
 .login {
-  background-color: #40afff;
+  background-color: #5C6BC0;
   border-radius: 10px;
   border: none;
   color: #fff;
   padding: 10px;
-  width: 48%;
-  margin: 5px;
+
+  width: 46%;
+  margin: 20px 0px 80px 90px;
+
 }
 
 .register {
-  border: 1px solid #192d50;
+  text-align: center;
+  border: 1px solid #5C6BC0;
   background-color: #fff;
   font-size: 15;
   border-radius: 10px;
   padding: 10px;
-  width: 48%;
+  width: 46%;
+  margin-left: 10px;
+}
+
+.buttons{
+  text-align: center;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.logInInput{
+  width: 96%;
+  padding: 10px;
+  margin: 10px;
+  border: solid 1px #5C6BC0;
+  border-radius: 5px;
+}
+
+.forgetPassword{
+  display: flex;
+  margin-top: 15px;
+  border-bottom: solid 1px #5C6BC0;
+  color: #5C6BC0;
+  width: fit-content;
+  margin-left: 200px;
+}
+
+.solid{
+  position: absolute ;
+  color: #ffffff;
+  border-bottom: solid 1px #5C6BC0;
+  width: 76%;
+  top: 70%;
+
 }
 
 .buttons{

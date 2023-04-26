@@ -36,30 +36,34 @@ export default function Register(): JSX.Element {
   return (
     <div className={styles.wrapper}>
       <form onSubmit={(e) => submitHandler(e)}>
+        <h1>Job<span className={styles.nowTitle}>Site</span></h1>
         <label>
-          <p className={styles.titles}>First name:</p>
-          <input
-            className={styles.inputs}
-            id="firstName"
-            name="firstName"
-            type="text"
-          />
+          <p className={styles.titles}>First name</p>
+          <input className={styles.inputs} id="firstName" name="firstName" type="text" />
         </label>
         <label>
-          <p className={styles.titles}>Last name:</p>
+          <p className={styles.titles}>Last name</p>
           <input className={styles.inputs} name="lastName" type="text" />
         </label>
         <label>
-          <p className={styles.titles}>Email:</p>
+          <p className={styles.titles}>Email</p>
           <input className={styles.inputs} name="email" type="text" />
         </label>
+        
         <label>
-          <p className={styles.titles}>Password:</p>
+          <p className={styles.titles}>Password</p>
           <input className={styles.inputs} name="password" type="password" />
         </label>
-        <label>
-          <p>gender:</p>
-          <select name="gender">
+
+        <div className={styles.submit}>
+          <label>
+            <p className={styles.titles}>Phone number</p>
+            <input type="number" name="phoneNumber" className={styles.inputs} />
+          </label>
+        </div>
+        <label className={styles.gender}>
+          <p>Gender</p>
+          <select className={styles.option} name="gender" >
             <option defaultValue={"select"} disabled>
               select
             </option>
@@ -68,11 +72,7 @@ export default function Register(): JSX.Element {
             <option>other</option>
           </select>
         </label>
-        <label>
-          <p className={styles.titles}>Phone number:</p>
-          <input type="number" name="phoneNumber" />
-        </label>
-        <button type="submit">Submit</button>
+          <button type="submit" className={styles.submitBtn}>Submit</button>
       </form>
     </div>
   );

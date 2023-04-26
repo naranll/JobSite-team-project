@@ -35,38 +35,48 @@ export default function Login(): JSX.Element {
   return (
     <div className={styles.logInFrom}>
     <div className={styles.wrap}>
-      <h2 className={styles.title}>Job <span className={styles.titleNow}>Now</span></h2>
+      <h2 className={styles.title}>Job<span className={styles.titleNow}>Site</span></h2>
       <form onSubmit={submitHandler} className={styles.form}>
         <div className={styles.wrapper}>
           
 
           <div className={styles.wrapFrom}>
-            <label >
-              <input className={styles.logInInput} type="email" name="email" placeholder="Email"/>
-            </label>
-            <label >
-              <input className={styles.logInInput} type="password" name="password" placeholder="Password"/>
-            </label>
+          <label>
+          <p className={styles.h3title}>Email</p>
+          <input className={styles.logInInput} name="password" type="password" />
+        </label>
+          <label>
+          <p className={styles.h3title}>Password</p>
+          <input className={styles.logInInput} name="email" type="email" />
+        </label>
+
           </div>
+          <Link href={`/user/forgetpassword`}>
+            <span className={styles.forgetPassword}>
+            Forget password
+            
+            </span>
+          </Link>
           <div className={styles.buttons}>
-          <Link href={`/user/register`}>
+
+          
+            <button type="submit" className={styles.login}>
+              Log in
+            </button>
+
+            <span className={styles.solid}>.</span>
+            <Link href={`/user/register`}>
+
               <input
                 placeholder="register"
                 disabled
                 className={styles.register}
               />
             </Link>
-            <button type="submit" className={styles.login}>
-              Log in
-            </button>
-            
+
           </div>
-          <Link href={`/user/forgetpassword`}>
-            <span className={styles.forgetPassword}>
-            Forget password
-            <span className={styles.solid}>.</span>
-            </span>
-          </Link>
+          
+
         </div>
       </form>
     </div>

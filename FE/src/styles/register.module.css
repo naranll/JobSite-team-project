@@ -2,19 +2,73 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-  justify-content: center;
+  margin-top: 50px;
   height: 100vh;
+  max-width: 100%;
 }
 
 .titles{
   display: flex;
   flex-direction: column;
-  justify-content: start;
   text-align: start;
-  margin-left: 135px;
   gap: 10px;
+  margin-left: 50px;
+  color: #5C6BC0;
+}
+
+.nowTitle{
+  color: #5C6BC0;
 }
 
 .inputs{
-  margin: 5px 0px 15px 0px;
+  margin: 5px 0px 25px 0px;
+  border: none;
+  padding: 8px;
+  border-radius: 5px;
+  border: solid 1px #5C6BC0;
+  width: 80%;
+}
+
+.phoneNumber{
+  display: flex;
+  width: 147px;
+  margin-left: 120px;
+}
+
+.gender{
+  display: flex;
+  margin-left: 70px;
+  margin-bottom: 25px;
+  gap: 105px;
+}
+
+.gender p{
+  color: #5C6BC0;
+}
+
+.gender .option{
+  padding: 8px;
+  border-radius: 5px;
+  border: solid 1px #5C6BC0;
+  width: 40%;
+}
+
+.submit{
+  display: flex;
+  flex-direction: column;
+}
+
+.submitBtn{
+  display: flex;
+  width: 147px;
+  margin-left: 120px;
+}
+
+.submitBtn{
+  justify-content: center;
+  background-color: #5C6BC0;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
 }

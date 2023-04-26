@@ -10,15 +10,9 @@ export default function Job({data: job}: {data: JobType}): JSX.Element {
 
   function handleApply() {
     console.log("Job Id", job._id);
-<<<<<<< HEAD
     console.log("User id", user?._id);
 
     const newApply = { jobId: job._id, userId: user?._id };
-=======
-    console.log("User id", user._id);
-
-    const newApply = {jobId: job._id, userId: user._id};
->>>>>>> ece1c95 (updated all port numbers)
 
     axios
       .post("http://localhost:8008/application/add", newApply)
