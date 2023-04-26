@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import styles from "../../styles/Login.module.css";
 // import { UserType } from "@/util/types";
-import Link from "next/link";
 // import { useRouter } from "next/router";
 // import axios from "axios";
+import Link from "next/link";
+import styles from "../../styles/Login.module.css";
 import { useUserContext } from "../../../context/UserContext";
 
 export default function Login(): JSX.Element {
@@ -33,10 +33,13 @@ export default function Login(): JSX.Element {
   // }
 
   return (
+    <div className={styles.logInFrom}>
     <div className={styles.wrap}>
       <h2 className={styles.title}>Job<span className={styles.titleNow}>Site</span></h2>
       <form onSubmit={submitHandler} className={styles.form}>
         <div className={styles.wrapper}>
+          
+
           <div className={styles.wrapFrom}>
           <label>
           <p className={styles.h3title}>Email</p>
@@ -46,6 +49,7 @@ export default function Login(): JSX.Element {
           <p className={styles.h3title}>Password</p>
           <input className={styles.logInInput} name="email" type="email" />
         </label>
+
           </div>
           <Link href={`/user/forgetpassword`}>
             <span className={styles.forgetPassword}>
@@ -54,6 +58,7 @@ export default function Login(): JSX.Element {
             </span>
           </Link>
           <div className={styles.buttons}>
+
           
             <button type="submit" className={styles.login}>
               Log in
@@ -61,17 +66,20 @@ export default function Login(): JSX.Element {
 
             <span className={styles.solid}>.</span>
             <Link href={`/user/register`}>
+
               <input
                 placeholder="register"
                 disabled
                 className={styles.register}
               />
             </Link>
-            
+
           </div>
           
+
         </div>
       </form>
+    </div>
     </div>
   );
 }
