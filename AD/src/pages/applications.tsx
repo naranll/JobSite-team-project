@@ -34,8 +34,11 @@ export default function Applications(props: {
         </thead>
         <tbody>
           {applications.map((application: ApplicationType, i: number) => {
-            console.log("application row", application);
-            return <Row key={i} rowNumber={i} />;
+            const rowData = {
+              rowNumber: i,
+              data: application,
+            };
+            return <Row key={i} rowData={rowData} />;
           })}
         </tbody>
       </table>

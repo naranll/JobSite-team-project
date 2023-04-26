@@ -4,7 +4,6 @@ import {buttonStyle} from "@/styles/tagstyles";
 
 export default function Jobs(props: {jobs: JobType[]}): JSX.Element {
   const {jobs} = props;
-  console.log("jobs", jobs);
 
   return (
     <div>
@@ -30,10 +29,13 @@ export default function Jobs(props: {jobs: JobType[]}): JSX.Element {
           </tr>
         </thead>
         <tbody>
-          {/* {jobs.map((job: JobType, i: number) => {
-            console.log("job row", job);
-            return <Row key={i} rowNumber={i} {...job} />;
-          })} */}
+          {jobs.map((job: JobType, i: number) => {
+            const rowData = {
+              rowNumber: i,
+              data: job,
+            };
+            return <Row key={i} rowData={rowData} />;
+          })}
         </tbody>
       </table>
     </div>

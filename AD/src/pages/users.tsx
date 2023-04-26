@@ -30,8 +30,11 @@ export default function Users(props: {users: UserType[]}): JSX.Element {
         </thead>
         <tbody className="">
           {users.map((user: UserType, i: number) => {
-            console.log("user row", user);
-            return <Row key={i} rowNumber={i} />;
+            const rowData = {
+              rowNumber: i,
+              data: user,
+            };
+            return <Row key={i} rowData={rowData} />;
           })}
         </tbody>
       </table>
