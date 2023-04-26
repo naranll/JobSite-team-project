@@ -31,15 +31,15 @@ export default function Home(props: { jobs: JobType[] }): JSX.Element {
 
 export async function getStaticProps() {
   try {
-  const response = await fetch("http://localhost:6000/job/all");
-  const jobs = await response.json();
-  console.log(jobs);
-  return {
-    props: {
-      jobs: jobs,
-    },
-  };
-} catch (error) {
+    const response = await fetch("http://localhost:8008/job/all");
+    const jobs = await response.json();
+    console.log(jobs);
+    return {
+      props: {
+        jobs: jobs,
+      },
+    };
+  } catch (error) {
     console.log("error:", error);
-}
+  }
 }
