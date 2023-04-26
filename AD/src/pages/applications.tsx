@@ -1,10 +1,12 @@
-import { ApplicationType } from "@/utils/types";
+import {ApplicationType} from "@/utils/types";
 import Row from "../components/Row";
-import { buttonStyle } from "@/styles/tagstyles";
+import {buttonStyle} from "@/styles/tagstyles";
 
-export default function Applications( props: {applications: ApplicationType[]}): JSX.Element {
+export default function Applications(props: {
+  applications: ApplicationType[];
+}): JSX.Element {
   const {applications} = props;
-  console.log("applications", applications)
+  console.log("applications", applications);
 
   return (
     <div>
@@ -41,12 +43,12 @@ export default function Applications( props: {applications: ApplicationType[]}):
   );
 }
 
-export async function getStaticProps(){
-  const response = await fetch("http://localhost:5000/application/all");
+export async function getStaticProps() {
+  const response = await fetch("http://localhost:6000/application/all");
   const applications = await response.json();
-  return{
+  return {
     props: {
       applications: applications,
-    }
-  }
+    },
+  };
 }

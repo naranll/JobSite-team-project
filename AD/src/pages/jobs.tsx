@@ -1,9 +1,10 @@
 import Row from "../components/Row";
-import { JobType } from "@/utils/types";
-import { buttonStyle } from "@/styles/tagstyles";
+import {JobType} from "@/utils/types";
+import {buttonStyle} from "@/styles/tagstyles";
 
-export default function Jobs(props: { jobs: JobType[] }): JSX.Element {
-  const { jobs } = props;
+export default function Jobs(props: {jobs: JobType[]}): JSX.Element {
+  const {jobs} = props;
+  console.log("jobs", jobs);
 
   return (
     <div>
@@ -29,10 +30,10 @@ export default function Jobs(props: { jobs: JobType[] }): JSX.Element {
           </tr>
         </thead>
         <tbody>
-          {jobs.map((job: JobType, i: number) => {
+          {/* {jobs.map((job: JobType, i: number) => {
             console.log("job row", job);
             return <Row key={i} rowNumber={i} {...job} />;
-          })}
+          })} */}
         </tbody>
       </table>
     </div>
@@ -40,12 +41,21 @@ export default function Jobs(props: { jobs: JobType[] }): JSX.Element {
 }
 
 export async function getStaticProps() {
-  const response = await fetch("http://localhost:5000/job/all");
-  const jobs = await response.json();
-  console.log("response from fetch", jobs);
-  return {
-    props: {
-      jobs: jobs,
-    },
-  };
+  try {
+    const response = await fetch("http://localhost:6000/job/all");
+    const jobs = await response.json();
+    console.log("response from fetch", jobs);
+    return {
+      props: {
+        jobs: jobs,
+      },
+    };
+  } catch (error) {
+    console.log("fetch error", error);
+    return {
+      props: {
+        msg: "error",
+      },
+    };
+  }
 }

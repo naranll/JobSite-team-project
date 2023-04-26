@@ -1,9 +1,9 @@
 import Row from "@/components/Row";
-import { UserType } from "@/utils/types";
-import { buttonStyle } from "@/styles/tagstyles";
+import {UserType} from "@/utils/types";
+import {buttonStyle} from "@/styles/tagstyles";
 
-export default function Users(props: { users: UserType[] }): JSX.Element {
-  const { users } = props;
+export default function Users(props: {users: UserType[]}): JSX.Element {
+  const {users} = props;
   console.log("all users", users);
 
   return (
@@ -40,7 +40,7 @@ export default function Users(props: { users: UserType[] }): JSX.Element {
 }
 
 export async function getStaticProps() {
-  const response = await fetch("http://localhost:5000/user/all");
+  const response = await fetch("http://localhost:6000/user/all");
   const users = await response.json();
   console.log("users in static", users);
   return {
