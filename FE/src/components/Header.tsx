@@ -22,11 +22,11 @@ export default function Header(): JSX.Element {
               &times;
             </a>
             <div className={styles.filters}>
-              <Link href={`/user/appliedjobs`}>
+              <Link href={`/user/appliedjobs`} onClick={() => setOffcanvas(false)}>
               <div>Applied jobs</div>
 
               </Link>
-              <Link href={`/user/postedjobs`}>
+              <Link href={`/user/postedjobs`} onClick={() => setOffcanvas(false)}>
               <div>Posted jobs</div>
 
               </Link>
