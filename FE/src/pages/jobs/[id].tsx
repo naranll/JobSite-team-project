@@ -1,11 +1,11 @@
-import { JobType } from "@/util/types";
-import { GetStaticProps, GetStaticPropsContext } from "next";
+import {JobType} from "@/util/types";
+import {GetStaticProps, GetStaticPropsContext} from "next";
 import Style from "../../styles/JobCard.module.css";
-import { useUserContext } from "../../../context/UserContext";
+import {useUserContext} from "../../../context/UserContext";
 import axios from "axios";
 
-export default function Job({ data: job }: { data: JobType }): JSX.Element {
-  const { user } = useUserContext();
+export default function Job({data: job}: {data: JobType}): JSX.Element {
+  const {user} = useUserContext();
   console.log("jobPage:", job);
 
   function handleApply() {
@@ -42,8 +42,8 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
 export const getStaticPaths = async () => {
   const result = await fetch(`http://localhost:8008/job/job_id`);
   const resJob = await result.json();
-  const paths = await resJob.map((id: { _id: string }) => ({
-    params: { id: id._id },
+  const paths = await resJob.map((id: {_id: string}) => ({
+    params: {id: id._id},
   }));
   return {
     paths,
