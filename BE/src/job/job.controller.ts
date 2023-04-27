@@ -28,4 +28,9 @@ export class JobController {
   getJob(@Param('id') id: string) {
     return this.jobService.findJob(id);
   }
+
+  @Get('posted/:id')
+  getPostedJobsByUserId(@Param('id') userId: string): Promise<Job[]> {
+    return this.jobService.getPostedJobsByUserId(userId);
+  }
 }
