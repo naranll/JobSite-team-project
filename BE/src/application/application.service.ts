@@ -3,7 +3,7 @@ import { Connection, Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { Application } from './application.schema';
 import { ApplicationDto } from './application.dto';
-// import { Job } from "src/job/job.schema";
+import { Job } from 'src/job/job.schema';
 
 @Injectable()
 export class ApplicationService {
@@ -23,11 +23,11 @@ export class ApplicationService {
   async getAppliedJobsByUserId(userId: string): Promise<void> {
     const applications = await this.applicationModel
       .find({ userId })
-      .populate('jobId');
-    // const jobsId = applications.map((application) => application.jobId);
-    // console.log("applied jobsId", jobsId);
-    console.log("user's applications", applications);
+      .populate('jobId')
+      .select({ jobId: 1 });
+    console.log('applications', applications[0]);
+    // const appliedJobs = applications.map((application) => application.jobId);
+    // console.log('applied jobs', appliedJobs[0]);
+    // return appliedJobs;
   }
 }
-
-// .populate({path: "Job", options: {strictPopulate: false}})
