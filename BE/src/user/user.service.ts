@@ -1,16 +1,14 @@
-import { Injectable, UnauthorizedException } from "@nestjs/common";
-import { InjectConnection, InjectModel } from "@nestjs/mongoose";
-import { Connection, Model } from "mongoose";
-import { User } from "./user.schema";
-import { UserDto } from "./user.dto";
-import { Application } from "src/application/application.schema";
+import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { InjectConnection, InjectModel } from '@nestjs/mongoose';
+import { Connection, Model } from 'mongoose';
+import { User } from './user.schema';
+import { UserDto } from './user.dto';
 
 @Injectable()
 export class UserService {
   constructor(
-    @InjectModel("users") private userModel: Model<User>,
-    @InjectModel("application") private applicationModel: Model<Application>,
-    @InjectConnection() private connection: Connection
+    @InjectModel('User') private userModel: Model<User>,
+    @InjectConnection() private connection: Connection,
   ) {}
   async addUser(createUserDto: UserDto): Promise<User> {
     const createdUser = new this.userModel(createUserDto);
@@ -22,9 +20,9 @@ export class UserService {
   }
 
   async findUser(id: string): Promise<User> {
-    console.log("find user id", id);
+    console.log('find user id', id);
     const result = await this.userModel.findById(id).exec();
-    console.log("found User", result);
+    console.log('found User', result);
     return result;
   }
 
@@ -35,11 +33,5 @@ export class UserService {
     } else {
       throw new UnauthorizedException();
     }
-  }
-
-  async getAppliedJobs(id: string): Promise<void> {
-    const userId = id;
-    const applications = await this.applicationModel.find({});
-    console.log("applications by", userId, applications);
   }
 }

@@ -1,7 +1,7 @@
-import { Body, Controller, Get, Param, Post } from "@nestjs/common";
-import { UserService } from "./user.service";
-import { UserDto } from "./user.dto";
-import { User } from "./user.schema";
+import {Body, Controller, Get, Param, Post} from "@nestjs/common";
+import {UserService} from "./user.service";
+import {UserDto} from "./user.dto";
+import {User} from "./user.schema";
 
 @Controller("user")
 export class UserController {
@@ -26,10 +26,5 @@ export class UserController {
   @Get("/:id")
   getUser(@Param("id") id: string) {
     return this.userService.findUser(id);
-  }
-
-  @Get("/:id/applied")
-  getAppliedJobs(@Param("id") id: string){
-    return this.userService.getAppliedJobs(id);
   }
 }
