@@ -1,72 +1,78 @@
 .wrapper {
+  position: absolute;
+  margin: 0 auto;
+  height: 80%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
   display: flex;
   flex-direction: column;
   text-align: center;
-  margin-top: 50px;
-  height: 100vh;
-  max-width: 100%;
+  /* margin-top: 50px; */
+  /* height: 100vh; */
+  /* max-width: 100%; */
 }
 
-.titles{
+.titles {
   display: flex;
   flex-direction: column;
   text-align: start;
   gap: 10px;
   margin-left: 50px;
-  color: #5C6BC0;
+  color: #5c6bc0;
 }
 
-.nowTitle{
-  color: #5C6BC0;
+.nowTitle {
+  color: #5c6bc0;
 }
 
-.inputs{
+.inputs {
   margin: 5px 0px 25px 0px;
   border: none;
   padding: 8px;
   border-radius: 5px;
-  border: solid 1px #5C6BC0;
+  border: solid 1px #5c6bc0;
   width: 80%;
 }
 
-.phoneNumber{
+.phoneNumber {
   display: flex;
   width: 147px;
   margin-left: 120px;
 }
 
-.gender{
+.gender {
   display: flex;
   margin-left: 70px;
   margin-bottom: 25px;
   gap: 105px;
 }
 
-.gender p{
-  color: #5C6BC0;
+.gender p {
+  color: #5c6bc0;
 }
 
-.gender .option{
+.gender .option {
   padding: 8px;
   border-radius: 5px;
-  border: solid 1px #5C6BC0;
+  border: solid 1px #5c6bc0;
   width: 40%;
 }
 
-.submit{
+.submit {
   display: flex;
   flex-direction: column;
 }
 
-.submitBtn{
+.submitBtn {
   display: flex;
   width: 147px;
   margin-left: 120px;
 }
 
-.submitBtn{
+.submitBtn {
   justify-content: center;
-  background-color: #5C6BC0;
+  background-color: #5c6bc0;
   color: #fff;
   border: none;
   border-radius: 5px;
