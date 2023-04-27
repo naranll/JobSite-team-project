@@ -12,11 +12,11 @@
 }
 
 .jobCard {
-  border: 1px solid white;
-  padding: 30px;
-  border-radius: 8px;
+  border-bottom: 1px solid #007aff;
+  padding-bottom: 5px;
+  /* border-radius: 25px; */
   width: 80%;
-  background-color: rgb(142, 199, 239);
+  background-color: #fff;
   color: rgb(0, 0, 0);
 }
 

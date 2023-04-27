@@ -3,55 +3,58 @@ import { useUserContext } from "../../context/UserContext";
 import styles from "../styles/header.module.css";
 import Link from "next/link";
 
-
 export default function Header(): JSX.Element {
   const { user, handleLogout } = useUserContext();
-  const [offanvas, setOffcanvas] = useState(false)
+  const [offanvas, setOffcanvas] = useState(false);
   // const [visible, setVisible] = useState(false)
-
 
   return (
     <div className={styles.header}>
+      <Link href={`/`}>
+        <div className={styles.logo}>Logo</div>
+      </Link>
       <div className={styles.menu}>
-        <div  id="mainBtn">
-          <span className={`${offanvas?styles.menuBtnHidden: styles.menuBtn} `} onClick={() =>{ setOffcanvas(true)}}>&#9776;</span>
-        </div>
         {offanvas ? (
           <div id="mySidenav" className="sidenav">
-            <a className={styles.closebtn} onClick={() => setOffcanvas(false)}>
-              &times;
-            </a>
             <div className={styles.filters}>
+              {user ? (
+                <div>
+                  <div>Hi! {user.firstName}</div>
+                  <button onClick={handleLogout}>Log out</button>
+                </div>
+              ) : (
+                <Link href={"/user/login"}>
+                  <div>LogIn</div>
+                </Link>
+              )}
               <Link href={`/user/appliedjobs`}>
-              <div>Applied jobs</div>
-
+                <div>Applied jobs</div>
               </Link>
               <Link href={`/user/postedjobs`}>
-              <div>Posted jobs</div>
-
+                <div>Posted jobs</div>
               </Link>
             </div>
           </div>
         ) : null}
       </div>
-    
-      <Link href={`/`}>
-        
-      <div>Logo</div>
-      </Link>
+
       <Link href={`/addjob`}>
-        <div className={styles.post}>Post</div>
+        <span className={styles.post}>Post a Job</span>
       </Link>
-      {user ? (
-        <div>
-          <div>Hi! {user.firstName}</div>
-          <button onClick={handleLogout}>Log out</button>
-        </div>
-      ) : (
-        <Link href={"/user/login"}>
-          <div>LogIn</div>
-        </Link>
-      )}
+
+      <div id="mainBtn">
+        <span
+          className={`${offanvas ? styles.menuBtnHidden : styles.menuBtn} `}
+          onClick={() => {
+            setOffcanvas(true);
+          }}
+        >
+          &#9776;
+        </span>
+        <a className={styles.closebtn} onClick={() => setOffcanvas(false)}>
+          &times;
+        </a>
+      </div>
     </div>
   );
 }
