@@ -18,7 +18,7 @@ export class ApplicationController {
     return this.applicationService.addApp(body);
   }
 
-  @Get('applied/:id')
+  @Get('/:id')
   getAppliadJobsByUserId(@Param('id') userId: string): Promise<Application[]> {
     return this.applicationService.getAppliedJobsByUserId(userId);
   }

@@ -1,7 +1,7 @@
-import {UserType} from "@/util/types";
+import { UserType } from "@/util/types";
 import axios from "axios";
-import {useRouter} from "next/router";
-import {ReactNode, createContext, useContext, useState} from "react";
+import { useRouter } from "next/router";
+import { ReactNode, createContext, useContext, useState } from "react";
 
 export interface IUserContext {
   user: UserType | null;
@@ -18,7 +18,7 @@ interface UserProviderType {
 
 export const useUserContext = () => useContext(UserContext);
 
-export const UserContextProvider = ({children}: UserProviderType) => {
+export const UserContextProvider = ({ children }: UserProviderType) => {
   const [user, setUser] = useState(null);
   const router = useRouter();
 
@@ -52,7 +52,7 @@ export const UserContextProvider = ({children}: UserProviderType) => {
   }
 
   return (
-    <UserContext.Provider value={{user, submitHandler, handleLogout}}>
+    <UserContext.Provider value={{ user, submitHandler, handleLogout }}>
       {children}
     </UserContext.Provider>
   );
