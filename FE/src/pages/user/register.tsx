@@ -1,6 +1,6 @@
 import styles from "../../styles/register.module.css";
-import {useRouter} from "next/router";
-import {UserType} from "@/util/types";
+import { useRouter } from "next/router";
+import { UserType } from "@/util/types";
 import axios from "axios";
 
 export default function Register(): JSX.Element {
@@ -24,7 +24,7 @@ export default function Register(): JSX.Element {
     console.log("new User", data);
 
     axios
-      .post("http://localhost:8008/user/register", data)
+      .post("http://localhost:8008/user/add", data)
       .then((res) => {
         if (res.data.success) {
           router.push("/success");
@@ -36,10 +36,17 @@ export default function Register(): JSX.Element {
   return (
     <div className={styles.wrapper}>
       <form onSubmit={(e) => submitHandler(e)}>
-        <h1>Job<span className={styles.nowTitle}>Site</span></h1>
+        <h1>
+          Job<span className={styles.nowTitle}>Site</span>
+        </h1>
         <label>
           <p className={styles.titles}>First name</p>
-          <input className={styles.inputs} id="firstName" name="firstName" type="text" />
+          <input
+            className={styles.inputs}
+            id="firstName"
+            name="firstName"
+            type="text"
+          />
         </label>
         <label>
           <p className={styles.titles}>Last name</p>
@@ -49,7 +56,7 @@ export default function Register(): JSX.Element {
           <p className={styles.titles}>Email</p>
           <input className={styles.inputs} name="email" type="text" />
         </label>
-        
+
         <label>
           <p className={styles.titles}>Password</p>
           <input className={styles.inputs} name="password" type="password" />
@@ -63,7 +70,7 @@ export default function Register(): JSX.Element {
         </div>
         <label className={styles.gender}>
           <p>Gender</p>
-          <select className={styles.option} name="gender" >
+          <select className={styles.option} name="gender">
             <option defaultValue={"select"} disabled>
               select
             </option>
@@ -72,7 +79,9 @@ export default function Register(): JSX.Element {
             <option>other</option>
           </select>
         </label>
-          <button type="submit" className={styles.submitBtn}>Submit</button>
+        <button type="submit" className={styles.submitBtn}>
+          Submit
+        </button>
       </form>
     </div>
   );
