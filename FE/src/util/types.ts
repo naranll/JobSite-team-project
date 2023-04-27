@@ -1,4 +1,5 @@
 export type JobType = {
+  postedBy: string | undefined;
   _id?: string;
   title: string;
   description: string;
@@ -8,7 +9,7 @@ export type JobType = {
 };
 
 export type UserType = {
-  _id? :string;
+  _id?: string;
   firstName?: string;
   lastName?: string;
   password: string;
