@@ -1,14 +1,16 @@
-
-
 .wrap {
+  position: absolute;
+  margin: 0 auto;
+  height: 80%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 220px 20px 0px 40px ;
-  max-width: 80%;
 }
 
-.titleNow{
-  color: #5C6BC0;
+.titleNow {
+  color: #5c6bc0;
 }
 
 /* .wrapper {
@@ -26,16 +28,15 @@
   margin-top: 10px;
 }
 
-.h3title{
+.h3title {
   text-align: start;
   margin-left: 20px;
-  color: #5C6BC0;
+  color: #5c6bc0;
   margin-top: 10px;
-
 }
 
 .login {
-  background-color: #5C6BC0;
+  background-color: #5c6bc0;
   border-radius: 10px;
   border: none;
   color: #fff;
@@ -43,12 +44,11 @@
 
   width: 46%;
   margin: 20px 0px 80px 90px;
-
 }
 
 .register {
   text-align: center;
-  border: 1px solid #5C6BC0;
+  border: 1px solid #5c6bc0;
   background-color: #fff;
   font-size: 15;
   border-radius: 10px;
@@ -57,66 +57,63 @@
   margin-left: 10px;
 }
 
-.buttons{
+.buttons {
   text-align: center;
   margin-top: 10px;
   display: flex;
   flex-direction: column;
 }
 
-.logInInput{
+.logInInput {
   width: 96%;
   padding: 10px;
   margin: 10px;
-  border: solid 1px #5C6BC0;
+  border: solid 1px #5c6bc0;
   border-radius: 5px;
 }
 
-.forgetPassword{
+.forgetPassword {
   display: flex;
   margin-top: 15px;
-  border-bottom: solid 1px #5C6BC0;
-  color: #5C6BC0;
+  border-bottom: solid 1px #5c6bc0;
+  color: #5c6bc0;
   width: fit-content;
   margin-left: 200px;
 }
 
-.solid{
-  position: absolute ;
+.solid {
+  position: absolute;
   color: #ffffff;
-  border-bottom: solid 1px #5C6BC0;
+  border-bottom: solid 1px #5c6bc0;
   width: 76%;
   top: 70%;
-
 }
 
-.buttons{
+.buttons {
   text-align: center;
   margin-top: 10px;
 }
 
-.logInInput{
+.logInInput {
   width: 96%;
   padding: 8px;
   margin: 5px;
-  background-color: #F2F2F7;
+  background-color: #f2f2f7;
   border: none;
   border-radius: 5px;
 }
 
-.forgetPassword{
+.forgetPassword {
   display: flex;
   text-align: center;
   justify-content: center;
   margin-top: 15px;
   background-color: #fffafa;
   z-index: 99;
-  
-
 }
 
-.solid{
-  position: absolute ;
+.solid {
+  position: absolute;
   color: #ffffff;
   border-bottom: solid 1px #00000032;
   width: 76%;
