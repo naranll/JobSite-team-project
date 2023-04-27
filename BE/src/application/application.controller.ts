@@ -2,7 +2,7 @@ import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ApplicationService } from './application.service';
 import { Application } from './application.schema';
 import { ApplicationDto } from './application.dto';
-import { Job } from 'src/job/job.schema';
+// import { Job } from 'src/job/job.schema';
 
 @Controller('application')
 export class ApplicationController {
@@ -19,7 +19,7 @@ export class ApplicationController {
   }
 
   @Get('/:id')
-  getAppliadJobsByUserId(@Param('id') userId: string): Promise<void> {
+  getAppliadJobsByUserId(@Param('id') userId: string): Promise<Application[]> {
     return this.applicationService.getAppliedJobsByUserId(userId);
   }
 }
