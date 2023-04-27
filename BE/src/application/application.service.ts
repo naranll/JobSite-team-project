@@ -7,7 +7,7 @@ import { ApplicationDto } from './application.dto';
 @Injectable()
 export class ApplicationService {
   constructor(
-    @InjectModel('applications') private applicationModel: Model<Application>,
+    @InjectModel('Application') private applicationModel: Model<Application>,
     @InjectConnection() private connection: Connection,
   ) {}
   async addApp(createAppDto: ApplicationDto): Promise<Application> {
@@ -16,5 +16,14 @@ export class ApplicationService {
   }
   async findAll(): Promise<Application[]> {
     return this.applicationModel.find().exec();
+  }
+
+  async getAppliedJobsByUserId(userId: string): Promise<Application[]> {
+    const appliedJobs = await this.applicationModel
+      .find({ userId })
+      .populate('jobId')
+      .select({ jobId: 1, _id: 0 });
+    console.log('applidJobs', appliedJobs);
+    return appliedJobs;
   }
 }

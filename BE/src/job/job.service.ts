@@ -7,7 +7,7 @@ import { Jobdto } from './job.dto';
 @Injectable()
 export class JobService {
   constructor(
-    @InjectModel('jobs') private jobModel: Model<Job>,
+    @InjectModel('Job') private jobModel: Model<Job>,
     @InjectConnection() private connection: Connection,
   ) {}
 
