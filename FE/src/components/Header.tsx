@@ -1,5 +1,7 @@
-import { useState } from "react";
-import { useUserContext } from "../context/UserContext";
+
+import {useState} from "react";
+import {useUserContext} from "../context/UserContext";
+
 import styles from "../styles/header.module.css";
 import Link from "next/link";
 
