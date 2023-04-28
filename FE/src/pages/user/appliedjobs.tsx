@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import {useUserContext} from "../../../context/UserContext";
 import {JobType} from "@/util/types";
+import JobCard from "@/components/JobCard";
 
 interface AppliedType {
   jobId: JobType;
@@ -12,24 +13,26 @@ export default function AppliedJob(): JSX.Element {
   console.log("user", user);
 
   useEffect(() => {
-    const getAppliedJobs = async () => {
-      const response = await fetch(
-        `http://localhost:8008/application/${user?._id}`
-      );
-      const jobs = await response.json();
-      console.log("appliedjobs", jobs);
-      setAppliedJobs(jobs);
-    };
-
-    getAppliedJobs();
+    try {
+      const getAppliedJobs = async () => {
+        const response = await fetch(
+          `http://localhost:8008/application/${user?._id}`
+        );
+        const jobs = await response.json();
+        //   console.log("appliedjobs", jobs);
+        setAppliedJobs(jobs);
+      };
+      getAppliedJobs();
+    } catch (error) {
+      console.log("error fetch", error);
+    }
   }, [user?._id]);
 
+  console.log("appliedJobs", appliedJobs);
   return (
     <div>
       {appliedJobs[0] &&
-        appliedJobs.map((job, i) => {
-          console.log("job", job);
-        })}
+        appliedJobs.map((job, i) => <JobCard key={i} {...job.jobId} />)}
     </div>
   );
 }
