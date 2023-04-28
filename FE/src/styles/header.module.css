@@ -48,15 +48,19 @@
 }
 
 .filters {
-  position: absolute;
-  /* top: 30px; */
-  left: -15px;
   display: flex;
   flex-direction: column;
-  background-color: #818181;
   height: 100vh;
-  width: 250px;
   justify-content: center;
+}
+
+.AppliedJobs{
+  text-decoration: none;
+  margin: 20px;
+}
+
+.PostedJobs{
+   text-decoration: none;
 }
 
 .sidenav {
