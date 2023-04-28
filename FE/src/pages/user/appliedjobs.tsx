@@ -1,7 +1,8 @@
 import {useEffect, useState} from "react";
-import {useUserContext} from "../../../context/UserContext";
+import {useUserContext} from "../../context/UserContext";
 import {JobType} from "@/util/types";
 import JobCard from "@/components/JobCard";
+import Link from "next/link";
 
 interface AppliedType {
   jobId: JobType;
@@ -32,7 +33,11 @@ export default function AppliedJob(): JSX.Element {
   return (
     <div>
       {appliedJobs[0] &&
-        appliedJobs.map((job, i) => <JobCard key={i} {...job.jobId} />)}
+        appliedJobs.map((job, i) => (
+          <Link key={i} href={`../jobs/${job.jobId._id}`}>
+            <JobCard {...job.jobId} />
+          </Link>
+        ))}
     </div>
   );
 }
