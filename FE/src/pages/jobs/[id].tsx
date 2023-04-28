@@ -1,7 +1,7 @@
 import { JobType } from "@/util/types";
 import { GetStaticProps, GetStaticPropsContext } from "next";
 import Style from "../../styles/JobCard.module.css";
-import { useUserContext } from "../../../context/UserContext";
+import { useUserContext } from "../../context/UserContext";
 import axios from "axios";
 
 export default function Job({ data: job }: { data: JobType }): JSX.Element {
