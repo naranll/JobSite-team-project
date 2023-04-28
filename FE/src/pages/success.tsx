@@ -1,4 +1,4 @@
-import { useUserContext } from "../../context/UserContext";
+import { useUserContext } from "../context/UserContext";
 import styles from "../styles/addjob.module.css";
 
 export default function Success(): JSX.Element {

@@ -3,7 +3,7 @@ import styles from "../styles/addjob.module.css";
 import { useRouter } from "next/router";
 import { JobType } from "@/util/types";
 import axios from "axios";
-import { useUserContext } from "../../context/UserContext";
+import { useUserContext } from "../context/UserContext";
 
 export default function AddJob(): JSX.Element {
   const { user } = useUserContext();

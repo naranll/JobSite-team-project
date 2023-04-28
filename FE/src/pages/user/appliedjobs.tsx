@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { useUserContext } from "../../../context/UserContext";
-import { JobType } from "@/util/types";
+import {useEffect, useState} from "react";
+import {useUserContext} from "../../../context/UserContext";
+import {JobType} from "@/util/types";
 
 interface AppliedType {
   jobId: JobType;
@@ -8,7 +8,7 @@ interface AppliedType {
 
 export default function AppliedJob(): JSX.Element {
   const [appliedJobs, setAppliedJobs] = useState<AppliedType[]>([]);
-  const { user } = useUserContext();
+  const {user} = useUserContext();
   console.log("user", user);
 
   useEffect(() => {
