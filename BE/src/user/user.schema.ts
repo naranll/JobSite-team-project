@@ -1,7 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
-
-export type UserDocument = HydratedDocument<User>;
+import { now } from 'mongoose';
 
 @Schema()
 export class User {
@@ -10,19 +8,19 @@ export class User {
   @Prop()
   lastName: string;
   @Prop()
-  password: string;
+  password?: string;
   @Prop()
-  gender: string;
+  gender?: string;
+  @Prop({ default: now() })
+  joinDate?: Date;
   @Prop()
-  joinDate: string;
-  @Prop()
-  phoneNumber: string;
+  phoneNumber?: string;
   @Prop()
   email: string;
   @Prop([String])
   skill: string[];
-  @Prop()
-  role: string;
+  @Prop({ default: 'ClIENT' })
+  role: 'CLIENT' | 'MODERATOR' | 'ADMIN';
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

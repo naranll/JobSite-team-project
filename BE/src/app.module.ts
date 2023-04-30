@@ -6,6 +6,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './user/user.module';
 import { jobModule } from './job/job.module';
 import { applicationModule } from './application/application.module';
+import { GoogleLoginModule } from './googleLogin/googleLogin.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { applicationModule } from './application/application.module';
     UserModule,
     jobModule,
     applicationModule,
+    GoogleLoginModule,
   ],
   controllers: [AppController],
   providers: [AppService],
