@@ -1,5 +1,5 @@
 import { useUserContext } from "../context/UserContext";
-import styles from "../styles/addjob.module.css";
+import styles from "../styles/addjob.module.scss";
 import Cookies from "js-cookie";
 
 export default function Success(): JSX.Element {

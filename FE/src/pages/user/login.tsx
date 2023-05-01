@@ -3,7 +3,7 @@
 import { useRouter } from "next/router";
 import axios from "axios";
 import Link from "next/link";
-import styles from "../../styles/Login.module.css";
+import styles from "../../styles/Login.module.scss";
 import { useUserContext } from "../../context/UserContext";
 
 export default function Login(): JSX.Element {

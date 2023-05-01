@@ -1,6 +1,6 @@
 // import {useUserContext} from "../../context/UserContext";
 
-import styles from "../styles/header.module.css";
+import styles from "../styles/header.module.scss";
 import Link from "next/link";
 import { Sidebar } from "primereact/sidebar";
 import React, { useState } from "react";
