@@ -7,6 +7,7 @@ import { UserModule } from './user/user.module';
 import { jobModule } from './job/job.module';
 import { applicationModule } from './application/application.module';
 import { GoogleLoginModule } from './googleLogin/googleLogin.module';
+import { categoryModule } from './category/category.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { GoogleLoginModule } from './googleLogin/googleLogin.module';
     jobModule,
     applicationModule,
     GoogleLoginModule,
+    categoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],
