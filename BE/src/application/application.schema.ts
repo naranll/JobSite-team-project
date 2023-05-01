@@ -8,8 +8,8 @@ export class Application {
   jobId: string;
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
   userId: string;
-  @Prop()
-  state: string;
+  @Prop({ default: 'PENDING' })
+  state: 'PENDING' | 'ACCEPTED' | 'REJECTED';
   @Prop({ default: now() })
   createdAt: Date;
 }

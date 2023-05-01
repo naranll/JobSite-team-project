@@ -1,23 +1,24 @@
-import {useEffect, useState} from "react";
-import {useUserContext} from "../../context/UserContext";
-import {JobType} from "@/util/types";
+import { useEffect, useState } from "react";
+import { useUserContext } from "../../context/UserContext";
+import { JobType } from "@/util/types";
 import JobCard from "@/components/JobCard";
 import Link from "next/link";
 
-interface AppliedType {
+export interface AppliedType {
   jobId: JobType;
+  state: string;
 }
 
 export default function AppliedJob(): JSX.Element {
   const [appliedJobs, setAppliedJobs] = useState<AppliedType[]>([]);
-  const {user} = useUserContext();
-  console.log("user", user);
+  const { currentUser } = useUserContext();
+  console.log("user", currentUser);
 
   useEffect(() => {
     try {
       const getAppliedJobs = async () => {
         const response = await fetch(
-          `http://localhost:8008/application/${user?._id}`
+          `http://localhost:8008/application/${currentUser?._id}`
         );
         const jobs = await response.json();
         //   console.log("appliedjobs", jobs);
@@ -27,7 +28,7 @@ export default function AppliedJob(): JSX.Element {
     } catch (error) {
       console.log("error fetch", error);
     }
-  }, [user?._id]);
+  }, [currentUser?._id]);
 
   console.log("appliedJobs", appliedJobs);
   return (
@@ -35,7 +36,7 @@ export default function AppliedJob(): JSX.Element {
       {appliedJobs[0] &&
         appliedJobs.map((job, i) => (
           <Link key={i} href={`../jobs/${job.jobId._id}`}>
-            <JobCard {...job.jobId} />
+            <JobCard {...job.jobId} state={job.state} />
           </Link>
         ))}
     </div>
