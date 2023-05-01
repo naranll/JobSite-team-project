@@ -4,9 +4,15 @@ import styles from "../styles/header.module.css";
 import Link from "next/link";
 import { Sidebar } from "primereact/sidebar";
 import React, { useState } from "react";
+<<<<<<< Updated upstream
 import "primeicons/primeicons.css";
 import { AiOutlineMenu } from "react-icons/ai";
 
+=======
+import 'primeicons/primeicons.css';
+import {AiOutlineMenu } from "react-icons/ai"
+        
+>>>>>>> Stashed changes
 export default function Header(): JSX.Element {
   // const {user, handleLogout} = useUserContext();
   const [visible, setVisible] = useState<boolean>(false);
