@@ -13,7 +13,7 @@ import {
 
 export interface IUserContext {
   currentUser: UserType | null | undefined;
-  user: UserType | null | undefined;
+
   setCurrentUser: React.Dispatch<
     React.SetStateAction<UserType | null | undefined>
   >;
@@ -32,7 +32,6 @@ export const useUserContext = () => useContext(UserContext);
 
 export const UserContextProvider = ({ children }: UserProviderType) => {
   const [currentUser, setCurrentUser] = useState<UserType | null>();
-  const [user, setUser] = useState(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -43,7 +42,8 @@ export const UserContextProvider = ({ children }: UserProviderType) => {
   }, []);
 
   function handleLogout() {
-    setUser(null);
+    setCurrentUser(null);
+    Cookies.remove("token");
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -62,7 +62,7 @@ export const UserContextProvider = ({ children }: UserProviderType) => {
       .then((res) => {
         console.log("response", res);
         if (res.status === 201) {
-          setUser(res.data);
+          setCurrentUser(res.data);
           router.push("/success");
         } else {
           console.log("fail");
@@ -73,7 +73,7 @@ export const UserContextProvider = ({ children }: UserProviderType) => {
 
   return (
     <UserContext.Provider
-      value={{ currentUser, setCurrentUser, user, submitHandler, handleLogout }}
+      value={{ currentUser, setCurrentUser, submitHandler, handleLogout }}
     >
       {children}
     </UserContext.Provider>

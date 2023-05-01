@@ -5,14 +5,14 @@ import { useUserContext } from "../../context/UserContext";
 import axios from "axios";
 
 export default function Job({ data: job }: { data: JobType }): JSX.Element {
-  const { user } = useUserContext();
+  const { currentUser } = useUserContext();
   console.log("jobPage:", job);
 
   function handleApply() {
     console.log("Job Id", job._id);
-    console.log("User id", user?._id);
+    console.log("User id", currentUser?._id);
 
-    const newApply = { jobId: job._id, userId: user?._id };
+    const newApply = { jobId: job._id, userId: currentUser?._id };
 
     axios
       .post("http://localhost:8008/application/add", newApply)
@@ -20,7 +20,7 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
   }
   return (
     <div>
-      {user ? (
+      {currentUser ? (
         <div className={Style.wrap}>
           <div className={Style.jobCard}>
             <h1 className={Style.cardTitle}>{job.title}</h1>
@@ -29,7 +29,7 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
             <p className={Style.contractType}>{job.contractType}</p>
           </div>
           <button
-            disabled={user._id === job.postedBy}
+            disabled={currentUser._id === job.postedBy}
             onClick={handleApply}
             className={Style.button}
           >
