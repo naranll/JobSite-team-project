@@ -1,10 +1,22 @@
+import jwtDecode from "jwt-decode";
+import Cookies from "js-cookie";
 import { UserType } from "@/util/types";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { ReactNode, createContext, useContext, useState } from "react";
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 export interface IUserContext {
-  user: UserType | null;
+  currentUser: UserType | null | undefined;
+  user: UserType | null | undefined;
+  setCurrentUser: React.Dispatch<
+    React.SetStateAction<UserType | null | undefined>
+  >;
   handleLogout: () => void;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   submitHandler: (e: any) => void;
@@ -19,8 +31,16 @@ interface UserProviderType {
 export const useUserContext = () => useContext(UserContext);
 
 export const UserContextProvider = ({ children }: UserProviderType) => {
+  const [currentUser, setCurrentUser] = useState<UserType | null>();
   const [user, setUser] = useState(null);
   const router = useRouter();
+
+  useEffect(() => {
+    const token = Cookies.get("token");
+    if (token) {
+      setCurrentUser(jwtDecode(token));
+    }
+  }, []);
 
   function handleLogout() {
     setUser(null);
@@ -52,7 +72,9 @@ export const UserContextProvider = ({ children }: UserProviderType) => {
   }
 
   return (
-    <UserContext.Provider value={{ user, submitHandler, handleLogout }}>
+    <UserContext.Provider
+      value={{ currentUser, setCurrentUser, user, submitHandler, handleLogout }}
+    >
       {children}
     </UserContext.Provider>
   );

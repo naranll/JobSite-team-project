@@ -24,6 +24,7 @@ export class GoogleLoginController {
   @Get('google-login')
   googleLogin() {
     console.log('google login Request');
+
     const stringifiedParams = queryString.stringify({
       client_id: process.env.CLIENT_ID,
       redirect_uri: `http://localhost:${process.env.PORT}/google/callback`,
@@ -65,11 +66,17 @@ export class GoogleLoginController {
         gender: null,
         skill: [],
         phoneNumber: null,
+        image: profile.picture,
       };
       user = await this.userService.createUser(userInput);
     }
 
-    const payload = { name: user.firstName, email: user.email };
+    const payload = {
+      name: user.firstName,
+      email: user.email,
+      _id: user._id,
+      image: user.image,
+    };
     const token = await this.jwtService.signAsync(payload);
 
     res

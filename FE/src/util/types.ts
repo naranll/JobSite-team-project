@@ -16,4 +16,5 @@ export type UserType = {
   email: string;
   gender?: string;
   phoneNumber?: number;
+  image?: string;
 };
