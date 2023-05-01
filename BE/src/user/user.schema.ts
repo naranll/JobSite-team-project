@@ -21,6 +21,8 @@ export class User {
   skill: string[];
   @Prop({ default: 'ClIENT' })
   role: 'CLIENT' | 'MODERATOR' | 'ADMIN';
+  @Prop()
+  image: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
