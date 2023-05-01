@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../styles/addjob.module.css";
+import styles from "../styles/addjob.module.scss";
 import { useRouter } from "next/router";
 import { JobType } from "@/util/types";
 import axios from "axios";
