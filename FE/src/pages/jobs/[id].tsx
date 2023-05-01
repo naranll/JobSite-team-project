@@ -1,6 +1,6 @@
 import { JobType } from "@/util/types";
 import { GetStaticProps, GetStaticPropsContext } from "next";
-import Style from "../../styles/JobCard.module.css";
+import Style from "../../styles/JobCard.module.scss";
 import { useUserContext } from "../../context/UserContext";
 import axios from "axios";
 
