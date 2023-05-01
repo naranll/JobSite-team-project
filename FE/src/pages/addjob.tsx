@@ -6,7 +6,7 @@ import axios from "axios";
 import { useUserContext } from "../context/UserContext";
 
 export default function AddJob(): JSX.Element {
-  const { user } = useUserContext();
+  const { currentUser } = useUserContext();
   const router = useRouter();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -16,7 +16,7 @@ export default function AddJob(): JSX.Element {
     const target = event.currentTarget.elements;
 
     const newJob: JobType = {
-      postedBy: user?._id,
+      postedBy: currentUser?._id,
       title: target.title.value,
       description: target.description.value,
       payment: target.payment.value,
@@ -34,7 +34,7 @@ export default function AddJob(): JSX.Element {
 
   return (
     <>
-      {user ? (
+      {currentUser ? (
         <div className={styles.add_job_page}>
           <button className={styles.btn}>Back</button>
           <form className={styles.job_form} onSubmit={submitHandler}>
