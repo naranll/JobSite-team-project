@@ -47,6 +47,16 @@
   display: none;
 }
 
+.offcanvasmenu {
+  border: 1px solid #007aff;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 30px;
+  margin: 10px;
+  color: #007aff;
+
+}
+
 .filters {
   display: flex;
   flex-direction: column;

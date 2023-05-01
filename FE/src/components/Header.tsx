@@ -4,9 +4,9 @@
 import styles from "../styles/header.module.css";
 import Link from "next/link";
 import { Sidebar } from 'primereact/sidebar';
-import { Button } from 'primereact/button';
 import React, { useState } from "react";
-// import 'primeicons/primeicons.css';
+import 'primeicons/primeicons.css';
+import {AiOutlineMenu } from "react-icons/ai"
         
 
 
@@ -44,8 +44,11 @@ export default function Header(): JSX.Element {
             </div>
           </div>
         </Sidebar>
-        <Button className="pi pi-bars" onClick={() => setVisible(true)}/>
-</div>
+        {/* <Button className="pi pi-bars" severity="info" outlined onClick={() => setVisible(true)}/> */}
+        
+        <AiOutlineMenu className={styles.offcanvasmenu} onClick={() => setVisible(true)}/>
+        
+        </div>
     </div>
   );
 }
