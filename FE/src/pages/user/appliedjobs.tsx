@@ -3,7 +3,7 @@ import { useUserContext } from "../../context/UserContext";
 import { JobType } from "@/util/types";
 import JobCard from "@/components/JobCard";
 import Link from "next/link";
-import styles from "../../styles/appliedJob.module.css";
+import styles from "../../styles/appliedJob.module.scss";
 
 export interface AppliedType {
   jobId: JobType;

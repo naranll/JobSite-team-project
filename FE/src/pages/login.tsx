@@ -3,8 +3,9 @@
 import { useRouter } from "next/router";
 import axios from "axios";
 import Link from "next/link";
-import styles from "../../styles/Login.module.scss";
+import styles from "../styles/Login.module.scss";
 import { useUserContext } from "../context/UserContext";
+import { FcGoogle } from "react-icons/fc";
 
 export default function Login(): JSX.Element {
   const { submitHandler } = useUserContext();
@@ -44,20 +45,30 @@ export default function Login(): JSX.Element {
         <h2 className={styles.title}>
           Job<span className={styles.titleNow}>Site</span>
         </h2>
+
         <form onSubmit={submitHandler} className={styles.form}>
+          <div className={styles.google} onClick={googleLogin}>
+            <FcGoogle />
+            Continue With Google
+          </div>
+          <div className={styles.orWith}> or with Email and Password</div>
           <div className={styles.wrapper}>
             <div className={styles.wrapFrom}>
-              <label>
+              <label htmlFor="email">
                 <p className={styles.h3title}>Email</p>
                 <input
+                  id="email"
+                  placeholder="Email"
                   className={styles.logInInput}
                   name="email"
                   type="email"
+                  required
                 />
               </label>
               <label>
                 <p className={styles.h3title}>Password</p>
                 <input
+                  placeholder="password"
                   className={styles.logInInput}
                   name="password"
                   type="password"
@@ -80,13 +91,6 @@ export default function Login(): JSX.Element {
                   className={styles.register}
                 />
               </Link>
-              <button
-                type="button"
-                className={styles.login}
-                onClick={googleLogin}
-              >
-                Google login
-              </button>
             </div>
           </div>
         </form>
