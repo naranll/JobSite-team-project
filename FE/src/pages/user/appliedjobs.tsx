@@ -31,11 +31,10 @@ export default function AppliedJob(): JSX.Element {
     }
   }, [currentUser?._id]);
 
-  console.log("appliedJobs", appliedJobs);
   return (
-    <div className={styles.wrap}>
+    <div>
       {appliedJobs[0] &&
-        appliedJobs.map((job, i) => (
+        appliedJobs.map((job: AppliedType, i: number) => (
           <div className={styles.card} key={i}>
             <Link href={`../jobs/${job.jobId._id}`}>
               <JobCard {...job.jobId} />
