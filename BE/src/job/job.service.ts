@@ -29,13 +29,12 @@ export class JobService {
 
   async generateStaticId(): Promise<Job[]> {
     const query = await this.jobModel.find({}).select({ _id: 1 });
-    console.log('static paths', query);
+    // console.log('static paths', query);
     return query;
   }
 
   async getPostedJobsByUserId(postedBy: string): Promise<Job[]> {
     const postedJobs = await this.jobModel.find({ postedBy });
-    console.log('postedJobs', postedJobs);
     return postedJobs;
   }
 }
