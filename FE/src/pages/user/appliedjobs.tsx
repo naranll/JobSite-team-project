@@ -3,6 +3,7 @@ import { useUserContext } from "../../context/UserContext";
 import { JobType } from "@/util/types";
 import JobCard from "@/components/JobCard";
 import Link from "next/link";
+import styles from "../../styles/appliedJob.module.css";
 
 export interface AppliedType {
   jobId: JobType;
@@ -32,12 +33,15 @@ export default function AppliedJob(): JSX.Element {
 
   console.log("appliedJobs", appliedJobs);
   return (
-    <div>
+    <div className={styles.wrap}>
       {appliedJobs[0] &&
         appliedJobs.map((job, i) => (
-          <Link key={i} href={`../jobs/${job.jobId._id}`}>
-            <JobCard {...job.jobId} state={job.state} />
-          </Link>
+          <div className={styles.card} key={i}>
+            <Link href={`../jobs/${job.jobId._id}`}>
+              <JobCard {...job.jobId} />
+            </Link>
+            <div className={styles.state}>{job.state}</div>
+          </div>
         ))}
     </div>
   );
