@@ -29,7 +29,7 @@ export class ApplicationController {
   @Get('/applicants/:jobId')
   getApplicantsByJobId(
     @Param('jobId') jobId: mongoose.Types.ObjectId,
-  ): Promise<void> {
+  ): Promise<Application[]> {
     return this.applicationService.getApplicantsByJobId(jobId);
   }
 }

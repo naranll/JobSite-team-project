@@ -29,11 +29,13 @@ export class ApplicationService {
     return appliedJobs;
   }
 
-  async getApplicantsByJobId(jobId: mongoose.Types.ObjectId): Promise<void> {
+  async getApplicantsByJobId(
+    jobId: mongoose.Types.ObjectId,
+  ): Promise<Application[]> {
     const applicants = await this.applicationModel
       .find({ jobId })
-      .populate('userId')
+      .populate('userId', '_id')
       .select({ userId: 1, _id: 0, state: 1 });
-    console.log('applicants', applicants);
+    return applicants;
   }
 }
