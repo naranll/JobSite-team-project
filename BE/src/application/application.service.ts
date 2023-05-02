@@ -23,7 +23,7 @@ export class ApplicationService {
       .find({ userId })
       .populate('jobId')
       .select({ jobId: 1, _id: 0, state: 1 });
-    console.log('appliedJobs', appliedJobs);
+    // console.log('appliedJobs', appliedJobs);
     return appliedJobs;
   }
 

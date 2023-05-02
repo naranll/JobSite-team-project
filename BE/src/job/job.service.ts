@@ -29,7 +29,7 @@ export class JobService {
 
   async generateStaticId(): Promise<Job[]> {
     const query = await this.jobModel.find({}).select({ _id: 1 });
-    console.log('static paths', query);
+    // console.log('static paths', query);
     return query;
   }
 
