@@ -1,12 +1,12 @@
 import JobCard from "@/components/JobCard";
-import {useUserContext} from "@/context/UserContext";
-import {JobType} from "@/util/types";
+import { useUserContext } from "@/context/UserContext";
+import { JobType } from "@/util/types";
 import Link from "next/link";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 
 export default function PostedJob(): JSX.Element {
   const [postedJobs, setPostedJobs] = useState<JobType[]>([]);
-  const {currentUser} = useUserContext();
+  const { currentUser } = useUserContext();
 
   useEffect(() => {
     try {
@@ -27,9 +27,12 @@ export default function PostedJob(): JSX.Element {
     <div>
       {postedJobs[0] &&
         postedJobs.map((job, i) => (
-          <Link href={`../jobs/${job._id}`} key={i}>
-            <JobCard {...job} />
-          </Link>
+          <div key={i} className="flex border-2 border-solid border-black">
+            <Link href={`../jobs/${job._id}`}>
+              <JobCard {...job} />
+            </Link>
+            <div>applicant no.</div>
+          </div>
         ))}
     </div>
   );
