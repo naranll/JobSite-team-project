@@ -22,7 +22,7 @@ export class ApplicationService {
     const appliedJobs = await this.applicationModel
       .find({ userId })
       .populate('jobId')
-      .select({ jobId: 1, _id: 0 });
+      .select({ jobId: 1, _id: 0, state: 1 });
     console.log('appliedJobs', appliedJobs);
     return appliedJobs;
   }
