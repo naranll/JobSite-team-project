@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../styles/addjob.module.scss";
-import { useRouter } from "next/router";
 import { JobType } from "@/util/types";
 import axios from "axios";
 import { useUserContext } from "../context/UserContext";
+import Message from "@/components/MessegeModal";
 
 export default function AddJob(): JSX.Element {
   const { currentUser } = useUserContext();
-  const router = useRouter();
+  const [modal,setModal]=useState<boolean>(false)
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function submitHandler(event: any): void {
@@ -25,10 +25,12 @@ export default function AddJob(): JSX.Element {
     axios
       .post("http://localhost:8008/job/add", newJob)
       .then((res) => {
+        console.log(res)
         if (res.data.success) {
-          router.push("/success");
-        }
-      })
+          setModal(true)
+          
+        } 
+      }) 
       .catch((err) => console.log(err));
   }
 
@@ -52,8 +54,12 @@ export default function AddJob(): JSX.Element {
               <p> Payment</p>
               <input type="number" name="payment" required />
             </label>
-            <button className={styles.btn}>SUBMIT</button>
+
+            <button className={styles.btn} >SUBMIT</button>
+
+
           </form>
+          {modal&&<Message setModal={setModal}/>}
         </div>
       ) : (
         <div>anon pls... login to post job</div>
