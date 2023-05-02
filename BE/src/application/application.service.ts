@@ -1,5 +1,5 @@
 import { InjectConnection, InjectModel } from '@nestjs/mongoose';
-import { Connection, Model } from 'mongoose';
+import mongoose, { Connection, Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { Application } from './application.schema';
 import { ApplicationDto } from './application.dto';
@@ -18,7 +18,9 @@ export class ApplicationService {
     return this.applicationModel.find().exec();
   }
 
-  async getAppliedJobsByUserId(userId: string): Promise<Application[]> {
+  async getAppliedJobsByUserId(
+    userId: mongoose.Types.ObjectId,
+  ): Promise<Application[]> {
     const appliedJobs = await this.applicationModel
       .find({ userId })
       .populate('jobId')
@@ -27,7 +29,7 @@ export class ApplicationService {
     return appliedJobs;
   }
 
-  async getApplicantsByJobId(jobId: string): Promise<void> {
+  async getApplicantsByJobId(jobId: mongoose.Types.ObjectId): Promise<void> {
     const applicants = await this.applicationModel
       .find({ jobId })
       .populate('userId')
