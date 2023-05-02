@@ -22,4 +22,9 @@ export class ApplicationController {
   getAppliadJobsByUserId(@Param('id') userId: string): Promise<Application[]> {
     return this.applicationService.getAppliedJobsByUserId(userId);
   }
+
+  @Get('/applicants/:jobId')
+  getApplicantsByJobId(@Param('jobId') jobId: string): Promise<void> {
+    return this.applicationService.getApplicantsByJobId(jobId);
+  }
 }

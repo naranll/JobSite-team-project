@@ -26,4 +26,12 @@ export class ApplicationService {
     console.log('appliedJobs', appliedJobs);
     return appliedJobs;
   }
+
+  async getApplicantsByJobId(jobId: string): Promise<void> {
+    const applicants = await this.applicationModel
+      .find({ jobId })
+      .populate('userId')
+      .select({ userId: 1, _id: 0, state: 1 });
+    console.log('applicants', applicants);
+  }
 }

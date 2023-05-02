@@ -35,7 +35,6 @@ export class JobService {
 
   async getPostedJobsByUserId(postedBy: string): Promise<Job[]> {
     const postedJobs = await this.jobModel.find({ postedBy });
-    console.log('postedJobs', postedJobs);
     return postedJobs;
   }
 }
