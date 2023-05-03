@@ -1,6 +1,7 @@
 export type JobType = {
-  postedBy?: string | undefined;
-  _id?: string;
+  map(arg0: (job: JobType) => Promise<any>): unknown;
+  postedBy?: undefined | string;
+  _id: string;
   title: string;
   description: string;
   payment: number;

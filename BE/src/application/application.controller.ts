@@ -26,9 +26,9 @@ export class ApplicationController {
     return this.applicationService.getAppliedJobsByUserId(userId);
   }
 
-  @Get('/applicants/:jobId')
+  @Get('/applicants/:id')
   getApplicantsByJobId(
-    @Param('jobId') jobId: mongoose.Types.ObjectId,
+    @Param('id') jobId: mongoose.Types.ObjectId,
   ): Promise<Application[]> {
     return this.applicationService.getApplicantsByJobId(jobId);
   }

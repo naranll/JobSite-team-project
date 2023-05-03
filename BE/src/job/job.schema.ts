@@ -7,7 +7,7 @@ import mongoose from 'mongoose';
 @Schema()
 export class Job {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
-  postedBy: string;
+  postedBy: mongoose.Types.ObjectId;
 
   @Prop()
   title: string;

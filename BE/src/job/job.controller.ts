@@ -38,13 +38,13 @@ export class JobController {
   }
 
   @Get('/:id')
-  getJob(@Param('id') id: string) {
+  getJob(@Param('id') id: mongoose.Types.ObjectId) {
     return this.jobService.findJob(id);
   }
 
-  @Get('posted/:id')
+  @Get('posted/:postedBy')
   getPostedJobsByUserId(
-    @Param('id') userId: mongoose.Types.ObjectId,
+    @Param('postedBy') userId: mongoose.Types.ObjectId,
   ): Promise<Job[]> {
     return this.jobService.getPostedJobsByUserId(userId);
   }

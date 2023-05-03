@@ -30,12 +30,13 @@ export class ApplicationService {
   }
 
   async getApplicantsByJobId(
-    jobId: mongoose.Types.ObjectId,
+    jobId: mongoose.Types.ObjectId | string,
   ): Promise<Application[]> {
     const applicants = await this.applicationModel
       .find({ jobId })
       .populate('userId', '_id')
       .select({ userId: 1, _id: 0, state: 1 });
+    console.log(applicants);
     return applicants;
   }
 }

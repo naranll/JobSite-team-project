@@ -20,7 +20,7 @@ export class JobService {
     return this.jobModel.find().exec();
   }
 
-  async findJob(id: string): Promise<Job> {
+  async findJob(id: mongoose.Types.ObjectId): Promise<Job> {
     console.log('find Job id', id);
     const result = await this.jobModel.findById(id).exec();
     console.log(' found job', result);
@@ -36,7 +36,7 @@ export class JobService {
   async getPostedJobsByUserId(
     postedBy: mongoose.Types.ObjectId,
   ): Promise<Job[]> {
-    const postedJobs = await this.jobModel.find({ postedBy });
+    const postedJobs = await this.jobModel.find({ postedBy: postedBy });
     return postedJobs;
   }
 }
