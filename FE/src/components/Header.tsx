@@ -29,7 +29,7 @@ export default function Header(): JSX.Element {
               <Link href={`/user/appliedjobs`}>
                 <div className="AppliedJobs">Applied jobs</div>
               </Link>
-              <Link href={`/user/postedjobs`}>
+              <Link href={`../user/postedjobs`}>
                 <div className="PostedJobs">Posted jobs</div>
               </Link>
             </div>

@@ -3,9 +3,13 @@ import { GetStaticProps, GetStaticPropsContext } from "next";
 import Style from "../../styles/JobCard.module.scss";
 import { useUserContext } from "../../context/UserContext";
 import axios from "axios";
+import { useState } from 'react'; 
+import Apply from '../../components/ApplyModal';
+
 
 export default function Job({ data: job }: { data: JobType }): JSX.Element {
   const { currentUser } = useUserContext();
+  const [apply, setApply] = useState<boolean>(false)
   console.log("jobPage:", job);
 
   function handleApply() {
@@ -16,8 +20,15 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
 
     axios
       .post("http://localhost:8008/application/add", newApply)
-      .then((res) => console.log(res));
+      .then((res) => 
+        {console.log(res)
+          if (res.data) {
+        setApply(true)
+      }}
+      );
   }
+  console.log(apply);
+  
   return (
     <div>
       {currentUser ? (
@@ -35,6 +46,7 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
           >
             Apply
           </button>
+          {apply&&<Apply setApply={setApply}/>}
         </div>
       ) : (
         <div>Please login to see content</div>
