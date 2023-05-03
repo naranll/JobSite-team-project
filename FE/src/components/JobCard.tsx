@@ -1,5 +1,5 @@
 import Card from "../styles/JobCard.module.scss";
-import {JobType} from "@/util/types";
+import { JobType } from "@/util/types";
 
 export default function JobCard(props: JobType): JSX.Element {
   return (

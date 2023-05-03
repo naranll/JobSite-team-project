@@ -3,8 +3,9 @@
 import { useRouter } from "next/router";
 import axios from "axios";
 import Link from "next/link";
-import styles from "../styles/Login.module.scss";
+// import styles from "../styles/Login.module.scss";
 import { useUserContext } from "../context/UserContext";
+import { FcGoogle } from "react-icons/fc";
 
 export default function Login(): JSX.Element {
   const { submitHandler } = useUserContext();
@@ -39,54 +40,63 @@ export default function Login(): JSX.Element {
   }
 
   return (
-    <div className={styles.logInFrom}>
-      <div className={styles.wrap}>
-        <h2 className={styles.title}>
-          Job<span className={styles.titleNow}>Site</span>
-        </h2>
-        <form onSubmit={submitHandler} className={styles.form}>
-          <div className={styles.wrapper}>
-            <div className={styles.wrapFrom}>
-              <label>
-                <p className={styles.h3title}>Email</p>
+    <div className="w-full flex justify-center items-center min-h-screen">
+      <div className="sm:min-w-[360px] lg:min-w-[560px] rounded-lg border-2  p-8">
+        <div
+          className="flex w-full border-2 justify-center items-center p-2 gap-2 rounded-lg cursor-pointer "
+          onClick={googleLogin}
+        >
+          <FcGoogle size={"2em"} />
+          Continue With Google
+        </div>
+        <div className="relative flex py-5 items-center">
+          <div className="flex-grow border-t border-gray-400"> </div>
+          <span className="text-gray-500 text-xs">
+            or with Email and Password
+          </span>
+          <div className="flex-grow border-t border-gray-400"> </div>
+        </div>
+
+        <form onSubmit={submitHandler} className="">
+          <div className="">
+            <div className="">
+              <label htmlFor="email">
+                <p className="">Email</p>
                 <input
-                  className={styles.logInInput}
+                  id="email"
+                  placeholder="Email"
+                  className="w-full border-2 rounded-lg  p-2"
                   name="email"
                   type="email"
+                  required
                 />
               </label>
               <label>
-                <p className={styles.h3title}>Password</p>
+                <p className="">Password</p>
                 <input
-                  className={styles.logInInput}
+                  placeholder="password"
+                  className="w-full border-2 rounded-lg  p-2"
                   name="password"
                   type="password"
                 />
               </label>
             </div>
             <Link href={`/user/forgetpassword`}>
-              <span className={styles.forgetPassword}>Forgot password?</span>
+              <div className="text-right">Forgot password?</div>
             </Link>
-            <div className={styles.buttons}>
-              <button type="submit" className={styles.login}>
-                Log in
-              </button>
-
-              <span className={styles.solid}>.</span>
-              <Link href={`/user/register`}>
-                <input
-                  placeholder="register"
-                  disabled
-                  className={styles.register}
-                />
-              </Link>
+            <div className="">
               <button
-                type="button"
-                className={styles.login}
-                onClick={googleLogin}
+                type="submit"
+                className="w-full text-center p-2 rounded-lg bg-[#1A75E8] text-white hover:bg-[#5A99EA] mt-8"
               >
-                Google login
+                Login
               </button>
+              <div className="flex justify-center mt-8 gap-3">
+                <span>not a member?</span>
+                <Link href={`/user/register`}>
+                  <div className="font-semibold">Register</div>
+                </Link>
+              </div>
             </div>
           </div>
         </form>
