@@ -1,6 +1,6 @@
 import { InjectConnection, InjectModel } from '@nestjs/mongoose';
-import { Connection, Model } from 'mongoose';
-import { Injectable } from '@nestjs/common';
+import mongoose, { Connection, Model } from 'mongoose';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Application } from './application.schema';
 import { ApplicationDto } from './application.dto';
 
@@ -10,8 +10,10 @@ export class ApplicationService {
     @InjectModel('Application') private applicationModel: Model<Application>,
     @InjectConnection() private connection: Connection,
   ) {}
-  async addApp(createAppDto: ApplicationDto): Promise<Application> {
-    const createApp = new this.applicationModel(createAppDto);
+  async addApp(body: Application): Promise<Application> {
+    console.log('body', body);
+
+    const createApp = new this.applicationModel(body);
     return createApp.save();
   }
   async findAll(): Promise<Application[]> {
@@ -34,5 +36,17 @@ export class ApplicationService {
       .select({ userId: 1, _id: 0, state: 1, jobId: 1 });
     // console.log('applicants', applicants);
     return applicants;
+  }
+
+  async isApplied(userId: string, jobId: string): Promise<boolean> {
+    const result = await this.applicationModel.find({
+      $and: [{ userId: userId }, { jobId: jobId }],
+    });
+    console.log('find applied by user', result);
+    if (!result.length) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }

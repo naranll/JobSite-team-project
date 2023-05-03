@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  Post,
+  Request as Req,
+  Response as Res,
+} from '@nestjs/common';
+import { Request, Response } from 'express';
 import { ApplicationService } from './application.service';
 import { Application } from './application.schema';
 import { ApplicationDto } from './application.dto';
@@ -13,13 +21,30 @@ export class ApplicationController {
   }
 
   @Post('add')
-  addAppList(@Body() body: ApplicationDto): Promise<Application> {
-    console.log('req body:', body);
-    return this.applicationService.addApp(body);
+  async addAppList(@Req() Req: Request, @Res() Res: Response) {
+    console.log('application add request');
+    console.log('req body:', Req.body);
+    const { userId, jobId } = Req.body;
+    try {
+      const result = await this.applicationService.isApplied(userId, jobId);
+      console.log('is applied result', result);
+      if (!result) {
+        const response = await this.applicationService.addApp(Req.body);
+        return Res.status(200).json({ success: true, data: response });
+      } else {
+        return Res.status(409).json({
+          success: false,
+          message: 'you already applied to this job',
+        });
+      }
+    } catch (error) {
+      error.message;
+    }
   }
 
   @Get('/:id')
   getAppliadJobsByUserId(@Param('id') userId: string): Promise<Application[]> {
+    console.log('user id', userId);
     return this.applicationService.getAppliedJobsByUserId(userId);
   }
 
