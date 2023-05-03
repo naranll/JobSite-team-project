@@ -1,5 +1,5 @@
 import { InjectConnection, InjectModel } from '@nestjs/mongoose';
-import mongoose, { Connection, Model } from 'mongoose';
+import { Connection, Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { Job } from './job.schema';
 import { Jobdto } from './job.dto';
@@ -33,10 +33,8 @@ export class JobService {
     return query;
   }
 
-  async getPostedJobsByUserId(
-    postedBy: mongoose.Types.ObjectId,
-  ): Promise<Job[]> {
-    const postedJobs = await this.jobModel.find({ postedBy });
+  async getPostedJobsByUserId(postedBy: string): Promise<Job[]> {
+    const postedJobs = await this.jobModel.find({ postedBy: postedBy });
     return postedJobs;
   }
 }
