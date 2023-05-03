@@ -9,6 +9,21 @@
   align-items: center;
 }
 
+.google {
+  display: flex;
+  align-items: center;
+  border: 1px solid #889397;
+  border-radius: 6px;
+  gap: 10px;
+  justify-content: center;
+  color: #5c6c75;
+}
+
+.orWith {
+  text-align: center;
+  color: #5c6c75;
+}
+
 .titleNow {
   color: #5c6bc0;
 }
