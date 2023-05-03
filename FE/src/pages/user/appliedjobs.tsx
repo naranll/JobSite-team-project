@@ -22,7 +22,7 @@ export default function AppliedJob(): JSX.Element {
           `http://localhost:8008/application/${currentUser?._id}`
         );
         const jobs = await response.json();
-        //   console.log("appliedjobs", jobs);
+        console.log("appliedjobs", jobs);
         setAppliedJobs(jobs);
       };
       getAppliedJobs();

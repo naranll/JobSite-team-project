@@ -9,7 +9,11 @@ import Apply from '../../components/ApplyModal';
 
 export default function Job({ data: job }: { data: JobType }): JSX.Element {
   const { currentUser } = useUserContext();
+<<<<<<< Updated upstream
   const [apply, setApply] = useState<boolean>(false)
+=======
+
+>>>>>>> Stashed changes
   console.log("jobPage:", job);
 
   function handleApply() {

@@ -4,9 +4,9 @@ import { now } from 'mongoose';
 
 @Schema({ timestamps: true })
 export class Application {
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Job' })
+  @Prop({ type: mongoose.Schema.Types.String, ref: 'Job' })
   jobId: string;
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
+  @Prop({ type: mongoose.Schema.Types.String, ref: 'User' })
   userId: string;
   @Prop({ default: 'PENDING' })
   state: 'PENDING' | 'ACCEPTED' | 'REJECTED';
