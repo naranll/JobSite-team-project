@@ -42,10 +42,11 @@ export class ApplicationService {
     const result = await this.applicationModel.find({
       $and: [{ userId: userId }, { jobId: jobId }],
     });
-    if (result) {
-      return true;
-    } else {
+    console.log('find applied by user', result);
+    if (!result.length) {
       return false;
+    } else {
+      return true;
     }
   }
 }

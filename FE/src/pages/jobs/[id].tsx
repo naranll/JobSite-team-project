@@ -3,17 +3,13 @@ import { GetStaticProps, GetStaticPropsContext } from "next";
 import Style from "../../styles/JobCard.module.scss";
 import { useUserContext } from "../../context/UserContext";
 import axios from "axios";
-import { useState } from 'react'; 
-import Apply from '../../components/ApplyModal';
-
+import { useState } from "react";
+import Apply from "../../components/ApplyModal";
 
 export default function Job({ data: job }: { data: JobType }): JSX.Element {
   const { currentUser } = useUserContext();
-<<<<<<< Updated upstream
-  const [apply, setApply] = useState<boolean>(false)
-=======
-
->>>>>>> Stashed changes
+  const [apply, setApply] = useState<boolean>(false);
+  const [isApplied, setIsApplied] = useState(false);
   console.log("jobPage:", job);
 
   function handleApply() {
@@ -24,15 +20,16 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
 
     axios
       .post("http://localhost:8008/application/add", newApply)
-      .then((res) => 
-        {console.log(res)
-          if (res.data) {
-        setApply(true)
-      }}
-      );
+      .then((res) => {
+        console.log(res.data);
+        if (res.data) {
+          setApply(true);
+        }
+      })
+      .catch((error) => setIsApplied(true));
   }
   console.log(apply);
-  
+
   return (
     <div>
       {currentUser ? (
@@ -50,7 +47,10 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
           >
             Apply
           </button>
-          {apply&&<Apply setApply={setApply}/>}
+          {isApplied && (
+            <p className="text-red-500">you are already applied to this job</p>
+          )}
+          {apply && <Apply setApply={setApply} />}
         </div>
       ) : (
         <div>Please login to see content</div>

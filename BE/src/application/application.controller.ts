@@ -1,12 +1,12 @@
 import {
-  Body,
   Controller,
   Get,
-  HttpException,
-  HttpStatus,
   Param,
   Post,
+  Request as Req,
+  Response as Res,
 } from '@nestjs/common';
+import { Request, Response } from 'express';
 import { ApplicationService } from './application.service';
 import { Application } from './application.schema';
 import { ApplicationDto } from './application.dto';
@@ -21,19 +21,21 @@ export class ApplicationController {
   }
 
   @Post('add')
-  async addAppList(@Body() body: Application): Promise<Application> {
+  async addAppList(@Req() Req: Request, @Res() Res: Response) {
     console.log('application add request');
-    console.log('req body:', body);
+    console.log('req body:', Req.body);
+    const { userId, jobId } = Req.body;
     try {
-      const result = await this.applicationService.isApplied(
-        body.userId,
-        body.jobId,
-      );
+      const result = await this.applicationService.isApplied(userId, jobId);
       console.log('is applied result', result);
       if (!result) {
-        return this.applicationService.addApp(body);
+        const response = await this.applicationService.addApp(Req.body);
+        return Res.status(200).json({ success: true, data: response });
       } else {
-        throw new HttpException('already applied', HttpStatus.BAD_REQUEST);
+        return Res.status(409).json({
+          success: false,
+          message: 'you already applied to this job',
+        });
       }
     } catch (error) {
       error.message;
