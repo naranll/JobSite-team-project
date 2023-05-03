@@ -7,7 +7,7 @@ import Message from "@/components/MessegeModal";
 
 export default function AddJob(): JSX.Element {
   const { currentUser } = useUserContext();
-  const [modal,setModal]=useState<boolean>(false)
+  const [modal, setModal] = useState<boolean>(false);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function submitHandler(event: any): void {
@@ -25,12 +25,11 @@ export default function AddJob(): JSX.Element {
     axios
       .post("http://localhost:8008/job/add", newJob)
       .then((res) => {
-        console.log(res)
+        console.log(res);
         if (res.data.success) {
-          setModal(true)
-          
-        } 
-      }) 
+          setModal(true);
+        }
+      })
       .catch((err) => console.log(err));
   }
 
@@ -55,11 +54,9 @@ export default function AddJob(): JSX.Element {
               <input type="number" name="payment" required />
             </label>
 
-            <button className={styles.btn} >SUBMIT</button>
-
-
+            <button className={styles.btn}>SUBMIT</button>
           </form>
-          {modal&&<Message setModal={setModal}/>}
+          {modal && <Message setModal={setModal} />}
         </div>
       ) : (
         <div>anon pls... login to post job</div>

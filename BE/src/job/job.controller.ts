@@ -9,7 +9,6 @@ import {
 import { Request, Response } from 'express';
 import { Job } from './job.schema';
 import { JobService } from './job.service';
-import mongoose from 'mongoose';
 
 @Controller('job')
 export class JobController {
@@ -42,10 +41,8 @@ export class JobController {
     return this.jobService.findJob(id);
   }
 
-  @Get('posted/:id')
-  getPostedJobsByUserId(
-    @Param('id') userId: mongoose.Types.ObjectId,
-  ): Promise<Job[]> {
+  @Get('posted/:postedBy')
+  getPostedJobsByUserId(@Param('postedBy') userId: string): Promise<Job[]> {
     return this.jobService.getPostedJobsByUserId(userId);
   }
 }
