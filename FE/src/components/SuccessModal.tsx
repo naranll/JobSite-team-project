@@ -1,11 +1,8 @@
-// import "../styles/successmodal.scss";
-import { useUserContext } from "@/context/UserContext";
 import Link from "next/link";
 
 export default function SuccessModal(props: {
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const { currentUser } = useUserContext();
   const { setModal } = props;
 
   return (
@@ -17,11 +14,10 @@ export default function SuccessModal(props: {
             <picture className="succeedImage">
               <img src="../image/succeedImage.png" alt="#" />
             </picture>
-            <p className="userEmail">{currentUser?.email}</p>
             <p className="para">Congratulations </p>
           </div>
           <Link href={`../`}>
-            <button className="applicationBtn">Go to my Application</button>
+            <button className="applicationBtn">Go Home</button>
           </Link>
         </div>
       </div>

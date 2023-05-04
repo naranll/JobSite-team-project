@@ -1,13 +1,12 @@
-import React, { useState } from "react";
-// import "../styles/addjob.scss";
-import { JobType } from "@/util/types";
 import axios from "axios";
+import React, { useState } from "react";
+import { JobType } from "@/util/types";
 import { useUserContext } from "../context/UserContext";
 import SuccessModal from "@/components/SuccessModal";
 
 export default function AddJob(): JSX.Element {
   const { currentUser } = useUserContext();
-  const [modal, setModal] = useState<boolean>(false);
+  const [showSuccessModal, setShowSuccessModal] = useState<boolean>(false);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function submitHandler(event: any): void {
@@ -21,13 +20,13 @@ export default function AddJob(): JSX.Element {
       description: target.description.value,
       payment: target.payment.value,
     };
-    console.log("add new job working", newJob);
+    console.log("new job", newJob);
     axios
       .post("http://localhost:8008/job/add", newJob)
       .then((res) => {
         console.log(res);
         if (res.data.success) {
-          setModal(true);
+          setShowSuccessModal(true);
         }
       })
       .catch((err) => console.log(err));
@@ -56,7 +55,7 @@ export default function AddJob(): JSX.Element {
 
             <button className="btn">SUBMIT</button>
           </form>
-          {modal && <SuccessModal setModal={setModal} />}
+          {showSuccessModal && <SuccessModal setModal={setShowSuccessModal} />}
         </div>
       ) : (
         <div>login to post job</div>

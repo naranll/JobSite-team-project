@@ -4,13 +4,13 @@ import { GetStaticProps, GetStaticPropsContext } from "next";
 import { useUserContext } from "../../context/UserContext";
 import axios from "axios";
 import { useState } from "react";
-import ApplyModal from "../../components/ApplyModal";
+import SuccessModal from "@/components/SuccessModal";
 
 export default function Job({ data: job }: { data: JobType }): JSX.Element {
   const { currentUser } = useUserContext();
-  const [apply, setApply] = useState<boolean>(false);
   const [isApplied, setIsApplied] = useState(false);
-  console.log("jobPage:", job);
+  const [showSuccessModal, setShowSuccessModal] = useState<boolean>(false);
+  // console.log("jobPage:", job);
 
   function handleApply() {
     console.log("Job Id", job._id);
@@ -23,12 +23,11 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
       .then((res) => {
         console.log(res.data);
         if (res.data) {
-          setApply(true);
+          setShowSuccessModal(true);
         }
       })
       .catch(() => setIsApplied(true));
   }
-  console.log(apply);
 
   return (
     <div>
@@ -50,7 +49,7 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
           {isApplied && (
             <p className="text-red-500">you are already applied to this job</p>
           )}
-          {apply && <ApplyModal setApply={setApply} />}
+          {showSuccessModal && <SuccessModal setModal={setShowSuccessModal} />}
         </div>
       ) : (
         <div>Please login to see content</div>

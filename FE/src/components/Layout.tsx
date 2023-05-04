@@ -8,7 +8,7 @@ interface PropType {
 
 export default function Layout({ children }: PropType): JSX.Element {
   return (
-    <div className="xl:container mx-auto relative pb-[100px]">
+    <div className="mx-auto relative pb-[100px]">
       <Header />
       <main className="min-h-screen flex justify-center">{children}</main>
       <Footer />
