@@ -1,110 +1,12 @@
-.menu {
-  font-size: 20px;
-  height: 31px;
-  width: 55px;
-  margin-left: 16px;
-  text-align: center;
-  background-color: #fff;
-}
+@import "variables";
 
 .header {
-  display: flex;
-  justify-content: space-between;
   background-color: #fff;
-  height: 52px;
-  align-items: center;
-  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.75);
-}
-.post {
-  background-color: #fff;
-  width: 55px;
-  height: 33px;
-  margin-right: 16px;
-  text-align: center;
-  color: #007aff;
-  font-size: 20px;
-  border: #007aff solid 1px;
-  border-radius: 25px;
-  padding: 5px;
-}
-.menu {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  color: #000000;
-  text-align: center;
-  width: 50px;
-  height: 30px;
-  background-color: #fff;
+  padding: 0 20px;
 }
 
-.menuBtn {
-  color: black;
-  font-size: 30px;
-}
-.menuBtnHidden {
-  color: #818181;
-  display: none;
-}
-
-.offcanvasmenu {
-  border: 1px solid #007aff;
-  border-radius: 5px;
-  padding: 5px;
-  font-size: 30px;
-  margin: 10px;
-  color: #007aff;
-}
-
-.filters {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  justify-content: center;
-}
-
-.AppliedJobs {
-  text-decoration: none;
-  margin: 20px;
-}
-
-.PostedJobs {
-  text-decoration: none;
-}
-
-.sidenav {
-  height: 100%;
-  width: 0;
-  position: fixed;
-  z-index: 99;
-  top: 0;
-  left: 0;
-  background-color: #111;
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
-}
-
-.closebtn {
-  margin-right: 20px;
-  color: #000000;
-}
-
-.sidenav a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #530b0b;
-  display: block;
-  transition: 0.3s;
-}
-
-.sidenav a:hover {
-  color: #5e1212;
-}
-
-#mainBtn {
-  transition: margin-left 0.5s;
-  position: absolute;
-  padding: 16px;
+.header-logo {
+  color: $primary-color;
+  font-size: 24px;
+  font-weight: 700;
 }
