@@ -1,4 +1,4 @@
-import "../styles/successmodal.scss";
+// import "../styles/successmodal.scss";
 import { useUserContext } from "@/context/UserContext";
 import Link from "next/link";
 

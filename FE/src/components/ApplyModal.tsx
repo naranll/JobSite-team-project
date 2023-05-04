@@ -1,4 +1,4 @@
-import "../styles/applied.scss";
+// import "../styles/applied.scss";
 import Link from "next/link";
 
 export default function ApplyModal(props: {
@@ -9,24 +9,24 @@ export default function ApplyModal(props: {
   return (
     <>
       <div>hellomodal</div>
-      {/* <div className={styles.successModal}> */}
-      {/* <div className={styles.bgOpacity} />
-        <div className={styles.success}>
-          <picture className={styles.succeedImage}>
+      <div className="successModal">
+        <div className="bgOpacity" />
+        <div className="success">
+          <picture className="succeedImage">
             <img src="../image/succeedImage.png" alt="#" />
           </picture>
-          <div className={styles.body}>
-            <p className={styles.para}>Congratulations </p>
+          <div className="body">
+            <p className="para">Congratulations </p>
           </div>
           <Link
             href={`/`}
-            className={styles.applicationBtn}
+            className="applicationBtn"
             onClick={() => setApply(false)}
           >
             <button>Go to my Application</button>
           </Link>
-        </div> */}
-      {/* </div> */}
+        </div>
+      </div>
     </>
   );
 }

@@ -1,6 +1,6 @@
 import JobCard from "@/components/JobCard";
 import { JobType } from "@/util/types";
-import "../styles/main.scss";
+// import "../styles/jobcard.scss";
 import Link from "next/link";
 
 export default function Home(props: { jobs: JobType[] }): JSX.Element {

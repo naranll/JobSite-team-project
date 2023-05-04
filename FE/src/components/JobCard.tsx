@@ -1,9 +1,8 @@
-import "../styles/jobcard.scss";
 import { JobType } from "@/util/types";
 
 export default function JobCard(props: JobType): JSX.Element {
   return (
-    <div className="wrap">
+    <div>
       <div className="jobCard">
         <h1 className="cardTitle">{props.title}</h1>
         <p className="cardDisc">{props.description}</p>

@@ -1,6 +1,6 @@
 import { JobType } from "@/util/types";
 import { GetStaticProps, GetStaticPropsContext } from "next";
-import "../../styles/jobcard.scss";
+// import "../../styles/jobcard.scss";
 import { useUserContext } from "../../context/UserContext";
 import axios from "axios";
 import { useState } from "react";
@@ -33,7 +33,7 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
   return (
     <div>
       {currentUser ? (
-        <div className="wrap">
+        <div>
           <div className="jobCard">
             <h1 className="cardTitle">{job.title}</h1>
             <p className="cardDisc">{job.description}</p>

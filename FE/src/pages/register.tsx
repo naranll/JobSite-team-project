@@ -1,4 +1,4 @@
-import "../styles/register.scss";
+// import "../styles/register.scss";
 import { useRouter } from "next/router";
 import { UserType } from "@/util/types";
 import axios from "axios";

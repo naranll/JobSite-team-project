@@ -3,7 +3,7 @@ import { useUserContext } from "../../context/UserContext";
 import { JobType } from "@/util/types";
 import JobCard from "@/components/JobCard";
 import Link from "next/link";
-import "../../styles/applied.scss";
+// import "../../styles/applied.scss";
 import { FcCancel } from "react-icons/fc";
 import axios from "axios";
 

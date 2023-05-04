@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/addjob.scss";
+// import "../styles/addjob.scss";
 import { JobType } from "@/util/types";
 import axios from "axios";
 import { useUserContext } from "../context/UserContext";
