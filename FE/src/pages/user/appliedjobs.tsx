@@ -3,7 +3,7 @@ import { useUserContext } from "../../context/UserContext";
 import { JobType } from "@/util/types";
 import JobCard from "@/components/JobCard";
 import Link from "next/link";
-import styles from "../../styles/appliedJob.module.scss";
+// import "../../styles/applied.scss";
 import { FcCancel } from "react-icons/fc";
 import axios from "axios";
 
@@ -58,11 +58,11 @@ export default function AppliedJob(): JSX.Element {
     <div>
       {appliedJobs[0] &&
         appliedJobs.map((job: AppliedType, i: number) => (
-          <div className={styles.card} key={i}>
+          <div className="card" key={i}>
             <Link href={`../jobs/${job.jobId._id}`}>
               <JobCard {...job.jobId} />
             </Link>
-            <div className={styles.state}>{job.state}</div>
+            <div className="state">{job.state}</div>
             <div onClick={() => handleWithdraw(job.jobId._id)}>
               <FcCancel size={30} />
             </div>

@@ -1,7 +1,3 @@
-.wrap {
-  display: flex;
-  flex-direction: column;
-}
 .card {
   display: flex;
   justify-content: space-between;
@@ -16,7 +12,7 @@
 //Successful Modal//
 
 .successModal {
-  color: #1A75E8;
+  color: #1a75e8;
   position: absolute;
   top: 0;
   left: 0;
@@ -25,8 +21,8 @@
   align-items: center;
 }
 
-.success{
-  color: #1A75E8;
+.success {
+  color: #1a75e8;
   position: absolute;
   // top:  20%;?
   display: flex;
@@ -43,36 +39,34 @@
   min-width: 320px;
 }
 
-.bgOpacity{
+.bgOpacity {
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.718);
-
 }
 
-.userImage{
+.userImage {
   border-radius: 50%;
 }
 
-.userEmail{
+.userEmail {
   margin: 15px;
 }
-.body{
+.body {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-
-.applicationBtn{
-  background-color: #1A75E8;
+.applicationBtn {
+  background-color: #1a75e8;
   color: #fff;
   padding: 10px;
   border-radius: 10px;
   // width: 200px;
 }
 
-.succeedImage{
+.succeedImage {
   width: 250px;
   height: 250px;
 }

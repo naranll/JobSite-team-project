@@ -1,16 +1,16 @@
 import { JobType } from "@/util/types";
 import { GetStaticProps, GetStaticPropsContext } from "next";
-import Style from "../../styles/JobCard.module.scss";
+// import "../../styles/jobcard.scss";
 import { useUserContext } from "../../context/UserContext";
 import axios from "axios";
 import { useState } from "react";
-import Apply from "../../components/ApplyModal";
+import SuccessModal from "@/components/SuccessModal";
 
 export default function Job({ data: job }: { data: JobType }): JSX.Element {
   const { currentUser } = useUserContext();
-  const [apply, setApply] = useState<boolean>(false);
   const [isApplied, setIsApplied] = useState(false);
-  console.log("jobPage:", job);
+  const [showSuccessModal, setShowSuccessModal] = useState<boolean>(false);
+  // console.log("jobPage:", job);
 
   function handleApply() {
     console.log("Job Id", job._id);
@@ -23,34 +23,33 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
       .then((res) => {
         console.log(res.data);
         if (res.data) {
-          setApply(true);
+          setShowSuccessModal(true);
         }
       })
-      .catch((error) => setIsApplied(true));
+      .catch(() => setIsApplied(true));
   }
-  console.log(apply);
 
   return (
     <div>
       {currentUser ? (
-        <div className={Style.wrap}>
-          <div className={Style.jobCard}>
-            <h1 className={Style.cardTitle}>{job.title}</h1>
-            <p className={Style.cardDisc}>{job.description}</p>
-            <span className={Style.cardmoney}>{job.payment}$</span>
-            <p className={Style.contractType}>{job.contractType}</p>
+        <div>
+          <div className="jobCard">
+            <h1 className="cardTitle">{job.title}</h1>
+            <p className="cardDisc">{job.description}</p>
+            <span className="cardmoney">{job.payment}$</span>
+            <p className="contractType">{job.contractType}</p>
           </div>
           <button
             disabled={currentUser._id === job.postedBy}
             onClick={handleApply}
-            className={Style.button}
+            className="button"
           >
             Apply
           </button>
           {isApplied && (
             <p className="text-red-500">you are already applied to this job</p>
           )}
-          {apply && <Apply setApply={setApply} />}
+          {showSuccessModal && <SuccessModal setModal={setShowSuccessModal} />}
         </div>
       ) : (
         <div>Please login to see content</div>
