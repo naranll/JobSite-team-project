@@ -13,7 +13,7 @@ export class UserController {
   }
 
   @Post('add')
-  createUser(@Body() body: UserDto): Promise<User> {
+  createUser(@Body() body: User): Promise<User> {
     console.log('request body', body);
     return this.userService.addUser(body);
   }

@@ -2,7 +2,6 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectConnection, InjectModel } from '@nestjs/mongoose';
 import { Connection, Model } from 'mongoose';
 import { User } from './user.schema';
-import { UserDto } from './user.dto';
 
 @Injectable()
 export class UserService {
@@ -18,8 +17,8 @@ export class UserService {
     return result;
   }
 
-  async addUser(createUserDto: UserDto): Promise<User> {
-    const createdUser = new this.userModel(createUserDto);
+  async addUser(body: User): Promise<User> {
+    const createdUser = new this.userModel(body);
     return createdUser.save();
   }
 
