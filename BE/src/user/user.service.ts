@@ -26,6 +26,11 @@ export class UserService {
     return this.userModel.find().exec();
   }
 
+  async generateStaticIdforUser(): Promise<User[]> {
+    const query = await this.userModel.find({}).select({ _id: 1 });
+    return query;
+  }
+
   async findUser(id: string): Promise<User> {
     console.log('find user id', id);
     const result = await this.userModel.findById(id).exec();

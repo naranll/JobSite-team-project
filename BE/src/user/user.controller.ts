@@ -12,6 +12,12 @@ export class UserController {
     return this.userService.findAll();
   }
 
+  @Get('user_id')
+  getStaticId(): Promise<User[]> {
+    console.log('generating static paths for user');
+    return this.userService.generateStaticIdforUser();
+  }
+
   @Post('add')
   createUser(@Body() body: User): Promise<User> {
     console.log('request body', body);
