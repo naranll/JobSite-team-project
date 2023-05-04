@@ -49,4 +49,12 @@ export class ApplicationService {
       return true;
     }
   }
+
+  async cancelApply(userId: string, jobId: string): Promise<Application> {
+    console.log('deleting application');
+    const result = await this.applicationModel.findOneAndDelete({
+      $and: [{ userId: userId }, { jobId: jobId }],
+    });
+    return result;
+  }
 }

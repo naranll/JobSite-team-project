@@ -4,6 +4,8 @@ import { JobType } from "@/util/types";
 import JobCard from "@/components/JobCard";
 import Link from "next/link";
 import styles from "../../styles/appliedJob.module.scss";
+import { FcCancel } from "react-icons/fc";
+import axios from "axios";
 
 export interface AppliedType {
   jobId: JobType;
@@ -12,7 +14,9 @@ export interface AppliedType {
 
 export default function AppliedJob(): JSX.Element {
   const [appliedJobs, setAppliedJobs] = useState<AppliedType[]>([]);
+  const [deleted, setDeleted] = useState(false);
   const { currentUser } = useUserContext();
+
   console.log("user", currentUser);
 
   useEffect(() => {
@@ -31,6 +35,25 @@ export default function AppliedJob(): JSX.Element {
     }
   }, [currentUser?._id]);
 
+  function handleWithdraw(jobId: string) {
+    console.log("jobId", jobId);
+    console.log("userId", currentUser?._id);
+    const appInfo = {
+      jobId: jobId,
+      userId: currentUser?._id,
+    };
+    axios
+      .delete(`http://localhost:8008/application/remove/${currentUser?._id}`, {
+        data: appInfo,
+      })
+      .then((res) => {
+        if (res.data.message) {
+          setDeleted(true);
+        }
+      })
+      .catch((err) => console.log(err));
+  }
+
   return (
     <div>
       {appliedJobs[0] &&
@@ -40,8 +63,16 @@ export default function AppliedJob(): JSX.Element {
               <JobCard {...job.jobId} />
             </Link>
             <div className={styles.state}>{job.state}</div>
+            <div onClick={() => handleWithdraw(job.jobId._id)}>
+              <FcCancel size={30} />
+            </div>
           </div>
         ))}
+      {deleted ? (
+        <div>
+          <p>application deleted successfully</p>
+        </div>
+      ) : null}
     </div>
   );
 }

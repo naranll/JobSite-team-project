@@ -18,6 +18,7 @@ export type UserType = {
   gender?: string;
   phoneNumber?: number;
   image?: string;
+  skills?: [string];
 };
 
 export type AppliedJobsType = {

@@ -64,7 +64,7 @@ export class GoogleLoginController {
         lastName: profile.family_name,
         password: null,
         gender: null,
-        skill: [],
+        skills: [],
         phoneNumber: null,
         image: profile.picture,
       };

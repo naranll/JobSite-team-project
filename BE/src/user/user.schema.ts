@@ -18,11 +18,11 @@ export class User {
   @Prop()
   email: string;
   @Prop([String])
-  skill: string[];
+  skills: string[];
   @Prop({ default: 'ClIENT' })
   role: 'CLIENT' | 'MODERATOR' | 'ADMIN';
   @Prop()
-  image: string;
+  image?: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

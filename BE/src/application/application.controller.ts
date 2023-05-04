@@ -1,12 +1,14 @@
 import {
   Controller,
+  Delete,
   Get,
   Param,
   Post,
+  Query,
   Request as Req,
   Response as Res,
 } from '@nestjs/common';
-import { Request, Response } from 'express';
+import { Request, Response, query } from 'express';
 import { ApplicationService } from './application.service';
 import { Application } from './application.schema';
 import { ApplicationDto } from './application.dto';
@@ -51,5 +53,17 @@ export class ApplicationController {
   @Get('/applicants/:jobId')
   getApplicantsByJobId(@Param('jobId') jobId: string): Promise<Application[]> {
     return this.applicationService.getApplicantsByJobId(jobId);
+  }
+
+  @Delete('/remove/:id')
+  async removeApplication(@Req() Req: Request, @Res() Res: Response) {
+    console.log('delete Application request', Req.body);
+    const { userId, jobId } = Req.body;
+    const result = await this.applicationService.cancelApply(userId, jobId);
+    if (result) {
+      Res.status(200).json({ message: true });
+    } else {
+      Res.status(400).json({ message: 'something went wrong' });
+    }
   }
 }
