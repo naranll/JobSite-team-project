@@ -1,12 +1,11 @@
 import Link from "next/link";
-import {Sidebar} from "primereact/sidebar";
-import React, {useState} from "react";
-
+import React, { useState } from "react";
+import { useUserContext } from "@/context/UserContext";
 import "primeicons/primeicons.css";
-import {useUserContext} from "@/context/UserContext";
+import { Sidebar } from "primereact/sidebar";
 
 export default function Header(): JSX.Element {
-  const {currentUser, handleLogout} = useUserContext();
+  const { currentUser, handleLogout } = useUserContext();
   const [visible, setVisible] = useState<boolean>(false);
 
   return (
@@ -15,7 +14,15 @@ export default function Header(): JSX.Element {
         <div>Logo</div>
       </Link>
       <div className="center-element gap-2">
-        <Link href={`/addjob`} className="button-style">
+        {!currentUser && (
+          <Link
+            href="/login"
+            className="header-login-btn hidden sm:block sm:w-[60px]"
+          >
+            <div>Log In</div>
+          </Link>
+        )}
+        <Link href={`/addjob`} className="btn-style">
           <span>Post a Job</span>
         </Link>
         {currentUser && (
@@ -29,18 +36,28 @@ export default function Header(): JSX.Element {
         )}
       </div>
 
-      <Sidebar visible={visible} onHide={() => setVisible(false)}>
-        <div>
-          <div>
-            <Link href={`/user/appliedjobs`}>
-              <div>Applied jobs</div>
-            </Link>
-            <Link href={`../user/postedjobs`}>
-              <div>Posted jobs</div>
-            </Link>
-            {currentUser ? <div onClick={handleLogout}>Logout</div> : null}
+      <Sidebar
+        visible={visible}
+        position="right"
+        onHide={() => setVisible(false)}
+      >
+        <Link href={`/user/appliedjobs`} onClick={() => setVisible(false)}>
+          <div className="sidebar-options">Applied jobs</div>
+        </Link>
+        <Link href={`../user/postedjobs`} onClick={() => setVisible(false)}>
+          <div className="sidebar-options">Posted jobs</div>
+        </Link>
+        {currentUser ? (
+          <div
+            onClick={() => {
+              handleLogout();
+              setVisible(false);
+            }}
+            className="sidebar-options"
+          >
+            Logout
           </div>
-        </div>
+        ) : null}
       </Sidebar>
     </div>
   );

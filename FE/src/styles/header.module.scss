@@ -3,10 +3,28 @@
 .header {
   background-color: #fff;
   padding: 0 20px;
+  color: $primary-color;
+}
+
+.header-login-btn {
+  font-size: medium;
+  font-weight: 600;
 }
 
 .header-logo {
-  color: $primary-color;
   font-size: 24px;
   font-weight: 700;
+}
+
+.sidebar-options {
+  height: 30px;
+  padding-left: 10px;
+  border-bottom: 1px solid $primary-color;
+  color: $secondary-color;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.sidebar-options:hover {
+  border-bottom: 1px solid $secondary-color;
 }
