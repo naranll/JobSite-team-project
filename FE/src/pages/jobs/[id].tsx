@@ -3,13 +3,21 @@ import { GetStaticProps, GetStaticPropsContext } from "next";
 // import "../../styles/jobcard.scss";
 import { useUserContext } from "../../context/UserContext";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SuccessModal from "@/components/SuccessModal";
+import { useRouter } from "next/router";
 
 export default function Job({ data: job }: { data: JobType }): JSX.Element {
   const { currentUser } = useUserContext();
   const [isApplied, setIsApplied] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState<boolean>(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!currentUser) {
+      router.push("/login");
+    }
+  }, [currentUser]);
   // console.log("jobPage:", job);
 
   function handleApply() {
