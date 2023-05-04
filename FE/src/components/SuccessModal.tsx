@@ -19,7 +19,7 @@ export default function Message(props: {
             <img src="../image/succeedImage.png" alt="#" />
           </picture>
           <p className={styles.userEmail}>{currentUser?.email}</p>
-          <p className={styles.para}>Conratulations </p>
+          <p className={styles.para}>Congratulations </p>
             </div>
             <Link href={`../`}>
               <button className={styles.applicationBtn}>Go to my Application</button>

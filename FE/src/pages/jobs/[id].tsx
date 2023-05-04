@@ -4,7 +4,7 @@ import Style from "../../styles/JobCard.module.scss";
 import { useUserContext } from "../../context/UserContext";
 import axios from "axios";
 import { useState } from "react";
-import Apply from "../../components/ApplyModal";
+import ApplyModal from "../../components/ApplyModal";
 
 export default function Job({ data: job }: { data: JobType }): JSX.Element {
   const { currentUser } = useUserContext();
@@ -26,7 +26,7 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
           setApply(true);
         }
       })
-      .catch((error) => setIsApplied(true));
+      .catch(() => setIsApplied(true));
   }
   console.log(apply);
 
@@ -50,7 +50,7 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
           {isApplied && (
             <p className="text-red-500">you are already applied to this job</p>
           )}
-          {apply && <Apply setApply={setApply} />}
+          {apply && <ApplyModal setApply={setApply} />}
         </div>
       ) : (
         <div>Please login to see content</div>

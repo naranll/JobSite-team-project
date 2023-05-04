@@ -3,7 +3,7 @@ import styles from "../styles/addjob.module.scss";
 import { JobType } from "@/util/types";
 import axios from "axios";
 import { useUserContext } from "../context/UserContext";
-import Message from "@/components/MessegeModal";
+import Message from "@/components/SuccessModal";
 
 export default function AddJob(): JSX.Element {
   const { currentUser } = useUserContext();
@@ -59,7 +59,7 @@ export default function AddJob(): JSX.Element {
           {modal && <Message setModal={setModal} />}
         </div>
       ) : (
-        <div>anon pls... login to post job</div>
+        <div>login to post job</div>
       )}
     </>
   );
