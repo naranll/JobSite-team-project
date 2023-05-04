@@ -1,6 +1,6 @@
 import { JobType } from "@/util/types";
 import { GetStaticProps, GetStaticPropsContext } from "next";
-import Style from "../../styles/JobCard.module.scss";
+import "../../styles/jobcard.scss";
 import { useUserContext } from "../../context/UserContext";
 import axios from "axios";
 import { useState } from "react";
@@ -33,17 +33,17 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
   return (
     <div>
       {currentUser ? (
-        <div className={Style.wrap}>
-          <div className={Style.jobCard}>
-            <h1 className={Style.cardTitle}>{job.title}</h1>
-            <p className={Style.cardDisc}>{job.description}</p>
-            <span className={Style.cardmoney}>{job.payment}$</span>
-            <p className={Style.contractType}>{job.contractType}</p>
+        <div className="wrap">
+          <div className="jobCard">
+            <h1 className="cardTitle">{job.title}</h1>
+            <p className="cardDisc">{job.description}</p>
+            <span className="cardmoney">{job.payment}$</span>
+            <p className="contractType">{job.contractType}</p>
           </div>
           <button
             disabled={currentUser._id === job.postedBy}
             onClick={handleApply}
-            className={Style.button}
+            className="button"
           >
             Apply
           </button>

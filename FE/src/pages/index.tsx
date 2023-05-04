@@ -1,14 +1,14 @@
 import JobCard from "@/components/JobCard";
 import { JobType } from "@/util/types";
-import styles from "../styles/Main.module.scss";
+import "../styles/main.scss";
 import Link from "next/link";
 
 export default function Home(props: { jobs: JobType[] }): JSX.Element {
   const { jobs } = props;
   return (
-    <div className={styles.main}>
+    <div className="main">
       <h1>JOB BOARD</h1>
-      <div className={styles.search}>
+      <div className="search">
         <input placeholder="search" />
         <button>search</button>
       </div>

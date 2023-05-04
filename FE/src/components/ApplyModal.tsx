@@ -1,4 +1,4 @@
-import styles from "../styles/appliedJob.module.scss";
+import "../styles/applied.scss";
 import Link from "next/link";
 
 export default function ApplyModal(props: {
@@ -8,8 +8,9 @@ export default function ApplyModal(props: {
 
   return (
     <>
-      <div className={styles.successModal}>
-        <div className={styles.bgOpacity} />
+      <div>hellomodal</div>
+      {/* <div className={styles.successModal}> */}
+      {/* <div className={styles.bgOpacity} />
         <div className={styles.success}>
           <picture className={styles.succeedImage}>
             <img src="../image/succeedImage.png" alt="#" />
@@ -24,8 +25,8 @@ export default function ApplyModal(props: {
           >
             <button>Go to my Application</button>
           </Link>
-        </div>
-      </div>
+        </div> */}
+      {/* </div> */}
     </>
   );
 }
