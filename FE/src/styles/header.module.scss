@@ -54,7 +54,6 @@
   font-size: 30px;
   margin: 10px;
   color: #007aff;
-
 }
 
 .filters {
@@ -64,13 +63,13 @@
   justify-content: center;
 }
 
-.AppliedJobs{
+.AppliedJobs {
   text-decoration: none;
   margin: 20px;
 }
 
-.PostedJobs{
-   text-decoration: none;
+.PostedJobs {
+  text-decoration: none;
 }
 
 .sidenav {
@@ -108,17 +107,4 @@
   transition: margin-left 0.5s;
   position: absolute;
   padding: 16px;
-}
-
-@media screen and (max-height: 450px) {
-  .sidenav {
-    padding-top: 15px;
-  }
-  .sidenav a {
-    font-size: 18px;
-  }
-}
-
-.logo {
-  color: #000000;
 }

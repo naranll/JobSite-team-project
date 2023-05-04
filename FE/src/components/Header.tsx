@@ -1,14 +1,14 @@
 import styles from "../styles/header.module.scss";
 import Link from "next/link";
-import { Sidebar } from "primereact/sidebar";
-import React, { useState } from "react";
+import {Sidebar} from "primereact/sidebar";
+import React, {useState} from "react";
 
 import "primeicons/primeicons.css";
-import { AiOutlineMenu } from "react-icons/ai";
-import { useUserContext } from "@/context/UserContext";
+import {AiOutlineMenu} from "react-icons/ai";
+import {useUserContext} from "@/context/UserContext";
 
 export default function Header(): JSX.Element {
-  const { currentUser, handleLogout } = useUserContext();
+  const {currentUser, handleLogout} = useUserContext();
   const [visible, setVisible] = useState<boolean>(false);
 
   return (
@@ -18,7 +18,7 @@ export default function Header(): JSX.Element {
       </Link>
 
       <Link href={`/addjob`}>
-        <span className={styles.post}>Post a Job</span>
+        <span className="">Post a Job</span>
       </Link>
 
       <div className="card flex justify-content-center ">
@@ -35,7 +35,6 @@ export default function Header(): JSX.Element {
             </div>
           </div>
         </Sidebar>
-        {/* <Button className="pi pi-bars" severity="info" outlined onClick={() => setVisible(true)}/> */}
 
         <AiOutlineMenu
           className={styles.offcanvasmenu}
