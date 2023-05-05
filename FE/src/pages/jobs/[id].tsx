@@ -1,14 +1,13 @@
-import { JobType } from "@/util/types";
-import { GetStaticProps, GetStaticPropsContext } from "next";
-// import "../../styles/jobcard.scss";
-import { useUserContext } from "../../context/UserContext";
+import {JobType} from "@/util/types";
+import {GetStaticProps, GetStaticPropsContext} from "next";
+import {useUserContext} from "../../context/UserContext";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import {useState, useEffect} from "react";
 import SuccessModal from "@/components/SuccessModal";
-import { useRouter } from "next/router";
+import {useRouter} from "next/router";
 
-export default function Job({ data: job }: { data: JobType }): JSX.Element {
-  const { currentUser } = useUserContext();
+export default function Job({data: job}: {data: JobType}): JSX.Element {
+  const {currentUser} = useUserContext();
   const [isApplied, setIsApplied] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState<boolean>(false);
   const router = useRouter();
@@ -17,14 +16,13 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
     if (!currentUser) {
       router.push("/login");
     }
-  }, [currentUser]);
-  // console.log("jobPage:", job);
+  }, [currentUser, router]);
 
   function handleApply() {
     console.log("Job Id", job._id);
     console.log("User id", currentUser?._id);
 
-    const newApply = { jobId: job._id, userId: currentUser?._id };
+    const newApply = {jobId: job._id, userId: currentUser?._id};
 
     axios
       .post("http://localhost:8008/application/add", newApply)
@@ -41,16 +39,15 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
     <div>
       {currentUser ? (
         <div>
-          <div className="jobCard">
-            <h1 className="cardTitle">{job.title}</h1>
-            <p className="cardDisc">{job.description}</p>
-            <span className="cardmoney">{job.payment}$</span>
-            <p className="contractType">{job.contractType}</p>
+          <div className="jobpage">
+            <h1 className="jobpage-title">{job.title}</h1>
+            <p className="jobpage-description">{job.description}</p>
+            <p className="jobpage-contract">{job.contractType}</p>
           </div>
           <button
             disabled={currentUser._id === job.postedBy}
             onClick={handleApply}
-            className="button"
+            className="btn-style"
           >
             Apply
           </button>
@@ -69,8 +66,8 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
 export const getStaticPaths = async () => {
   const result = await fetch(`http://localhost:8008/job/job_id`);
   const resJob = await result.json();
-  const paths = await resJob.map((id: { _id: string }) => ({
-    params: { id: id._id },
+  const paths = await resJob.map((id: {_id: string}) => ({
+    params: {id: id._id},
   }));
   return {
     paths,
