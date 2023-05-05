@@ -10,10 +10,7 @@ export class Job {
   postedBy: string;
 
   @Prop()
-  companyName: string;
-
-  @Prop()
-  link: string;
+  _id: string;
 
   @Prop()
   title: string;
@@ -22,25 +19,22 @@ export class Job {
   description: string;
 
   @Prop()
-  payment: number;
+  wage: number;
 
   @Prop()
-  category: string;
-
-  @Prop()
-  experience: string;
-
-  @Prop()
-  qualification: string;
+  requirement: string;
 
   @Prop()
   location: string;
 
   @Prop()
-  jobType: string;
+  contactType: string;
 
   @Prop()
-  applicationDeadline: number;
+  category: string;
+
+  @Prop()
+  createdDate: Date;
 }
 
 export const JobSchema = SchemaFactory.createForClass(Job);

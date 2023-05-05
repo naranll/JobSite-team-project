@@ -26,7 +26,10 @@ export default function AddJob(): JSX.Element {
       postedBy: currentUser?._id,
       title: target.title.value,
       description: target.description.value,
-      payment: target.payment.value,
+      wage: Number(target.wage.value),
+      requirement: target.requirement.value,  
+      location: target.location.value,
+      // contractType: target.contractType.value,
     };
     console.log("new job", newJob);
     axios
@@ -42,32 +45,52 @@ export default function AddJob(): JSX.Element {
 
   return (
     <>
-      {currentUser ? (
-        <div className="add_job_page">
-          <button className="btn">Back</button>
-          <form className="job_form" onSubmit={submitHandler}>
-            <label>
+    {currentUser ? (
+      <div className="add_job_page">
+        <form className="job_form" onSubmit={submitHandler}>
+          <div className="inputs_field">
+            <label className="inputs_left_form">
               <p>Job Title</p>
-              <input type="text" name="title" required />
+              <input className="input" type="text" name="title" placeholder="Title" required />
             </label>
 
-            <label>
+            <label className="inputs_right_form">
+              <p>Wage</p>
+              <input className="input" type="number" name="wage" placeholder="Wage" required />
+            </label>
+          </div>
+          <div className="inputs_field">
+            <label className="inputs_left_form">
               <p>Job Description</p>
-              <textarea rows={5} name="description" required />
+              <textarea className="input" rows={5} name="description" placeholder="Job Description" required />
             </label>
 
-            <label>
-              <p> Payment</p>
-              <input type="number" name="payment" required />
+            <label className="inputs_right_form">
+              <p> Requirement</p>
+              <textarea className="input" rows={5} name="requirement" placeholder="Requirement" required />
             </label>
+          </div>
+          <div className="inputs_field">
+            <label className="inputs_left_form">
+                <p> Job Category</p>
+              <select  className="input" name="category" required>
+                <option value="text">developer</option>
+                <option value="text">design</option>
+              </select>
+            </label>
+            <label className="inputs_right_form">
+              <p> Job Location</p>
+              <input className="input" type="Address Type" name="location" placeholder="Location" required />
+            </label>
+          </div>
 
-            <button className="btn">SUBMIT</button>
-          </form>
-          {showSuccessModal && <SuccessModal setModal={setShowSuccessModal} />}
-        </div>
-      ) : (
-        <div>login to post job</div>
-      )}
-    </>
+          <button className="btn">SUBMIT</button>
+        </form>
+        {showSuccessModal && <SuccessModal setModal={setShowSuccessModal} />}
+      </div>
+    ) : (
+      <div>login to post job</div>
+    )}
+  </>
   );
 }

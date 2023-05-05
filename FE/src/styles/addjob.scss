@@ -1,5 +1,4 @@
 .add_job_page {
-  padding: 4px;
   position: relative;
 }
 
@@ -8,7 +7,7 @@
   color: white;
   border: none;
   padding: 4px;
-  width: 200px;
+  min-width: 200px;
   margin: auto;
   border-radius: 10px;
 }
@@ -18,6 +17,7 @@
   flex-direction: column;
   gap: 20px;
   padding: 36px;
+  flex-wrap: wrap;
 }
 
 .job_form input,
@@ -25,9 +25,87 @@
   width: 100%;
 }
 
-// .success {
-//   height: 600px;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// }
+
+
+.input{
+  border: 1px solid rgba(0, 0, 0, 0.326);
+  padding: 5px 0px 5px 10px ;
+  border-radius: 5px;
+  width: 50%;
+}
+
+.inputs_field{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.select_input{
+  min-width: 190px;
+  height: 20px;
+  border: 1px solid #333;
+}
+
+.inputs_left_form{
+  margin-bottom: 20px;
+}
+
+@media only screen and (min-width: 200px
+) and (max-width: 400px) {
+   .input{
+    background-color: rgba(255, 255, 255, 0.168);
+   }
+    .input{
+      width: 100%;
+    }
+  } 
+
+@media only screen and (min-width: 410px) and (max-width: 800px) {
+
+   .input{
+    width: 100%;
+
+
+  }
+  .inputs_right_form{
+    width: 45%;
+  }
+
+  .inputs_left_form{
+    width: 45%;
+  }
+
+  .inputs .inputs_left_form{
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 10px;
+  }
+}
+
+@media only screen and (min-width: 801px) and (max-width: 1500px) {
+  .input{
+    width: 100%;
+
+  }
+  .inputs_right_form{
+    width: 45%;
+  }
+
+  .inputs_left_form{
+    width: 45%;
+  }
+}
+
+@media only screen and (min-width: 1501px) and (max-width: 2435px) {
+  .input{
+    width: 100%;
+
+  }
+  .inputs_right_form{
+    width: 45%;
+  }
+
+  .inputs_left_form{
+    width: 45%;
+  }
+}

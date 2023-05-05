@@ -10,7 +10,9 @@ export class JobService {
   ) {}
 
   async addJob(body: Job): Promise<Job> {
-    const createJob = new this.jobModel(body);
+    console.log(body.wage);
+
+    const createJob = new this.jobModel({ ...body, wage: body.wage });
     return createJob.save();
   }
 

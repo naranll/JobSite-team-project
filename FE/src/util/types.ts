@@ -1,11 +1,14 @@
 export type JobType = {
   postedBy?: undefined | string;
-  _id: string;
+  _id?: string;
   title: string;
   description: string;
-  payment: number;
+  wage: number;
   createdDate?: Date;
   contractType?: string;
+  category: string;
+  requirement: string;
+  location: string;
 };
 
 export type UserType = {

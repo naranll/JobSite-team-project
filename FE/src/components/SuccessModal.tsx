@@ -8,7 +8,7 @@ export default function SuccessModal(props: {
   return (
     <>
       <div className="successModal">
-        <div className="bgOpacity" onClick={() => setModal(false)} />
+        <div className="bgOpacity" />
         <div className="success">
           <div className="body">
             <picture className="succeedImage">
