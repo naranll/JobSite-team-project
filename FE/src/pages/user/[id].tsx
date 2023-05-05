@@ -13,49 +13,88 @@ export default function User({ data: user }: { data: UserType }): JSX.Element {
     if (!currentUser) {
       router.push("/login");
     }
-  }, [currentUser]);
+  }, [currentUser, router]);
 
   return (
     <div>
-      {currentUser ? (
-        <div className="flex border mx-auto w-full px-8 py-8 rounded-lg justify-around min-h-screen">
-          <div className="border-2 rounded-lg w-2/5 h-32">
-            <ul className="text-center font-semibold">
-              <li className="bg-blue-500 rounded-lg">Profile</li>
-              <li>Posted</li>
-              <li>Applied</li>
-              <li>History</li>
-            </ul>
+      <h1 className="text-center font-semibold bg-slate-100 rounded-lg">
+        {user.email} profile
+      </h1>
+      <div className="relative border-2 rounded-lg w-[1280px] h-screen mx-auto p-5 flex gap-5 justify-center">
+        <div className="border-2 rounded-lg h-min p-5 w-1/5">
+          <ul>
+            <li className="">profile</li>
+            <li>posted</li>
+            <li>applied</li>
+            <li>history</li>
+          </ul>
+        </div>
+        <div className="flex border-2 rounded-lg w-3/5 justify-between p-5 h-min">
+          <div className="flex flex-col gap-5 items-center w-1/5">
+            <div className="">
+              <picture>
+                <img
+                  className="rounded-full shadow-md"
+                  src={user.image}
+                  alt="user-profile"
+                />
+              </picture>
+            </div>
+            <div className="shadow-md border-2 rounded-lg text-center w-full cursor-pointer hover:bg-slate-400 hover:text-white">
+              edit
+            </div>
           </div>
-          <div className="flex border-2 justify-between rounded-lg">
-            <div className="flex-col m-5">
-              <div className="w-full">
-                <picture>
-                  <img className="rounded-full" src={user.image} alt="sample" />
-                </picture>
+          <div className="border-2 rounded-lg p-2 w-2/5 shadow-lg ">
+            <form className="">
+              <div className="flex flex-col mb-4">
+                <label
+                  className="mb-2 font-bold text-grey-darkest"
+                  htmlFor="firstname"
+                >
+                  First Name :
+                </label>
+                <input
+                  disabled
+                  className="border-2 rounded-lg text-center py-1 px-2"
+                  type="text"
+                  defaultValue={user.firstName}
+                />
               </div>
-
-              <div className="border text-center font-semibold rounded-lg bg-slate-400 cursor-pointer text-white">
-                edit
+              <div className="flex flex-col mb-4">
+                <label
+                  className="mb-2 font-bold text-grey-darkest"
+                  htmlFor="lastName"
+                >
+                  Last Name :
+                </label>
+                <input
+                  disabled
+                  className="border-2 rounded-lg text-center py-1 px-2"
+                  type="text"
+                  defaultValue={user.lastName}
+                />
               </div>
-            </div>
-            <div className="flex-col m-5 w-3/5">
-              <div className=" border-2 rounded-lg p-2">{user.email}</div>
-              <div className=" border-2 rounded-lg p-2">{user.firstName}</div>
-              <div className=" border-2 rounded-lg p-2">{user.lastName}</div>
-              <div className=" border-2 rounded-lg p-2">
-                Phone number: {user.phoneNumber ? user.phoneNumber : null}
+              <div className="flex flex-col mb-4">
+                <label
+                  className="mb-2 font-bold text-grey-darkest"
+                  htmlFor="Email"
+                >
+                  Email :
+                </label>
+                <input
+                  disabled
+                  className="border-2 rounded-lg text-center py-1 px-2"
+                  type="email"
+                  defaultValue={user.email}
+                />
               </div>
-              <div className=" border-2 rounded-lg p-2">
-                gender : {user.gender ? user.gender : null}
-              </div>
-              <div className="border-2 rounded-lg h-1/4">CV</div>
-            </div>
+            </form>
+          </div>
+          <div className="place-self-end shadow-md bottom-1 right-1 border-2 rounded-lg h-min px-2 hover:bg-slate-400 hover:text-white text-center cursor-pointer w-1/5">
+            edit
           </div>
         </div>
-      ) : (
-        <div> u shouldn't be here </div>
-      )}
+      </div>
     </div>
   );
 }
