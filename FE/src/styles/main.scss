@@ -2,16 +2,13 @@
 
 .home {
   color: $secondary-color;
-  &-page {
-    border: 1px solid black;
-  }
+
   &-title {
     font-size: 32px;
     font-weight: 600;
     color: $primary-color;
   }
   &-joblist {
-    border: 1px solid red;
     display: flex;
     flex-direction: column;
     gap: 4px;
