@@ -36,8 +36,8 @@ export default function Job({data: job}: {data: JobType}): JSX.Element {
   }
 
   return (
-    <div>
-      {currentUser ? (
+    <>
+      {currentUser && (
         <div>
           <div className="jobpage">
             <h1 className="jobpage-title">{job.title}</h1>
@@ -56,10 +56,8 @@ export default function Job({data: job}: {data: JobType}): JSX.Element {
           )}
           {showSuccessModal && <SuccessModal setModal={setShowSuccessModal} />}
         </div>
-      ) : (
-        <div>Please login to see content</div>
       )}
-    </div>
+    </>
   );
 }
 
