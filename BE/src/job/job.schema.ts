@@ -10,9 +10,6 @@ export class Job {
   postedBy: string;
 
   @Prop()
-  _id: string;
-
-  @Prop()
   title: string;
 
   @Prop()

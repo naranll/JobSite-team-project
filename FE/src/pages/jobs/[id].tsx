@@ -17,7 +17,7 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
     if (!currentUser) {
       router.push("/login");
     }
-  }, [currentUser]);
+  }, [currentUser, router]);
   // console.log("jobPage:", job);
 
   function handleApply() {
