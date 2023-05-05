@@ -11,7 +11,7 @@ export default function JobCard(props: JobType): JSX.Element {
         <p className="jobcard-description">
           {props.description.slice(0, 150)}...
         </p>
-        <span className="jobcard-wage">${props.payment}</span>
+        <span className="jobcard-wage">${props.wage}</span>
       </div>
     </div>
   );

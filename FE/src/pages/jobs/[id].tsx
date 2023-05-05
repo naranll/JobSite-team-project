@@ -44,7 +44,7 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
           <div className="jobCard">
             <h1 className="cardTitle">{job.title}</h1>
             <p className="cardDisc">{job.description}</p>
-            <span className="cardmoney">{job.payment}$</span>
+            <span className="cardmoney">{job.wage}$</span>
             <p className="contractType">{job.contractType}</p>
           </div>
           <button
