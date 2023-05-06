@@ -1,13 +1,13 @@
-import {JobType} from "@/util/types";
-import {GetStaticProps, GetStaticPropsContext} from "next";
-import {useUserContext} from "../../context/UserContext";
+import { JobType } from "@/util/types";
+import { GetStaticProps, GetStaticPropsContext } from "next";
+import { useUserContext } from "../../context/UserContext";
 import axios from "axios";
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import SuccessModal from "@/components/SuccessModal";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 
-export default function Job({data: job}: {data: JobType}): JSX.Element {
-  const {currentUser} = useUserContext();
+export default function Job({ data: job }: { data: JobType }): JSX.Element {
+  const { currentUser } = useUserContext();
   const [isApplied, setIsApplied] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState<boolean>(false);
   const router = useRouter();
@@ -22,7 +22,7 @@ export default function Job({data: job}: {data: JobType}): JSX.Element {
     console.log("Job Id", job._id);
     console.log("User id", currentUser?._id);
 
-    const newApply = {jobId: job._id, userId: currentUser?._id};
+    const newApply = { jobId: job._id, userId: currentUser?._id };
 
     axios
       .post("http://localhost:8008/application/add", newApply)
@@ -38,22 +38,31 @@ export default function Job({data: job}: {data: JobType}): JSX.Element {
   return (
     <>
       {currentUser && (
-        <div>
-          <div className="jobpage">
-            <h1 className="jobpage-title">{job.title}</h1>
-            <p className="jobpage-description">{job.description}</p>
-            <p className="jobpage-contract">{job.contractType}</p>
+        <div className="jobpage flex flex-col md:flex-row-reverse gap-4 container px-4 py-2">
+          <div className="jobpage-employer w-full md:w-1/4 md:h-[260px] p-4">
+            <h2 className="jobpage-employer-title">Employer Info</h2>
           </div>
-          <button
-            disabled={currentUser._id === job.postedBy}
-            onClick={handleApply}
-            className="btn-style"
-          >
-            Apply
-          </button>
-          {isApplied && (
-            <p className="text-red-500">you are already applied to this job</p>
-          )}
+          <div className="jobpage-jobdetails w-full md:w-3/4 p-4">
+            <div>
+              <h1 className="jobpage-title">{job.title}</h1>
+              <p className="jobpage-description">{job.description}</p>
+              <p className="jobpage-contract">{job.contractType}</p>
+              <p className="jobpage-contract">{job.wage}</p>
+              <p className="jobpage-contract">{job.category}</p>
+              <p className="jobpage-contract">{job.requirement}</p>
+              <p className="jobpage-contract">{job.location}</p>
+            </div>
+            <button
+              disabled={currentUser._id === job.postedBy}
+              onClick={handleApply}
+              className={`w-full ${
+                isApplied ? "text-black bg-gray-400 rounded-lg" : "btn-style"
+              }`}
+            >
+              {isApplied ? "Applied" : "Apply"}
+            </button>
+          </div>
+
           {showSuccessModal && <SuccessModal setModal={setShowSuccessModal} />}
         </div>
       )}
@@ -64,8 +73,8 @@ export default function Job({data: job}: {data: JobType}): JSX.Element {
 export const getStaticPaths = async () => {
   const result = await fetch(`http://localhost:8008/job/job_id`);
   const resJob = await result.json();
-  const paths = await resJob.map((id: {_id: string}) => ({
-    params: {id: id._id},
+  const paths = await resJob.map((id: { _id: string }) => ({
+    params: { id: id._id },
   }));
   return {
     paths,
