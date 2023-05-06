@@ -20,6 +20,11 @@ export class ApplicationService {
     return this.applicationModel.find().exec();
   }
 
+  async generateStaticId(): Promise<Application[]> {
+    const query = await this.applicationModel.find({}).select({ _id: 1 });
+    return query;
+  }
+
   async getAppliedJobsByUserId(userId: string): Promise<Application[]> {
     const appliedJobs = await this.applicationModel
       .find({ userId })

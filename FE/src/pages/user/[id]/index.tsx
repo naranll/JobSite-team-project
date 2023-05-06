@@ -1,6 +1,7 @@
 import { useUserContext } from "@/context/UserContext";
 import { UserType } from "@/util/types";
 import { GetStaticProps, GetStaticPropsContext } from "next";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
@@ -23,10 +24,18 @@ export default function User({ data: user }: { data: UserType }): JSX.Element {
       <div className="relative border-2 rounded-lg w-[1280px] h-screen mx-auto p-5 flex gap-5 justify-center">
         <div className="border-2 rounded-lg h-min p-5 w-1/5">
           <ul>
-            <li className="">profile</li>
-            <li>posted</li>
-            <li>applied</li>
-            <li>history</li>
+            <Link href={`/user/${currentUser?._id}`}>
+              <li className="">profile</li>
+            </Link>
+            <Link href={`/user/${currentUser?._id}/postedjobs`}>
+              <li>posted</li>
+            </Link>
+            <Link href={`/user/${currentUser?._id}/appliedjobs`}>
+              <li>applied</li>
+            </Link>
+            <Link href={`/user/${currentUser?._id}`}>
+              <li>history</li>
+            </Link>
           </ul>
         </div>
         <div className="flex border-2 rounded-lg w-3/5 justify-between p-5 h-min">

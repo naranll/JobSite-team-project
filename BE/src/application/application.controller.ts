@@ -55,6 +55,12 @@ export class ApplicationController {
     return this.applicationService.getApplicantsByJobId(jobId);
   }
 
+  @Get('application_id')
+  getStaticId(): Promise<Application[]> {
+    console.log('generating static paths for application');
+    return this.applicationService.generateStaticId();
+  }
+
   @Delete('/remove/:id')
   async removeApplication(@Req() Req: Request, @Res() Res: Response) {
     console.log('delete Application request', Req.body);
