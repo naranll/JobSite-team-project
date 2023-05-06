@@ -1,17 +1,17 @@
 import Link from "next/link";
-import React, {useState} from "react";
-import {useUserContext} from "@/context/UserContext";
+import React, { useState } from "react";
+import { useUserContext } from "@/context/UserContext";
 import "primeicons/primeicons.css";
-import {Sidebar} from "primereact/sidebar";
-import {useRouter} from "next/router";
+import { Sidebar } from "primereact/sidebar";
+import { useRouter } from "next/router";
 
 export default function Header(): JSX.Element {
-  const {currentUser, handleLogout} = useUserContext();
+  const { currentUser, handleLogout } = useUserContext();
   const [visible, setVisible] = useState<boolean>(false);
   const router = useRouter();
 
   return (
-    <div className="header center-element w-full h-[46px] md:h-[54px]">
+    <div className="header center-element w-full h-[46px] md:h-[54px] container mx-auto">
       <Link href={`/`} className="header-logo">
         <div>Logo</div>
       </Link>

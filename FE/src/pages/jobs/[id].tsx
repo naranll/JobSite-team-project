@@ -1,6 +1,5 @@
 import { JobType } from "@/util/types";
 import { GetStaticProps, GetStaticPropsContext } from "next";
-// import "../../styles/jobcard.scss";
 import { useUserContext } from "../../context/UserContext";
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -18,7 +17,6 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
       router.push("/login");
     }
   }, [currentUser, router]);
-  // console.log("jobPage:", job);
 
   function handleApply() {
     console.log("Job Id", job._id);
@@ -38,31 +36,37 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
   }
 
   return (
-    <div>
-      {currentUser ? (
-        <div>
-          <div className="jobCard">
-            <h1 className="cardTitle">{job.title}</h1>
-            <p className="cardDisc">{job.description}</p>
-            <span className="cardmoney">{job.wage}$</span>
-            <p className="contractType">{job.contractType}</p>
+    <>
+      {currentUser && (
+        <div className="jobpage flex flex-col md:flex-row-reverse gap-4 container px-4 py-2">
+          <div className="jobpage-employer w-full md:w-1/4 md:h-[260px] p-4">
+            <h2 className="jobpage-employer-title">Employer Info</h2>
           </div>
-          <button
-            disabled={currentUser._id === job.postedBy}
-            onClick={handleApply}
-            className="button"
-          >
-            Apply
-          </button>
-          {isApplied && (
-            <p className="text-red-500">you are already applied to this job</p>
-          )}
+          <div className="jobpage-jobdetails w-full md:w-3/4 p-4">
+            <div>
+              <h1 className="jobpage-title">{job.title}</h1>
+              <p className="jobpage-description">{job.description}</p>
+              <p className="jobpage-contract">{job.contractType}</p>
+              <p className="jobpage-contract">{job.wage}</p>
+              <p className="jobpage-contract">{job.category}</p>
+              <p className="jobpage-contract">{job.requirement}</p>
+              <p className="jobpage-contract">{job.location}</p>
+            </div>
+            <button
+              disabled={currentUser._id === job.postedBy}
+              onClick={handleApply}
+              className={`w-full ${
+                isApplied ? "text-black bg-gray-400 rounded-lg" : "btn-style"
+              }`}
+            >
+              {isApplied ? "Applied" : "Apply"}
+            </button>
+          </div>
+
           {showSuccessModal && <SuccessModal setModal={setShowSuccessModal} />}
         </div>
-      ) : (
-        <div>Please login to see content</div>
       )}
-    </div>
+    </>
   );
 }
 
