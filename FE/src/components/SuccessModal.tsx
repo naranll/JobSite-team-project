@@ -4,11 +4,12 @@ export default function SuccessModal(props: {
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const { setModal } = props;
+  console.log(setModal);
 
   return (
     <>
       <div className="successModal">
-        <div className="bgOpacity" onClick={() => setModal(false)} />
+        <div className="bgOpacity" />
         <div className="success">
           <div className="body">
             <picture className="succeedImage">

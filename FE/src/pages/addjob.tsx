@@ -14,7 +14,7 @@ export default function AddJob(): JSX.Element {
     if (!currentUser) {
       router.push("/login");
     }
-  }, [currentUser]);
+  }, [currentUser, router]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function submitHandler(event: any): void {
@@ -26,7 +26,10 @@ export default function AddJob(): JSX.Element {
       postedBy: currentUser?._id,
       title: target.title.value,
       description: target.description.value,
-      payment: target.payment.value,
+      wage: Number(target.wage.value),
+      requirement: target.requirement.value,
+      location: target.location.value,
+      // contractType: target.contractType.value,
     };
     console.log("new job", newJob);
     axios
@@ -44,22 +47,72 @@ export default function AddJob(): JSX.Element {
     <>
       {currentUser ? (
         <div className="add_job_page">
-          <button className="btn">Back</button>
           <form className="job_form" onSubmit={submitHandler}>
-            <label>
-              <p>Job Title</p>
-              <input type="text" name="title" required />
-            </label>
+            <div className="inputs_field">
+              <label className="inputs_left_form">
+                <p>Job Title</p>
+                <input
+                  className="input"
+                  type="text"
+                  name="title"
+                  placeholder="Title"
+                  required
+                />
+              </label>
 
-            <label>
-              <p>Job Description</p>
-              <textarea rows={5} name="description" required />
-            </label>
+              <label className="inputs_right_form">
+                <p>Wage</p>
+                <input
+                  className="input"
+                  type="number"
+                  name="wage"
+                  placeholder="Wage"
+                  required
+                />
+              </label>
+            </div>
+            <div className="inputs_field">
+              <label className="inputs_left_form">
+                <p>Job Description</p>
+                <textarea
+                  className="input"
+                  rows={5}
+                  name="description"
+                  placeholder="Job Description"
+                  required
+                />
+              </label>
 
-            <label>
-              <p> Payment</p>
-              <input type="number" name="payment" required />
-            </label>
+              <label className="inputs_right_form">
+                <p> Requirement</p>
+                <textarea
+                  className="input"
+                  rows={5}
+                  name="requirement"
+                  placeholder="Requirement"
+                  required
+                />
+              </label>
+            </div>
+            <div className="inputs_field">
+              <label className="inputs_left_form">
+                <p> Job Category</p>
+                <select className="input" name="category" required>
+                  <option value="text">developer</option>
+                  <option value="text">design</option>
+                </select>
+              </label>
+              <label className="inputs_right_form">
+                <p> Job Location</p>
+                <input
+                  className="input"
+                  type="Address Type"
+                  name="location"
+                  placeholder="Location"
+                  required
+                />
+              </label>
+            </div>
 
             <button className="btn">SUBMIT</button>
           </form>

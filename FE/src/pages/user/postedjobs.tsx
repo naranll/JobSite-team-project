@@ -1,9 +1,9 @@
 import JobCard from "@/components/JobCard";
-import {JobType, UserType} from "@/util/types";
+import { JobType, UserType } from "@/util/types";
 import Link from "next/link";
 import Cookies from "js-cookie";
 import jwtDecode from "jwt-decode";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 
 type ApplicantType = {
   jobId: string;
@@ -41,7 +41,7 @@ export default function PostedJob(): JSX.Element {
     });
   }
 
-  function filterJobApplicant(oneJobId: string) {
+  function filterJobApplicant(oneJobId: string | undefined) {
     return jobApplicants.filter((application) => application.jobId == oneJobId);
   }
 

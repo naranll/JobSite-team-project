@@ -16,7 +16,22 @@ export class Job {
   description: string;
 
   @Prop()
-  payment: number;
+  wage: number;
+
+  @Prop()
+  requirement: string;
+
+  @Prop()
+  location: string;
+
+  @Prop()
+  contactType: string;
+
+  @Prop()
+  category: string;
+
+  @Prop()
+  createdDate: Date;
 }
 
 export const JobSchema = SchemaFactory.createForClass(Job);

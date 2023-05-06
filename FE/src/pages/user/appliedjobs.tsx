@@ -35,7 +35,7 @@ export default function AppliedJob(): JSX.Element {
     }
   }, [currentUser?._id]);
 
-  function handleWithdraw(jobId: string) {
+  function handleWithdraw(jobId: string | undefined) {
     console.log("jobId", jobId);
     console.log("userId", currentUser?._id);
     const appInfo = {
