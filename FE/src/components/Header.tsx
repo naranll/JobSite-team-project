@@ -43,10 +43,16 @@ export default function Header(): JSX.Element {
         position="right"
         onHide={() => setVisible(false)}
       >
-        <Link href={`/user/appliedjobs`} onClick={() => setVisible(false)}>
+        <Link
+          href={`/user/${currentUser?._id}/appliedjobs`}
+          onClick={() => setVisible(false)}
+        >
           <div className="sidebar-options">Applied jobs</div>
         </Link>
-        <Link href={`../user/postedjobs`} onClick={() => setVisible(false)}>
+        <Link
+          href={`../user/${currentUser?._id}/postedjobs`}
+          onClick={() => setVisible(false)}
+        >
           <div className="sidebar-options">Posted jobs</div>
         </Link>
         {currentUser && (
