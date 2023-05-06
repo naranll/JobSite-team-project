@@ -42,7 +42,7 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
           <div className="jobpage-employer w-full md:w-1/4 md:h-[260px] p-4">
             <h2 className="jobpage-employer-title">Employer Info</h2>
           </div>
-          <div className="jobpage-jobdetails w-full md:w-3/4 p-4">
+          <div className="jobpage-jobdetails w-full min-h-[600px] md:w-3/4 p-4">
             <div>
               <h1 className="jobpage-title">{job.title}</h1>
               <p className="jobpage-description">{job.description}</p>
