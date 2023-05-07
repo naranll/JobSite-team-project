@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useUserContext } from "@/context/UserContext";
 import { JobType } from "@/util/types";
 import JobCard from "@/components/JobCard";
