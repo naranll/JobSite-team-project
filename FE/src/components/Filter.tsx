@@ -34,21 +34,23 @@ export default function Filter() {
   }
 
   return (
-    <form className="filter-form">
-      <p className="filter-form-title">Category</p>
-      {categories.map((category: CategoryType, i: number) => (
-        <label key={i}>
-          <input
-            type="radio"
-            name="category"
-            value={category.value}
-            onChange={changeHandler}
-            checked={currentCategory === category.value ? true : false}
-          />
-          {category.value.charAt(0).toUpperCase() + category.value.slice(1)}
-        </label>
-      ))}
-      <hr />
-    </form>
+    <div className="home-filter hidden lg:block lg:w-1/5 lg:h-[360px] lg:p-4 shadow">
+      <form className="filter-form">
+        <p className="filter-form-title">Category</p>
+        {categories.map((category: CategoryType, i: number) => (
+          <label key={i}>
+            <input
+              type="radio"
+              name="category"
+              value={category.value}
+              onChange={changeHandler}
+              checked={currentCategory === category.value ? true : false}
+            />
+            {category.value.charAt(0).toUpperCase() + category.value.slice(1)}
+          </label>
+        ))}
+        <hr />
+      </form>
+    </div>
   );
 }

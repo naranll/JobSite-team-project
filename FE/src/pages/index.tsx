@@ -15,11 +15,12 @@ export default function Home(props: { jobs: JobType[] }): JSX.Element {
           className="w-full sm:w-5/6"
         />
         <button className="hidden sm:block sm:w-1/6">Search</button>
+        <div>filter</div>
       </form>
       <div className="w-full lg:container lg:flex lg:gap-5">
-        <div className="home-filter hidden lg:block lg:w-1/5 lg:h-[360px] lg:p-4 shadow">
-          <Filter />
-        </div>
+        {/* <div className="home-filter hidden lg:block lg:w-1/5 lg:h-[360px] lg:p-4 shadow"> */}
+        <Filter />
+        {/* </div> */}
         <div className="home-joblist mx-auto w-5/6 lg:w-4/5">
           {jobs.map(
             (job: JobType, index: number): JSX.Element => (
