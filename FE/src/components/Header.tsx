@@ -50,7 +50,7 @@ export default function Header(): JSX.Element {
           <div className="sidebar-options">Applied jobs</div>
         </Link>
         <Link
-          href={`../user/${currentUser?._id}/postedjobs`}
+          href={`/user/${currentUser?._id}/postedjobs`}
           onClick={() => setVisible(false)}
         >
           <div className="sidebar-options">Posted jobs</div>
