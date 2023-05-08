@@ -2,19 +2,10 @@ import { useUserContext } from "@/context/UserContext";
 import { UserType } from "@/util/types";
 import { GetStaticProps, GetStaticPropsContext } from "next";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
 
 export default function User({ data: user }: { data: UserType }): JSX.Element {
   console.log("user profile page", user);
   const { currentUser } = useUserContext();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!currentUser) {
-      router.push("/login");
-    }
-  }, [currentUser, router]);
 
   return (
     <div>
