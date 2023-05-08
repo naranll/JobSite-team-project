@@ -46,10 +46,10 @@ export default function AddJob(): JSX.Element {
   return (
     <>
       {currentUser ? (
-        <div className="add_job_page">
+        <div className="add_job_page container">
           <form className="job_form" onSubmit={submitHandler}>
-            <div className="inputs_field">
-              <label className="inputs_left_form">
+            <div className="inputs_field  ">
+              <label className="inputs_right_form">
                 <p>Job Title</p>
                 <input
                   className="input"
@@ -71,8 +71,15 @@ export default function AddJob(): JSX.Element {
                 />
               </label>
             </div>
-            <div className="inputs_field">
-              <label className="inputs_left_form">
+            <label className="select">
+                <p> Job Category</p>
+                <select className="input" name="category" required>
+                  <option value="text">developer</option>
+                  <option value="text">design</option>
+                </select>
+              </label>
+            <div className="inputs_field lg-d-flex">
+              <label className="inputs_right_form">
                 <p>Job Description</p>
                 <textarea
                   className="input"
@@ -94,15 +101,8 @@ export default function AddJob(): JSX.Element {
                 />
               </label>
             </div>
-            <div className="inputs_field">
-              <label className="inputs_left_form">
-                <p> Job Category</p>
-                <select className="input" name="category" required>
-                  <option value="text">developer</option>
-                  <option value="text">design</option>
-                </select>
-              </label>
-              <label className="inputs_right_form">
+             
+              <label className="select">
                 <p> Job Location</p>
                 <input
                   className="input"
@@ -112,7 +112,6 @@ export default function AddJob(): JSX.Element {
                   required
                 />
               </label>
-            </div>
 
             <button className="btn">SUBMIT</button>
           </form>
