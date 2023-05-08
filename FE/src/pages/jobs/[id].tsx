@@ -5,6 +5,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import SuccessModal from "@/components/SuccessModal";
 import { useRouter } from "next/router";
+import  Cookies  from 'js-cookie';
 
 export default function Job({ data: job }: { data: JobType }): JSX.Element {
   const { currentUser } = useUserContext();
@@ -13,9 +14,14 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
   const router = useRouter();
 
   useEffect(() => {
-    if (!currentUser) {
+    // console.log(currentUser);
+    const token = Cookies.get("token");
+    if (!token) {
       router.push("/login");
     }
+    // if (!currentUser) {
+    //   router.push("/login");
+    // }
   }, [currentUser, router]);
 
   function handleApply() {
