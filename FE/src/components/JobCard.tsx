@@ -1,9 +1,9 @@
-import {JobType} from "@/util/types";
+import { JobType } from "@/util/types";
 
 export default function JobCard(props: JobType): JSX.Element {
   return (
-    <div className="jobcard flex items-center gap-4 drop-shadow-sm">
-      <div className="jobcard-image invisible sm:visible sm:flex sm:w-[40px] sm:h-[40px] sm:rounded-full">
+    <div className="jobcard flex items-center gap-4 shadow-md">
+      <div className="jobcard-image invisible sm:visible sm:flex sm:w-[40px] sm:h-[40px] sm:ml-3 sm:rounded-full">
         J
       </div>
       <div className="jobcard-details w-5/6">

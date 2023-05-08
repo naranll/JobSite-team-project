@@ -1,12 +1,12 @@
 import Link from "next/link";
-import React, { useState } from "react";
-import { useUserContext } from "@/context/UserContext";
+import React, {useState} from "react";
+import {useUserContext} from "@/context/UserContext";
 import "primeicons/primeicons.css";
-import { Sidebar } from "primereact/sidebar";
-import { useRouter } from "next/router";
+import {Sidebar} from "primereact/sidebar";
+import {useRouter} from "next/router";
 
 export default function Header(): JSX.Element {
-  const { currentUser, handleLogout } = useUserContext();
+  const {currentUser, handleLogout} = useUserContext();
   const [visible, setVisible] = useState<boolean>(false);
   const router = useRouter();
 
@@ -50,7 +50,7 @@ export default function Header(): JSX.Element {
           <div className="sidebar-options">Applied jobs</div>
         </Link>
         <Link
-          href={`../user/${currentUser?._id}/postedjobs`}
+          href={`/user/${currentUser?._id}/postedjobs`}
           onClick={() => setVisible(false)}
         >
           <div className="sidebar-options">Posted jobs</div>
