@@ -2,10 +2,15 @@ import Filter from "@/components/Filter";
 import JobCard from "@/components/JobCard";
 import {JobType} from "@/util/types";
 import Link from "next/link";
-import {FaFilter} from "react-icons/fa";
 
 export default function Home(props: {jobs: JobType[]}): JSX.Element {
   const {jobs} = props;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function changeHandler(e: any): void {
+    console.log("filter", e.currentTarget.value);
+  }
+
   return (
     <div className="home-page flex flex-col items-center gap-3 overflow-y-scroll">
       <h1 className="home-title">JOB BOARD</h1>
@@ -18,11 +23,10 @@ export default function Home(props: {jobs: JobType[]}): JSX.Element {
         <button className="hidden lg:block lg:w-1/6">Search</button>
 
         <div className="home-filter-btn p-2 center-element lg:hidden">
-          <FaFilter />
-          <select>
-            <option>All</option>
-            <option>Developer</option>
-            <option>Designer</option>
+          <select onChange={changeHandler}>
+            <option value="all">All</option>
+            <option value="developer">Developer</option>
+            <option value="designer">Designer</option>
           </select>
         </div>
       </form>
