@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useUserContext } from "@/context/UserContext";
 import { JobType } from "@/util/types";
 import JobCard from "@/components/JobCard";
@@ -38,6 +38,8 @@ export default function AppliedJob(props: { data: AppliedType }): JSX.Element {
   //     console.log("error fetch", error);
   //   }
   // }, [currentUser?._id]);
+
+
 
   function handleWithdraw(jobId: string | undefined) {
     console.log("jobId", jobId);
