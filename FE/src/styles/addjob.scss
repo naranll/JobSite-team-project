@@ -38,7 +38,6 @@
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  width: 100%;
 }
 
 .select_input{
@@ -51,61 +50,44 @@
   margin-bottom: 20px;
 }
 
-@media only screen and (min-width: 200px
-) and (max-width: 400px) {
-   .input{
-    background-color: rgba(255, 255, 255, 0.168);
-   }
+@media only screen and (min-width: 300px) and (max-width: 590px) {
     .input{
       width: 100%;
     }
+
+  .inputs_field{
+    display: block;     
+  }
   } 
 
-@media only screen and (min-width: 410px) and (max-width: 800px) {
+@media only screen and (min-width: 589px) and (max-width: 800px) {
 
    .input{
     width: 100%;
-
-
+    display: block;  
   }
+
   .inputs_right_form{
-    width: 45%;
+    width: 40%;
   }
 
-  .inputs_left_form{
-    width: 45%;
-  }
-
-  .inputs .inputs_left_form{
-    border: 1px solid rgb(0, 0, 0);
-    border-radius: 10px;
+  .select{
+    margin: 0 35px 0 35px;
   }
 }
 
 @media only screen and (min-width: 801px) and (max-width: 1500px) {
+
+  .select{
+    margin: 0 58px 0 55px;
+  }
   .input{
     width: 100%;
-
+    display: block;  
   }
+
   .inputs_right_form{
-    width: 45%;
+    width: 40%;
   }
-
-  .inputs_left_form{
-    width: 45%;
-  }
-}
-
-@media only screen and (min-width: 1501px) and (max-width: 2435px) {
-  .input{
-    width: 100%;
-
-  }
-  .inputs_right_form{
-    width: 45%;
-  }
-
-  .inputs_left_form{
-    width: 45%;
-  }
+  
 }
