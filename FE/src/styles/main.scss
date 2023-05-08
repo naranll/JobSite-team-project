@@ -15,7 +15,12 @@
   &-joblist {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
+  }
+  &-filter-btn {
+    border: 1px solid #dcdcdc;
+    border-radius: 0 10px 10px 0;
+    background-color: #fff;
   }
 }
 
