@@ -2,9 +2,12 @@ import JobCard from "@/components/JobCard";
 import { JobType, ApplicationType } from "@/util/types";
 import { GetStaticProps, GetStaticPropsContext } from "next";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function PostedJob({ data }: JobProps): JSX.Element {
   const { postedJobs, allApplicants } = data;
+  const router = useRouter();
+  const { id } = router.query;
 
   function filterJobApplicant(oneJobId: string | undefined) {
     const jobApplicants = allApplicants?.find(
@@ -19,15 +22,21 @@ export default function PostedJob({ data }: JobProps): JSX.Element {
         const jobApplicants = filterJobApplicant(job._id);
         return (
           <div key={i} className="postedjobs-jobcard">
-            <Link href={`../postedjobs/${job._id}`} className="w-4/5 sm:w-5/6">
+            <Link
+              href={`../${id}/postedjobs/${job._id}`}
+              className="w-4/5 sm:w-5/6"
+            >
               <JobCard {...job} />
             </Link>
-            <div className="postedjobs-applicants h-full w-1/5 sm:w-1/6">
+            <Link
+              href={`../${id}/postedjobs/${job._id}/applicants`}
+              className="postedjobs-applicants h-full w-1/5 sm:w-1/6"
+            >
               <div className="postedjobs-applicants-count">
                 {jobApplicants?.length}
               </div>
               <p>applied</p>
-            </div>
+            </Link>
           </div>
         );
       })}
