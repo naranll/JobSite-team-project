@@ -5,7 +5,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import SuccessModal from "@/components/SuccessModal";
 import { useRouter } from "next/router";
-import  Cookies  from 'js-cookie';
+import Cookies from "js-cookie";
 
 export default function Job({ data: job }: { data: JobType }): JSX.Element {
   const { currentUser } = useUserContext();
@@ -13,15 +13,27 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
   const [showSuccessModal, setShowSuccessModal] = useState<boolean>(false);
   const router = useRouter();
 
+  const checkApplied = () => {
+    const checkBody = {
+      jobId: job._id,
+      userId: currentUser?._id,
+    };
+
+    axios
+      .post("http://localhost:8008/application/check", checkBody)
+      .then((res) => {
+        if (res.data.message) {
+          setIsApplied(true);
+        }
+      });
+  };
+
   useEffect(() => {
-    // console.log(currentUser);
     const token = Cookies.get("token");
     if (!token) {
       router.push("/login");
     }
-    // if (!currentUser) {
-    //   router.push("/login");
-    // }
+    checkApplied();
   }, [currentUser, router]);
 
   function handleApply() {
@@ -59,7 +71,7 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
               <p className="jobpage-contract">{job.location}</p>
             </div>
             <button
-              disabled={currentUser._id === job.postedBy}
+              disabled={(currentUser._id === job.postedBy, isApplied === true)}
               onClick={handleApply}
               className={`w-full ${
                 isApplied ? "text-black bg-gray-400 rounded-lg" : "btn-style"
