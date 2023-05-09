@@ -1,11 +1,10 @@
 import JobCard from "@/components/JobCard";
-import {JobType, ApplicationType} from "@/util/types";
+import { JobType, ApplicationType } from "@/util/types";
+import { GetStaticProps, GetStaticPropsContext } from "next";
 import Link from "next/link";
-import {GetStaticProps, GetStaticPropsContext} from "next";
 
-export default function PostedJob({data}: JobProps): JSX.Element {
-  const {postedJobs, allApplicants} = data;
-  console.log("applicants", allApplicants);
+export default function PostedJob({ data }: JobProps): JSX.Element {
+  const { postedJobs, allApplicants } = data;
 
   function filterJobApplicant(oneJobId: string | undefined) {
     const jobApplicants = allApplicants?.find(
@@ -15,20 +14,19 @@ export default function PostedJob({data}: JobProps): JSX.Element {
   }
 
   return (
-    <div>
+    <div className="postedjobs-page">
       {postedJobs?.map((job: JobType, i: number) => {
         const jobApplicants = filterJobApplicant(job._id);
         return (
-          <div
-            key={i}
-            className="posted-jobcard container border-2 border-solid border-black relative px-5"
-          >
-            <Link href={`../postedjobs/${job._id}`}>
+          <div key={i} className="postedjobs-jobcard">
+            <Link href={`../postedjobs/${job._id}`} className="w-4/5 sm:w-5/6">
               <JobCard {...job} />
             </Link>
-            <div className="border-2 border-solid border-black absolute top-0 right-0">
-              <div>applicants:{jobApplicants?.length}</div>
-              <div className="btn-style w-[80px]">View</div>
+            <div className="postedjobs-applicants h-full w-1/5 sm:w-1/6">
+              <div className="postedjobs-applicants-count">
+                {jobApplicants?.length}
+              </div>
+              <p>applied</p>
             </div>
           </div>
         );
@@ -40,8 +38,8 @@ export default function PostedJob({data}: JobProps): JSX.Element {
 export const getStaticPaths = async () => {
   const result = await fetch(`http://localhost:8008/user/user_id`);
   const user = await result.json();
-  const paths = await user.map((id: {_id: string}) => ({
-    params: {id: id._id},
+  const paths = await user.map((id: { _id: string }) => ({
+    params: { id: id._id },
   }));
   return {
     paths,
