@@ -22,6 +22,22 @@ export class ApplicationController {
     return this.applicationService.findAll();
   }
 
+  @Post('check')
+  async checkIfApplied(@Req() Req: Request, @Res() Res: Response) {
+    console.log('check if user applied', Req.body);
+    const { userId, jobId } = Req.body;
+    try {
+      const result = await this.applicationService.checkApplied(userId, jobId);
+      if (result) {
+        Res.status(200).json({ message: true });
+      } else {
+        Res.status(200).json({ message: false });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   @Post('add')
   async addAppList(@Req() Req: Request, @Res() Res: Response) {
     console.log('application add request');
