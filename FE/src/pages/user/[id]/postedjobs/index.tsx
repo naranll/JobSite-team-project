@@ -14,7 +14,7 @@ export default function PostedJob({ data }: JobProps): JSX.Element {
   }
 
   return (
-    <div className="postedjobs-page">
+    <div className="postedjobs-page sm:w-5/6 lg:w-3/4">
       {postedJobs?.map((job: JobType, i: number) => {
         const jobApplicants = filterJobApplicant(job._id);
         return (
