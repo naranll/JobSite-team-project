@@ -43,6 +43,19 @@ export class ApplicationService {
     return applicants;
   }
 
+  async checkApplied(userId: string, jobId: string): Promise<boolean> {
+    console.log('check service', userId, jobId);
+    const result = await this.applicationModel.find({
+      $and: [{ userId: userId }, { jobId: jobId }],
+    });
+    console.log('result service', result);
+    if (!result.length) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   async isApplied(userId: string, jobId: string): Promise<boolean> {
     const result = await this.applicationModel.find({
       $and: [{ userId: userId }, { jobId: jobId }],
