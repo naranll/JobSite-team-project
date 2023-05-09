@@ -1,12 +1,17 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useUserContext } from "@/context/UserContext";
 import { JobType } from "@/util/types";
 import JobCard from "@/components/JobCard";
 import Link from "next/link";
+import { Dialog } from "primereact/dialog";
+import { Button } from "primereact/button";
+import { Toast } from "primereact/toast";
 // import "../../styles/applied.scss";
 import { FcCancel } from "react-icons/fc";
 import axios from "axios";
 import { GetStaticProps, GetStaticPropsContext } from "next";
+import { useRouter } from "next/router";
+import React from "react";
 
 export interface AppliedType {
   map(
@@ -17,31 +22,25 @@ export interface AppliedType {
 }
 
 export default function AppliedJob(props: { data: AppliedType }): JSX.Element {
-  // const [appliedJobs, setAppliedJobs] = useState<AppliedType[]>([]);
-  const [deleted, setDeleted] = useState(false);
+  const [jobId, setJobId] = useState<string | undefined>();
+  const [visible, setVisible] = useState(false);
   const { currentUser } = useUserContext();
+  const router = useRouter();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const toast = useRef<any>(null);
   console.log("props", props);
   console.log("user", currentUser);
 
-  // useEffect(() => {
-  //   try {
-  //     const getAppliedJobs = async () => {
-  //       const response = await fetch(
-  //         `http://localhost:8008/application/${currentUser?._id}`
-  //       );
-  //       const jobs = await response.json();
-  //       console.log("appliedjobs", jobs);
-  //       setAppliedJobs(jobs);
-  //     };
-  //     getAppliedJobs();
-  //   } catch (error) {
-  //     console.log("error fetch", error);
-  //   }
-  // }, [currentUser?._id]);
+  const showInfo = () => {
+    toast.current.show({
+      severity: "success",
+      summary: "application deleted",
+      detail: "your applicatiion to this job successfully canceled",
+      life: 3000,
+    });
+  };
 
-
-
-  function handleWithdraw(jobId: string | undefined) {
+  function handleWithdraw() {
     console.log("jobId", jobId);
     console.log("userId", currentUser?._id);
     const appInfo = {
@@ -54,7 +53,8 @@ export default function AppliedJob(props: { data: AppliedType }): JSX.Element {
       })
       .then((res) => {
         if (res.data.message) {
-          setDeleted(true);
+          showInfo();
+          router.reload();
         }
       })
       .catch((err) => console.log(err));
@@ -62,22 +62,43 @@ export default function AppliedJob(props: { data: AppliedType }): JSX.Element {
 
   return (
     <div>
+      <Toast ref={toast} />
+      <Dialog
+        className="text-center"
+        header="Warning"
+        visible={visible}
+        onHide={() => setVisible(false)}
+      >
+        <div className="p-3">delete application to this job? </div>
+        <div className="flex justify-center gap-3">
+          <Button
+            onClick={() => {
+              handleWithdraw();
+              setVisible(false);
+            }}
+          >
+            yes
+          </Button>
+          <Button onClick={() => setVisible(false)}>no</Button>
+        </div>
+      </Dialog>
       {props.data.map((job: AppliedType, i: number) => (
         <div className="card" key={i}>
-          <Link href={`../jobs/${job.jobId._id}`}>
+          <Link className="w-4/5 p-3 " href={`../jobs/${job.jobId._id}`}>
             <JobCard {...job.jobId} />
           </Link>
-          <div className="state">{job.state}</div>
-          <div onClick={() => handleWithdraw(job.jobId._id)}>
-            <FcCancel size={30} />
+          <div className="state shadow-md ">{job.state}</div>
+          <div
+            className="cursor-pointer hover:bg-red-300 shadow-md rounded-full"
+            onClick={() => {
+              setVisible(true);
+              setJobId(job.jobId._id);
+            }}
+          >
+            <FcCancel size={40} />
           </div>
         </div>
       ))}
-      {deleted ? (
-        <div>
-          <p>application deleted successfully</p>
-        </div>
-      ) : null}
     </div>
   );
 }
