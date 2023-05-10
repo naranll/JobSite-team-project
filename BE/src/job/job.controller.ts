@@ -43,6 +43,7 @@ export class JobController {
 
   @Get('posted/:postedBy')
   getPostedJobsByUserId(@Param('postedBy') userId: string): Promise<Job[]> {
+    console.log('get jobs posted by user service');
     return this.jobService.getPostedJobsByUserId(userId);
   }
 }

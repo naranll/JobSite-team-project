@@ -23,6 +23,14 @@ export type UserType = {
   skills?: [string];
 };
 
+export type ApplicationType = {
+  _id?: string;
+  jobId: string;
+  userId: string;
+  state: string;
+  createdAt: Date;
+};
+
 export type AppliedJobsType = {
   state: string;
 };

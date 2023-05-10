@@ -1,0 +1,34 @@
+@import "variables";
+
+.postedjobs {
+  &-jobcard {
+    position: relative;
+    display: flex;
+    margin-bottom: 6px;
+    &:hover {
+      border-left: 3px solid $primary-color;
+    }
+  }
+  &-applicants {
+    color: $primary-color;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid $primary-color;
+    border-radius: 8px;
+    &-count {
+      font-size: 20px;
+    }
+    &:hover {
+      color: $primary-hover-color;
+      font-weight: 600;
+      border: 3px solid $primary-hover-color;
+    }
+  }
+}
