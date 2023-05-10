@@ -17,11 +17,6 @@ export class UserService {
     return result;
   }
 
-  async addUser(body: User): Promise<User> {
-    const createdUser = new this.userModel(body);
-    return createdUser.save();
-  }
-
   async findAll(): Promise<User[]> {
     return this.userModel.find().exec();
   }
