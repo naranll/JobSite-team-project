@@ -26,7 +26,7 @@ export class UserController {
 
   @Post('login')
   signIn(@Body() UserDto: UserDto) {
-    return this.userService.signIn(UserDto.email, UserDto.password);
+    return this.userService.logIn(UserDto.email, UserDto.password);
   }
 
   @Get('/:id')

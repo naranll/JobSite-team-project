@@ -38,7 +38,7 @@ export class UserService {
     return await this.userModel.findOne({ email });
   }
 
-  async signIn(email: string, pass: string): Promise<User> {
+  async logIn(email: string, pass: string): Promise<User> {
     const user = await this.userModel.findOne({ email });
     if (user.password === pass) {
       return user;
