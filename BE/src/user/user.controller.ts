@@ -2,10 +2,14 @@ import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserDto } from './user.dto';
 import { User } from './user.schema';
+import { JwtService } from '@nestjs/jwt';
 
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly jwtService: JwtService,
+  ) {}
 
   @Get('all')
   findAll(): Promise<User[]> {
@@ -25,8 +29,15 @@ export class UserController {
   }
 
   @Post('login')
-  signIn(@Body() UserDto: UserDto) {
-    return this.userService.logIn(UserDto.email, UserDto.password);
+  async logIn(@Body() UserDto: UserDto) {
+    console.log('login req');
+    const payload = await this.userService.logIn(
+      UserDto.email,
+      UserDto.password,
+    );
+    console.log('got user', payload);
+    const token = await this.jwtService.signAsync(payload);
+    console.log('token', token);
   }
 
   @Get('/:id')
