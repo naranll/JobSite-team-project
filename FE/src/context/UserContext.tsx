@@ -27,6 +27,10 @@ export const UserContext = createContext<IUserContext>({} as IUserContext);
 interface UserProviderType {
   children: ReactNode;
 }
+interface LoginType {
+  email: string;
+  password: string;
+}
 
 export const useUserContext = () => useContext(UserContext);
 
@@ -52,11 +56,10 @@ export const UserContextProvider = ({ children }: UserProviderType) => {
 
     const target = event.currentTarget.elements;
 
-    const userLogin: UserType = {
+    const userLogin: LoginType = {
       email: target.email.value,
       password: target.password.value,
     };
-    console.log("user login", userLogin);
     axios
       .post(`http://localhost:8008/user/login`, userLogin)
       .then((res) => {
@@ -64,9 +67,10 @@ export const UserContextProvider = ({ children }: UserProviderType) => {
         if (res.status === 201) {
           Cookies.set("token", res.data.token);
           setCurrentUser(jwtDecode(res.data.token));
+          console.log("userrr", jwtDecode(res.data.token));
           router.push("/");
         } else {
-          console.log("fail");
+          console.log("login fail");
         }
       })
       .catch((err) => console.log(err));

@@ -13,8 +13,8 @@ export type JobType = {
 
 export type UserType = {
   _id?: string;
-  firstName?: string;
-  lastName?: string;
+  firstName: string;
+  lastName: string;
   password: string;
   email: string;
   gender?: string;
