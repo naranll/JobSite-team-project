@@ -4,6 +4,7 @@ import { Injectable } from '@nestjs/common';
 import { Job } from './job.schema';
 @Injectable()
 export class JobService {
+  [x: string]: any;
   constructor(
     @InjectModel('Job') private jobModel: Model<Job>,
     @InjectConnection() private connection: Connection,
@@ -17,12 +18,38 @@ export class JobService {
   }
 
   async findAll(): Promise<Job[]> {
+<<<<<<< Updated upstream
     return this.jobModel.find().exec();
   }
 
   async findJob(id: string): Promise<Job> {
     console.log('find Job id', id);
     const result = await this.jobModel.findById(id).exec();
+=======
+    const result = await this.jobModel.find({});
+    console.log('found jobs', result);
+    return result;
+  }
+
+  async findJob(id: string): Promise<Job> {
+    // console.log('find Job id', id);
+    const result = await this.jobModel.findById(id).exec();
+    console.log(' found job', result);
+    return result;
+  }
+  async filetredJob(query): Promise<Job[]> {
+    const { category, search } = query;
+
+    if (category === 'all') {
+      const result = await this.jobModel.find({
+        title: { $regex: new RegExp(search, 'i') },
+      });
+      return result;
+    }
+    const result = await this.jobModel.find({
+      title: { $regex: new RegExp(category, 'i') },
+    });
+>>>>>>> Stashed changes
     console.log(' found job', result);
     return result;
   }

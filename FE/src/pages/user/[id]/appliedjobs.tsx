@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
 import { useRef, useState } from "react";
 import { useUserContext } from "@/context/UserContext";
 import { JobType } from "@/util/types";
@@ -84,7 +85,7 @@ export default function AppliedJob(props: { data: AppliedType }): JSX.Element {
       </Dialog>
       {props.data.map((job: AppliedType, i: number) => (
         <div className="card" key={i}>
-          <Link className="w-4/5 p-3 " href={`../jobs/${job.jobId._id}`}>
+          <Link className="w-4/5 p-3 " href={`../jobs/${job.jobId?._id}`}>
             <JobCard {...job.jobId} />
           </Link>
           <div className="state shadow-md ">{job.state}</div>
@@ -92,7 +93,7 @@ export default function AppliedJob(props: { data: AppliedType }): JSX.Element {
             className="cursor-pointer hover:bg-red-300 shadow-md rounded-full"
             onClick={() => {
               setVisible(true);
-              setJobId(job.jobId._id);
+              setJobId(job.jobId?._id);
             }}
           >
             <FcCancel size={40} />

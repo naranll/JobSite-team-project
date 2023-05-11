@@ -6,7 +6,7 @@ import {
   Request as Req,
   Response as Res,
 } from '@nestjs/common';
-import { Request, Response } from 'express';
+import { Request, Response, query } from 'express';
 import { Job } from './job.schema';
 import { JobService } from './job.service';
 
@@ -36,11 +36,34 @@ export class JobController {
     return this.jobService.generateStaticId();
   }
 
+<<<<<<< Updated upstream
   @Get('/:id')
   getJob(@Param('id') id: string) {
     return this.jobService.findJob(id);
   }
 
+=======
+  @Get('singleJob/:id')
+  getJob(@Param('id') id: string) {
+    // console.log('job ID', id);
+    return this.jobService.findJob(id);
+  }
+
+  @Get('filter')
+  filetredJob(@Query() query: { category: string; search: string }) {
+    // console.log('filter ID', id);
+    console.log(query);
+    return this.jobService.filetredJob(query);
+  }
+
+  @Get('query')
+  async search(@Req() Req: Request, @Res() Res: Response) {
+    const query = Req.query;
+    console.log('query: ', query);
+    return Res.status(200);
+  }
+
+>>>>>>> Stashed changes
   @Get('posted/:postedBy')
   getPostedJobsByUserId(@Param('postedBy') userId: string): Promise<Job[]> {
     return this.jobService.getPostedJobsByUserId(userId);
