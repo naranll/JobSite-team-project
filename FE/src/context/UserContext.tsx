@@ -60,9 +60,10 @@ export const UserContextProvider = ({ children }: UserProviderType) => {
     axios
       .post(`http://localhost:8008/user/login`, userLogin)
       .then((res) => {
-        console.log("response", res);
+        // console.log("response", res.data);
         if (res.status === 201) {
-          setCurrentUser(res.data);
+          Cookies.set("token", res.data.token);
+          setCurrentUser(jwtDecode(res.data.token));
           router.push("/");
         } else {
           console.log("fail");

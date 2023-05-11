@@ -1,8 +1,16 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Request as Req,
+  Response as Res,
+} from '@nestjs/common';
 import { UserService } from './user.service';
-import { UserDto } from './user.dto';
 import { User } from './user.schema';
 import { JwtService } from '@nestjs/jwt';
+import { Request, Response } from 'express';
 
 @Controller('user')
 export class UserController {
@@ -29,13 +37,14 @@ export class UserController {
   }
 
   @Post('login')
-  async logIn(@Body() UserDto: UserDto) {
-    const user = await this.userService.logIn(UserDto.email, UserDto.password);
+  async logIn(@Req() request: Request, @Res() response: Response) {
+    const { email, password } = request.body;
+    const user = await this.userService.logIn(email, password);
     const payload = { ...user };
-    const token = this.jwtService.sign(payload, {
+    const token = await this.jwtService.signAsync(payload, {
       secret: process.env.JWT_SECRET,
     });
-    return token;
+    response.json({ token: token });
   }
 
   @Get('/:id')
