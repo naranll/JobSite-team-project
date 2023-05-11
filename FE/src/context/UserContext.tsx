@@ -1,9 +1,15 @@
 import jwtDecode from "jwt-decode";
 import Cookies from "js-cookie";
-import {UserType} from "@/util/types";
+import { UserType } from "@/util/types";
 import axios from "axios";
-import {useRouter} from "next/router";
-import {ReactNode, createContext, useContext, useEffect, useState} from "react";
+import { useRouter } from "next/router";
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 export interface IUserContext {
   currentUser: UserType | null | undefined;
@@ -24,7 +30,7 @@ interface UserProviderType {
 
 export const useUserContext = () => useContext(UserContext);
 
-export const UserContextProvider = ({children}: UserProviderType) => {
+export const UserContextProvider = ({ children }: UserProviderType) => {
   const [currentUser, setCurrentUser] = useState<UserType | null>();
   const router = useRouter();
 
@@ -54,9 +60,10 @@ export const UserContextProvider = ({children}: UserProviderType) => {
     axios
       .post(`http://localhost:8008/user/login`, userLogin)
       .then((res) => {
-        console.log("response", res);
+        // console.log("response", res.data);
         if (res.status === 201) {
-          setCurrentUser(res.data);
+          Cookies.set("token", res.data.token);
+          setCurrentUser(jwtDecode(res.data.token));
           router.push("/");
         } else {
           console.log("fail");
@@ -67,7 +74,7 @@ export const UserContextProvider = ({children}: UserProviderType) => {
 
   return (
     <UserContext.Provider
-      value={{currentUser, setCurrentUser, submitHandler, handleLogout}}
+      value={{ currentUser, setCurrentUser, submitHandler, handleLogout }}
     >
       {children}
     </UserContext.Provider>
