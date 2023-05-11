@@ -17,11 +17,6 @@ export class UserService {
     return result;
   }
 
-  async addUser(body: User): Promise<User> {
-    const createdUser = new this.userModel(body);
-    return createdUser.save();
-  }
-
   async findAll(): Promise<User[]> {
     return this.userModel.find().exec();
   }
@@ -43,7 +38,7 @@ export class UserService {
     return await this.userModel.findOne({ email });
   }
 
-  async signIn(email: string, pass: string): Promise<User> {
+  async logIn(email: string, pass: string): Promise<User> {
     const user = await this.userModel.findOne({ email });
     if (user.password === pass) {
       return user;

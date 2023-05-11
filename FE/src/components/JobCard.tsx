@@ -9,7 +9,7 @@ export default function JobCard(props: JobType): JSX.Element {
       <div className="jobcard-details w-5/6">
         <h1 className="jobcard-title">{props.title}</h1>
         <p className="jobcard-description">
-          {props.description.split(" ").slice(0, 8).join(" ")}...
+          {props.description?.split(" ").slice(0, 8).join(" ")}...
         </p>
         <span className="jobcard-wage">${props.wage}</span>
       </div>
