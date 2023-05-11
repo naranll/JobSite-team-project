@@ -30,14 +30,12 @@ export class UserController {
 
   @Post('login')
   async logIn(@Body() UserDto: UserDto) {
-    console.log('login req');
-    const payload = await this.userService.logIn(
-      UserDto.email,
-      UserDto.password,
-    );
-    console.log('got user', payload);
-    const token = await this.jwtService.signAsync(payload);
-    console.log('token', token);
+    const user = await this.userService.logIn(UserDto.email, UserDto.password);
+    const payload = { ...user };
+    const token = this.jwtService.sign(payload, {
+      secret: process.env.JWT_SECRET,
+    });
+    return token;
   }
 
   @Get('/:id')

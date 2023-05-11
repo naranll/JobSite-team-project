@@ -18,7 +18,6 @@ import { categoryModule } from './category/category.module';
     applicationModule,
     GoogleLoginModule,
     categoryModule,
-    ConfigModule,
   ],
   controllers: [AppController],
   providers: [AppService],
