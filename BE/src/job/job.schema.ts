@@ -1,10 +1,10 @@
 import { SchemaFactory, Prop, Schema } from '@nestjs/mongoose';
-import mongoose from 'mongoose';
+import mongoose, { now } from 'mongoose';
 // import { HydratedDocument } from 'mongoose';
 
 // export type JobDocument = HydratedDocument<Job>;
 
-@Schema()
+@Schema({ timestamps: true })
 export class Job {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
   postedBy: string;
@@ -30,7 +30,7 @@ export class Job {
   @Prop()
   category: string;
 
-  @Prop()
+  @Prop({ default: now() })
   createdDate: Date;
 }
 

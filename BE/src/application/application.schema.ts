@@ -11,6 +11,8 @@ export class Application {
   @Prop({ default: 'PENDING' })
   state: 'PENDING' | 'ACCEPTED' | 'REJECTED';
   @Prop({ default: now() })
-  createdAt: Date;
+  createdDate: Date;
+  @Prop({ default: now() })
+  updatedDate: Date;
 }
 export const ApplicationSchema = SchemaFactory.createForClass(Application);
