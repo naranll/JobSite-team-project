@@ -19,19 +19,19 @@ export class JobService {
 
   async findAll(): Promise<Job[]> {
     const result = await this.jobModel.find({});
-    console.log('found jobs', result);
+    console.log('found jobs findall', result);
     return result;
   }
 
   async findJob(id: string): Promise<Job> {
     // console.log('find Job id', id);
     const result = await this.jobModel.findById(id).exec();
-    console.log(' found job', result);
+    console.log(' found job === ', result);
     return result;
   }
-  async filetredJob(query): Promise<Job[]> {
+  async filetredJob(query: { category: any; search: any }): Promise<Job[]> {
+    console.log(' query: ', query);
     const { category, search } = query;
-
     if (category === 'all') {
       const result = await this.jobModel.find({
         title: { $regex: new RegExp(search, 'i') },
@@ -39,9 +39,10 @@ export class JobService {
       return result;
     }
     const result = await this.jobModel.find({
-      title: { $regex: new RegExp(category, 'i') },
+      category,
+      title: { $regex: new RegExp(search, 'i') },
     });
-    console.log(' found job', result);
+    console.log(' found job filterJobs ===> ', result);
     return result;
   }
 

@@ -6,6 +6,7 @@ import {
   Request as Req,
   Response as Res,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { Request, Response, query } from 'express';
 // import { Query } from 'mongoose';
