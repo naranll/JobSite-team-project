@@ -30,7 +30,7 @@ export class ApplicationService {
       .find({ userId })
       .populate('jobId')
       .select({ jobId: 1, _id: 0, state: 1 });
-    // console.log('appliedJobs', appliedJobs);
+    console.log('appliedJobs ====', appliedJobs);
     return appliedJobs;
   }
 
@@ -48,7 +48,7 @@ export class ApplicationService {
     const result = await this.applicationModel.find({
       $and: [{ userId: userId }, { jobId: jobId }],
     });
-    console.log('result service', result);
+    console.log('result service ====>', result);
     if (!result.length) {
       return false;
     } else {

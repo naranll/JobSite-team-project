@@ -2,29 +2,54 @@ import Filter from "@/components/Filter";
 import JobCard from "@/components/JobCard";
 import {JobType} from "@/util/types";
 import Link from "next/link";
+import { useRouter } from 'next/router';
 
 export default function Home(props: {jobs: JobType[]}): JSX.Element {
   const {jobs} = props;
-
+  const route = useRouter()
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function changeHandler(e: any): void {
     console.log("filter", e.currentTarget.value);
+      route.push({query : {category : e.currentTarget.value}})
+      return;
   }
+  
+console.log(route);
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function submitHandler(e: any): void {
+    e.preventDefault();
+    console.log("hi",e.target.search.value);
+      
+      if(e.target.search.value.trim()==="") {
+        route.query.s =  e.target.search.value
+          return;
+        }
+      console.log("route",route)
+      route.query.s =  e.target.search.value
+      route.push(route)
+      return;
+    }
+  
 
   return (
     <div className="home-page flex flex-col items-center gap-3 overflow-y-scroll">
       <h1 className="home-title">JOB BOARD</h1>
-      <form className="searchbar w-4/6 h-[32px] lg:h-[40px]">
+      {/* <form className="searchbar w-4/6 h-[32px] lg:h-[40px]" onSubmit={submitHandler}> */}
+      <form className="searchbar w-4/6 h-[32px] lg:h-[40px]" onSubmit={submitHandler}>
         <input
           type="search"
           placeholder="Enter search"
           className="w-full sm:w-5/6"
+          name="search"
+          defaultValue={route.query.s}
+          // onChange={(e)=>changeHandler(e,"search")}
         />
-        <button className="hidden lg:block lg:w-1/6">Search</button>
+        <button className="hidden lg:block lg:w-1/6" type="submit">Search</button>
 
         <div className="home-filter-btn p-2 center-element lg:hidden">
-          <select onChange={changeHandler}>
-            <option value="all">All</option>
+          <select onChange={changeHandler} defaultValue={route.query.category}>
+            <option value="all" onClick={(e)=>(e.currentTarget.value)}>All</option>
             <option value="developer">Developer</option>
             <option value="designer">Designer</option>
           </select>
@@ -35,29 +60,42 @@ export default function Home(props: {jobs: JobType[]}): JSX.Element {
           <Filter />
         </div>
         <div className="home-joblist mx-auto w-5/6 lg:w-4/5">
-          {jobs.map(
-            (job: JobType, index: number): JSX.Element => (
-              <Link href={`jobs/${job._id}`} key={index}>
-                <JobCard {...job} />
-              </Link>
+          {
+          // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+          // filtered != undefined && (
+            jobs.map(
+              (job: JobType, index: number): JSX.Element => (
+                <Link href={`jobs/${job._id}`} key={index}>
+                  <JobCard {...job} />
+                </Link>
+              )
             )
-          )}
+          // )
+          }
         </div>
       </div>
     </div>
   );
 }
 
-export async function getStaticProps() {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function getServerSideProps(context: { query: any}) {
+  console.log(context);
+  const { query } = context;
   try {
-    const response = await fetch("http://localhost:8008/job/all");
-    const jobs = await response.json();
+    const response = await fetch(`http://localhost:8008/job/filter/?category=${query.category}&search=${query.s?query.s:""}`);
+    const filtered = await response.json();
+
+    console.log("this is filtered jobs", filtered);
     return {
       props: {
-        jobs: jobs,
+        jobs: filtered,
       },
     };
   } catch (error) {
     console.log("error:", error);
+    return {
+      props : {}
+    }
   }
 }

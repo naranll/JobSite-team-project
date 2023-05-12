@@ -5,9 +5,12 @@ import {
   Param,
   Request as Req,
   Response as Res,
+  Query,
   UseGuards,
 } from '@nestjs/common';
-import { Request, Response } from 'express';
+import { Request, Response, query } from 'express';
+// import { Query } from 'mongoose';
+// import { Query } from '@nestjs/common';
 import { Job } from './job.schema';
 import { JobService } from './job.service';
 import { CheckRoleGuard } from 'src/role/role.guard';
@@ -45,9 +48,24 @@ export class JobController {
     return this.jobService.generateStaticId();
   }
 
-  @Get('/:id')
+  @Get('singleJob/:id')
   getJob(@Param('id') id: string) {
+    console.log('job ID', id);
     return this.jobService.findJob(id);
+  }
+
+  @Get('filter')
+  filetredJob(@Query() query: { category: string; search: string }) {
+    // console.log('filter ID', id);
+    console.log(query);
+    return this.jobService.filetredJob(query);
+  }
+
+  @Get('query')
+  async search(@Req() Req: Request, @Res() Res: Response) {
+    const query = Req.query;
+    console.log('query : =>  ', query);
+    return Res.status(200);
   }
 
   @Get('posted/:postedBy')
