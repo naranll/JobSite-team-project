@@ -5,14 +5,21 @@ import {
   Param,
   Request as Req,
   Response as Res,
+  UseGuards,
 } from '@nestjs/common';
 import { Request, Response, query } from 'express';
 import { Job } from './job.schema';
 import { JobService } from './job.service';
+import { CheckRoleGuard } from 'src/role/role.guard';
+import { JwtService } from '@nestjs/jwt';
+import { CheckRole } from 'src/role/role.decorator';
 
 @Controller('job')
 export class JobController {
-  constructor(private readonly jobService: JobService) {}
+  constructor(
+    private readonly jobService: JobService,
+    private readonly jwtService: JwtService,
+  ) {}
 
   @Get('all')
   findAll(): Promise<Job[]> {
@@ -20,6 +27,8 @@ export class JobController {
   }
 
   @Post('add')
+  @UseGuards(CheckRoleGuard)
+  @CheckRole('CLIENT')
   async createJob(@Req() Req: Request, @Res() Res: Response) {
     try {
       console.log('request body ', Req.body);
@@ -65,7 +74,10 @@ export class JobController {
 
 >>>>>>> Stashed changes
   @Get('posted/:postedBy')
+  @UseGuards(CheckRoleGuard)
+  @CheckRole('CLIENT')
   getPostedJobsByUserId(@Param('postedBy') userId: string): Promise<Job[]> {
+    console.log('get jobs posted by user service');
     return this.jobService.getPostedJobsByUserId(userId);
   }
 }

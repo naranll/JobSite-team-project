@@ -1,35 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useRouter } from "next/router";
+import {useRouter} from "next/router";
 import axios from "axios";
 import Link from "next/link";
-import { useUserContext } from "../context/UserContext";
-import { FcGoogle } from "react-icons/fc";
+import {useUserContext} from "../context/UserContext";
+import {FcGoogle} from "react-icons/fc";
 
 export default function Login(): JSX.Element {
-  const { submitHandler } = useUserContext();
+  const {submitHandler} = useUserContext();
   const router = useRouter();
-
-  // function submitHandler(event: any): void {
-  //   event.preventDefault();
-
-  //   const target = event.currentTarget.elements;
-
-  //   const userLogin: UserType = {
-  //     email: target.email.value,
-  //     password: target.password.value,
-  //   };
-  //   console.log("user login", userLogin);
-  //   axios
-  //     .post(`http://localhost:8080/user/login`, userLogin)
-  //     .then((res) => {
-  //       if (res.data.success) {
-  //         router.push("/success");
-  //       } else {
-  //         console.log("fail");
-  //       }
-  //     })
-  //     .catch((err) => console.log(err));
-  // }
 
   function googleLogin() {
     axios
@@ -79,7 +57,7 @@ export default function Login(): JSX.Element {
                 />
               </label>
             </div>
-            <Link href={`/user/forgetpassword`}>
+            <Link href={`/`}>
               <div className="text-right">Forgot password?</div>
             </Link>
             <div className="">
@@ -91,7 +69,7 @@ export default function Login(): JSX.Element {
               </button>
               <div className="flex justify-center mt-8 gap-3">
                 <span>not a member?</span>
-                <Link href={`/user/register`}>
+                <Link href={`/register`} className="login-register-link">
                   <div className="font-semibold">Register</div>
                 </Link>
               </div>

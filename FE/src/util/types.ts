@@ -13,14 +13,22 @@ export type JobType = {
 
 export type UserType = {
   _id?: string;
-  firstName?: string;
-  lastName?: string;
+  firstName: string;
+  lastName: string;
   password: string;
   email: string;
   gender?: string;
   phoneNumber?: number;
   image?: string;
   skills?: [string];
+};
+
+export type ApplicationType = {
+  _id?: string;
+  jobId: string;
+  userId: string;
+  state: string;
+  createdAt: Date;
 };
 
 export type AppliedJobsType = {

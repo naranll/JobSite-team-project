@@ -116,15 +116,11 @@
   top: 455px;
 }
 
-/* .forgetPassword {    
-  width: 1000px;     
-  text-align: center;     
-  border-bottom: 1px solid #000;     
-  line-height: 0.1em;    
-  margin: 10px 0 20px;  
-}   
-
- .solid {      
-  background:#fff;      
-  padding:0 10px;  
-} */
+//Added on branch 188
+.login-register-link {
+  color: $primary-color;
+  &:hover {
+    color: $primary-hover-color;
+    border-bottom: 1px solid $primary-hover-color;
+  }
+}
