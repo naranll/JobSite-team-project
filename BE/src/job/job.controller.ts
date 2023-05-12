@@ -33,9 +33,8 @@ export class JobController {
   // @UseGuards(CheckRoleGuard)
   // @CheckRole('CLIENT')
   async createJob(@Req() req: Request, @Res() res: Response) {
-    console.log('hello new job');
     try {
-      console.log('request body ', req.body);
+      console.log('add job req body ', req.body);
       const result = await this.jobService.addJob(req.body);
       return res.status(200).json({ success: true, data: result });
     } catch (error) {

@@ -1,6 +1,5 @@
 import Filter from "@/components/Filter";
 import JobCard from "@/components/JobCard";
-import {useUserContext} from "@/context/UserContext";
 import {JobType} from "@/util/types";
 import Link from "next/link";
 import {useRouter} from "next/router";

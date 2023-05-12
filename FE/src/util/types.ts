@@ -4,7 +4,7 @@ export type JobType = {
   title: string;
   description: string;
   wage: number;
-  createdDate?: Date;
+  createdDate?: string;
   contractType?: string;
   category?: string;
   requirement: string;
