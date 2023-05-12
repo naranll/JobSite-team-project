@@ -4,15 +4,52 @@ import axios from "axios";
 import Link from "next/link";
 import {useUserContext} from "../context/UserContext";
 import {FcGoogle} from "react-icons/fc";
+import jwtDecode, {JwtPayload} from "jwt-decode";
+import Cookies from "js-cookie";
+
+interface LoginType {
+  email: string;
+  password: string;
+}
+
+interface MyJwtPayload extends JwtPayload {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  _doc: any;
+}
 
 export default function Login(): JSX.Element {
-  const {submitHandler} = useUserContext();
+  const {setCurrentUser} = useUserContext();
   const router = useRouter();
 
   function googleLogin() {
     axios
       .get("http://localhost:8008/google-login")
       .then((res) => router.push(res.data));
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function submitHandler(event: any): void {
+    event.preventDefault();
+
+    const target = event.currentTarget.elements;
+    const userLogin: LoginType = {
+      email: target.email.value,
+      password: target.password.value,
+    };
+    axios
+      .post(`http://localhost:8008/user/login`, userLogin)
+      .then((res) => {
+        if (res.status === 201) {
+          const decoded: MyJwtPayload = jwtDecode(res.data.token);
+          const user = decoded["_doc"];
+          setCurrentUser(user);
+          Cookies.set("token", res.data.token);
+          router.push("/");
+        } else {
+          console.log("login fail");
+        }
+      })
+      .catch((err) => console.log(err));
   }
 
   return (

@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import SuccessModal from "@/components/SuccessModal";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
+import moment from "moment";
 
 export default function Job({ data: job }: { data: JobType }): JSX.Element {
   const { currentUser } = useUserContext();
@@ -63,6 +64,7 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
           <div className="jobpage-jobdetails w-full min-h-[600px] md:w-3/4 p-4">
             <div>
               <h1 className="jobpage-title">{job.title}</h1>
+              <p>{moment(job.createdDate).calendar()}</p>
               <p className="jobpage-description">{job.description}</p>
               <p className="jobpage-contract">{job.contractType}</p>
               <p className="jobpage-contract">{job.wage}</p>

@@ -6,7 +6,7 @@ export type JobType = {
   created_date?: Date;
   updatedDate: Date;
   contractType?: string;
-  state? : string;
+  state?: string;
 };
 
 export type UserType = {
@@ -26,7 +26,7 @@ export type ApplicationType = {
   _id: string;
   jobId: string;
   userId: string;
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdDate?: Date;
+  updatedDate?: Date;
   state?: string;
 };

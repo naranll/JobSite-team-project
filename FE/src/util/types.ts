@@ -4,7 +4,7 @@ export type JobType = {
   title: string;
   description: string;
   wage: number;
-  createdDate?: Date;
+  createdDate?: string;
   contractType?: string;
   category?: string;
   requirement: string;
@@ -28,7 +28,8 @@ export type ApplicationType = {
   jobId: string;
   userId: string;
   state: string;
-  createdAt: Date;
+  createdDate: Date;
+  updatedDate?: Date;
 };
 
 export type AppliedJobsType = {

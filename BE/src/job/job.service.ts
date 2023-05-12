@@ -11,8 +11,6 @@ export class JobService {
   ) {}
 
   async addJob(body: Job): Promise<Job> {
-    console.log(body.wage);
-
     const createJob = new this.jobModel({ ...body, wage: body.wage });
     return createJob.save();
   }
@@ -30,7 +28,6 @@ export class JobService {
     return result;
   }
   async filetredJob(query: { category: any; search: any }): Promise<Job[]> {
-    console.log(' query: ', query);
     const { category, search } = query;
     if (category === 'all') {
       const result = await this.jobModel.find({
@@ -48,7 +45,6 @@ export class JobService {
 
   async generateStaticId(): Promise<Job[]> {
     const query = await this.jobModel.find({}).select({ _id: 1 });
-    // console.log('static paths', query);
     return query;
   }
 
