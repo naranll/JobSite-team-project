@@ -1,7 +1,8 @@
-import jwtDecode, {JwtPayload} from "jwt-decode";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import jwtDecode from "jwt-decode";
 import Cookies from "js-cookie";
 import {UserType} from "@/util/types";
-import axios from "axios";
+// import axios from "axios";
 import {useRouter} from "next/router";
 import {ReactNode, createContext, useContext, useEffect, useState} from "react";
 export interface IUserContext {
@@ -12,7 +13,7 @@ export interface IUserContext {
   >;
   handleLogout: () => void;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  submitHandler: (e: any) => void;
+  // submitHandler: (e: any) => void;
 }
 
 export const UserContext = createContext<IUserContext>({} as IUserContext);
@@ -20,15 +21,15 @@ export const UserContext = createContext<IUserContext>({} as IUserContext);
 interface UserProviderType {
   children: ReactNode;
 }
-interface LoginType {
-  email: string;
-  password: string;
-}
+// interface LoginType {
+//   email: string;
+//   password: string;
+// }
 
-interface MyJwtPayload extends JwtPayload {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  _doc: any;
-}
+// interface MyJwtPayload extends JwtPayload {
+//   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//   _doc: any;
+// }
 
 export const useUserContext = () => useContext(UserContext);
 
@@ -40,6 +41,7 @@ export const UserContextProvider = ({children}: UserProviderType) => {
     const token = Cookies.get("token");
     if (token) {
       setCurrentUser(jwtDecode(token));
+      router.push("/");
     }
   }, []);
 
@@ -49,34 +51,30 @@ export const UserContextProvider = ({children}: UserProviderType) => {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function submitHandler(event: any): void {
-    event.preventDefault();
+  // function submitHandler(event: any): void {
+  //   event.preventDefault();
 
-    const target = event.currentTarget.elements;
-    const userLogin: LoginType = {
-      email: target.email.value,
-      password: target.password.value,
-    };
-    axios
-      .post(`http://localhost:8008/user/login`, userLogin)
-      .then((res) => {
-        if (res.status === 201) {
-          const decoded: MyJwtPayload = jwtDecode(res.data.token);
-          const user = decoded["_doc"];
-          Cookies.set("token", res.data.token);
-          setCurrentUser(user);
-          router.push("/");
-        } else {
-          console.log("login fail");
-        }
-      })
-      .catch((err) => console.log(err));
-  }
+  //   const target = event.currentTarget.elements;
+  //   const userLogin: LoginType = {
+  //     email: target.email.value,
+  //     password: target.password.value,
+  //   };
+  //   axios
+  //     .post(`http://localhost:8008/user/login`, userLogin)
+  //     .then((res) => {
+  //       if (res.status === 201) {
+  //         const decoded: MyJwtPayload = jwtDecode(res.data.token);
+  //         const user = decoded["_doc"];
+  //         Cookies.set("token", res.data.token);
+  //       } else {
+  //         console.log("login fail");
+  //       }
+  //     })
+  //     .catch((err) => console.log(err));
+  // }
 
   return (
-    <UserContext.Provider
-      value={{currentUser, setCurrentUser, submitHandler, handleLogout}}
-    >
+    <UserContext.Provider value={{currentUser, setCurrentUser, handleLogout}}>
       {children}
     </UserContext.Provider>
   );
