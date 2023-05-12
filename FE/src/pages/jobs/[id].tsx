@@ -107,7 +107,7 @@ interface JobProps {
 export const getStaticProps: GetStaticProps<JobProps> = async ({
   params,
 }: GetStaticPropsContext) => {
-  const res = await fetch(`http://localhost:8008/job/${params?.id}`);
+  const res = await fetch(`http://localhost:8008/job/singleJob/${params?.id}`);
   const resjson = await res.json();
   return {
     props: {

@@ -5,9 +5,11 @@ import {
   Param,
   Request as Req,
   Response as Res,
-  UseGuards,
+  Query,
 } from '@nestjs/common';
 import { Request, Response, query } from 'express';
+// import { Query } from 'mongoose';
+// import { Query } from '@nestjs/common';
 import { Job } from './job.schema';
 import { JobService } from './job.service';
 import { CheckRoleGuard } from 'src/role/role.guard';
@@ -45,16 +47,9 @@ export class JobController {
     return this.jobService.generateStaticId();
   }
 
-<<<<<<< Updated upstream
-  @Get('/:id')
-  getJob(@Param('id') id: string) {
-    return this.jobService.findJob(id);
-  }
-
-=======
   @Get('singleJob/:id')
   getJob(@Param('id') id: string) {
-    // console.log('job ID', id);
+    console.log('job ID', id);
     return this.jobService.findJob(id);
   }
 
@@ -68,11 +63,10 @@ export class JobController {
   @Get('query')
   async search(@Req() Req: Request, @Res() Res: Response) {
     const query = Req.query;
-    console.log('query: ', query);
+    console.log('query : =>  ', query);
     return Res.status(200);
   }
 
->>>>>>> Stashed changes
   @Get('posted/:postedBy')
   @UseGuards(CheckRoleGuard)
   @CheckRole('CLIENT')

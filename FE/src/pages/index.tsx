@@ -2,28 +2,31 @@ import Filter from "@/components/Filter";
 import JobCard from "@/components/JobCard";
 import {JobType} from "@/util/types";
 import Link from "next/link";
+import { useRouter } from 'next/router';
 
 export default function Home(props: {jobs: JobType[]}): JSX.Element {
   const {jobs} = props;
-<<<<<<< Updated upstream
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function changeHandler(e: any): void {
-    console.log("filter", e.currentTarget.value);
-  }
-=======
   const route = useRouter()
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function changeHandler(e: any): void {
+  function changeHandler(e: any,value:string): void {
     console.log("filter", e.currentTarget.value);
-    if(e.currentTarget.value.trim()==="") {
+    console.log(value);
+    if(value==="search"){
+      if(e.currentTarget.value.trim()==="") {
+        route.query.s =  e.currentTarget.value
+          return;
+        }
+      console.log("route",route)
       route.query.s =  e.currentTarget.value
-        return;
-      }
-    console.log("route",route)
-    route.query.s =  e.currentTarget.value
-    route.push(route)
+      route.push(route)
+      return;
+    }
+    if(value==="filter"){
+      route.push({query : {category : e.currentTarget.value}})
+      return;
+    }
   }
+console.log(jobs);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   // function submitHandler(e: any): void {
@@ -35,9 +38,6 @@ export default function Home(props: {jobs: JobType[]}): JSX.Element {
   //   }
   //   route.query.s = e.target.search.value
   // }
- 
-    console.log(jobs);
->>>>>>> Stashed changes
 
   return (
     <div className="home-page flex flex-col items-center gap-3 overflow-y-scroll">
@@ -49,12 +49,12 @@ export default function Home(props: {jobs: JobType[]}): JSX.Element {
           placeholder="Enter search"
           className="w-full sm:w-5/6"
           name="search"
-          onChange={changeHandler}
+          onChange={(e)=>changeHandler(e,"search")}
         />
         <button className="hidden lg:block lg:w-1/6" type="submit">Search</button>
 
         <div className="home-filter-btn p-2 center-element lg:hidden">
-          <select onChange={changeHandler}>
+          <select onChange={(e)=>changeHandler(e,"filter")}>
             <option value="all" onClick={(e)=>(e.currentTarget.value)}>All</option>
             <option value="developer">Developer</option>
             <option value="designer">Designer</option>
@@ -66,25 +66,24 @@ export default function Home(props: {jobs: JobType[]}): JSX.Element {
           <Filter />
         </div>
         <div className="home-joblist mx-auto w-5/6 lg:w-4/5">
-          {jobs.map(
-            (job: JobType, index: number): JSX.Element => (
-              <Link href={`jobs/${job._id}`} key={index}>
-                <JobCard {...job} />
-              </Link>
+          {
+          // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+          // filtered != undefined && (
+            jobs.map(
+              (job: JobType, index: number): JSX.Element => (
+                <Link href={`jobs/${job._id}`} key={index}>
+                  <JobCard {...job} />
+                </Link>
+              )
             )
-          )}
+          // )
+          }
         </div>
       </div>
     </div>
   );
 }
 
-<<<<<<< Updated upstream
-export async function getStaticProps() {
-  try {
-    const response = await fetch("http://localhost:8008/job/all");
-    const jobs = await response.json();
-=======
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function getServerSideProps(context: { query: any}) {
   console.log(context);
@@ -93,18 +92,16 @@ export async function getServerSideProps(context: { query: any}) {
     const response = await fetch(`http://localhost:8008/job/filter/?category=${query.category}&search=${query.s?query.s:""}`);
     const filtered = await response.json();
 
-    // console.log("this is filtered jobs",filtered);
->>>>>>> Stashed changes
+    console.log("this is filtered jobs", filtered);
     return {
       props: {
-        jobs: jobs,
+        jobs: filtered,
       },
     };
   } catch (error) {
     console.log("error:", error);
+    return {
+      props : {}
+    }
   }
 }
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes

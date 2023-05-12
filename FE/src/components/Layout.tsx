@@ -13,6 +13,7 @@ export default function Layout({children}: PropType): JSX.Element {
   useEffect(()=>{
     if(router.asPath==="/") router.push({query : {category : "all"}})
   },[router])
+  
   return (
     <div className="mx-auto relative">
       <Header />
