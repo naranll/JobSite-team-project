@@ -1,16 +1,15 @@
 import "primeicons/primeicons.css";
 import Link from "next/link";
-import React, { useState } from "react";
-import { useUserContext } from "@/context/UserContext";
-import { Sidebar } from "primereact/sidebar";
-import { useRouter } from "next/router";
-import { FaUser } from "react-icons/fa";
+import React, {useState} from "react";
+import {useUserContext} from "@/context/UserContext";
+import {Sidebar} from "primereact/sidebar";
+import {useRouter} from "next/router";
+import {FaUser} from "react-icons/fa";
 
 export default function Header(): JSX.Element {
-  const { currentUser, handleLogout } = useUserContext();
+  const {currentUser, handleLogout} = useUserContext();
   const [visible, setVisible] = useState<boolean>(false);
   const router = useRouter();
-  console.log("user name", currentUser?.firstName);
 
   return (
     <div className="header center-element w-full h-[46px] md:h-[54px] container mx-auto">

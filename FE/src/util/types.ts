@@ -28,7 +28,8 @@ export type ApplicationType = {
   jobId: string;
   userId: string;
   state: string;
-  createdAt: Date;
+  createdDate: Date;
+  updatedDate?: Date;
 };
 
 export type AppliedJobsType = {

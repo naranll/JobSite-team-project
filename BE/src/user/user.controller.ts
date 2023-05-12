@@ -44,7 +44,7 @@ export class UserController {
     const token = await this.jwtService.signAsync(payload, {
       secret: process.env.JWT_SECRET,
     });
-    response.json({ token: token });
+    response.json({ token: token }).cookie('token', token);
   }
 
   @Get('/:id')

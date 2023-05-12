@@ -1,12 +1,12 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
-import { JobType } from "@/util/types";
-import { useUserContext } from "../context/UserContext";
+import React, {useState, useEffect} from "react";
+import {JobType} from "@/util/types";
+import {useUserContext} from "../context/UserContext";
 import SuccessModal from "@/components/SuccessModal";
-import { useRouter } from "next/router";
+import {useRouter} from "next/router";
 
 export default function AddJob(): JSX.Element {
-  const { currentUser } = useUserContext();
+  const {currentUser} = useUserContext();
   const [showSuccessModal, setShowSuccessModal] = useState<boolean>(false);
   const router = useRouter();
 
@@ -29,6 +29,7 @@ export default function AddJob(): JSX.Element {
       wage: Number(target.wage.value),
       requirement: target.requirement.value,
       location: target.location.value,
+      category: target.category.value,
       // contractType: target.contractType.value,
     };
     console.log("new job", newJob);
@@ -72,12 +73,12 @@ export default function AddJob(): JSX.Element {
               </label>
             </div>
             <label className="select">
-                <p> Job Category</p>
-                <select className="input" name="category" required>
-                  <option value="text">developer</option>
-                  <option value="text">design</option>
-                </select>
-              </label>
+              <p> Job Category</p>
+              <select className="input" name="category" required>
+                <option value="developer">developer</option>
+                <option value="designer">designer</option>
+              </select>
+            </label>
             <div className="inputs_field lg-d-flex">
               <label className="inputs_right_form">
                 <p>Job Description</p>
@@ -101,17 +102,17 @@ export default function AddJob(): JSX.Element {
                 />
               </label>
             </div>
-             
-              <label className="select">
-                <p> Job Location</p>
-                <input
-                  className="input"
-                  type="Address Type"
-                  name="location"
-                  placeholder="Location"
-                  required
-                />
-              </label>
+
+            <label className="select">
+              <p> Job Location</p>
+              <input
+                className="input"
+                type="Address Type"
+                name="location"
+                placeholder="Location"
+                required
+              />
+            </label>
 
             <button className="btn">SUBMIT</button>
           </form>
