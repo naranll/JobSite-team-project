@@ -1,0 +1,6 @@
+# Block all crawlers for /user
+User-agent: * 
+Disallow: /user
+Disallow: /_next/static/
+Disallow: /api/
+Disallow: /404.html
