@@ -1,5 +1,5 @@
-import {useState, useEffect} from "react";
-import { useRouter } from 'next/router';
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
 interface CategoryType {
   value: string;
@@ -16,10 +16,12 @@ const categories: CategoryType[] = [
     value: "designer",
   },
 ];
-  
+
 export default function Filter() {
-  const [currentCategory, setCurrentCategory] = useState<string>(categories[0].value);
-  const route = useRouter()
+  const [currentCategory, setCurrentCategory] = useState<string>(
+    categories[0].value
+  );
+  const route = useRouter();
 
   // useEffect(() => {
   //   if (localStorage.getItem("category")) {
@@ -29,22 +31,20 @@ export default function Filter() {
   // }, []);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function changeHandler(value:string): void {
+  function changeHandler(value: string): void {
     console.log("filter", value);
-    setCurrentCategory(value)
-    route.push({query : {category : value}})
+    setCurrentCategory(value);
+    route.push({ query: { category: value } });
   }
 
   useEffect(() => {
     if (route.query.category) {
       const category = route.query.category;
-      console.log("current Cate",currentCategory)
-      console.log("route Cate:" ,route.query.categories)
 
       setCurrentCategory(Array.isArray(category) ? category[0] : category);
     }
   }, [route.query.category]);
-  
+
   return (
     // <div className="home-filter hidden lg:block lg:w-1/5 lg:h-[360px] lg:p-4 shadow">
     <form className="filter-form">
@@ -55,7 +55,7 @@ export default function Filter() {
             type="radio"
             name="category"
             // value={category.value}
-            onChange={()=>changeHandler(category.value)}
+            onChange={() => changeHandler(category.value)}
             // checked={currentCategory === category.value ? true : false}
             checked={currentCategory === category.value}
           />

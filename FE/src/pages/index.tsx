@@ -1,31 +1,27 @@
 import Filter from "@/components/Filter";
 import JobCard from "@/components/JobCard";
-import {JobType} from "@/util/types";
+import { JobType } from "@/util/types";
 import Link from "next/link";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 
-export default function Home(props: {jobs: JobType[]}): JSX.Element {
-  const {jobs} = props;
+export default function Home(props: { jobs: JobType[] }): JSX.Element {
+  const { jobs } = props;
   const route = useRouter();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function changeHandler(e: any): void {
     console.log("filter", e.currentTarget.value);
-    route.push({query: {category: e.currentTarget.value}});
+    route.push({ query: { category: e.currentTarget.value } });
     return;
   }
-
-  console.log(route);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function submitHandler(e: any): void {
     e.preventDefault();
-    console.log("hi", e.target.search.value);
 
     if (e.target.search.value.trim() === "") {
       route.query.s = e.target.search.value;
       return;
     }
-    console.log("route", route);
     route.query.s = e.target.search.value;
     route.push(route);
     return;
@@ -85,9 +81,8 @@ export default function Home(props: {jobs: JobType[]}): JSX.Element {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function getServerSideProps(context: {query: any}) {
-  console.log(context);
-  const {query} = context;
+export async function getServerSideProps(context: { query: any }) {
+  const { query } = context;
   try {
     const response = await fetch(
       `http://localhost:8008/job/filter/?category=${query.category}&search=${
@@ -96,7 +91,6 @@ export async function getServerSideProps(context: {query: any}) {
     );
     const filtered = await response.json();
 
-    console.log("this is filtered jobs", filtered);
     return {
       props: {
         jobs: filtered,

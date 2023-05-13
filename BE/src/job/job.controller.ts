@@ -56,8 +56,6 @@ export class JobController {
 
   @Get('filter')
   filetredJob(@Query() query: { category: string; search: string }) {
-    // console.log('filter ID', id);
-    console.log(query);
     return this.jobService.filetredJob(query);
   }
 
