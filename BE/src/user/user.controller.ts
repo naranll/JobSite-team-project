@@ -48,7 +48,6 @@ export class UserController {
       secret: process.env.JWT_SECRET,
     });
 
-    // console.log('token on be', this.jwtService.decode(token));
     response.json({ token: token });
   }
 

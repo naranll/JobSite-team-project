@@ -1,4 +1,3 @@
-// import "../styles/register.scss";
 import { useRouter } from "next/router";
 import { UserType } from "@/util/types";
 import axios from "axios";
@@ -38,52 +37,47 @@ export default function Register(): JSX.Element {
   }
 
   return (
-    <div className="wrapper">
-      <form onSubmit={(e) => submitHandler(e)}>
-        <h1>
-          Job<span className="nowTitle">Site</span>
-        </h1>
-        <label>
-          <p className="titles">First name</p>
-          <input
-            className="inputs"
-            id="firstName"
-            name="firstName"
-            type="text"
-          />
-        </label>
-        <label>
-          <p className="titles">Last name</p>
-          <input className="inputs" name="lastName" type="text" />
-        </label>
-        <label>
-          <p className="titles">Email</p>
-          <input className="inputs" name="email" type="text" />
+    <div className="register-page w-screen min-h-screen">
+      <form
+        onSubmit={(e) => submitHandler(e)}
+        className="register-form flex flex-col w-[300px] sm:w-[360px] lg:w-[496px] mx-auto shadow-xl"
+      >
+        <h1 className="register-form-title mx-auto">Create New Account</h1>
+        <label className="register-field mt-[24px]">
+          <p className="">First name</p>
+          <input id="firstName" name="firstName" type="text" className="" />
         </label>
 
-        <label>
-          <p className="titles">Password</p>
-          <input className="inputs" name="password" type="password" />
+        <label className="register-field">
+          <p className="">Last name</p>
+          <input name="lastName" type="text" className="" />
         </label>
 
-        <div className="submit">
-          <label>
-            <p className="titles">Phone number</p>
-            <input type="number" name="phoneNumber" className="inputs" />
-          </label>
-        </div>
-        <label className="gender">
+        <label className="register-field flex items-center gap-2">
           <p>Gender</p>
-          <select className="option" name="gender">
-            <option defaultValue={"select"} disabled>
-              select
-            </option>
-            <option>male</option>
-            <option>female</option>
-            <option>other</option>
+          <select name="gender" className="register-field-gender">
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
           </select>
         </label>
-        <button type="submit" className="submitBtn">
+
+        <label className="register-field">
+          <p className="">Email</p>
+          <input name="email" type="text" className="" />
+        </label>
+
+        <label className="register-field">
+          <p className="">Phone number</p>
+          <input type="number" name="phoneNumber" />
+        </label>
+
+        <label className="register-field">
+          <p className="">Password</p>
+          <input name="password" type="password" />
+        </label>
+
+        <button type="submit" className="btn-style">
           Submit
         </button>
       </form>

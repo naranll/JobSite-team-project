@@ -16,8 +16,12 @@
 @import "./filter.scss";
 @import "./posted.scss";
 
+* {
+  box-sizing: border-box;
+}
+
 .btn-style {
-  height: 30px;
+  height: 32px;
   padding: 6px;
   background-color: $primary-color;
   color: #fff;
