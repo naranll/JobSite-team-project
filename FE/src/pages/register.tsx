@@ -2,14 +2,14 @@
 import { useRouter } from "next/router";
 import { UserType } from "@/util/types";
 import axios from "axios";
+import { useState } from "react";
 
 export default function Register(): JSX.Element {
   const router = useRouter();
+  const [showErrorMsg, setShowErrorMsg] = useState<boolean>(false);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function submitHandler(event: any): void {
-    // async?
-
     event.preventDefault();
 
     const data: UserType = {
@@ -27,10 +27,14 @@ export default function Register(): JSX.Element {
       .post("http://localhost:8008/user/add", data)
       .then((res) => {
         if (res.data.success) {
-          router.push("/success");
+          console.log("successfully added user");
+          router.push("/login");
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setShowErrorMsg(true);
+      });
   }
 
   return (
@@ -83,6 +87,7 @@ export default function Register(): JSX.Element {
           Submit
         </button>
       </form>
+      {showErrorMsg && <p>User with the email exists</p>}
     </div>
   );
 }

@@ -11,9 +11,10 @@ export class UserService {
   ) {}
 
   async createUser(user: User) {
-    console.log('creating user');
+    console.log('create user service called');
     const newUser = new this.userModel(user);
     const result = await newUser.save();
+    console.log('new user added', result);
     return result;
   }
 
