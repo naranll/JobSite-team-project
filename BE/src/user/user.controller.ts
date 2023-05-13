@@ -1,5 +1,4 @@
 import {
-  Body,
   Controller,
   Get,
   Param,
@@ -31,9 +30,13 @@ export class UserController {
   }
 
   @Post('add')
-  createUser(@Body() body: User): Promise<User> {
-    console.log('request body', body);
-    return this.userService.createUser(body);
+  async createUser(@Req() request: Request, @Res() response: Response) {
+    try {
+      await this.userService.createUser(request.body);
+      response.status(200).json({ success: true });
+    } catch (error) {
+      response.status(500).json({ success: false });
+    }
   }
 
   @Post('login')
