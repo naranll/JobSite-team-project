@@ -49,4 +49,14 @@ export class JobService {
     const postedJobs = await this.jobModel.find({ postedBy: postedBy });
     return postedJobs;
   }
+
+  //////page
+  async findPage(pageNumbers: number): Promise<any> {
+    const result = await this.storyModel
+      .find({})
+      .select({ _id: 1, title: 1, province: 1 })
+      .skip((pageNumbers - 1) * 10)
+      .limit(8);
+    return result;
+  }
 }
