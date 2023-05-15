@@ -21,7 +21,7 @@ export class JobService {
   }
 
   async findJob(id: string): Promise<Job> {
-    const result = await this.jobModel.findById(id).exec();
+    const result = await this.jobModel.findById(id).populate('postedBy');
     return result;
   }
   async filetredJob(query: { category: any; search: any }): Promise<Job[]> {
