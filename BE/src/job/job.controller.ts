@@ -54,6 +54,7 @@ export class JobController {
     return this.jobService.findJob(id);
   }
 
+  //////search and filter
   @Get('filter')
   filetredJob(@Query() query: { category: string; search: string }) {
     return this.jobService.filetredJob(query);
@@ -64,6 +65,17 @@ export class JobController {
     const query = Req.query;
     console.log('query : =>  ', query);
     return Res.status(200);
+  }
+
+  ////page
+  @Get('pageNumbers')
+  countNum(): Promise<number> {
+    return this.jobService.countNum();
+  }
+
+  @Get('page/:id')
+  findPage(@Param('id') pageNumbers: number): Promise<Job> {
+    return this.jobService.findPage(pageNumbers);
   }
 
   @Get('posted/:postedBy')

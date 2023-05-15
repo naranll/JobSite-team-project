@@ -1,7 +1,6 @@
-import { ReactNode, useEffect } from "react";
+import { ReactNode } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import { useRouter } from "next/router";
 import Head from "next/head";
 
 interface PropType {
@@ -9,11 +8,9 @@ interface PropType {
 }
 
 export default function Layout({ children }: PropType): JSX.Element {
-  const router = useRouter();
-
-  useEffect(() => {
-    if (router.asPath === "/") router.push({ query: { category: "all" } });
-  }, [router]);
+  // useEffect(() => {
+  //   if (router.asPath === "/") router.push({ query: { category: "all" } });
+  // }, [router]);
 
   return (
     <div className="mx-auto relative">

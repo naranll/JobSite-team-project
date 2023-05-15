@@ -47,7 +47,7 @@ export const UserContextProvider = ({ children }: UserProviderType) => {
     const token = Cookies.get("token");
     if (token) {
       setCurrentUser(jwtDecode(token));
-      router.push("/profile");
+      router.push("/");
     }
   }, []);
 

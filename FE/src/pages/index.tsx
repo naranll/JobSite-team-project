@@ -1,11 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Filter from "@/components/Filter";
 import JobCard from "@/components/JobCard";
 import { JobType } from "@/util/types";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import Pagination from "@/components/Pagenation";
 
 export default function Home(props: { jobs: JobType[] }): JSX.Element {
   const { jobs } = props;
+  const [showJobs, setShowJobs] = useState<any>();
   const route = useRouter();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function changeHandler(e: any): void {
@@ -14,6 +18,9 @@ export default function Home(props: { jobs: JobType[] }): JSX.Element {
     return;
   }
 
+  useEffect(() => {
+    setShowJobs(jobs);
+  }, [jobs]);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function submitHandler(e: any): void {
     e.preventDefault();
@@ -46,7 +53,6 @@ export default function Home(props: { jobs: JobType[] }): JSX.Element {
         <button className="hidden lg:block lg:w-1/6" type="submit">
           Search
         </button>
-
         <div className="home-filter-btn p-2 center-element lg:hidden">
           <select onChange={changeHandler} defaultValue={route.query.category}>
             <option value="all" onClick={(e) => e.currentTarget.value}>
@@ -57,6 +63,7 @@ export default function Home(props: { jobs: JobType[] }): JSX.Element {
           </select>
         </div>
       </form>
+
       <div className="w-full h-[32px] lg:container lg:flex lg:gap-5">
         <div className="home-filter hidden lg:block lg:w-1/5 lg:h-[360px] lg:p-4 shadow">
           <Filter />
@@ -65,7 +72,7 @@ export default function Home(props: { jobs: JobType[] }): JSX.Element {
           {
             // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
             // filtered != undefined && (
-            jobs.map(
+            showJobs?.map(
               (job: JobType, index: number): JSX.Element => (
                 <Link href={`jobs/${job._id}`} key={index}>
                   <JobCard {...job} />
@@ -75,6 +82,8 @@ export default function Home(props: { jobs: JobType[] }): JSX.Element {
             // )
           }
         </div>
+
+        <Pagination setShowJobs={setShowJobs} />
       </div>
     </div>
   );
@@ -85,9 +94,13 @@ export async function getServerSideProps(context: { query: any }) {
   const { query } = context;
   try {
     const response = await fetch(
-      `http://localhost:8008/job/filter/?category=${query.category}&search=${
-        query.s ? query.s : ""
-      }`
+      query.category
+        ? `http://localhost:8008/job/filter/?category=${
+            query.category
+          }&search=${query.s ? query.s : ""}`
+        : `http://localhost:8008/job/filter/?category=all&search=${
+            query.s ? query.s : ""
+          }`
     );
     const filtered = await response.json();
 

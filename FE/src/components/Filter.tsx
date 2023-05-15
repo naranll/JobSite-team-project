@@ -7,9 +7,6 @@ interface CategoryType {
 
 const categories: CategoryType[] = [
   {
-    value: "all",
-  },
-  {
     value: "developer",
   },
   {
@@ -23,6 +20,7 @@ export default function Filter() {
   );
   const route = useRouter();
 
+  console.log("category=====>", route.query.category);
   // useEffect(() => {
   //   if (localStorage.getItem("category")) {
   //     const category: string | null = localStorage.getItem("category");
@@ -40,7 +38,6 @@ export default function Filter() {
   useEffect(() => {
     if (route.query.category) {
       const category = route.query.category;
-
       setCurrentCategory(Array.isArray(category) ? category[0] : category);
     }
   }, [route.query.category]);
@@ -54,7 +51,7 @@ export default function Filter() {
           <input
             type="radio"
             name="category"
-            // value={category.value}
+            // value={category.value}/
             onChange={() => changeHandler(category.value)}
             // checked={currentCategory === category.value ? true : false}
             checked={currentCategory === category.value}
