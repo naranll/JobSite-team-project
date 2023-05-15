@@ -15,7 +15,7 @@ export default function JobCard(props: JobType): JSX.Element {
           </div>
         </div>
         <p className="jobcard-description">
-          {props.description.split(" ").slice(0, 8).join(" ")}...
+          {props.description && props.description.split(" ").slice(0, 8).join(" ")}...
         </p>
         <span className="jobcard-wage">${props.wage}</span>
       </div>

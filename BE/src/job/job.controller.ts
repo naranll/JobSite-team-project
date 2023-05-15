@@ -73,7 +73,7 @@ export class JobController {
     return this.jobService.countNum();
   }
 
-  @Get('page:id')
+  @Get('page/:id')
   findPage(@Param('id') pageNumbers: number): Promise<Job> {
     return this.jobService.findPage(pageNumbers);
   }
