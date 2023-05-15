@@ -36,7 +36,7 @@ export class JobService {
       category,
       title: { $regex: new RegExp(search, 'i') },
     });
-    console.log(' found job filterJobs ===> ', result);
+    // console.log(' found job filterJobs ===> ', result);
     return result;
   }
 
@@ -52,10 +52,10 @@ export class JobService {
 
   //////page
   async findPage(pageNumbers: number): Promise<any> {
-    const result = await this.storyModel
+    const result = this.jobModel
       .find({})
       .select({ _id: 1, title: 1, province: 1 })
-      .skip((pageNumbers - 1) * 10)
+      .skip((pageNumbers - 1) * 8)
       .limit(8);
     return result;
   }
