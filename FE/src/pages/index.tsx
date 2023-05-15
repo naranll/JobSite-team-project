@@ -1,23 +1,27 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Filter from "@/components/Filter";
 import JobCard from "@/components/JobCard";
 import Pagenation from "@/components/Pagenation";
 import { JobType } from "@/util/types";
 import Link from "next/link";
-import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 export default function Home(props: { jobs: JobType[] }): JSX.Element {
   const { jobs } = props;
-  const router = useRouter();
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const path = "jobs";
-
-  function changeHandler(e: React.ChangeEvent<HTMLSelectElement>): void {
+  const [showJobs, setShowJobs] = useState<any>();
+  const route = useRouter();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function changeHandler(e: any): void {
     console.log("filter", e.currentTarget.value);
     router.push({ query: { category: e.currentTarget.value } });
   }
 
-  function submitHandler(e: React.FormEvent<HTMLFormElement>): void {
+  useEffect(()=>{
+    setShowJobs(jobs)
+  },[jobs])
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function submitHandler(e: any): void {
     e.preventDefault();
     const searchValue = e.currentTarget.search.value.trim();
 
@@ -58,14 +62,22 @@ export default function Home(props: { jobs: JobType[] }): JSX.Element {
           <Filter />
         </div>
         <div className="home-joblist mx-auto w-5/6 lg:w-4/5">
-          {jobs.map((job: JobType, index: number): JSX.Element => (
-            <Link href={`jobs/${job._id}`} key={index}>
-              <JobCard {...job} />
-            </Link>
-          ))}
-          <Pagenation currentPage={currentPage} setCurrentPage={setCurrentPage} path={path} />
+          {
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+            // filtered != undefined && (
+              showJobs?.map(
+              (job: JobType, index: number): JSX.Element => (
+                <Link href={`jobs/${job._id}`} key={index}>
+                  <JobCard {...job} />
+                </Link>
+              )
+            )
+            // )
+          }
         </div>
+        <Pagenation setShowJobs={setShowJobs}/>
       </div>
+
     </div>
   );
 }
@@ -81,7 +93,11 @@ export async function getServerSideProps(context: { query: any }) {
   try {
     // Fetch the data for the current page based on the pagination parameters
     const response = await fetch(
-      `http://localhost:8008/job/filter/?category=${query.category}&search=${query.s ? query.s : ""}&page=${currentPage}&limit=${itemsPerPage}`
+      query.category ? `http://localhost:8008/job/filter/?category=${query.category}&search=${
+        query.s ? query.s : ""
+      }` : `http://localhost:8008/job/filter/?category=all&search=${
+        query.s ? query.s : ""
+      }`
     );
     const filtered = await response.json();
 

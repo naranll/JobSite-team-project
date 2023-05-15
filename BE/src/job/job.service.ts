@@ -21,7 +21,7 @@ export class JobService {
   }
 
   async findJob(id: string): Promise<Job> {
-    const result = await this.jobModel.findById(id).exec();
+    const result = await this.jobModel.findById(id).populate('postedBy');
     return result;
   }
   async filetredJob(query: { category: any; search: any }): Promise<Job[]> {
@@ -54,7 +54,6 @@ export class JobService {
   async findPage(pageNumbers: number): Promise<any> {
     const result = this.jobModel
       .find({})
-      .select({ _id: 1, title: 1, province: 1 })
       .skip((pageNumbers - 1) * 8)
       .limit(8);
     return result;
