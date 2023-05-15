@@ -7,6 +7,7 @@ import SuccessModal from "@/components/SuccessModal";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 // import { getStaticPaths } from '../user/[id]/appliedjobs';
+import moment from "moment";
 
 export default function Job({ data: job }: { data: JobType }): JSX.Element {
   const { currentUser } = useUserContext();
@@ -54,7 +55,7 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
       .catch(() => setIsApplied(true));
   }
 
-   console.log("User id ====>", currentUser?._id);
+  console.log("User id ====>", currentUser?._id);
 
   return (
     <>
@@ -62,12 +63,8 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
         <div className="jobpage flex flex-col md:flex-row-reverse gap-4 container px-4 py-2">
           <div className="jobpage-employer w-full md:w-1/4 md:h-[260px] p-4">
             <h2 className="jobpage-employer-title">Employer Info</h2>
-            <div>
-              {job.postedBy?.firstName}
-            </div>
-              {job.postedBy?.joinDate}
-
-
+            <div>{job.postedBy?.firstName}</div>
+            {job.postedBy?.joinDate}
           </div>
           <div className="jobpage-jobdetails w-full min-h-[600px] md:w-3/4 p-4">
             <div>
@@ -83,8 +80,9 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
             <button
               disabled={(currentUser._id === job.postedBy, isApplied === true)}
               onClick={handleApply}
-              className={`w-full ${isApplied ? "text-black bg-gray-400 rounded-lg" : "btn-style"
-                }`}
+              className={`w-full ${
+                isApplied ? "text-black bg-gray-400 rounded-lg" : "btn-style"
+              }`}
             >
               {isApplied ? "Applied" : "Apply"}
             </button>
