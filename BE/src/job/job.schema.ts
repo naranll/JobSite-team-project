@@ -1,10 +1,11 @@
 import { SchemaFactory, Prop, Schema } from '@nestjs/mongoose';
-import mongoose, { now } from 'mongoose';
+import mongoose, { now, Types } from 'mongoose';
+import { User } from 'src/user/user.schema';
 
 @Schema({ timestamps: true })
 export class Job {
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
-  postedBy: string;
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: User.name })
+  postedBy: Types.ObjectId;
 
   @Prop()
   title: string;
