@@ -14,7 +14,9 @@ export default function ProfileInfo(): JSX.Element {
   useEffect(() => {
     const getUser = async (id: string | undefined) => {
       console.log("user ID", id);
-      const result = await axios.get(`http://localhost:8008/user/${id}`);
+      const result = await axios.get(
+        `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/user/${id}`
+      );
       setUser(result.data);
       console.log("user", user);
     };

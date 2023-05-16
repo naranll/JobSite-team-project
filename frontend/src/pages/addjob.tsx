@@ -1,12 +1,12 @@
 import axios from "axios";
-import React, {useState, useEffect} from "react";
-import {JobType} from "@/util/types";
-import {useUserContext} from "../context/UserContext";
+import React, { useState, useEffect } from "react";
+import { JobType } from "@/util/types";
+import { useUserContext } from "../context/UserContext";
 import SuccessModal from "@/components/SuccessModal";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 
 export default function AddJob(): JSX.Element {
-  const {currentUser} = useUserContext();
+  const { currentUser } = useUserContext();
   const [showSuccessModal, setShowSuccessModal] = useState<boolean>(false);
   const router = useRouter();
 
@@ -34,7 +34,7 @@ export default function AddJob(): JSX.Element {
     };
     console.log("new job", newJob);
     axios
-      .post("http://localhost:8008/job/add", newJob)
+      .post(`${process.env.HOST}${process.env.PORT}/job/add`, newJob)
       .then((res) => {
         console.log(res);
         if (res.data.success) {

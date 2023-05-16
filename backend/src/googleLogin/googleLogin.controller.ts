@@ -26,17 +26,17 @@ export class GoogleLoginController {
     console.log('google login Request');
 
     const stringifiedParams = queryString.stringify({
-      client_id: process.env.CLIENT_ID,
-      redirect_uri: `http://localhost:${process.env.PORT}/google/callback`,
+      client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
+      redirect_uri: `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/google/callback`,
       scope: [
-        'https://www.googleapis.com/auth/userinfo.email',
-        'https://www.googleapis.com/auth/userinfo.profile',
+        `${process.env.NEXT_PUBLIC_AUTH_INFO_HOST}auth/userinfo.email`,
+        `${process.env.NEXT_PUBLIC_AUTH_INFO_HOST}auth/userinfo.profile`,
       ].join(' '),
       response_type: 'code',
       access_type: 'offline',
       prompt: 'consent',
     });
-    return `https://accounts.google.com/o/oauth2/v2/auth?${stringifiedParams}`;
+    return `${process.env.NEXT_PUBLIC_AUTH_ACCOUNT_HOST}o/oauth2/v2/auth?${stringifiedParams}`;
   }
 
   @Get('google/callback')
@@ -79,13 +79,13 @@ export class GoogleLoginController {
     };
     // const token = await this.jwtService.signAsync(payload);
     const token = await this.jwtService.signAsync(payload, {
-      secret: process.env.JWT_SECRET,
+      secret: process.env.NEXT_PUBLIC_JWT_SECRET,
     });
     console.log('google token on be', this.jwtService.decode(token));
 
     res
       .status(200)
       .cookie('token', token)
-      .redirect(`http://localhost:${process.env.CLIENT_PORT}`);
+      .redirect(`${process.env.NEXT_PUBLIC_CLIENT_PORT}`);
   }
 }

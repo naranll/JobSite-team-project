@@ -1,4 +1,4 @@
-import { JobType } from "@/util/types";
+import { JobType, UserType } from "@/util/types";
 import { GetStaticProps, GetStaticPropsContext } from "next";
 import { useUserContext } from "../../context/UserContext";
 import axios from "axios";
@@ -22,7 +22,10 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
     };
 
     axios
-      .post("http://localhost:8008/application/check", checkBody)
+      .post(
+        `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/application/check`,
+        checkBody
+      )
       .then((res) => {
         if (res.data.message) {
           setIsApplied(true);
@@ -45,7 +48,7 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
     const newApply = { jobId: job._id, userId: currentUser?._id };
 
     axios
-      .post("http://localhost:8008/application/add", newApply)
+      .post(`${process.env.NEXT_PUBLIC_JOBSITE_HOST}/application/add`, newApply)
       .then((res) => {
         console.log(res.data);
         if (res.data) {
@@ -96,7 +99,9 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
 }
 
 export const getStaticPaths = async () => {
-  const result = await fetch(`http://localhost:8008/job/job_id`);
+  const result = await fetch(
+    `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/job/job_id`
+  );
   const resJob = await result.json();
   const paths = await resJob.map((id: { _id: string }) => ({
     params: { id: id._id },
@@ -114,7 +119,9 @@ interface JobProps {
 export const getStaticProps: GetStaticProps<JobProps> = async ({
   params,
 }: GetStaticPropsContext) => {
-  const res = await fetch(`http://localhost:8008/job/singleJob/${params?.id}`);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/job/singleJob/${params?.id}`
+  );
   const resjson = await res.json();
   return {
     props: {

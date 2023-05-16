@@ -88,19 +88,19 @@ export default function Home(props: { jobs: JobType[] }): JSX.Element {
     </div>
   );
 }
-
+console.log(`${process.env.NEXT_PUBLIC_JOBSITE_HOST}`);
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function getServerSideProps(context: { query: any }) {
   const { query } = context;
   try {
     const response = await fetch(
       query.category
-        ? `http://localhost:8008/job/filter/?category=${
+        ? `${process.env.NEXT_PUBLIC_JOBSITE_HOST}job/filter/?category=${
             query.category
           }&search=${query.s ? query.s : ""}`
-        : `http://localhost:8008/job/filter/?category=all&search=${
-            query.s ? query.s : ""
-          }`
+        : `${
+            process.env.NEXT_PUBLIC_JOBSITE_HOST
+          }/job/filter/?category=all&search=${query.s ? query.s : ""}`
     );
     const filtered = await response.json();
 

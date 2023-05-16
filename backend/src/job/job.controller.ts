@@ -24,6 +24,11 @@ export class JobController {
     private readonly jwtService: JwtService,
   ) {}
 
+  @Post('test')
+  testFunctiona(@Req() req: Request) {
+    console.log(req['user']);
+  }
+
   @Get('all')
   findAll(): Promise<Job[]> {
     return this.jobService.findAll();

@@ -20,7 +20,7 @@ export default function Profile() {
   //       router.push("/login");
   //     }
 
-  //     // const userInfo = axios("http://localhost:8008/getProfile", {
+  //     // const userInfo = axios(`${process.env.NEXT_PUBLIC_JOBSITE_HOST}getProfile`, {
   //     //   headers: {
   //     //     authorizedToken: `Bearer: ${token}`,
   //     //   },

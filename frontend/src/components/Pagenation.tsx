@@ -8,11 +8,13 @@ export default function Pagenation(props: any): JSX.Element {
 
   useEffect(() => {
     if (router.query.page) {
-      fetch(`http://localhost:8008/job/page/${router.query.page}`)
+      fetch(
+        `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/job/page/${router.query.page}`
+      )
         .then((res) => res.json())
         .then((res) => setShowJobs(res));
     } else {
-      fetch(`http://localhost:8008/job/page/1`)
+      fetch(`${process.env.NEXT_PUBLIC_JOBSITE_HOST}/job/page/1`)
         .then((res) => res.json())
         .then((res) => {
           setShowJobs(res);
