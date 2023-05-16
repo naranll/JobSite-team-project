@@ -34,7 +34,7 @@ export default function AddJob(): JSX.Element {
     };
     console.log("new job", newJob);
     axios
-      .post(`${process.env.HOST}${process.env.PORT}/job/add`, newJob)
+      .post(`${process.env.NEXT_PUBLIC_JOBSITE_HOST}/job/add`, newJob)
       .then((res) => {
         console.log(res);
         if (res.data.success) {
