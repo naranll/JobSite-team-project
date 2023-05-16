@@ -12,7 +12,7 @@ import { categoryModule } from './category/category.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    MongooseModule.forRoot(`${process.env.NEXT_PUBLIC_MONGO_DB_CONNECT}`),
+    MongooseModule.forRoot(`${process.env.MONGO_DB_CONNECT}`),
     UserModule,
     jobModule,
     applicationModule,
