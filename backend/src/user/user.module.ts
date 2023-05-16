@@ -12,7 +12,7 @@ import { ConfigModule } from '@nestjs/config';
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
     JwtModule.register({
       global: true,
-      secret: process.env.NEXT_PUBLIC_JWT_SECRET,
+      secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '1h' },
     }),
   ],
