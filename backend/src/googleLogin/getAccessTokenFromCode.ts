@@ -6,12 +6,12 @@ export async function getAccessTokenFromCode(code: any) {
     client_id: process.env.GOOGLE_CLIENT_ID,
     client_secret: process.env.GOOGLE_CLIENT_SECRET,
     grant_type: 'authorization_code',
-    redirect_uri: `http://localhost:${process.env.BACKENDPORT}/google/callback`,
+    redirect_uri: `http://localhost:${process.env.BACKEND_PORT}/google/callback`,
     code,
   });
 
   const { access_token }: any = await fetch(
-    'https://oauth2.googleapis.com/token',
+    `${process.env.NEXT_PUBLIC_AUTH_HOST}token`,
     {
       method: 'POST',
       headers: {

@@ -45,7 +45,9 @@ export default function PostedJob({ data }: JobProps): JSX.Element {
 }
 
 export const getStaticPaths = async () => {
-  const result = await fetch(`http://localhost:8008/user/user_id`);
+  const result = await fetch(
+    `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/user/user_id`
+  );
   const user = await result.json();
   const paths = await user.map((id: { _id: string }) => ({
     params: { id: id._id },
@@ -72,13 +74,13 @@ export const getStaticProps: GetStaticProps<JobProps> = async ({
 }: GetStaticPropsContext) => {
   try {
     const postedjobs = await fetch(
-      `http://localhost:8008/job/posted/${params?.id}`
+      `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/job/posted/${params?.id}`
     ).then((result) => result.json());
 
     const allApplicants = await Promise.all(
       postedjobs.map(async (job: JobType) => {
         const applicantsArray = await fetch(
-          `http://localhost:8008/application/applicants/${job._id}`
+          `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/application/applicants/${job._id}`
         ).then((res) => res.json());
         return {
           jobId: job._id,

@@ -23,7 +23,7 @@ export default function Register(): JSX.Element {
     console.log("new User", data);
 
     axios
-      .post("http://localhost:8008/user/add", data)
+      .post(`${process.env.NEXT_PUBLIC_JOBSITE_HOST}/user/add`, data)
       .then((res) => {
         if (res.data.success) {
           console.log("successfully added user");

@@ -66,7 +66,7 @@ export const UserContextProvider = ({ children }: UserProviderType) => {
   //     password: target.password.value,
   //   };
   //   axios
-  //     .post(`http://localhost:8008/user/login`, userLogin)
+  //     .post(`${process.env.NEXT_PUBLIC_JOBSITE_HOST}/user/login`, userLogin)
   //     .then((res) => {
   //       if (res.status === 201) {
   //         const decoded: MyJwtPayload = jwtDecode(res.data.token);

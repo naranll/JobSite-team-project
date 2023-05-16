@@ -7,7 +7,7 @@ Module({
   imports: [
     JwtModule.register({
       global: true,
-      secret: process.env.JWT_SECRET,
+      secret: process.env.NEXT_PUBLIC_JWT_SECRET,
       signOptions: { expiresIn: '1h' },
     }),
   ],

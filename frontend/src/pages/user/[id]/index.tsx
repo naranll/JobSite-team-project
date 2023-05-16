@@ -1,11 +1,11 @@
-import {useUserContext} from "@/context/UserContext";
-import {UserType} from "@/util/types";
-import {GetStaticProps, GetStaticPropsContext} from "next";
+import { useUserContext } from "@/context/UserContext";
+import { UserType } from "@/util/types";
+import { GetStaticProps, GetStaticPropsContext } from "next";
 import Link from "next/link";
 
-export default function User({data: user}: {data: UserType}): JSX.Element {
+export default function User({ data: user }: { data: UserType }): JSX.Element {
   console.log("user profile page", user);
-  const {currentUser} = useUserContext();
+  const { currentUser } = useUserContext();
 
   return (
     <div>
@@ -100,10 +100,12 @@ export default function User({data: user}: {data: UserType}): JSX.Element {
 }
 
 export const getStaticPaths = async () => {
-  const result = await fetch(`http://localhost:8008/user/user_id`);
+  const result = await fetch(
+    `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/user/user_id`
+  );
   const resultUser = await result.json();
-  const paths = await resultUser.map((id: {_id: string}) => ({
-    params: {id: id._id},
+  const paths = await resultUser.map((id: { _id: string }) => ({
+    params: { id: id._id },
   }));
   return {
     paths,
@@ -118,7 +120,9 @@ interface UserProps {
 export const getStaticProps: GetStaticProps<UserProps> = async ({
   params,
 }: GetStaticPropsContext) => {
-  const res = await fetch(`http://localhost:8008/user/${params?.id}`);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/user/${params?.id}`
+  );
   const resJson = await res.json();
   return {
     props: {

@@ -1,5 +1,7 @@
+
+
 export type JobType = {
-  postedBy?: undefined | UserType;
+  postedBy?: string | UserType ;
   _id?: string;
   title: string;
   description: string;
