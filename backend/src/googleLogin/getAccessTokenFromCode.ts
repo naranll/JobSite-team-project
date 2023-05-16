@@ -3,10 +3,10 @@ import * as queryString from 'query-string';
 
 export async function getAccessTokenFromCode(code: any) {
   const postData = queryString.stringify({
-    client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
-    client_secret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET,
+    client_id: process.env.GOOGLE_CLIENT_ID,
+    client_secret: process.env.GOOGLE_CLIENT_SECRET,
     grant_type: 'authorization_code',
-    redirect_uri: `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/google/callback`,
+    redirect_uri: `http://localhost:${process.env.BACKEND_PORT}/google/callback`,
     code,
   });
 
