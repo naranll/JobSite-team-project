@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { CategoryService } from 'src/category/category.service';
 import { Category } from './category.schema';
 import { CategoryDto } from './category.dto';
@@ -15,5 +23,18 @@ export class CategoryController {
   addCateList(@Body() body: CategoryDto): Promise<Category> {
     console.log('category req body: ', body);
     return this.categoryService.addCate(body);
+  }
+
+  @Put(':id')
+  updateCate(
+    @Param('id') id: string,
+    @Body() body: CategoryDto,
+  ): Promise<Category> {
+    return this.categoryService.updateCate(id, body);
+  }
+
+  @Delete(':id')
+  deleteCate(@Param('id') id: string): Promise<Category> {
+    return this.categoryService.deleteCate(id);
   }
 }
