@@ -26,7 +26,7 @@ const Loader = ({ children }: { children: ReactNode }) => {
   return loading ? (
     <div className="loader-container w-screen h-screen flex justify-center items-center">
       <div className="loader">
-        <ReactLoading color="#1A75E8" height={50} width={50} type="bars" />
+        <ReactLoading color="blue" height={50} width={50} type="bars" />
       </div>
     </div>
   ) : (
