@@ -47,4 +47,10 @@ export class UserService {
       throw new UnauthorizedException();
     }
   }
+  async updateUser(id: string, userData: Partial<User>): Promise<User> {
+    const updatedUser = await this.userModel.findByIdAndUpdate(id, userData, {
+      new: true,
+    });
+    return updatedUser;
+  }
 }
