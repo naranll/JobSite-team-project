@@ -8,7 +8,7 @@ import History from "@/components/subComponents/History";
 // import axios from "axios";
 // import { UserType } from "@/util/types";
 
-export default function Profile() {
+export default function Profile(): JSX.Element {
   // const router = useRouter();
   // const { currentUser, token } = useUserContext();
   const [activeBtn, setActiveBtn] = useState<

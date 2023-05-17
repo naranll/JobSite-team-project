@@ -3,13 +3,19 @@ import {
   Get,
   Param,
   Post,
+  Patch,
   Request as Req,
   Response as Res,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
 import { UserService } from './user.service';
+import { Multer } from 'multer';
 import { User } from './user.schema';
 import { JwtService } from '@nestjs/jwt';
 import { Request, Response } from 'express';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { firebaseApp, storageBucket } from 'src/fileHandler/firebase.service';
 
 @Controller('user')
 export class UserController {
@@ -54,5 +60,56 @@ export class UserController {
   @Get('/:id')
   getUser(@Param('id') id: string) {
     return this.userService.findUser(id);
+  }
+
+  @Patch('/:id')
+  @UseInterceptors(FileInterceptor('image'))
+  async updateUser(
+    @Param('id') id: string,
+    @Req() req: Request,
+    @Res() res: Response,
+    @UploadedFile() file: Express.Multer.File,
+  ): Promise<any> {
+    const { data, skills } = req.body;
+    const userData = {
+      image: '',
+      ...JSON.parse(data),
+      skills: JSON.parse(skills),
+    };
+    if (file) {
+      const imageUrl = await this.uploadFileToFirebase(file);
+      userData.image = imageUrl;
+    }
+
+    const updatedUser = await this.userService.updateUser(id, userData);
+    if (updatedUser) {
+      res.status(200).json({ message: true });
+    } else {
+      res.status(400).json({ message: false });
+    }
+  }
+
+  private async uploadFileToFirebase(
+    file: Express.Multer.File,
+  ): Promise<string> {
+    const { originalname, buffer, mimetype } = file;
+
+    const blob = storageBucket.file(originalname);
+    const blobWriter = blob.createWriteStream({
+      metadata: {
+        contentType: mimetype,
+      },
+    });
+
+    return new Promise((resolve, reject) => {
+      blobWriter.on('finish', () => {
+        const publicUrl = `https://storage.googleapis.com/${storageBucket.name}/${blob.name}`;
+        resolve(publicUrl);
+      });
+      blobWriter.on('error', (error) => {
+        reject(error);
+      });
+      blobWriter.end(buffer);
+    });
   }
 }
