@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect } from "react";
-import { useRouter } from "next/router";
+import {useEffect} from "react";
+import {useRouter} from "next/router";
 
 export default function Pagenation(props: any): JSX.Element {
   const router = useRouter();
-  const { setShowJobs } = props;
+  const {setShowJobs} = props;
 
   useEffect(() => {
     if (router.query.page) {
@@ -25,7 +25,7 @@ export default function Pagenation(props: any): JSX.Element {
 
   function pagenationHandler(e: any) {
     const page = e.currentTarget.innerHTML;
-    router.push({ query: { ...router.query, page } });
+    router.push({query: {...router.query, page}});
   }
 
   return (
