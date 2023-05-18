@@ -7,7 +7,7 @@ export async function getAccessTokenFromCode(code: any) {
     client_secret: process.env.GOOGLE_CLIENT_SECRET,
     grant_type: 'authorization_code',
     //need redo
-    redirect_uri: `http://localhost:${process.env.BACKEND_PORT}/google/callback`,
+    redirect_uri: `${process.env.BACKEND_URL}/google/callback`,
     code,
   });
 
