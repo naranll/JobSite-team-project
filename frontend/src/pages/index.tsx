@@ -13,7 +13,6 @@ export default function Home(props: {jobs: JobType[]}): JSX.Element {
   const route = useRouter();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function changeHandler(e: any): void {
-    console.log("filter", e.currentTarget.value);
     route.push({query: {category: e.currentTarget.value}});
     return;
   }
@@ -83,7 +82,7 @@ export default function Home(props: {jobs: JobType[]}): JSX.Element {
     </div>
   );
 }
-console.log(`${process.env.NEXT_PUBLIC_JOBSITE_HOST}`);
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function getServerSideProps(context: {query: any}) {
   const {query} = context;
@@ -105,7 +104,6 @@ export async function getServerSideProps(context: {query: any}) {
       },
     };
   } catch (error) {
-    console.log("error:", error);
     return {
       props: {
         jobs: [],

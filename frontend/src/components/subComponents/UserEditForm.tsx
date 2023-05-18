@@ -1,12 +1,12 @@
 // import { UserType } from "@/util/types";
 // import { eventNames } from "process";
-import { useState, useRef, ChangeEvent } from "react";
-import { Toast } from "primereact/toast";
-import { Button } from "primereact/button";
-import { Dialog } from "primereact/dialog";
-import { UserType } from "@/util/types";
+import {useState, useRef, ChangeEvent} from "react";
+import {Toast} from "primereact/toast";
+import {Button} from "primereact/button";
+import {Dialog} from "primereact/dialog";
+// import { UserType } from "@/util/types";
 import axios from "axios";
-import { useUserContext } from "@/context/UserContext";
+import {useUserContext} from "@/context/UserContext";
 // import { useRouter } from "next/router";
 
 interface RequestData {
@@ -17,17 +17,16 @@ interface RequestData {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function UserEditForm({ user, setVisible }: any): JSX.Element {
-  const { currentUser } = useUserContext();
+export default function UserEditForm({user, setVisible}: any): JSX.Element {
+  const {currentUser} = useUserContext();
   // const router = useRouter()
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const toast = useRef<any>(null);
-  console.log("user", user);
   const [userData, setUserData] = useState({
     firstName: "",
     lastName: "",
     email: "",
-    phoneNumber: undefined,
+    // phoneNumber: null,
   });
   const [modalVisible, setModalVisible] = useState(false);
   const [skills, setSkills] = useState<string[]>([""]);
@@ -91,9 +90,9 @@ export default function UserEditForm({ user, setVisible }: any): JSX.Element {
     if (userData.email.trim() !== "") {
       requestData["email"] = userData.email.trim();
     }
-    if (userData.phoneNumber !== undefined) {
-      requestData["phoneNumber"] = userData.phoneNumber;
-    }
+    // if (userData.phoneNumber) {
+    //   requestData["phoneNumber"] = userData.phoneNumber;
+    // }
 
     console.log("request data:", requestData);
 
@@ -112,7 +111,7 @@ export default function UserEditForm({ user, setVisible }: any): JSX.Element {
       headers: {
         "Content-Type": "multipart/form-data",
       },
-    }).then((res: any) => {
+    }).then((res) => {
       if (res.data.message) {
         setVisible(false), showInfo();
       }

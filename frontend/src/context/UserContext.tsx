@@ -50,29 +50,6 @@ export const UserContextProvider = ({children}: UserProviderType) => {
     Cookies.remove("token");
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  // function submitHandler(event: any): void {
-  //   event.preventDefault();
-
-  //   const target = event.currentTarget.elements;
-  //   const userLogin: LoginType = {
-  //     email: target.email.value,
-  //     password: target.password.value,
-  //   };
-  //   axios
-  //     .post(`${process.env.NEXT_PUBLIC_JOBSITE_HOST}/user/login`, userLogin)
-  //     .then((res) => {
-  //       if (res.status === 201) {
-  //         const decoded: MyJwtPayload = jwtDecode(res.data.token);
-  //         const user = decoded["_doc"];
-  //         Cookies.set("token", res.data.token);
-  //       } else {
-  //         console.log("login fail");
-  //       }
-  //     })
-  //     .catch((err) => console.log(err));
-  // }
-
   return (
     <UserContext.Provider value={{currentUser, setCurrentUser, handleLogout}}>
       {children}

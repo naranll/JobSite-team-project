@@ -1,28 +1,27 @@
-import { useUserContext } from "@/context/UserContext";
-import { UserType } from "@/util/types";
+import {useUserContext} from "@/context/UserContext";
+import {UserType} from "@/util/types";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { Button } from "primereact/button";
-import { Dialog } from "primereact/dialog";
+import {useEffect, useState} from "react";
+import {Button} from "primereact/button";
+import {Dialog} from "primereact/dialog";
 import UserEditForm from "./UserEditForm";
 
 export default function ProfileInfo(): JSX.Element {
-  const { currentUser } = useUserContext();
+  const {currentUser} = useUserContext();
   const [user, setUser] = useState<UserType | undefined>(undefined);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const getUser = async (id: string | undefined) => {
-      console.log("user ID", id);
       const result = await axios.get(
         `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/user/${id}`
       );
       setUser(result.data);
-      console.log("user", user);
     };
     if (currentUser) {
       getUser(currentUser._id);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -79,7 +78,7 @@ export default function ProfileInfo(): JSX.Element {
           <Dialog
             header="Settings"
             visible={visible}
-            style={{ width: "60vw", height: "80vh" }}
+            style={{width: "60vw", height: "80vh"}}
             onHide={() => setVisible(false)}
           >
             <UserEditForm user={user} setVisible={setVisible} />

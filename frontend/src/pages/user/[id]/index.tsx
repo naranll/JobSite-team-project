@@ -1,11 +1,10 @@
-import { useUserContext } from "@/context/UserContext";
-import { UserType } from "@/util/types";
-import { GetStaticProps, GetStaticPropsContext } from "next";
+import {useUserContext} from "@/context/UserContext";
+import {UserType} from "@/util/types";
+import {GetStaticProps, GetStaticPropsContext} from "next";
 import Link from "next/link";
 
-export default function User({ data: user }: { data: UserType }): JSX.Element {
-  console.log("user profile page", user);
-  const { currentUser } = useUserContext();
+export default function User({data: user}: {data: UserType}): JSX.Element {
+  const {currentUser} = useUserContext();
 
   return (
     <div>
@@ -104,8 +103,8 @@ export const getStaticPaths = async () => {
     `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/user/user_id`
   );
   const resultUser = await result.json();
-  const paths = await resultUser.map((id: { _id: string }) => ({
-    params: { id: id._id },
+  const paths = await resultUser.map((id: {_id: string}) => ({
+    params: {id: id._id},
   }));
   return {
     paths,

@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
-import { useRef, useState } from "react";
-import { useUserContext } from "@/context/UserContext";
-import { JobType } from "@/util/types";
+import {useRef, useState} from "react";
+import {useUserContext} from "@/context/UserContext";
+import {JobType} from "@/util/types";
 import JobCard from "@/components/JobCard";
 import Link from "next/link";
-import { Dialog } from "primereact/dialog";
-import { Button } from "primereact/button";
-import { Toast } from "primereact/toast";
+import {Dialog} from "primereact/dialog";
+import {Button} from "primereact/button";
+import {Toast} from "primereact/toast";
 // import "../../styles/applied.scss";
-import { FcCancel } from "react-icons/fc";
+import {FcCancel} from "react-icons/fc";
 import axios from "axios";
-import { GetStaticProps, GetStaticPropsContext } from "next";
-import { useRouter } from "next/router";
+import {GetStaticProps, GetStaticPropsContext} from "next";
+import {useRouter} from "next/router";
 import React from "react";
 
 export interface AppliedType {
@@ -22,15 +22,13 @@ export interface AppliedType {
   state: string;
 }
 
-export default function AppliedJob(props: { data: AppliedType }): JSX.Element {
+export default function AppliedJob(props: {data: AppliedType}): JSX.Element {
   const [jobId, setJobId] = useState<string | undefined>();
   const [visible, setVisible] = useState(false);
-  const { currentUser } = useUserContext();
+  const {currentUser} = useUserContext();
   const router = useRouter();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const toast = useRef<any>(null);
-  console.log("props", props);
-  console.log("user", currentUser);
 
   const showInfo = () => {
     toast.current.show({
@@ -42,8 +40,6 @@ export default function AppliedJob(props: { data: AppliedType }): JSX.Element {
   };
 
   function handleWithdraw() {
-    console.log("jobId", jobId);
-    console.log("userId", currentUser?._id);
     const appInfo = {
       jobId: jobId,
       userId: currentUser?._id,
@@ -112,8 +108,8 @@ export const getStaticPaths = async () => {
     `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/application/user_id`
   );
   const resultApp = await result.json();
-  const paths = await resultApp.map((id: { _id: string }) => ({
-    params: { id: id._id },
+  const paths = await resultApp.map((id: {_id: string}) => ({
+    params: {id: id._id},
   }));
   return {
     paths,
