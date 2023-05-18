@@ -23,8 +23,6 @@ export class GoogleLoginController {
 
   @Get('google-login')
   googleLogin() {
-    console.log('google login Request');
-
     const stringifiedParams = queryString.stringify({
       client_id: process.env.GOOGLE_CLIENT_ID,
       redirect_uri: `http://localhost:${process.env.BACKEND_PORT}/google/callback`,

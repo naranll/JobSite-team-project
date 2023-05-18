@@ -6,6 +6,5 @@ export async function getGoogleUserInfo(access_token: string) {
       Authorization: `Bearer ${access_token}`,
     },
   }).then((res) => res.json());
-  console.log('get user info', profile);
   return profile;
 }

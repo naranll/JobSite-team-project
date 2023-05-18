@@ -11,8 +11,6 @@ export class ApplicationService {
     @InjectConnection() private connection: Connection,
   ) {}
   async addApp(body: Application): Promise<Application> {
-    console.log('body', body);
-
     const createApp = new this.applicationModel(body);
     return createApp.save();
   }
@@ -30,7 +28,6 @@ export class ApplicationService {
       .find({ userId })
       .populate('jobId')
       .select({ jobId: 1, _id: 0, state: 1 });
-    console.log('appliedJobs ====', appliedJobs);
     return appliedJobs;
   }
 
@@ -39,16 +36,13 @@ export class ApplicationService {
       .find({ jobId })
       .populate('userId')
       .select({ userId: 1, _id: 0, state: 1, jobId: 1 });
-    // console.log('applicants', applicants);
     return applicants;
   }
 
   async checkApplied(userId: string, jobId: string): Promise<boolean> {
-    console.log('check service', userId, jobId);
     const result = await this.applicationModel.find({
       $and: [{ userId: userId }, { jobId: jobId }],
     });
-    console.log('result service ====>', result);
     if (!result.length) {
       return false;
     } else {
@@ -60,7 +54,6 @@ export class ApplicationService {
     const result = await this.applicationModel.find({
       $and: [{ userId: userId }, { jobId: jobId }],
     });
-    console.log('find applied by user', result);
     if (!result.length) {
       return false;
     } else {
@@ -69,7 +62,6 @@ export class ApplicationService {
   }
 
   async cancelApply(userId: string, jobId: string): Promise<Application> {
-    console.log('deleting application');
     const result = await this.applicationModel.findOneAndDelete({
       $and: [{ userId: userId }, { jobId: jobId }],
     });
