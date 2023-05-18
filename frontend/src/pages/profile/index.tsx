@@ -20,7 +20,7 @@ export default function Profile(): JSX.Element {
   //       router.push("/login");
   //     }
 
-  //     // const userInfo = axios(`${process.env.NEXT_PUBLIC_JOBSITE_HOST}getProfile`, {
+  //     // const userInfo = axios(`${process.env.NEXT_PUBLIC_JOBSITE_HOST}/getProfile`, {
   //     //   headers: {
   //     //     authorizedToken: `Bearer: ${token}`,
   //     //   },

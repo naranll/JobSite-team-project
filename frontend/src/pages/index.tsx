@@ -88,12 +88,12 @@ export async function getServerSideProps(context: {query: any}) {
   try {
     const response = await fetch(
       query.category
-        ? `${process.env.NEXT_PUBLIC_JOBSITE_HOST}job/filter/?category=${
+        ? `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/job/filter/?category=${
             query.category
           }&search=${query.s ? query.s : ""}`
         : `${
             process.env.NEXT_PUBLIC_JOBSITE_HOST
-          }job/filter/?category=all&search=${query.s ? query.s : ""}`
+          }/job/filter/?category=all&search=${query.s ? query.s : ""}`
     );
     const filtered = await response.json();
 

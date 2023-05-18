@@ -46,7 +46,7 @@ export default function Applied(props:any): JSX.Element {
     };
     axios
       .delete(
-        `${process.env.NEXT_PUBLIC_JOBSITE_HOST}application/remove/${currentUser?._id}`,
+        `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/application/remove/${currentUser?._id}`,
         {
           data: appInfo,
         }
@@ -66,7 +66,7 @@ export default function Applied(props:any): JSX.Element {
 
   useEffect(()=>{
     const getApplication = async (id: string | undefined) => {
-      const result = await axios.get(`${process.env.NEXT_PUBLIC_JOBSITE_HOST}application/${id}`)
+      const result = await axios.get(`${process.env.NEXT_PUBLIC_JOBSITE_HOST}/application/${id}`)
       setAppliedJobs(result.data)
 
     }

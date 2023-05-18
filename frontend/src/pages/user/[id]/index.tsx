@@ -100,7 +100,7 @@ export default function User({data: user}: {data: UserType}): JSX.Element {
 
 export const getStaticPaths = async () => {
   const result = await fetch(
-    `${process.env.NEXT_PUBLIC_JOBSITE_HOST}user/user_id`
+    `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/user/user_id`
   );
   const resultUser = await result.json();
   const paths = await resultUser.map((id: {_id: string}) => ({
@@ -120,7 +120,7 @@ export const getStaticProps: GetStaticProps<UserProps> = async ({
   params,
 }: GetStaticPropsContext) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_JOBSITE_HOST}user/${params?.id}`
+    `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/user/${params?.id}`
   );
   const resJson = await res.json();
   return {
