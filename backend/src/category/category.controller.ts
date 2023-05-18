@@ -21,7 +21,6 @@ export class CategoryController {
 
   @Post('add')
   addCateList(@Body() body: CategoryDto): Promise<Category> {
-    console.log('category req body: ', body);
     return this.categoryService.addCate(body);
   }
 

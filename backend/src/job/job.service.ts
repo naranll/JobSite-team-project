@@ -36,7 +36,6 @@ export class JobService {
       category,
       title: { $regex: new RegExp(search, 'i') },
     });
-    console.log(' found job filterJobs ===> ', result);
     return result;
   }
 
