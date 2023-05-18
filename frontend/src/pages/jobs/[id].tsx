@@ -6,7 +6,6 @@ import {useState, useEffect} from "react";
 import SuccessModal from "@/components/SuccessModal";
 import {useRouter} from "next/router";
 import Cookies from "js-cookie";
-// import { getStaticPaths } from '../user/[id]/appliedjobs';
 import moment from "moment";
 
 export default function Job({data: job}: {data: JobType}): JSX.Element {
