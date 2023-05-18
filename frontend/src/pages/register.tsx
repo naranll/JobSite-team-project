@@ -1,7 +1,7 @@
-import { useRouter } from "next/router";
-import { UserType } from "@/util/types";
+import {useRouter} from "next/router";
+import {UserType} from "@/util/types";
 import axios from "axios";
-import { useState } from "react";
+import {useState} from "react";
 
 export default function Register(): JSX.Element {
   const router = useRouter();
@@ -20,13 +20,10 @@ export default function Register(): JSX.Element {
       phoneNumber: event.target.phoneNumber.value,
     };
 
-    console.log("new User", data);
-
     axios
       .post(`${process.env.NEXT_PUBLIC_JOBSITE_HOST}/user/add`, data)
       .then((res) => {
         if (res.data.success) {
-          console.log("successfully added user");
           router.push("/login");
         }
       })

@@ -1,7 +1,5 @@
-
-
 export type JobType = {
-  postedBy?: string | UserType ;
+  postedBy?: string | UserType;
   _id?: string;
   title: string;
   description: string;
@@ -23,7 +21,7 @@ export type UserType = {
   phoneNumber?: number;
   image?: string;
   skills?: [string];
-  joinDate: string;
+  joinDate?: string;
 };
 
 export type ApplicationType = {

@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
+import {useState, useEffect} from "react";
+import {useRouter} from "next/router";
 
 interface CategoryType {
   value: string;
@@ -20,7 +20,6 @@ export default function Filter() {
   );
   const route = useRouter();
 
-  console.log("category=====>", route.query.category);
   // useEffect(() => {
   //   if (localStorage.getItem("category")) {
   //     const category: string | null = localStorage.getItem("category");
@@ -30,9 +29,8 @@ export default function Filter() {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function changeHandler(value: string): void {
-    console.log("filter", value);
     setCurrentCategory(value);
-    route.push({ query: { category: value } });
+    route.push({query: {category: value}});
   }
 
   useEffect(() => {

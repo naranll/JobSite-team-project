@@ -17,7 +17,6 @@ export default function Posted(): JSX.Element {
           `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/job/posted/${currentUser?._id}`,
           {headers: {Authorization: bearer}}
         ).then((res) => res.json());
-        console.log("fetch result", result);
         setPostedJobs(result);
         getJobsApplicants(result);
       };
@@ -47,7 +46,6 @@ export default function Posted(): JSX.Element {
   return (
     <div className="postedjobs-list">
       {postedJobs?.map((job: JobType, i: number) => {
-        console.log("onejob applicants", getSingleJobApplicants(job._id));
         const jobApplicants = getSingleJobApplicants(job._id);
         return (
           <div key={i} className="postedjobs-jobcard">

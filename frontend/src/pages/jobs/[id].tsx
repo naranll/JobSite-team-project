@@ -1,16 +1,16 @@
-import { JobType, UserType } from "@/util/types";
-import { GetStaticProps, GetStaticPropsContext } from "next";
-import { useUserContext } from "../../context/UserContext";
+import {JobType} from "@/util/types";
+import {GetStaticProps, GetStaticPropsContext} from "next";
+import {useUserContext} from "../../context/UserContext";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import {useState, useEffect} from "react";
 import SuccessModal from "@/components/SuccessModal";
-import { useRouter } from "next/router";
+import {useRouter} from "next/router";
 import Cookies from "js-cookie";
 // import { getStaticPaths } from '../user/[id]/appliedjobs';
 import moment from "moment";
 
-export default function Job({ data: job }: { data: JobType }): JSX.Element {
-  const { currentUser } = useUserContext();
+export default function Job({data: job}: {data: JobType}): JSX.Element {
+  const {currentUser} = useUserContext();
   const [isApplied, setIsApplied] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState<boolean>(false);
   const router = useRouter();
@@ -39,18 +39,15 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
       router.push("/login");
     }
     checkApplied();
-  }, [currentUser, router]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function handleApply() {
-    console.log("Job Id", job._id);
-    console.log("User id ====>", currentUser?._id);
-
-    const newApply = { jobId: job._id, userId: currentUser?._id };
+    const newApply = {jobId: job._id, userId: currentUser?._id};
 
     axios
       .post(`${process.env.NEXT_PUBLIC_JOBSITE_HOST}/application/add`, newApply)
       .then((res) => {
-        console.log(res.data);
         if (res.data) {
           setShowSuccessModal(true);
         }
@@ -58,16 +55,12 @@ export default function Job({ data: job }: { data: JobType }): JSX.Element {
       .catch(() => setIsApplied(true));
   }
 
-  console.log("User id ====>", currentUser?._id);
-
   return (
     <>
       {currentUser && (
         <div className="jobpage flex flex-col md:flex-row-reverse gap-4 container px-4 py-2">
           <div className="jobpage-employer w-full md:w-1/4 md:h-[260px] p-4">
             <h2 className="jobpage-employer-title">Employer Info</h2>
-            <div>{job.postedBy?.firstName}</div>
-            {job.postedBy?.joinDate}
           </div>
           <div className="jobpage-jobdetails w-full min-h-[600px] md:w-3/4 p-4">
             <div>
@@ -103,8 +96,8 @@ export const getStaticPaths = async () => {
     `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/job/job_id`
   );
   const resJob = await result.json();
-  const paths = await resJob.map((id: { _id: string }) => ({
-    params: { id: id._id },
+  const paths = await resJob.map((id: {_id: string}) => ({
+    params: {id: id._id},
   }));
   return {
     paths,

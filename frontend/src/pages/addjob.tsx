@@ -1,12 +1,12 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
-import { JobType } from "@/util/types";
-import { useUserContext } from "../context/UserContext";
+import React, {useState, useEffect} from "react";
+import {JobType} from "@/util/types";
+import {useUserContext} from "../context/UserContext";
 import SuccessModal from "@/components/SuccessModal";
-import { useRouter } from "next/router";
+import {useRouter} from "next/router";
 
 export default function AddJob(): JSX.Element {
-  const { currentUser } = useUserContext();
+  const {currentUser} = useUserContext();
   const [showSuccessModal, setShowSuccessModal] = useState<boolean>(false);
   const router = useRouter();
 
@@ -32,11 +32,9 @@ export default function AddJob(): JSX.Element {
       category: target.category.value,
       // contractType: target.contractType.value,
     };
-    console.log("new job", newJob);
     axios
       .post(`${process.env.NEXT_PUBLIC_JOBSITE_HOST}/job/add`, newJob)
       .then((res) => {
-        console.log(res);
         if (res.data.success) {
           setShowSuccessModal(true);
         }
