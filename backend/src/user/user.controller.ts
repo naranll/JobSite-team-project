@@ -16,6 +16,7 @@ import { JwtService } from '@nestjs/jwt';
 import { Request, Response } from 'express';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { firebaseApp, storageBucket } from 'src/fileHandler/firebase.service';
+import { nanoid } from 'nanoid';
 
 @Controller('user')
 export class UserController {
@@ -71,11 +72,15 @@ export class UserController {
     @UploadedFile() file: Express.Multer.File,
   ): Promise<any> {
     const { data, skills } = req.body;
+    console.log('data', data);
+    console.log('skills', skills);
+
     const userData = {
-      image: '',
       ...JSON.parse(data),
-      skills: JSON.parse(skills),
     };
+    if (skills) {
+      userData.skills = JSON.parse(skills);
+    }
     if (file) {
       const imageUrl = await this.uploadFileToFirebase(file);
       userData.image = imageUrl;
@@ -94,7 +99,17 @@ export class UserController {
   ): Promise<string> {
     const { originalname, buffer, mimetype } = file;
 
-    const blob = storageBucket.file(originalname);
+    const ext = getExtension(originalname);
+    // const generatedId = nanoid();
+    const newName = nanoid() + '.' + ext;
+    console.log('filename', newName);
+
+    function getExtension(name: string) {
+      const arr = name.split('.');
+      return arr[arr.length - 1];
+    }
+
+    const blob = storageBucket.file(newName);
     const blobWriter = blob.createWriteStream({
       metadata: {
         contentType: mimetype,

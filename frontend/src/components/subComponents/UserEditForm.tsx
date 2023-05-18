@@ -1,12 +1,12 @@
 // import { UserType } from "@/util/types";
 // import { eventNames } from "process";
-import {useState, useRef, ChangeEvent} from "react";
-import {Toast} from "primereact/toast";
-import {Button} from "primereact/button";
-import {Dialog} from "primereact/dialog";
+import { useState, useRef, ChangeEvent } from "react";
+import { Toast } from "primereact/toast";
+import { Button } from "primereact/button";
+import { Dialog } from "primereact/dialog";
 // import { UserType } from "@/util/types";
 import axios from "axios";
-import {useUserContext} from "@/context/UserContext";
+import { useUserContext } from "@/context/UserContext";
 // import { useRouter } from "next/router";
 
 interface RequestData {
@@ -17,8 +17,8 @@ interface RequestData {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function UserEditForm({user, setVisible}: any): JSX.Element {
-  const {currentUser} = useUserContext();
+export default function UserEditForm({ user, setVisible }: any): JSX.Element {
+  const { currentUser } = useUserContext();
   // const router = useRouter()
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const toast = useRef<any>(null);
@@ -29,7 +29,7 @@ export default function UserEditForm({user, setVisible}: any): JSX.Element {
     // phoneNumber: null,
   });
   const [modalVisible, setModalVisible] = useState(false);
-  const [skills, setSkills] = useState<string[]>([""]);
+  const [skills, setSkills] = useState<string[]>([]);
   const [image, setImage] = useState<File | null>(null);
 
   const showInfo = () => {
@@ -98,15 +98,21 @@ export default function UserEditForm({user, setVisible}: any): JSX.Element {
 
     const formData = new FormData();
 
+    if (skills.length != 0) {
+      console.log("skill length", skills.length);
+      const addedSkills = skills;
+      formData.append("skills", JSON.stringify(addedSkills));
+    }
+
     if (image) {
       formData.append("image", image);
     }
     formData.append("data", JSON.stringify(requestData));
-    formData.append("skills", JSON.stringify(skills));
+    // formData.append("skills", JSON.stringify(skills));
 
     axios({
       method: "PATCH",
-      url: `${process.env.NEXT_PUBLIC_JOBSITE_HOST}${currentUser?._id}`,
+      url: `${process.env.NEXT_PUBLIC_JOBSITE_HOST}user/${currentUser?._id}`,
       data: formData,
       headers: {
         "Content-Type": "multipart/form-data",
@@ -208,23 +214,6 @@ export default function UserEditForm({user, setVisible}: any): JSX.Element {
               id="email"
               type="email"
               placeholder={user.email}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 font-bold mb-2"
-              htmlFor="phoneNumber"
-            >
-              Phone number:
-            </label>
-            <input
-              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="phoneNumber"
-              type="number"
-              name="phoneNumber"
-              min={0}
-              placeholder={user.phoneNumber}
               onChange={handleChange}
             />
           </div>

@@ -48,6 +48,8 @@ export class UserService {
     }
   }
   async updateUser(id: string, userData: Partial<User>): Promise<User> {
+    console.log('userId', id);
+    console.log('user data', userData);
     const updatedUser = await this.userModel.findByIdAndUpdate(id, userData, {
       new: true,
     });

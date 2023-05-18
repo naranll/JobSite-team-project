@@ -14,7 +14,7 @@ export default function ProfileInfo(): JSX.Element {
   useEffect(() => {
     const getUser = async (id: string | undefined) => {
       const result = await axios.get(
-        `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/user/${id}`
+        `${process.env.NEXT_PUBLIC_JOBSITE_HOST}user/${id}`
       );
       setUser(result.data);
     };
@@ -59,6 +59,16 @@ export default function ProfileInfo(): JSX.Element {
           </div>
           <div className="border-2 p-3 m-3 rounded-lg shadow-md">
             <h2 className="text-lg font-bold">Skills:</h2>
+            <ul className="flex gap-3">
+              {user.skills?.map((skill, index) => (
+                <li
+                  className="font-bold bg-blue-400 rounded-lg p-3 hover:bg-blue-500"
+                  key={index}
+                >
+                  <span>{skill}</span>
+                </li>
+              ))}
+            </ul>
           </div>
           <div className="border-2 p-3 m-3 rounded-lg shadow-md">
             <h2 className="text-lg font-bold">General Information:</h2>

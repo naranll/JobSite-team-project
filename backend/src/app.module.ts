@@ -8,6 +8,8 @@ import { jobModule } from './job/job.module';
 import { applicationModule } from './application/application.module';
 import { GoogleLoginModule } from './googleLogin/googleLogin.module';
 import { categoryModule } from './category/category.module';
+import { MulterModule } from '@nestjs/platform-express';
+import { multerConfig } from './fileHandler/multer.config';
 
 @Module({
   imports: [
@@ -18,6 +20,7 @@ import { categoryModule } from './category/category.module';
     applicationModule,
     categoryModule,
     GoogleLoginModule,
+    MulterModule.register(multerConfig),
   ],
   controllers: [AppController],
   providers: [AppService],
