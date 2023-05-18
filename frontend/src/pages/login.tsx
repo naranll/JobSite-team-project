@@ -23,7 +23,7 @@ export default function Login(): JSX.Element {
 
   function googleLogin() {
     axios
-      .get(`${process.env.NEXT_PUBLIC_JOBSITE_HOST}/google-login`)
+      .get(`${process.env.NEXT_PUBLIC_JOBSITE_HOST}google-login`)
       .then((res) => router.push(res.data));
   }
 
@@ -37,7 +37,7 @@ export default function Login(): JSX.Element {
       password: target.password.value,
     };
     axios
-      .post(`${process.env.NEXT_PUBLIC_JOBSITE_HOST}/user/login`, userLogin)
+      .post(`${process.env.NEXT_PUBLIC_JOBSITE_HOST}user/login`, userLogin)
       .then((res) => {
         if (res.status === 201) {
           const decoded: MyJwtPayload = jwtDecode(res.data.token);
