@@ -25,7 +25,7 @@ export class GoogleLoginController {
   googleLogin() {
     const stringifiedParams = queryString.stringify({
       client_id: process.env.GOOGLE_CLIENT_ID,
-      redirect_uri: `http://localhost:${process.env.BACKEND_PORT}/google/callback`,
+      redirect_uri: `${process.env.BACKEND_URL}/google/callback`,
       scope: [
         `https://www.googleapis.com/auth/userinfo.email`,
         `https://www.googleapis.com/auth/userinfo.profile`,
@@ -85,6 +85,6 @@ export class GoogleLoginController {
     res
       .status(200)
       .cookie('token', token)
-      .redirect(`${process.env.CLIENT_PORT}`);
+      .redirect(`${process.env.FRONTEND_URL}`);
   }
 }
