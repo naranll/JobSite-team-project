@@ -76,12 +76,13 @@ export class GoogleLoginController {
       email: user.email,
       _id: user._id,
       image: user.image,
+      role: user.role,
     };
     // const token = await this.jwtService.signAsync(payload);
     const token = await this.jwtService.signAsync(payload, {
       secret: process.env.JWT_SECRET,
     });
-    console.log('google token on be', this.jwtService.decode(token));
+    // console.log('google token on be', this.jwtService.decode(token));
 
     res
       .status(200)
