@@ -21,7 +21,7 @@ export default function Register(): JSX.Element {
     };
 
     axios
-      .post(`${process.env.NEXT_PUBLIC_JOBSITE_HOST}user/add`, data)
+      .post(`${process.env.NEXT_PUBLIC_JOBSITE_HOST}/user/add`, data)
       .then((res) => {
         if (res.data.success) {
           router.push("/login");

@@ -22,7 +22,7 @@ export default function Job({data: job}: {data: JobType}): JSX.Element {
 
     axios
       .post(
-        `${process.env.NEXT_PUBLIC_JOBSITE_HOST}application/check`,
+        `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/application/check`,
         checkBody
       )
       .then((res) => {
@@ -45,7 +45,7 @@ export default function Job({data: job}: {data: JobType}): JSX.Element {
     const newApply = {jobId: job._id, userId: currentUser?._id};
 
     axios
-      .post(`${process.env.NEXT_PUBLIC_JOBSITE_HOST}application/add`, newApply)
+      .post(`${process.env.NEXT_PUBLIC_JOBSITE_HOST}/application/add`, newApply)
       .then((res) => {
         if (res.data) {
           setShowSuccessModal(true);
@@ -92,7 +92,7 @@ export default function Job({data: job}: {data: JobType}): JSX.Element {
 
 export const getStaticPaths = async () => {
   const result = await fetch(
-    `${process.env.NEXT_PUBLIC_JOBSITE_HOST}job/job_id`
+    `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/job/job_id`
   );
   const resJob = await result.json();
   const paths = await resJob.map((id: {_id: string}) => ({
@@ -112,7 +112,7 @@ export const getStaticProps: GetStaticProps<JobProps> = async ({
   params,
 }: GetStaticPropsContext) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_JOBSITE_HOST}job/singleJob/${params?.id}`
+    `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/job/singleJob/${params?.id}`
   );
   const resjson = await res.json();
   return {
