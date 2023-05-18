@@ -46,7 +46,7 @@ export default function AppliedJob(props: {data: AppliedType}): JSX.Element {
     };
     axios
       .delete(
-        `${process.env.NEXT_PUBLIC_JOBSITE_HOST}application/remove/${currentUser?._id}`,
+        `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/application/remove/${currentUser?._id}`,
         {
           data: appInfo,
         }
@@ -105,7 +105,7 @@ export default function AppliedJob(props: {data: AppliedType}): JSX.Element {
 
 export const getStaticPaths = async () => {
   const result = await fetch(
-    `${process.env.NEXT_PUBLIC_JOBSITE_HOST}application/user_id`
+    `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/application/user_id`
   );
   const resultApp = await result.json();
   const paths = await resultApp.map((id: {_id: string}) => ({
@@ -125,7 +125,7 @@ export const getStaticProps: GetStaticProps<ApplicationProps> = async ({
   params,
 }: GetStaticPropsContext) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_JOBSITE_HOST}application/${params?.id}`
+    `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/application/${params?.id}`
   );
   const resJson = await res.json();
   return {
