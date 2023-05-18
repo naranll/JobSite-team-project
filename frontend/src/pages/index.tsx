@@ -9,7 +9,7 @@ import Pagination from "@/components/Pagenation";
 
 export default function Home(props: {jobs: JobType[]}): JSX.Element {
   const {jobs} = props;
-  const [showJobs, setShowJobs] = useState<any>();
+  const [showJobs, setShowJobs] = useState<JobType[]>();
   const route = useRouter();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function changeHandler(e: any): void {
@@ -67,8 +67,7 @@ export default function Home(props: {jobs: JobType[]}): JSX.Element {
         </div>
         <div className="home-joblist mx-auto w-5/6 lg:w-4/5">
           {
-            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-            showJobs?.map(
+           showJobs && showJobs.map(
               (job: JobType, index: number): JSX.Element => (
                 <Link href={`jobs/${job._id}`} key={index}>
                   <JobCard {...job} />
@@ -94,7 +93,7 @@ export async function getServerSideProps(context: {query: any}) {
           }&search=${query.s ? query.s : ""}`
         : `${
             process.env.NEXT_PUBLIC_JOBSITE_HOST
-          }/job/filter/?category=all&search=${query.s ? query.s : ""}`
+          }job/filter/?category=all&search=${query.s ? query.s : ""}`
     );
     const filtered = await response.json();
 
