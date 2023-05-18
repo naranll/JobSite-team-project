@@ -33,7 +33,7 @@ export default function AddJob(): JSX.Element {
       // contractType: target.contractType.value,
     };
     axios
-      .post(`${process.env.NEXT_PUBLIC_JOBSITE_HOST}/job/add`, newJob)
+      .post(`${process.env.NEXT_PUBLIC_JOBSITE_HOST}job/add`, newJob)
       .then((res) => {
         if (res.data.success) {
           setShowSuccessModal(true);
