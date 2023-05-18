@@ -46,7 +46,7 @@ export default function Posted(): JSX.Element {
           <div key={i} className="postedjobs-jobcard">
             <JobCard {...job} />
             <div className="postedjobs-applicants-count">
-              {jobApplicants.length()}
+              {/* {jobApplicants.length()} */}
             </div>
           </div>
         );
