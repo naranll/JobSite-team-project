@@ -51,14 +51,14 @@ export class UserController {
   async logIn(@Req() request: Request, @Res() response: Response) {
     const { email, password } = request.body;
     const user: any = await this.userService.logIn(email, password);
-    // const payload = {
-    //   firstName: user.firstName,
-    //   email: user.email,
-    //   _id: user._id,
-    //   image: user.image,
-    //   role: user.role,
-    // };
-    const payload = { ...user };
+    const payload = {
+      firstName: user.firstName,
+      email: user.email,
+      _id: user._id,
+      image: user.image,
+      role: user.role,
+    };
+    // const payload = { ...user };
     const token = await this.jwtService.signAsync(payload, {
       secret: process.env.JWT_SECRET,
     });
