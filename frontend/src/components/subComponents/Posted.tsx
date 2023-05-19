@@ -10,6 +10,7 @@ export default function Posted(): JSX.Element {
   const {currentUser, token} = useUserContext();
 
   useEffect(() => {
+    console.log("current user", currentUser);
     if (currentUser) {
       try {
         const getPostedJobs = async () => {
