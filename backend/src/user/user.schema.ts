@@ -19,7 +19,7 @@ export class User {
   email: string;
   @Prop([String])
   skills: string[];
-  @Prop({ default: 'ClIENT' })
+  @Prop({ default: 'CLIENT' })
   role: 'CLIENT' | 'MODERATOR' | 'ADMIN';
   @Prop()
   image?: string;
