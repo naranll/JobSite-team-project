@@ -13,7 +13,6 @@ export interface IUserContext {
   handleLogout: () => void;
   token: string | undefined;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  // submitHandler: (e: any) => void;
 }
 
 export const UserContext = createContext<IUserContext>({} as IUserContext);
@@ -21,15 +20,6 @@ export const UserContext = createContext<IUserContext>({} as IUserContext);
 interface UserProviderType {
   children: ReactNode;
 }
-// interface LoginType {
-//   email: string;
-//   password: string;
-// }
-
-// interface MyJwtPayload extends JwtPayload {
-//   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-//   _doc: any;
-// }
 
 export const useUserContext = () => useContext(UserContext);
 
@@ -43,11 +33,17 @@ export const UserContextProvider = ({children}: UserProviderType) => {
     if (token) {
       const decode: any = jwtDecode(token);
       setCurrentUser(decode);
+    } else {
+      const queryToken = router.query.token;
+      if (queryToken) {
+        const decode: any = jwtDecode(`${queryToken}`);
+        setCurrentUser(decode);
+      }
     }
-  }, [token]);
+  }, [router.query.token, token]);
+
   useEffect(() => {
-    const cookie = Cookies.get("token");
-    if (cookie) {
+    if (Cookies.get("token")) {
       setToken(Cookies.get("token"));
     }
   }, [router.pathname]);
