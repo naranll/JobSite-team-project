@@ -8,7 +8,7 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
-import { Request, Response, query } from 'express';
+import { Request, Response } from 'express';
 // import { Query } from 'mongoose';
 // import { Query } from '@nestjs/common';
 import { Job } from './job.schema';
@@ -56,11 +56,11 @@ export class JobController {
     return this.jobService.filetredJob(query);
   }
 
-  @Get('query')
-  async search(@Req() Req: Request, @Res() Res: Response) {
-    const query = Req.query;
-    return Res.status(200);
-  }
+  // @Get('query')
+  // async search(@Req() Req: Request, @Res() Res: Response) {
+  //   const query = Req.query;
+  //   return Res.status(200);
+  // }
 
   @Get('pageNumbers')
   countNum(): Promise<number> {

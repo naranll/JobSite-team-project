@@ -81,11 +81,11 @@ export class GoogleLoginController {
     const token = await this.jwtService.signAsync(payload, {
       secret: process.env.JWT_SECRET,
     });
-    // console.log('google token on be', this.jwtService.decode(token));
+    console.log('google token on be', this.jwtService.decode(token));
 
-    res
-      .status(200)
-      .cookie('token', token)
-      .redirect(`${process.env.FRONTEND_URL}`);
+    res.status(200);
+    res.cookie('token', token);
+    console.log('ok cookie sent');
+    res.redirect(`${process.env.FRONTEND_URL}`);
   }
 }
