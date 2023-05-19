@@ -69,13 +69,7 @@ export class GoogleLoginController {
       user = await this.userService.createUser(userInput);
     }
 
-    const payload = {
-      firstName: user.firstName,
-      email: user.email,
-      _id: user._id,
-      image: user.image,
-      role: user.role,
-    };
+    const payload = { ...user };
     // const token = await this.jwtService.signAsync(payload);
     const token = await this.jwtService.signAsync(payload, {
       secret: process.env.JWT_SECRET,
