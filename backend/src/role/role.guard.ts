@@ -19,10 +19,10 @@ export class CheckRoleGuard implements CanActivate {
     if (!token) {
       return false;
     }
-    // console.log('token exist');
+    console.log('token exist');
 
     const decodedToken = this.jwtService.decode(token);
-    // console.log('decoded token', decodedToken);
+    console.log('decoded token', decodedToken);
 
     if (!decodedToken) {
       return false;
@@ -32,7 +32,7 @@ export class CheckRoleGuard implements CanActivate {
       'roles',
       context.getHandler(),
     );
-    // console.log('required roles', requiredRoles);
+    console.log('required roles', requiredRoles);
 
     if (!requiredRoles) {
       return false;
@@ -42,7 +42,7 @@ export class CheckRoleGuard implements CanActivate {
       return false;
     }
 
-    // console.log('user passed guard');
+    console.log('user passed guard');
     return true;
   }
 
