@@ -12,6 +12,7 @@ export default function Posted(): JSX.Element {
   useEffect(() => {
     if (token) {
       try {
+        console.log(currentUser);
         const getPostedJobs = async () => {
           const result = await fetch(
             `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/job/posted/${currentUser?._id}`,
