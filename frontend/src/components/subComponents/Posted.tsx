@@ -8,20 +8,27 @@ export default function Posted(): JSX.Element {
   const [postedJobs, setPostedJobs] = useState<JobType[]>();
   const [jobsApplicants, setJobsApplicants] = useState<ApplicationType[]>();
   const {currentUser} = useUserContext();
-  const bearer = "Bearer " + Cookies.get("token");
 
   useEffect(() => {
-    try {
-      const getPostedJobs = async () => {
-        const result = await fetch(
-          `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/job/posted/${currentUser?._id}`,
-          {headers: {Authorization: bearer}}
-        ).then((res) => res.json());
-        setPostedJobs(result);
-        getJobsApplicants(result);
-      };
-      getPostedJobs();
-    } catch (error) {}
+    const token = Cookies.get("token");
+    let auth = "Bearer ";
+    if (token) {
+      auth += token;
+
+      try {
+        const getPostedJobs = async () => {
+          const result = await fetch(
+            `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/job/posted/${currentUser?._id}`,
+            {headers: {Authorization: auth}}
+          ).then((res) => res.json());
+          setPostedJobs(result);
+          getJobsApplicants(result);
+        };
+        getPostedJobs();
+      } catch (error) {
+        console.log("Error: ", error);
+      }
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
