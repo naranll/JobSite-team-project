@@ -40,8 +40,6 @@ export default function Login(): JSX.Element {
       .post(`${process.env.NEXT_PUBLIC_JOBSITE_HOST}/user/login`, userLogin)
       .then((res) => {
         if (res.status === 201) {
-          // const decoded: MyJwtPayload = jwtDecode(res.data.token);
-          // const user = decoded["_doc"];
           const user: any = jwtDecode(res.data.token);
           setCurrentUser(user);
           Cookies.set("token", res.data.token);
