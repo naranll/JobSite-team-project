@@ -1,5 +1,5 @@
 import {useUserContext} from "@/context/UserContext";
-import Cookies from "js-cookie";
+
 import {ApplicationType, JobType} from "@/util/types";
 import {useEffect, useState} from "react";
 import JobCard from "../JobCard";
@@ -7,19 +7,15 @@ import JobCard from "../JobCard";
 export default function Posted(): JSX.Element {
   const [postedJobs, setPostedJobs] = useState<JobType[]>();
   const [jobsApplicants, setJobsApplicants] = useState<ApplicationType[]>();
-  const {currentUser} = useUserContext();
+  const {currentUser, token} = useUserContext();
 
   useEffect(() => {
-    const token = Cookies.get("token");
-    let auth = "Bearer ";
     if (token) {
-      auth += token;
-
       try {
         const getPostedJobs = async () => {
           const result = await fetch(
             `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/job/posted/${currentUser?._id}`,
-            {headers: {Authorization: auth}}
+            {headers: {Authorization: `"Bearer ${token}`}}
           ).then((res) => res.json());
           setPostedJobs(result);
           getJobsApplicants(result);
@@ -30,7 +26,7 @@ export default function Posted(): JSX.Element {
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [token]);
 
   const getJobsApplicants = (jobs: JobType[]) => {
     jobs.map((job) => {
