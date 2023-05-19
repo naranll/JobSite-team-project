@@ -83,9 +83,8 @@ export class GoogleLoginController {
     });
     console.log('google token on be', this.jwtService.decode(token));
 
-    res.status(200);
-    res.cookie('token', token);
-    console.log('ok cookie sent');
-    res.redirect(`${process.env.FRONTEND_URL}`);
+    res
+      .cookie('token', token)
+      .redirect(`${process.env.FRONTEND_URL}?token=${token}`);
   }
 }
