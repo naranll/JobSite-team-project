@@ -1,7 +1,9 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, UnauthorizedException, UploadedFile } from '@nestjs/common';
 import { InjectConnection, InjectModel } from '@nestjs/mongoose';
 import { Connection, Model } from 'mongoose';
 import { User } from './user.schema';
+import { admin } from 'src/fileHandler/firebase.config';
+import { nanoid } from 'nanoid';
 
 @Injectable()
 export class UserService {
@@ -55,4 +57,31 @@ export class UserService {
     });
     return updatedUser;
   }
+
+  async uploadToFirebase(file: Express.Multer.File): Promise<string>{
+    const {originalname, buffer, mimetype} = file
+
+    const ext = getExtension(originalname);
+    const newName = nanoid() + '.' + ext;
+    console.log('filename', newName);
+
+    function getExtension(name: string) {
+      const arr = name.split('.');
+      return arr[arr.length - 1];
+    }
+    const storageRef = admin.storage().bucket().file(newName);
+    const metadata = {
+      contentType: mimetype,
+    };
+
+    await storageRef.save(buffer, {
+      metadata,
+    });
+    const url = await storageRef.getSignedUrl({
+      action: 'read',
+      expires: '03-01-2024 ',
+    });
+    return url[0];
+  }
 }
+  

@@ -112,7 +112,7 @@ export default function UserEditForm({ user, setVisible }: any): JSX.Element {
 
     axios({
       method: "PATCH",
-      url: `${process.env.NEXT_PUBLIC_JOBSITE_HOST}user/${currentUser?._id}`,
+      url: `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/user/${currentUser?._id}`,
       data: formData,
       headers: {
         "Content-Type": "multipart/form-data",

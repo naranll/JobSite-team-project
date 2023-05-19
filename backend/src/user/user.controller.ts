@@ -76,7 +76,17 @@ export class UserController {
   async uploadImage(
     @UploadedFile() file: Express.Multer.File,
   ): Promise<string> {
-    const storageRef = admin.storage().bucket().file(file.originalname);
+    const {originalname} = file
+    const ext = getExtension(originalname);
+    const newName = nanoid() + '.' + ext;
+    console.log('filename', newName);
+
+    function getExtension(name: string) {
+      const arr = name.split('.');
+      return arr[arr.length - 1];
+    }
+    
+    const storageRef = admin.storage().bucket().file(newName);
     const metadata = {
       contentType: file.mimetype,
     };
@@ -109,10 +119,10 @@ export class UserController {
     if (skills) {
       userData.skills = JSON.parse(skills);
     }
-    // if (file) {
-    //   const imageUrl = await this.uploadFileToFirebase(file);
-    //   userData.image = imageUrl;
-    // }
+    if (file) {
+      const imageUrl = await this.userService.uploadToFirebase(file);
+      userData.image = imageUrl;
+    }
 
     const updatedUser = await this.userService.updateUser(id, userData);
     if (updatedUser) {

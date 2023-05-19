@@ -14,7 +14,7 @@ export default function ProfileInfo(): JSX.Element {
   useEffect(() => {
     const getUser = async (id: string | undefined) => {
       const result = await axios.get(
-        `${process.env.NEXT_PUBLIC_JOBSITE_HOST}user/${id}`
+        `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/user/${id}`
       );
       setUser(result.data);
     };
@@ -38,7 +38,7 @@ export default function ProfileInfo(): JSX.Element {
               />
             </div>
             <div className="relative flex p-4 gap-4">
-              <div className="">
+              <div className="w-24 h-24">
                 <picture>
                   <img className="rounded-lg" src={user.image} alt="user" />
                 </picture>
