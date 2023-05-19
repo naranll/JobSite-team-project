@@ -22,7 +22,7 @@ export class CheckRoleGuard implements CanActivate {
     // console.log('token exist');
 
     const decodedToken = this.jwtService.decode(token);
-    console.log('decoded token', decodedToken);
+    // console.log('decoded token', decodedToken);
 
     if (!decodedToken) {
       return false;
@@ -38,7 +38,7 @@ export class CheckRoleGuard implements CanActivate {
       return false;
     }
 
-    if (!requiredRoles.includes(decodedToken['_doc']['role'])) {
+    if (!requiredRoles.includes(decodedToken['role'])) {
       return false;
     }
 
@@ -49,8 +49,6 @@ export class CheckRoleGuard implements CanActivate {
   private extractTokenFromHeader(request: Request): string | undefined {
     const auth = request.headers.authorization?.split(' ') ?? [];
     const [type, token] = auth;
-    console.log(type === 'Bearer');
-    console.log(type);
     return type === 'Bearer' ? token : undefined;
   }
 }
