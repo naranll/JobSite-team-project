@@ -15,8 +15,9 @@ import { User } from './user.schema';
 import { JwtService } from '@nestjs/jwt';
 import { Request, Response } from 'express';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { firebaseApp, storageBucket } from 'src/fileHandler/firebase.service';
+// import { firebaseApp, storageBucket } from 'src/fileHandler/firebase.service';
 import { nanoid } from 'nanoid';
+import { admin } from 'src/fileHandler/firebase.config';
 
 @Controller('user')
 export class UserController {
@@ -63,6 +64,26 @@ export class UserController {
     return this.userService.findUser(id);
   }
 
+  @Post('uploads')
+  @UseInterceptors(FileInterceptor('image'))
+  async uploadImage(
+    @UploadedFile() file: Express.Multer.File,
+  ): Promise<string> {
+    const storageRef = admin.storage().bucket().file(file.originalname);
+    const metadata = {
+      contentType: file.mimetype,
+    };
+
+    await storageRef.save(file.buffer, {
+      metadata,
+    });
+    const url = await storageRef.getSignedUrl({
+      action: 'read',
+      expires: '03-01-2024 ',
+    });
+    return url[0];
+  }
+
   @Patch('/:id')
   @UseInterceptors(FileInterceptor('image'))
   async updateUser(
@@ -81,10 +102,10 @@ export class UserController {
     if (skills) {
       userData.skills = JSON.parse(skills);
     }
-    if (file) {
-      const imageUrl = await this.uploadFileToFirebase(file);
-      userData.image = imageUrl;
-    }
+    // if (file) {
+    //   const imageUrl = await this.uploadFileToFirebase(file);
+    //   userData.image = imageUrl;
+    // }
 
     const updatedUser = await this.userService.updateUser(id, userData);
     if (updatedUser) {
@@ -94,37 +115,37 @@ export class UserController {
     }
   }
 
-  private async uploadFileToFirebase(
-    file: Express.Multer.File,
-  ): Promise<string> {
-    const { originalname, buffer, mimetype } = file;
+  // private async uploadFileToFirebase(
+  //   file: Express.Multer.File,
+  // ): Promise<string> {
+  //   const { originalname, buffer, mimetype } = file;
 
-    const ext = getExtension(originalname);
-    // const generatedId = nanoid();
-    const newName = nanoid() + '.' + ext;
-    console.log('filename', newName);
+  //   const ext = getExtension(originalname);
+  //   // const generatedId = nanoid();
+  //   const newName = nanoid() + '.' + ext;
+  //   console.log('filename', newName);
 
-    function getExtension(name: string) {
-      const arr = name.split('.');
-      return arr[arr.length - 1];
-    }
+  //   function getExtension(name: string) {
+  //     const arr = name.split('.');
+  //     return arr[arr.length - 1];
+  //   }
 
-    const blob = storageBucket.file(newName);
-    const blobWriter = blob.createWriteStream({
-      metadata: {
-        contentType: mimetype,
-      },
-    });
+  //   const blob = storageBucket.file(newName);
+  //   const blobWriter = blob.createWriteStream({
+  //     metadata: {
+  //       contentType: mimetype,
+  //     },
+  //   });
 
-    return new Promise((resolve, reject) => {
-      blobWriter.on('finish', () => {
-        const publicUrl = `https://storage.googleapis.com/${storageBucket.name}/${blob.name}`;
-        resolve(publicUrl);
-      });
-      blobWriter.on('error', (error) => {
-        reject(error);
-      });
-      blobWriter.end(buffer);
-    });
-  }
+  //   return new Promise((resolve, reject) => {
+  //     blobWriter.on('finish', () => {
+  //       const publicUrl = `https://storage.googleapis.com/${storageBucket.name}/${blob.name}`;
+  //       resolve(publicUrl);
+  //     });
+  //     blobWriter.on('error', (error) => {
+  //       reject(error);
+  //     });
+  //     blobWriter.end(buffer);
+  //   });
+  // }
 }

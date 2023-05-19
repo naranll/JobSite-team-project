@@ -1,11 +1,10 @@
 import { MulterModuleOptions } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-import { extname } from 'path';
 import { nanoid } from 'nanoid';
 
 export const multerConfig: MulterModuleOptions = {
   storage: diskStorage({
-    destination: '/tmp',
+    destination: '/tmp', //change destination folder when using windows
     filename: (req, file, cb) => {
       const ext = getExtension(file.originalname);
       const newName = nanoid() + '.' + ext;

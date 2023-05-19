@@ -10,6 +10,8 @@ import { GoogleLoginModule } from './googleLogin/googleLogin.module';
 import { categoryModule } from './category/category.module';
 import { MulterModule } from '@nestjs/platform-express';
 import { multerConfig } from './fileHandler/multer.config';
+import { FirebaseAdmin } from 'nestjs-firebase';
+import { firebaseApp } from './fileHandler/firebase.config';
 
 @Module({
   imports: [
@@ -20,6 +22,7 @@ import { multerConfig } from './fileHandler/multer.config';
     applicationModule,
     categoryModule,
     GoogleLoginModule,
+
     MulterModule.register(multerConfig),
   ],
   controllers: [AppController],
