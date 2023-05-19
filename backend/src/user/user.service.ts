@@ -30,7 +30,7 @@ export class UserService {
   async findUser(id: string): Promise<User> {
     console.log('find user id', id);
     const result = await this.userModel.findById(id).exec();
-    console.log('found User', result);
+    // console.log('found User', result);
     return result;
   }
 

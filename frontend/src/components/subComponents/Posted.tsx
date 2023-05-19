@@ -12,11 +12,10 @@ export default function Posted(): JSX.Element {
   useEffect(() => {
     if (currentUser) {
       try {
-        console.log(currentUser);
         const getPostedJobs = async () => {
           const result = await fetch(
             `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/job/posted/${currentUser._id}`,
-            {headers: {Authorization: `"Bearer ${token}`}}
+            {headers: {Authorization: `Bearer ${token}`}}
           ).then((res) => res.json());
           setPostedJobs(result);
           getJobsApplicants(result);

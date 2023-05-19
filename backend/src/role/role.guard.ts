@@ -16,14 +16,13 @@ export class CheckRoleGuard implements CanActivate {
   ): boolean | Promise<boolean> | Observable<boolean> {
     const request = context.switchToHttp().getRequest();
     const token = this.extractTokenFromHeader(request);
-
     if (!token) {
       return false;
     }
-    console.log('token exist');
+    // console.log('token exist');
 
     const decodedToken = this.jwtService.decode(token);
-    // console.log('decoded token', decodedToken);
+    console.log('decoded token', decodedToken);
 
     if (!decodedToken) {
       return false;
@@ -39,7 +38,7 @@ export class CheckRoleGuard implements CanActivate {
       return false;
     }
 
-    if (!requiredRoles.includes(decodedToken['role'])) {
+    if (!requiredRoles.includes(decodedToken['_doc']['role'])) {
       return false;
     }
 
@@ -48,7 +47,10 @@ export class CheckRoleGuard implements CanActivate {
   }
 
   private extractTokenFromHeader(request: Request): string | undefined {
-    const [type, token] = request.headers.authorization?.split(' ') ?? [];
+    const auth = request.headers.authorization?.split(' ') ?? [];
+    const [type, token] = auth;
+    console.log(type === 'Bearer');
+    console.log(type);
     return type === 'Bearer' ? token : undefined;
   }
 }

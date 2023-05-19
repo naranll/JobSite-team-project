@@ -41,7 +41,8 @@ export const UserContextProvider = ({children}: UserProviderType) => {
   useEffect(() => {
     const token = Cookies.get("token");
     if (token) {
-      setCurrentUser(jwtDecode(token));
+      const decode: any = jwtDecode(token);
+      setCurrentUser(decode["_doc"]);
     }
   }, [token]);
   useEffect(() => {
