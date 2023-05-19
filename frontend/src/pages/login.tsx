@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useRouter } from "next/router";
+import {useRouter} from "next/router";
 import axios from "axios";
 import Link from "next/link";
-import { useUserContext } from "../context/UserContext";
-import { FcGoogle } from "react-icons/fc";
-import jwtDecode, { JwtPayload } from "jwt-decode";
+import {useUserContext} from "../context/UserContext";
+import {FcGoogle} from "react-icons/fc";
+import jwtDecode from "jwt-decode";
 import Cookies from "js-cookie";
 
 interface LoginType {
@@ -12,13 +12,13 @@ interface LoginType {
   password: string;
 }
 
-interface MyJwtPayload extends JwtPayload {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  _doc: any;
-}
+// interface MyJwtPayload extends JwtPayload {
+//   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//   _doc: any;
+// }
 
 export default function Login(): JSX.Element {
-  const { setCurrentUser } = useUserContext();
+  const {setCurrentUser} = useUserContext();
   const router = useRouter();
 
   function googleLogin() {
@@ -40,8 +40,9 @@ export default function Login(): JSX.Element {
       .post(`${process.env.NEXT_PUBLIC_JOBSITE_HOST}/user/login`, userLogin)
       .then((res) => {
         if (res.status === 201) {
-          const decoded: MyJwtPayload = jwtDecode(res.data.token);
-          const user = decoded["_doc"];
+          // const decoded: MyJwtPayload = jwtDecode(res.data.token);
+          // const user = decoded["_doc"];
+          const user: any = jwtDecode(res.data.token);
           setCurrentUser(user);
           Cookies.set("token", res.data.token);
           router.push("/");
