@@ -15,7 +15,7 @@ export default function SuccessModal(props: {
             <picture className="succeedImage">
               <img src="../image/succeedImage.png" alt="#" />
             </picture>
-            <p className="para">Congratulations </p>
+            <p className="para">Congratulations 👏</p>
           </div>
           <Link href={`../`}>
             <button className="applicationBtn">Go Home</button>
