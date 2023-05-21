@@ -18,13 +18,13 @@ export interface AppliedType {
   state: string;
 }
 
-export default function Applied(props:any): JSX.Element {
-  const [appliedJobs, setAppliedJobs] = useState<AppliedType[]>()
-  const [toggle, setToggle] = useState(false)
-  const [visible, setVisible] = useState(false)
-  const [jobId, setJobId] = useState<string | undefined>()
+export default function Applied(props: any): JSX.Element {
+  const [appliedJobs, setAppliedJobs] = useState<AppliedType[]>();
+  const [toggle, setToggle] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [jobId, setJobId] = useState<string | undefined>();
   const { currentUser } = useUserContext();
-  const toast = useRef<any>(null)
+  const toast = useRef<any>(null);
   const showInfo = () => {
     toast.current.show({
       severity: "success",
@@ -35,8 +35,8 @@ export default function Applied(props:any): JSX.Element {
   };
 
   const handleToggle = () => {
-    setToggle(!toggle)
-  }
+    setToggle(!toggle);
+  };
 
   function handleWithdraw(id: string | undefined) {
     console.log("userId", currentUser?._id);
@@ -55,64 +55,63 @@ export default function Applied(props:any): JSX.Element {
         handleToggle;
         if (res.data.message) {
           showInfo();
-
-          
         }
       })
       .catch((err) => console.log(err));
-    const result = appliedJobs?.filter((job:AppliedType)=> job.jobId._id !== id)
-    setAppliedJobs(result)
+    const result = appliedJobs?.filter(
+      (job: AppliedType) => job.jobId._id !== id
+    );
+    setAppliedJobs(result);
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     const getApplication = async (id: string | undefined) => {
-      const result = await axios.get(`${process.env.NEXT_PUBLIC_JOBSITE_HOST}/application/${id}`)
-      setAppliedJobs(result.data)
-
-    }
-    getApplication(currentUser?._id)
-  },[currentUser, toggle])
+      const result = await axios.get(
+        `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/application/${id}`
+      );
+      setAppliedJobs(result.data);
+    };
+    getApplication(currentUser?._id);
+  }, [currentUser, toggle]);
   return (
-    <div className="border-2">
-      
-      {
-      appliedJobs?.map((job: AppliedType, i: number)=> (
+    <div>
+      {appliedJobs?.map((job: AppliedType, i: number) => (
         <div className="m-5" key={i}>
           <JobCard {...job.jobId} />
-          <div className="state shadow-md ">{job.state}</div>
-      <Dialog
-        className="text-center"
-        header="Warning"
-        visible={visible}
-        onHide={() => setVisible(false)}
-      >
-        <div className="p-3">delete application to this job? </div>
-        <div className="flex justify-center gap-3">
-          <Button
-            onClick={() => {
-              handleWithdraw(job.jobId._id);
-              setVisible(false);
-              console.log(job
-                )
-            }}
-          >
-            yes
-          </Button>
-          <Button onClick={() => setVisible(false)}>no</Button>
-        </div>
-      </Dialog>
-          <div
-            className="cursor-pointer hover:bg-red-300 shadow-md rounded-full"
-            onClick={() => {
-              setVisible(true);
-              setJobId(job.jobId._id);
-            }}
-          >
-            <FcCancel size={40} />
+          <div className="flex justify-between m-[10px]">
+            <div className="state w-[100px]">{job.state}</div>
+            <Dialog
+              className="text-center"
+              header="Warning"
+              visible={visible}
+              onHide={() => setVisible(false)}
+            >
+              <div className="p-3">delete application to this job? </div>
+              <div className="flex justify-center gap-3">
+                <Button
+                  onClick={() => {
+                    handleWithdraw(job.jobId._id);
+                    setVisible(false);
+                    console.log(job);
+                  }}
+                >
+                  yes
+                </Button>
+                <Button onClick={() => setVisible(false)}>no</Button>
+              </div>
+            </Dialog>
+            <div
+              className="deleteBtn cursor-pointer hover:bg-red-200 rounded-full"
+              onClick={() => {
+                setVisible(true);
+                setJobId(job.jobId._id);
+              }}
+            >
+              <FcCancel size={40} />
+            </div>
           </div>
         </div>
-      ))
-      }
+      ))}
     </div>
   );
 }

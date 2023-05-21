@@ -4,10 +4,17 @@
   align-items: center;
 }
 .state {
-  background-color: yellow;
+  background-color: #fff;
+  color: #F2B05C;
   border-radius: 10px;
   padding: 10px;
+  // box-shadow: 0px 0px 10px #F2B05C;
+  box-shadow: 0 4px 4px -1px #F2B05C, 0 2px 2px -1px
 }
+
+// .deleteBtn{
+//   box-shadow: 1px 1px #fb0000, 0 0;
+// }
 
 //Successful Modal//
 
