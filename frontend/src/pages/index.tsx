@@ -1,19 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Filter from "@/components/Filter";
 import JobCard from "@/components/JobCard";
-import {JobType} from "@/util/types";
+import { JobType } from "@/util/types";
 import Link from "next/link";
-import {useRouter} from "next/router";
-import {useEffect, useState} from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import Pagination from "@/components/Pagenation";
 
-export default function Home(props: {jobs: JobType[]}): JSX.Element {
-  const {jobs} = props;
+export default function Home(props: { jobs: JobType[] }): JSX.Element {
+  const { jobs } = props;
   const [showJobs, setShowJobs] = useState<JobType[]>();
   const route = useRouter();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function changeHandler(e: any): void {
-    route.push({query: {category: e.currentTarget.value}});
+    route.push({ query: { category: e.currentTarget.value } });
     return;
   }
 
@@ -66,15 +66,14 @@ export default function Home(props: {jobs: JobType[]}): JSX.Element {
           <Filter />
         </div>
         <div className="home-joblist mx-auto w-5/6 lg:w-4/5">
-          {
-           showJobs && showJobs.map(
+          {showJobs &&
+            showJobs.map(
               (job: JobType, index: number): JSX.Element => (
                 <Link href={`jobs/${job._id}`} key={index}>
                   <JobCard {...job} />
                 </Link>
               )
-            )
-          }
+            )}
         </div>
       </div>
       <Pagination setShowJobs={setShowJobs} />
@@ -83,17 +82,23 @@ export default function Home(props: {jobs: JobType[]}): JSX.Element {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function getServerSideProps(context: {query: any}) {
-  const {query} = context;
+export async function getServerSideProps(context: { query: any }) {
+  const { query } = context;
   try {
     const response = await fetch(
       query.category
         ? `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/job/filter/?category=${
             query.category
-          }&search=${query.s ? query.s : ""}`
+            // }&search=${query.s ? query.s : ""}`
+          }&search=${query.s ? query.s : ""}&pages=${
+            query.page ? query.page : 1
+          }`
         : `${
             process.env.NEXT_PUBLIC_JOBSITE_HOST
-          }/job/filter/?category=all&search=${query.s ? query.s : ""}`
+            // }/job/filter/?category=all&search=${query.s ? query.s : ""}`
+          }/job/filter/?category=all&search=${query.s ? query.s : ""}&pages=${
+            query.page ? query.page : 1
+          }`
     );
     const filtered = await response.json();
 
