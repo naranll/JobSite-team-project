@@ -29,18 +29,21 @@ export const UserContextProvider = ({children}: UserProviderType) => {
   const router = useRouter();
 
   useEffect(() => {
+    const queryToken = router.query.token;
+    if (queryToken) {
+      const decode: any = jwtDecode(`${queryToken}`);
+      setCurrentUser(decode);
+      router.push("/");
+    }
+  }, [router.query.token]);
+
+  useEffect(() => {
     const token = Cookies.get("token");
     if (token) {
       const decode: any = jwtDecode(token);
       setCurrentUser(decode);
-    } else {
-      const queryToken = router.query.token;
-      if (queryToken) {
-        const decode: any = jwtDecode(`${queryToken}`);
-        setCurrentUser(decode);
-      }
     }
-  }, [router.query.token, token]);
+  }, [token]);
 
   useEffect(() => {
     if (Cookies.get("token")) {
