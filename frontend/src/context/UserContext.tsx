@@ -34,8 +34,9 @@ export const UserContextProvider = ({children}: UserProviderType) => {
       Cookies.set("token", `${queryToken}`);
       const decode: any = jwtDecode(`${queryToken}`);
       setCurrentUser(decode);
+      router.replace("/");
     }
-  }, [router.query]);
+  }, [router]);
 
   useEffect(() => {
     const token = Cookies.get("token");
