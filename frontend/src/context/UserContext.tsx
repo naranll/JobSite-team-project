@@ -35,7 +35,7 @@ export const UserContextProvider = ({children}: UserProviderType) => {
       setCurrentUser(decode);
       router.push("/");
     }
-  }, [router.query.token]);
+  }, [router]);
 
   useEffect(() => {
     const token = Cookies.get("token");
