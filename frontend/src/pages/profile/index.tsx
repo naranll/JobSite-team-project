@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useState} from "react";
 // import { useRouter } from "next/router";
 import ProfileInfo from "@/components/subComponents/ProfileInfo";
 import Posted from "@/components/subComponents/Posted";
@@ -14,18 +14,6 @@ export default function Profile(): JSX.Element {
   const [activeBtn, setActiveBtn] = useState<
     "profile" | "posted" | "applied" | "history"
   >("profile");
-
-  //   useEffect(() => {
-  //     if (!token) {
-  //       router.push("/login");
-  //     }
-
-  //     // const userInfo = axios(`${process.env.NEXT_PUBLIC_JOBSITE_HOST}/getProfile`, {
-  //     //   headers: {
-  //     //     authorizedToken: `Bearer: ${token}`,
-  //     //   },
-  //     // });
-  //   }, [currentUser, router, token]);
 
   let activeComponent = <ProfileInfo />;
   switch (activeBtn) {

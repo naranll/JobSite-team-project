@@ -5,6 +5,7 @@
     position: relative;
     display: flex;
     margin-bottom: 6px;
+    border-left: 3px solid #fff;
     &:hover {
       border-left: 3px solid $primary-color;
     }
@@ -24,11 +25,12 @@
     border-radius: 8px;
     &-count {
       font-size: 20px;
+      text-align: center;
     }
     &:hover {
-      color: $primary-hover-color;
+      color: $primary-color;
       font-weight: 600;
-      border: 3px solid $primary-hover-color;
+      border: 3px solid $primary-color;
     }
   }
 }
