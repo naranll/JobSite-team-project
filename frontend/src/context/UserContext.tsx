@@ -31,6 +31,7 @@ export const UserContextProvider = ({children}: UserProviderType) => {
   useEffect(() => {
     const queryToken = router.query.token;
     if (queryToken) {
+      Cookies.set("token", `${queryToken}`);
       const decode: any = jwtDecode(`${queryToken}`);
       setCurrentUser(decode);
     }
