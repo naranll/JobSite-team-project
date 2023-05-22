@@ -1,5 +1,4 @@
 import {useUserContext} from "@/context/UserContext";
-
 import {ApplicationType, JobType} from "@/util/types";
 import {useEffect, useState} from "react";
 import JobCard from "../JobCard";
@@ -10,7 +9,6 @@ export default function Posted(): JSX.Element {
   const {currentUser, token} = useUserContext();
 
   useEffect(() => {
-    console.log("current user", currentUser);
     if (currentUser) {
       try {
         const getPostedJobs = async () => {
@@ -47,18 +45,33 @@ export default function Posted(): JSX.Element {
     );
   }
 
+  function showEditJob(jobId: string | undefined) {
+    console.log("jobId", jobId);
+  }
+
+  function showJobApplicants(jobId: string | undefined) {
+    console.log("job applicants", jobId);
+  }
+
   return (
-    <div className="postedjobs-list">
+    <div className="postedjobs-list p-2">
       {postedJobs?.map((job: JobType, i: number) => {
         const jobApplicants = getSingleJobApplicants(job._id);
         return (
           <div key={i} className="postedjobs-jobcard">
-            <div className="w-4/5 sm:5/6">
+            <div
+              className="w-4/5 sm:w-5/6 pr-1"
+              onClick={() => showEditJob(job._id)}
+            >
               <JobCard {...job} />
             </div>
             <div className="postedjobs-applicants h-full w-1/5 sm:w-1/6">
-              <div className="postedjobs-applicants-count">
+              <div
+                className="postedjobs-applicants-count"
+                onClick={() => showJobApplicants(job._id)}
+              >
                 {jobApplicants?.length}
+                <p className="text-xs">applicants</p>
               </div>
             </div>
           </div>
