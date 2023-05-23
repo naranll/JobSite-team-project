@@ -52,16 +52,21 @@ export class JobController {
   }
 
   @Get('filter')
-  filetredJob(@Query() query: { category: string; search: string }) {
+  filetredJob(
+    @Query() query: { category: string; search: string; pages: string },
+  ) {
+    // console.log(query);
     return this.jobService.filetredJob(query);
   }
 
   // @Get('query')
   // async search(@Req() Req: Request, @Res() Res: Response) {
   //   const query = Req.query;
+  //   console.log('query : =>  ', query);
   //   return Res.status(200);
   // }
 
+  ////page
   @Get('pageNumbers')
   countNum(): Promise<number> {
     return this.jobService.countNum();
@@ -76,6 +81,7 @@ export class JobController {
   @UseGuards(CheckRoleGuard)
   @CheckRole('CLIENT')
   getPostedJobsByUserId(@Param('postedBy') userId: string): Promise<Job[]> {
+    console.log('get jobs posted by user service');
     return this.jobService.getPostedJobsByUserId(userId);
   }
 }

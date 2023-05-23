@@ -76,7 +76,7 @@ export default function Home(props: { jobs: JobType[] }): JSX.Element {
             )}
         </div>
       </div>
-      <Pagination setShowJobs={setShowJobs} />
+      <Pagination />
     </div>
   );
 }

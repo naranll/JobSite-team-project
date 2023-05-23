@@ -14,12 +14,12 @@ const categories: CategoryType[] = [
   },
 ];
 
+
 export default function Filter() {
   const [currentCategory, setCurrentCategory] = useState<string>(
     categories[0].value
-  );
-  const route = useRouter();
-
+    );
+    const route = useRouter();
   // useEffect(() => {
   //   if (localStorage.getItem("category")) {
   //     const category: string | null = localStorage.getItem("category");
