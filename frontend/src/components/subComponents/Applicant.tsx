@@ -30,14 +30,42 @@ export default function Applicant({ selectedApplicationId }: PropType) {
     }
   }, [selectedApplicationId]);
 
+  function acceptHandler() {
+    console.log("accept", applicantInfo?.userId.firstName);
+  }
+
+  function rejectHandler() {
+    console.log("accept", applicantInfo?.userId.firstName);
+  }
+
   return (
     <>
       {applicantInfo && (
-        <div>
-          <div onClick={() => router.back()}>back</div>
-          <h2>
-            {applicantInfo.userId.firstName} {applicantInfo.userId.lastName}
-          </h2>
+        <div className="applicant-page">
+          <div
+            onClick={() => router.back()}
+            className="border-2 border-solid border-black"
+          >
+            back
+          </div>
+          <div className="applicant-info">
+            <h2>
+              {applicantInfo.userId.firstName} {applicantInfo.userId.lastName}
+            </h2>
+            <div>Skills: {applicantInfo.userId.skills}</div>
+          </div>
+          <div
+            onClick={() => acceptHandler}
+            className="border-2 border-solid border-lime-500"
+          >
+            Accept
+          </div>
+          <div
+            onClick={() => rejectHandler()}
+            className="border-2 border-solid border-rose-500"
+          >
+            Reject
+          </div>
         </div>
       )}
     </>
