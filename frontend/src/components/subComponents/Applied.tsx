@@ -114,7 +114,9 @@ export default function Applied(props: any): JSX.Element {
             visible={visible}
             onHide={() => setVisible(false)}
           >
-            <div className="p-3">Withdraw application to this job? </div>
+            <div className="p-3">
+              Do you want to withdraw application to this job?{" "}
+            </div>
             <div className="flex justify-center gap-3">
               <Button
                 onClick={() => {
