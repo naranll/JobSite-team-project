@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useState, useRef, SetStateAction } from "react";
+import {useEffect, useState, useRef, SetStateAction} from "react";
 import JobCard from "../JobCard";
-import { JobType } from "@/util/types";
-import { useUserContext } from "@/context/UserContext";
+import {JobType} from "@/util/types";
+import {useUserContext} from "@/context/UserContext";
 import axios from "axios";
-import { FcCancel } from "react-icons/fc";
-import { Button } from "@chakra-ui/react";
-import { Dialog } from "primereact/dialog";
+import {MdDeleteOutline} from "react-icons/md";
+import {Button} from "@chakra-ui/react";
+import {Dialog} from "primereact/dialog";
 
 export interface AppliedType {
   _id: SetStateAction<AppliedType[] | undefined>;
@@ -23,7 +23,7 @@ export default function Applied(props: any): JSX.Element {
   const [toggle, setToggle] = useState(false);
   const [visible, setVisible] = useState(false);
   const [jobId, setJobId] = useState<string | undefined>();
-  const { currentUser } = useUserContext();
+  const {currentUser} = useUserContext();
   const toast = useRef<any>(null);
   const showInfo = () => {
     toast.current.show({
@@ -73,43 +73,63 @@ export default function Applied(props: any): JSX.Element {
     };
     getApplication(currentUser?._id);
   }, [currentUser, toggle]);
+
+  function setJobStateColor(jobState: string | undefined) {
+    if (jobState == "rejected") {
+      return "text-rose-500";
+    } else if (jobState == "accepted") {
+      return "text-lime-500";
+    } else {
+      return "text-yellow-400";
+    }
+  }
+
   return (
     <div>
       {appliedJobs?.map((job: AppliedType, i: number) => (
-        <div className="m-5" key={i}>
-          <JobCard {...job.jobId} />
-          <div className="flex justify-between m-[10px]">
-            <div className="state w-[100px]">{job.state}</div>
-            <Dialog
-              className="text-center"
-              header="Warning"
-              visible={visible}
-              onHide={() => setVisible(false)}
-            >
-              <div className="p-3">delete application to this job? </div>
-              <div className="flex justify-center gap-3">
-                <Button
-                  onClick={() => {
-                    handleWithdraw(job.jobId._id);
-                    setVisible(false);
-                    console.log(job);
-                  }}
-                >
-                  yes
-                </Button>
-                <Button onClick={() => setVisible(false)}>no</Button>
-              </div>
-            </Dialog>
+        <div className="appliedjobs-jobcard flex m-5 " key={i}>
+          <div className="w-full relative">
+            <JobCard {...job.jobId} />
+
             <div
-              className="deleteBtn cursor-pointer hover:bg-red-200 rounded-full"
-              onClick={() => {
-                setVisible(true);
-                setJobId(job.jobId._id);
-              }}
+              className={`appliedjobs-jobstate ${setJobStateColor(job.state)}`}
             >
-              <FcCancel size={40} />
+              {job.state}
             </div>
           </div>
+
+          <div
+            className="appliedjobs-delete cursor-pointer "
+            onClick={() => {
+              setVisible(true);
+              setJobId(job.jobId._id);
+            }}
+          >
+            <MdDeleteOutline size={30} />
+          </div>
+
+          <Dialog
+            className="text-center"
+            header="Warning"
+            visible={visible}
+            onHide={() => setVisible(false)}
+          >
+            <div className="p-3">
+              Do you want to withdraw application to this job?{" "}
+            </div>
+            <div className="flex justify-center gap-3">
+              <Button
+                onClick={() => {
+                  handleWithdraw(job.jobId._id);
+                  setVisible(false);
+                  console.log(job);
+                }}
+              >
+                Yes
+              </Button>
+              <Button onClick={() => setVisible(false)}>No</Button>
+            </div>
+          </Dialog>
         </div>
       ))}
     </div>

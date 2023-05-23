@@ -1,79 +1,25 @@
-.card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.state {
-  background-color: #fff;
-  color: #F2B05C;
-  border-radius: 10px;
-  padding: 10px;
-  // box-shadow: 0px 0px 10px #F2B05C;
-  box-shadow: 0 4px 4px -1px #F2B05C, 0 2px 2px -1px
-}
-
-// .deleteBtn{
-//   box-shadow: 1px 1px #fb0000, 0 0;
-// }
-
-//Successful Modal//
-
-.successModal {
-  color: #1a75e8;
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.success {
-  color: #1a75e8;
-  position: absolute;
-  // top:  20%;?
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  background-color: #fff;
-  padding: 10px;
-  // padding-bottom: 250px;
-  border-radius: 30px;
-  // height: 200px;
-  min-height: 400px;
-  min-width: 320px;
-}
-
-.bgOpacity {
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.718);
-}
-
-.userImage {
-  border-radius: 50%;
-}
-
-.userEmail {
-  margin: 15px;
-}
-.body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.applicationBtn {
-  background-color: #1a75e8;
-  color: #fff;
-  padding: 10px;
-  border-radius: 10px;
-  // width: 200px;
-}
-
-.succeedImage {
-  width: 250px;
-  height: 250px;
+.appliedjobs {
+  &-jobcard {
+    border-left: 3px solid #fff;
+    &:hover {
+      border-left: 3px solid $primary-color;
+    }
+  }
+  &-jobstate {
+    font-size: 12px;
+    font-weight: 500;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+  }
+  &-delete {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    &:hover {
+      border-radius: 10px;
+      color: $red-color;
+    }
+  }
 }
