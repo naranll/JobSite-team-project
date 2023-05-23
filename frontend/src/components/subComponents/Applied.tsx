@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {useEffect, useState, useRef, SetStateAction} from "react";
+import { useEffect, useState, useRef, SetStateAction } from "react";
 import JobCard from "../JobCard";
-import {JobType} from "@/util/types";
-import {useUserContext} from "@/context/UserContext";
+import { JobType } from "@/util/types";
+import { useUserContext } from "@/context/UserContext";
 import axios from "axios";
-import {MdDeleteOutline} from "react-icons/md";
-import {Button} from "@chakra-ui/react";
-import {Dialog} from "primereact/dialog";
+import { MdDeleteOutline } from "react-icons/md";
+import { Button } from "@chakra-ui/react";
+import { Dialog } from "primereact/dialog";
 
 export interface AppliedType {
   _id: SetStateAction<AppliedType[] | undefined>;
@@ -23,7 +23,7 @@ export default function Applied(props: any): JSX.Element {
   const [toggle, setToggle] = useState(false);
   const [visible, setVisible] = useState(false);
   const [jobId, setJobId] = useState<string | undefined>();
-  const {currentUser} = useUserContext();
+  const { currentUser } = useUserContext();
   const toast = useRef<any>(null);
   const showInfo = () => {
     toast.current.show({
@@ -67,7 +67,7 @@ export default function Applied(props: any): JSX.Element {
   useEffect(() => {
     const getApplication = async (id: string | undefined) => {
       const result = await axios.get(
-        `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/application/${id}`
+        `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/application/userId/${id}`
       );
       setAppliedJobs(result.data);
     };

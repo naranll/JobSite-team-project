@@ -1,36 +1,58 @@
-import {useState} from "react";
-// import { useRouter } from "next/router";
+import { useState } from "react";
 import ProfileInfo from "@/components/subComponents/ProfileInfo";
 import Posted from "@/components/subComponents/Posted";
 import Applied from "@/components/subComponents/Applied";
 import History from "@/components/subComponents/History";
-// import { useUserContext } from "@/context/UserContext";
-// import axios from "axios";
-// import { UserType } from "@/util/types";
+import Applicants from "@/components/subComponents/Applicants";
+import Applicant from "@/components/subComponents/Applicant";
 
 export default function Profile(): JSX.Element {
   // const router = useRouter();
-  // const { currentUser, token } = useUserContext();
   const [activeBtn, setActiveBtn] = useState<
-    "profile" | "posted" | "applied" | "history"
+    "profile" | "posted" | "applied" | "history" | "applicants" | "applicant"
   >("profile");
+  const [selectedJobId, setSelectedJobId] = useState<string | undefined>(
+    undefined
+  );
+  const [selectedApplicationId, setSelectedApplicationId] = useState<
+    string | undefined
+  >(undefined);
 
-  let activeComponent = <ProfileInfo />;
+  let activeComponent;
   switch (activeBtn) {
     case "profile":
-      activeComponent = <ProfileInfo />; //user data
+      activeComponent = <ProfileInfo />;
       break;
     case "posted":
-      activeComponent = <Posted />; //userData
+      activeComponent = (
+        <Posted
+          setActiveBtn={setActiveBtn}
+          setSelectedJobId={setSelectedJobId}
+        />
+      );
       break;
     case "applied":
-      activeComponent = <Applied />; // userData
+      activeComponent = <Applied />;
       break;
     case "history":
-      activeComponent = <History />; // userData
+      activeComponent = <History />;
+      break;
+    case "applicants":
+      activeComponent = (
+        <Applicants
+          selectedJobId={selectedJobId}
+          setActiveBtn={setActiveBtn}
+          setSelectedApplicationId={setSelectedApplicationId}
+        />
+      );
+      break;
+    case "applicant":
+      activeComponent = (
+        <Applicant selectedApplicationId={selectedApplicationId} />
+      );
       break;
     default:
-      activeComponent = <ProfileInfo />; // userData
+      activeComponent = <ProfileInfo />;
   }
 
   const navlinkStyle = "cursor-pointer p-2";
@@ -50,7 +72,13 @@ export default function Profile(): JSX.Element {
               Profile Info
             </li>
             <li
-              className={activeBtn == "posted" ? activeLinkStyle : navlinkStyle}
+              className={
+                activeBtn == "posted" ||
+                activeBtn == "applicants" ||
+                activeBtn == "applicant"
+                  ? activeLinkStyle
+                  : navlinkStyle
+              }
               onClick={() => setActiveBtn("posted")}
             >
               Posted Jobs

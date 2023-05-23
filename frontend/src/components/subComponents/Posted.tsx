@@ -1,12 +1,24 @@
-import {useUserContext} from "@/context/UserContext";
-import {ApplicationType, JobType} from "@/util/types";
-import {useEffect, useState} from "react";
+import { useUserContext } from "@/context/UserContext";
+import { ApplicationType, JobType } from "@/util/types";
+import { useEffect, useState } from "react";
 import JobCard from "../JobCard";
 
-export default function Posted(): JSX.Element {
+interface PropType {
+  setActiveBtn: React.Dispatch<
+    React.SetStateAction<
+      "profile" | "posted" | "applied" | "history" | "applicants" | "applicant"
+    >
+  >;
+  setSelectedJobId: React.Dispatch<React.SetStateAction<string | undefined>>;
+}
+
+export default function Posted({
+  setActiveBtn,
+  setSelectedJobId,
+}: PropType): JSX.Element {
   const [postedJobs, setPostedJobs] = useState<JobType[]>();
   const [jobsApplicants, setJobsApplicants] = useState<ApplicationType[]>();
-  const {currentUser, token} = useUserContext();
+  const { currentUser, token } = useUserContext();
 
   useEffect(() => {
     if (currentUser) {
@@ -14,7 +26,7 @@ export default function Posted(): JSX.Element {
         const getPostedJobs = async () => {
           const result = await fetch(
             `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/job/posted/${currentUser._id}`,
-            {headers: {Authorization: `Bearer ${token}`}}
+            { headers: { Authorization: `Bearer ${token}` } }
           ).then((res) => res.json());
           setPostedJobs(result);
           getJobsApplicants(result);
@@ -30,7 +42,7 @@ export default function Posted(): JSX.Element {
   const getJobsApplicants = (jobs: JobType[]) => {
     jobs.map((job) => {
       fetch(
-        `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/application/applicants/${job._id}`
+        `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/application/jobId/${job._id}`
       )
         .then((res) => res.json())
         .then((res) => setJobsApplicants(res));
@@ -50,6 +62,8 @@ export default function Posted(): JSX.Element {
   }
 
   function showJobApplicants(jobId: string | undefined) {
+    setSelectedJobId(jobId);
+    setActiveBtn("applicants");
     console.log("job applicants", jobId);
   }
 

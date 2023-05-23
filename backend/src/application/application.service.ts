@@ -1,8 +1,7 @@
 import { InjectConnection, InjectModel } from '@nestjs/mongoose';
-import mongoose, { Connection, Model } from 'mongoose';
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Connection, Model } from 'mongoose';
+import { Injectable } from '@nestjs/common';
 import { Application } from './application.schema';
-import { ApplicationDto } from './application.dto';
 
 @Injectable()
 export class ApplicationService {
@@ -23,6 +22,17 @@ export class ApplicationService {
     return query;
   }
 
+  async getApplicationById(
+    applicationId: string,
+  ): Promise<Application[] | void> {
+    const application = await this.applicationModel
+      .findById({
+        _id: applicationId,
+      })
+      .populate('userId');
+    return application.toObject();
+  }
+
   async getAppliedJobsByUserId(userId: string): Promise<Application[]> {
     const appliedJobs = await this.applicationModel
       .find({ userId })
@@ -34,8 +44,7 @@ export class ApplicationService {
   async getApplicantsByJobId(jobId: string): Promise<Application[]> {
     const applicants = await this.applicationModel
       .find({ jobId })
-      .populate('userId')
-      .select({ userId: 1, _id: 0, state: 1, jobId: 1 });
+      .populate('userId');
     return applicants;
   }
 

@@ -1,6 +1,10 @@
+import { ObjectId } from 'mongoose';
+
 export class ApplicationDto {
+  _id: ObjectId;
   jobId: string;
   userId: string;
-  _id?: string;
-  state?: string;
+  state: string;
+  createdDate: Date;
+  updatedDate: Date;
 }
