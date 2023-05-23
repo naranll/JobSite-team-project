@@ -25,13 +25,11 @@ export class ApplicationService {
   async getApplicationById(
     applicationId: string,
   ): Promise<Application[] | void> {
-    console.log('find application by id service');
     const application = await this.applicationModel
       .findById({
         _id: applicationId,
       })
-      .exec();
-    console.log('result', application);
+      .populate('userId');
     return application.toObject();
   }
 
