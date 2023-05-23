@@ -24,18 +24,30 @@ export class JobService {
     const result = await this.jobModel.findById(id).populate('postedBy');
     return result;
   }
-  async filetredJob(query: { category: any; search: any }): Promise<Job[]> {
-    const { category, search } = query;
+  async filetredJob(query: {
+    category: any;
+    search: any;
+    pages: any;
+  }): Promise<Job[]> {
+    const { category, search, pages } = query;
+    const pageNumbers = Number(pages);
     if (category === 'all') {
-      const result = await this.jobModel.find({
-        title: { $regex: new RegExp(search, 'i') },
-      });
+      const result = await this.jobModel
+        .find({
+          title: { $regex: new RegExp(search, 'i') },
+        })
+        .skip((pageNumbers - 1) * 8)
+        .limit(8);
       return result;
     }
-    const result = await this.jobModel.find({
-      category,
-      title: { $regex: new RegExp(search, 'i') },
-    });
+    const result = await this.jobModel
+      .find({
+        category,
+        title: { $regex: new RegExp(search, 'i') },
+      })
+      .skip((pageNumbers - 1) * 8)
+      .limit(8);
+    console.log(' found job filterJobs ===> ', result);
     return result;
   }
 
