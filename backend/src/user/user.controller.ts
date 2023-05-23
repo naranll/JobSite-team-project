@@ -76,7 +76,7 @@ export class UserController {
   async uploadImage(
     @UploadedFile() file: Express.Multer.File,
   ): Promise<string> {
-    const {originalname} = file
+    const { originalname } = file;
     const ext = getExtension(originalname);
     const newName = nanoid() + '.' + ext;
     console.log('filename', newName);
@@ -85,7 +85,7 @@ export class UserController {
       const arr = name.split('.');
       return arr[arr.length - 1];
     }
-    
+
     const storageRef = admin.storage().bucket().file(newName);
     const metadata = {
       contentType: file.mimetype,

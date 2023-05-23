@@ -1,4 +1,8 @@
-import { Injectable, UnauthorizedException, UploadedFile } from '@nestjs/common';
+import {
+  Injectable,
+  UnauthorizedException,
+  UploadedFile,
+} from '@nestjs/common';
 import { InjectConnection, InjectModel } from '@nestjs/mongoose';
 import { Connection, Model } from 'mongoose';
 import { User } from './user.schema';
@@ -58,8 +62,8 @@ export class UserService {
     return updatedUser;
   }
 
-  async uploadToFirebase(file: Express.Multer.File): Promise<string>{
-    const {originalname, buffer, mimetype} = file
+  async uploadToFirebase(file: Express.Multer.File): Promise<string> {
+    const { originalname, buffer, mimetype } = file;
 
     const ext = getExtension(originalname);
     const newName = nanoid() + '.' + ext;
@@ -84,4 +88,3 @@ export class UserService {
     return url[0];
   }
 }
-  
