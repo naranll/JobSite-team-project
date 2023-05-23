@@ -4,15 +4,12 @@ import {
   Get,
   Param,
   Post,
-  Query,
   Request as Req,
   Response as Res,
 } from '@nestjs/common';
-import { Request, Response, query } from 'express';
+import { Request, Response } from 'express';
 import { ApplicationService } from './application.service';
 import { Application } from './application.schema';
-import { ApplicationDto } from './application.dto';
-// import { Job } from 'src/job/job.schema';
 
 @Controller('application')
 export class ApplicationController {
@@ -38,15 +35,15 @@ export class ApplicationController {
   }
 
   @Post('add')
-  async addAppList(@Req() Req: Request, @Res() Res: Response) {
-    const { userId, jobId } = Req.body;
+  async addAppList(@Req() req: Request, @Res() res: Response) {
+    const { userId, jobId } = req.body;
     try {
       const result = await this.applicationService.isApplied(userId, jobId);
       if (!result) {
-        const response = await this.applicationService.addApp(Req.body);
-        return Res.status(200).json({ success: true, data: response });
+        const response = await this.applicationService.addApp(req.body);
+        return res.status(200).json({ success: true, data: response });
       } else {
-        return Res.status(409).json({
+        return res.status(409).json({
           success: false,
           message: 'you already applied to this job',
         });
@@ -56,20 +53,31 @@ export class ApplicationController {
     }
   }
 
-  @Get('/:id')
+  @Get('/:applicationId')
+  getApplicationById(
+    @Param('applicationId') applicationId: string,
+  ): Promise<Application[] | void> {
+    try {
+      return this.applicationService.getApplicationById(applicationId);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  @Get('/userId/:id')
   getAppliedJobsByUserId(@Param('id') userId: string): Promise<Application[]> {
     return this.applicationService.getAppliedJobsByUserId(userId);
   }
 
-  @Get('/applicants/:jobId')
+  @Get('/jobId/:jobId')
   getApplicantsByJobId(@Param('jobId') jobId: string): Promise<Application[]> {
     return this.applicationService.getApplicantsByJobId(jobId);
   }
 
-  @Get('application_id')
-  getStaticId(): Promise<Application[]> {
-    return this.applicationService.generateStaticId();
-  }
+  // @Get('application_id')
+  // getStaticId(): Promise<Application[]> {
+  //   return this.applicationService.generateStaticId();
+  // }
 
   @Delete('/remove/:id')
   async removeApplication(@Req() Req: Request, @Res() Res: Response) {
