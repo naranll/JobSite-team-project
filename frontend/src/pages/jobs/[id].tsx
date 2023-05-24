@@ -91,13 +91,20 @@ export default function Job({data: job}: {data: JobType}): JSX.Element {
 }
 
 export const getStaticPaths = async () => {
-  const result = await fetch(
-    `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/job/job_id`
-  );
-  const resJob = await result.json();
-  const paths = await resJob.map((id: {_id: string}) => ({
-    params: {id: id._id},
-  }));
+  let paths = [];
+  try {
+    const result = await fetch(
+      `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/job/job_id`
+    );
+    console.log("result:", result);
+    const resJob = await result.json();
+    paths = await resJob.map((id: {_id: string}) => ({
+      params: {id: id._id},
+    }));
+  } catch (err) {
+    console.log("error: ", err);
+  }
+
   return {
     paths,
     fallback: "blocking",
