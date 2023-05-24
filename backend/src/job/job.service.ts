@@ -47,7 +47,6 @@ export class JobService {
       })
       .skip((pageNumbers - 1) * 8)
       .limit(8);
-    console.log(' found job filterJobs ===> ', result);
     return result;
   }
 
