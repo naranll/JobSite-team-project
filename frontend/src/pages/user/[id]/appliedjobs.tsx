@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
-import {useRef, useState} from "react";
-import {useUserContext} from "@/context/UserContext";
-import {JobType} from "@/util/types";
-import JobCard from "@/components/JobCard";
-import Link from "next/link";
-import {Dialog} from "primereact/dialog";
-import {Button} from "primereact/button";
-import {Toast} from "primereact/toast";
+// import JobCard from "@/components/JobCard";
+// import Link from "next/link";
 // import "../../styles/applied.scss";
-import {FcCancel} from "react-icons/fc";
+// import { FcCancel } from "react-icons/fc";
+// import { GetStaticProps, GetStaticPropsContext } from "next";
+import { useRef, useState } from "react";
+import { useUserContext } from "@/context/UserContext";
+import { JobType } from "@/util/types";
+import { Dialog } from "primereact/dialog";
+import { Button } from "primereact/button";
+import { Toast } from "primereact/toast";
 import axios from "axios";
-import {GetStaticProps, GetStaticPropsContext} from "next";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 import React from "react";
 
 export interface AppliedType {
@@ -22,10 +22,10 @@ export interface AppliedType {
   state: string;
 }
 
-export default function AppliedJob(props: {data: AppliedType}): JSX.Element {
-  const [jobId, setJobId] = useState<string | undefined>();
+export default function AppliedJob(): JSX.Element {
+  const [jobId] = useState<string | undefined>();
   const [visible, setVisible] = useState(false);
-  const {currentUser} = useUserContext();
+  const { currentUser } = useUserContext();
   const router = useRouter();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const toast = useRef<any>(null);
@@ -82,7 +82,7 @@ export default function AppliedJob(props: {data: AppliedType}): JSX.Element {
           <Button onClick={() => setVisible(false)}>no</Button>
         </div>
       </Dialog>
-      {props.data.map((job: AppliedType, i: number) => (
+      {/* {props.data.map((job: AppliedType, i: number) => (
         <div className="card" key={i}>
           <Link className="w-4/5 p-3 " href={`../jobs/${job.jobId?._id}`}>
             <JobCard {...job.jobId} />
@@ -98,39 +98,39 @@ export default function AppliedJob(props: {data: AppliedType}): JSX.Element {
             <FcCancel size={40} />
           </div>
         </div>
-      ))}
+      ))} */}
     </div>
   );
 }
 
-export const getStaticPaths = async () => {
-  const result = await fetch(
-    `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/application/user_id`
-  );
-  const resultApp = await result.json();
-  const paths = await resultApp.map((id: {_id: string}) => ({
-    params: {id: id._id},
-  }));
-  return {
-    paths,
-    fallback: "blocking",
-  };
-};
+// export const getStaticPaths = async () => {
+//   const result = await fetch(
+//     `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/application/user_id`
+//   );
+//   const resultApp = await result.json();
+//   const paths = await resultApp.map((id: {_id: string}) => ({
+//     params: {id: id._id},
+//   }));
+//   return {
+//     paths,
+//     fallback: "blocking",
+//   };
+// };
 
-interface ApplicationProps {
-  data: AppliedType | null;
-}
+// interface ApplicationProps {
+//   data: AppliedType | null;
+// }
 
-export const getStaticProps: GetStaticProps<ApplicationProps> = async ({
-  params,
-}: GetStaticPropsContext) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/application/${params?.id}`
-  );
-  const resJson = await res.json();
-  return {
-    props: {
-      data: resJson,
-    },
-  };
-};
+// export const getStaticProps: GetStaticProps<ApplicationProps> = async ({
+//   params,
+// }: GetStaticPropsContext) => {
+//   const res = await fetch(
+//     `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/application/${params?.id}`
+//   );
+//   const resJson = await res.json();
+//   return {
+//     props: {
+//       data: resJson,
+//     },
+//   };
+// };
