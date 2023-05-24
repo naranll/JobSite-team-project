@@ -57,6 +57,7 @@ export class ApplicationController {
   getApplicationById(
     @Param('applicationId') applicationId: string,
   ): Promise<Application[] | void> {
+    console.log('applicationId: ', applicationId);
     try {
       return this.applicationService.getApplicationById(applicationId);
     } catch (error) {
