@@ -93,4 +93,4 @@ export class UserService {
     return url[0];
   } 
 }
-}
+

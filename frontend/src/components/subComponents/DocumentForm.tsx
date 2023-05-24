@@ -1,10 +1,10 @@
-import { UserType } from "@/util/types"
 import axios from "axios"
 import { useState } from "react"
 import { Dialog } from "primereact/dialog"
 import { Button } from "primereact/button"
 
-export default function DocumentForm({user, setDocumentVisible} : any): JSX.Element {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function DocumentForm({user} : any): JSX.Element {
     const [document, setDocument] = useState<File | null>(null)
     const [showDialog, setShowDialog] = useState<boolean>(false)
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
