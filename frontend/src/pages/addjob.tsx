@@ -4,6 +4,7 @@ import {JobType} from "@/util/types";
 import {useUserContext} from "../context/UserContext";
 import SuccessModal from "@/components/SuccessModal";
 import {useRouter} from "next/router";
+import Cookies from "js-cookie";
 
 export default function AddJob(): JSX.Element {
   const {currentUser} = useUserContext();
@@ -11,10 +12,11 @@ export default function AddJob(): JSX.Element {
   const router = useRouter();
 
   useEffect(() => {
-    if (!currentUser) {
+    const token = Cookies.get("token");
+    if (!token) {
       router.push("/login");
     }
-  }, [currentUser, router]);
+  }, [router]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function submitHandler(event: any): void {
