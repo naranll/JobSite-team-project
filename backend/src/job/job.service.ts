@@ -37,7 +37,7 @@ export class JobService {
           title: { $regex: new RegExp(search, 'i') },
         })
         .skip((pageNumbers - 1) * 8)
-        .limit(8);
+        .limit(8).populate('postedBy', 'image');
       return result;
     }
     const result = await this.jobModel
@@ -46,7 +46,7 @@ export class JobService {
         title: { $regex: new RegExp(search, 'i') },
       })
       .skip((pageNumbers - 1) * 8)
-      .limit(8);
+      .limit(8).populate('postedBy', 'image');
     return result;
   }
 
@@ -65,7 +65,7 @@ export class JobService {
     const result = this.jobModel
       .find({})
       .skip((pageNumbers - 1) * 8)
-      .limit(8);
+      .limit(8).populate('postedBy', 'image');
     return result;
   }
 }

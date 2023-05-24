@@ -1,4 +1,4 @@
-import {JobType, UserType} from "@/util/types";
+import {JobType} from "@/util/types";
 import {GetStaticProps, GetStaticPropsContext} from "next";
 import {useUserContext} from "../../context/UserContext";
 import axios from "axios";
@@ -24,9 +24,6 @@ export default function Job({data: job}: {data: JobType}): JSX.Element {
       router.push("/login");
     }
     const checkApplied = async () => {
-      console.log("user id", currentUser?._id);
-      console.log("job id", job?._id);
-      console.log("postedBy",typeof job.postedBy !== "string" && job?.postedBy?._id);
            const checkBody = {
                 jobId: job._id,
                 userId: currentUser?._id,
