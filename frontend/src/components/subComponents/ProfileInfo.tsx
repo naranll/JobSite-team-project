@@ -5,11 +5,14 @@ import {useEffect, useState} from "react";
 import {Button} from "primereact/button";
 import {Dialog} from "primereact/dialog";
 import UserEditForm from "./UserEditForm";
+import DocumentForm from "./DocumentForm";
 
 export default function ProfileInfo(): JSX.Element {
   const {currentUser} = useUserContext();
   const [user, setUser] = useState<UserType | undefined>(undefined);
   const [visible, setVisible] = useState(false);
+  const [documentVisible, setDocumentVisible] = useState(false)
+
 
   useEffect(() => {
     const getUser = async (id: string | undefined) => {
@@ -20,7 +23,9 @@ export default function ProfileInfo(): JSX.Element {
     };
     if (currentUser) {
       getUser(currentUser._id);
+      
     }
+  
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -71,18 +76,10 @@ export default function ProfileInfo(): JSX.Element {
             </ul>
           </div>
           <div className="border-2 p-3 m-3 rounded-lg shadow-md">
-            <h2 className="text-lg font-bold">General Information:</h2>
-            <div>
-              <h3 className="text-lg font-semibold">About me</h3>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Non
-                sunt excepturi modi maiores nulla cum, ducimus sint at
-                explicabo, ut dicta aperiam qui dolorem iure architecto
-                inventore laudantium totam placeat tempore vel earum, possimus
-                magnam harum. Repellendus cum minima natus consectetur assumenda
-                quis ipsum dignissimos, accusamus quibusdam vel maiores
-                suscipit?
-              </p>
+            <h2 className="text-lg font-bold">CV:</h2>
+            <div className=" m-5 flex justify-center">
+              {user.cv ? <div className="flex justify-between gap-5 items-center"> <a className="border-2 p-3 rounded-lg shadow-md hover:bg-slate-300" href={user.cv}>click to download cv</a> <p onClick={() => setDocumentVisible(true)} className="border-2 p-3 rounded-lg hover:bg-slate-300 cursor-pointer">or upload CV</p> </div> : <DocumentForm {...user} /> }
+              <Dialog header="Upload Document" visible={documentVisible} style={{width: "40vw", height: "40vh"}} onHide={() => setDocumentVisible(false)} > <DocumentForm user={user} setDocumentVisible={setDocumentVisible} /> </Dialog>
             </div>
           </div>
           <Dialog

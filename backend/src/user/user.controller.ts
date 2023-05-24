@@ -18,12 +18,14 @@ import { FileInterceptor } from '@nestjs/platform-express';
 // import { firebaseApp, storageBucket } from 'src/fileHandler/firebase.service';
 import { nanoid } from 'nanoid';
 import { admin } from 'src/fileHandler/firebase.config';
+import { FileUploadService } from 'src/fileHandler/upload-file.service';
 
 @Controller('user')
 export class UserController {
   constructor(
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
+    private readonly fileUploadService: FileUploadService,
   ) {}
 
   @Get('all')
@@ -71,34 +73,20 @@ export class UserController {
     return this.userService.findUser(id);
   }
 
-  @Post('uploads')
-  @UseInterceptors(FileInterceptor('image'))
-  async uploadImage(
+  @Post('/:id')
+  @UseInterceptors(FileInterceptor('file'))
+  async uploadFile(
+    @Param('id') id: string,
     @UploadedFile() file: Express.Multer.File,
-  ): Promise<string> {
-    const { originalname } = file;
-    const ext = getExtension(originalname);
-    const newName = nanoid() + '.' + ext;
-    console.log('filename', newName);
+  ): Promise<any> {
 
-    function getExtension(name: string) {
-      const arr = name.split('.');
-      return arr[arr.length - 1];
-    }
+    const fileBuffer = file.buffer
+    const fileName = file.originalname;
 
-    const storageRef = admin.storage().bucket().file(newName);
-    const metadata = {
-      contentType: file.mimetype,
-    };
+    const url = await this.fileUploadService.uploadFile(fileBuffer, fileName)
 
-    await storageRef.save(file.buffer, {
-      metadata,
-    });
-    const url = await storageRef.getSignedUrl({
-      action: 'read',
-      expires: '03-01-2024 ',
-    });
-    return url[0];
+    const updateUser = await this.userService.upDateCV(id, url)
+    return updateUser
   }
 
   @Patch('/:id')
@@ -131,38 +119,4 @@ export class UserController {
       res.status(400).json({ message: false });
     }
   }
-
-  // private async uploadFileToFirebase(
-  //   file: Express.Multer.File,
-  // ): Promise<string> {
-  //   const { originalname, buffer, mimetype } = file;
-
-  //   const ext = getExtension(originalname);
-  //   // const generatedId = nanoid();
-  //   const newName = nanoid() + '.' + ext;
-  //   console.log('filename', newName);
-
-  //   function getExtension(name: string) {
-  //     const arr = name.split('.');
-  //     return arr[arr.length - 1];
-  //   }
-
-  //   const blob = storageBucket.file(newName);
-  //   const blobWriter = blob.createWriteStream({
-  //     metadata: {
-  //       contentType: mimetype,
-  //     },
-  //   });
-
-  //   return new Promise((resolve, reject) => {
-  //     blobWriter.on('finish', () => {
-  //       const publicUrl = `https://storage.googleapis.com/${storageBucket.name}/${blob.name}`;
-  //       resolve(publicUrl);
-  //     });
-  //     blobWriter.on('error', (error) => {
-  //       reject(error);
-  //     });
-  //     blobWriter.end(buffer);
-  //   });
-  // }
 }

@@ -5,9 +5,11 @@ import { UserController } from './user.controller';
 import { UserService } from './user.service';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule } from '@nestjs/config';
+import { FileUploadService } from 'src/fileHandler/upload-file.service';
 
 @Module({
   imports: [
+    
     ConfigModule,
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
     JwtModule.register({
@@ -16,8 +18,8 @@ import { ConfigModule } from '@nestjs/config';
       signOptions: { expiresIn: '1h' },
     }),
   ],
-  exports: [UserService],
+  exports: [UserService, FileUploadService],
   controllers: [UserController],
-  providers: [UserService],
+  providers: [UserService, FileUploadService],
 })
 export class UserModule {}
