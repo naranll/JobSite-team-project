@@ -53,7 +53,7 @@ export class ApplicationController {
     }
   }
 
-  @Get('/:applicationId')
+  @Get('/id/:applicationId')
   getApplicationById(
     @Param('applicationId') applicationId: string,
   ): Promise<Application[] | void> {
