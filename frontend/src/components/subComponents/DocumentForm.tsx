@@ -1,12 +1,15 @@
 import axios from "axios"
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { Dialog } from "primereact/dialog"
 import { Button } from "primereact/button"
+import { Toast } from 'primereact/toast';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function DocumentForm({user} : any): JSX.Element {
+export default function DocumentForm({user, setDocumentVisible} : any): JSX.Element {
     const [document, setDocument] = useState<File | null>(null)
     const [showDialog, setShowDialog] = useState<boolean>(false)
+    const toast = useRef<Toast>(null);
+
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if(event.target.files && event.target.files.length > 0) {
             setDocument(event.target.files[0])
@@ -15,6 +18,7 @@ export default function DocumentForm({user} : any): JSX.Element {
     const handleDocumentUpload = () => {
 
         console.log("document", document)
+        setShowDialog(false)
         const formData = new FormData()
 
         if (document){
@@ -31,6 +35,8 @@ export default function DocumentForm({user} : any): JSX.Element {
         }).then((res) => {
             if(res.data.success) {
                 console.log("success")
+                setDocumentVisible(false)
+                toast.current?.show({ severity:'success', summary:'success', detail: 'Document successfully saved' });
             }
         }).catch((error) => {
             console.error("error uploading document: ", error.response.data)
