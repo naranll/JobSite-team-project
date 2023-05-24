@@ -61,8 +61,14 @@ export class UserService {
     return updatedUser;
   }
 
-  async uploadToFirebase(file: Express.Multer.File): Promise<string> {
-    const { originalname, buffer, mimetype } = file;
+  async upDateCV(id: string, url: string): Promise<User> {
+    const cv = { cv: url}
+    const updateUser = await this.userModel.findByIdAndUpdate(id, cv, { new: true });
+    return updateUser
+  }
+
+  async uploadToFirebase(file: Express.Multer.File): Promise<string>{
+    const {originalname, buffer, mimetype} = file
 
     const ext = getExtension(originalname);
     const newName = nanoid() + '.' + ext;
@@ -85,5 +91,6 @@ export class UserService {
       expires: '03-01-2024 ',
     });
     return url[0];
-  }
+  } 
+}
 }

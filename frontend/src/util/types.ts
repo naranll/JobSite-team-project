@@ -22,6 +22,7 @@ export type UserType = {
   image?: string;
   skills?: [string];
   joinDate?: string;
+  cv? : string;
 };
 
 export type ApplicationType = {

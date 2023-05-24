@@ -29,7 +29,7 @@ export default function UserEditForm({ user, setVisible }: any): JSX.Element {
     // phoneNumber: null,
   });
   const [modalVisible, setModalVisible] = useState(false);
-  const [skills, setSkills] = useState<string[]>([]);
+  const [skills, setSkills] = useState<string[]>(user.skills);
   const [image, setImage] = useState<File | null>(null);
 
   const showInfo = () => {

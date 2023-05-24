@@ -23,6 +23,8 @@ export class User {
   role: 'CLIENT' | 'MODERATOR' | 'ADMIN';
   @Prop()
   image?: string;
+  @Prop()
+  cv?: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
