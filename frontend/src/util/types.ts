@@ -1,5 +1,5 @@
 export type JobType = {
-  postedBy?: string | UserType;
+  postedBy?: UserType | string;
   _id?: string;
   title: string;
   description: string;

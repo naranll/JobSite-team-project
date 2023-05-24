@@ -4,8 +4,8 @@ import { User } from 'src/user/user.schema';
 
 @Schema({ timestamps: true })
 export class Job {
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: User.name })
-  postedBy: Types.ObjectId;
+  @Prop({ type: mongoose.Schema.Types.String, ref: User.name })
+  postedBy: string;
 
   @Prop()
   title: string;

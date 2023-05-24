@@ -7,39 +7,46 @@ import SuccessModal from "@/components/SuccessModal";
 import {useRouter} from "next/router";
 import Cookies from "js-cookie";
 import moment from "moment";
+import Link from "next/link";
 
 export default function Job({data: job}: {data: JobType}): JSX.Element {
   const {currentUser} = useUserContext();
-  const [isApplied, setIsApplied] = useState(false);
+  const [isApplied, setIsApplied] = useState<boolean>(false);
+  const [ifPosted, setIfPosted] = useState<boolean>(false);
   const [showSuccessModal, setShowSuccessModal] = useState<boolean>(false);
   const router = useRouter();
-
-  const checkApplied = () => {
-    const checkBody = {
-      jobId: job._id,
-      userId: currentUser?._id,
-    };
-
-    axios
-      .post(
-        `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/application/check`,
-        checkBody
-      )
-      .then((res) => {
-        if (res.data.message) {
-          setIsApplied(true);
-        }
-      });
-  };
+  
+  
 
   useEffect(() => {
     const token = Cookies.get("token");
     if (!token) {
       router.push("/login");
     }
+    const checkApplied = async () => {
+           const checkBody = {
+                jobId: job._id,
+                userId: currentUser?._id,
+                };
+
+    const result = await axios
+      .post(
+        `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/application/check`,
+        checkBody
+      )
+      if(result.data.message){
+        setIsApplied(true);
+        console.log("is applied",result.data.message)
+      }
+  };
     checkApplied();
+    console.log("postedBy", job.postedBy)
+    if( typeof job.postedBy !== "string" && currentUser?._id === job.postedBy?._id){
+      console.log("own posted job")
+      setIfPosted(true)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [currentUser]);
 
   function handleApply() {
     const newApply = {jobId: job._id, userId: currentUser?._id};
@@ -71,16 +78,18 @@ export default function Job({data: job}: {data: JobType}): JSX.Element {
               <p className="jobpage-contract">{job.category}</p>
               <p className="jobpage-contract">{job.requirement}</p>
               <p className="jobpage-contract">{job.location}</p>
-            </div>
-            <button
-              disabled={(currentUser._id === job.postedBy, isApplied === true)}
+            </div>        
+            {  ifPosted? (<Link href={`/profile`}> <button className="w-full text-white bg-blue-500 hover:bg-blue-600 border-2 rounded-lg">see applicants</button></Link> ):( <button
+              disabled={(isApplied === true)}
+              
               onClick={handleApply}
               className={`w-full ${
                 isApplied ? "text-black bg-gray-400 rounded-lg" : "btn-style"
               }`}
             >
               {isApplied ? "Applied" : "Apply"}
-            </button>
+            </button> )}
+            
           </div>
 
           {showSuccessModal && <SuccessModal setModal={setShowSuccessModal} />}
