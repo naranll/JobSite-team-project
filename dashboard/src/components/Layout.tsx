@@ -1,4 +1,4 @@
-import {ReactNode} from "react";
+import { ReactNode } from "react";
 import Head from "next/head";
 import SideMenu from "./SideMenu";
 import Header from "./Header";
@@ -7,7 +7,7 @@ interface PropType {
   children: ReactNode;
 }
 
-export default function Layout({children}: PropType): JSX.Element {
+export default function Layout({ children }: PropType): JSX.Element {
   return (
     <div>
       <Head>
