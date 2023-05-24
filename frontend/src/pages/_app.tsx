@@ -8,6 +8,7 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
 import { ChakraProvider } from "@chakra-ui/react";
 import Loader from "@/components/Loader";
+// import Loader from "@/components/Loader";
 // import 'primeicons/primeicons.css';
 
 export default function App({ Component, pageProps }: AppProps): JSX.Element {
