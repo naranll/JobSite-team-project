@@ -1,5 +1,5 @@
 import { InjectConnection, InjectModel } from '@nestjs/mongoose';
-import { Connection, Model } from 'mongoose';
+import { Connection, Model, now } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { Application } from './application.schema';
 
@@ -75,5 +75,22 @@ export class ApplicationService {
       $and: [{ userId: userId }, { jobId: jobId }],
     });
     return result;
+  }
+
+  async acceptApplicant(
+    applicationId: string,
+    newState: string,
+  ): Promise<void> {
+    console.log('accept service', applicationId, newState);
+    const state = {
+      state: newState,
+      updatedDate: Date.now(),
+    };
+    const result = await this.applicationModel.findByIdAndUpdate(
+      applicationId,
+      state,
+      { new: true },
+    );
+    console.log('result', result);
   }
 }

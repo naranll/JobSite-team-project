@@ -32,10 +32,58 @@ export default function Applicant({selectedApplicationId}: PropType) {
 
   function acceptHandler() {
     console.log("accept", applicantInfo?.userId.firstName);
+    fetch(
+      `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/application/${selectedApplicationId}`,
+      {
+        method: "PATCH",
+        body: JSON.stringify({
+          newState: "ACCEPTED",
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((res) => console.log("accept res", res));
   }
 
   function rejectHandler() {
-    console.log("accept", applicantInfo?.userId.firstName);
+    console.log("reject", applicantInfo?.userId.firstName);
+    fetch(
+      `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/application/${selectedApplicationId}`,
+      {
+        method: "PATCH",
+        body: JSON.stringify({
+          newState: "REJECTED",
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((res) => console.log("accept res", res));
+  }
+
+  function applicantHandler(prop: string) {
+    console.log("applicnt handler");
+    fetch(
+      `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/application/${selectedApplicationId}`,
+      {
+        method: "PATCH",
+        body: JSON.stringify({
+          newState: prop,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((res) => console.log("accept res", res));
+  }
+
   }
 
   return (
@@ -55,13 +103,13 @@ export default function Applicant({selectedApplicationId}: PropType) {
             <div>Skills: {applicantInfo.userId.skills}</div>
           </div>
           <div
-            onClick={() => acceptHandler}
+            onClick={() => applicantHandler('ACCEPTED')}
             className="border-2 border-solid border-lime-500"
           >
             Accept
           </div>
           <div
-            onClick={() => rejectHandler()}
+            onClick={() => applicantHandler('REJECTED')}
             className="border-2 border-solid border-rose-500"
           >
             Reject
