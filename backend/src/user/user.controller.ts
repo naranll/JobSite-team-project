@@ -76,6 +76,8 @@ export class UserController {
   @Post('/:id')
   @UseInterceptors(FileInterceptor('file'))
   async uploadFile(
+    @Req() req: Request,
+    @Res() res: Response,
     @Param('id') id: string,
     @UploadedFile() file: Express.Multer.File,
   ): Promise<any> {
@@ -86,7 +88,11 @@ export class UserController {
     const url = await this.fileUploadService.uploadFile(fileBuffer, fileName)
 
     const updateUser = await this.userService.upDateCV(id, url)
-    return updateUser
+    if(updateUser){
+      res.status(200).json({ success: true })
+    } else {
+      res.status(500).json({ success: false })
+    }
   }
 
   @Patch('/:id')
