@@ -2,6 +2,7 @@ import {
   Controller,
   Delete,
   Get,
+  Patch,
   Param,
   Post,
   Request as Req,
@@ -75,11 +76,6 @@ export class ApplicationController {
     return this.applicationService.getApplicantsByJobId(jobId);
   }
 
-  // @Get('application_id')
-  // getStaticId(): Promise<Application[]> {
-  //   return this.applicationService.generateStaticId();
-  // }
-
   @Delete('/remove/:id')
   async removeApplication(@Req() Req: Request, @Res() Res: Response) {
     const { userId, jobId } = Req.body;
@@ -88,6 +84,25 @@ export class ApplicationController {
       Res.status(200).json({ message: true });
     } else {
       Res.status(400).json({ message: 'something went wrong' });
+    }
+  }
+
+  @Patch(':applicationId')
+  async acceptApplicant(
+    @Param('applicationId') applicationId: string,
+    @Req() req: Request,
+    @Res() res: Response,
+  ): Promise<void> {
+    try {
+      console.log('accept', applicationId, req.body);
+      const { newState } = req.body;
+      const result = await this.applicationService.acceptApplicant(
+        applicationId,
+        newState,
+      );
+      res.json({ updated: result });
+    } catch (error) {
+      console.log('error', error);
     }
   }
 }

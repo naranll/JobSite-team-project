@@ -1,6 +1,6 @@
-import {ApplicationType, UserType} from "@/util/types";
-import {useRouter} from "next/router";
-import {useEffect, useState} from "react";
+import { ApplicationType, UserType } from "@/util/types";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 interface PropType {
   selectedApplicationId: string | undefined;
@@ -10,7 +10,7 @@ interface ApplicantsType extends Omit<ApplicationType, "userId"> {
   userId: UserType;
 }
 
-export default function Applicant({selectedApplicationId}: PropType) {
+export default function Applicant({ selectedApplicationId }: PropType) {
   const router = useRouter();
   const [applicantInfo, setApplicantInfo] = useState<
     ApplicantsType | undefined
@@ -30,12 +30,22 @@ export default function Applicant({selectedApplicationId}: PropType) {
     }
   }, [selectedApplicationId]);
 
-  function acceptHandler() {
-    console.log("accept", applicantInfo?.userId.firstName);
-  }
-
-  function rejectHandler() {
-    console.log("accept", applicantInfo?.userId.firstName);
+  function applicantHandler(prop: string) {
+    console.log("applicnt handler");
+    fetch(
+      `${process.env.NEXT_PUBLIC_JOBSITE_HOST}/application/${selectedApplicationId}`,
+      {
+        method: "PATCH",
+        body: JSON.stringify({
+          newState: prop,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((res) => console.log("accept res", res));
   }
 
   return (
@@ -55,13 +65,13 @@ export default function Applicant({selectedApplicationId}: PropType) {
             <div>Skills: {applicantInfo.userId.skills}</div>
           </div>
           <div
-            onClick={() => acceptHandler}
+            onClick={() => applicantHandler("ACCEPTED")}
             className="border-2 border-solid border-lime-500"
           >
             Accept
           </div>
           <div
-            onClick={() => rejectHandler()}
+            onClick={() => applicantHandler("REJECTED")}
             className="border-2 border-solid border-rose-500"
           >
             Reject
