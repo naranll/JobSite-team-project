@@ -3,10 +3,10 @@ export type JobType = {
   title: string;
   description: string;
   payment: number;
-  created_date?: Date;
+  createdDate: string;
   updatedDate: Date;
   contractType?: string;
-  state?: string;
+  state: string;
 };
 
 export type UserType = {
@@ -29,4 +29,9 @@ export type ApplicationType = {
   createdDate?: Date;
   updatedDate?: Date;
   state?: string;
+};
+
+export type CategoryType = {
+  _id: string;
+  name: string;
 };

@@ -26,8 +26,8 @@ const menuPages: Array<menuPageType> = [
     logo: <Logos.UserLogo />,
   },
   {
-    page: "Applications",
-    url: "/applications",
+    page: "Categories",
+    url: "/categories",
     logo: <Logos.ApplicationLogo />,
   },
   {
