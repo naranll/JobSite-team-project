@@ -1,4 +1,4 @@
-import Row from "../components/Row";
+import JobRow from "../components/JobRow";
 import {JobType} from "@/utils/types";
 
 export default function Jobs(props: {jobs: JobType[]}): JSX.Element {
@@ -21,7 +21,6 @@ export default function Jobs(props: {jobs: JobType[]}): JSX.Element {
         <thead>
           <tr className="[&>*]:h-[40px] [&>*]:border [&>*]:border-slate-200 rounded-md">
             <th className="w-[40px]">No.</th>
-            <th className="w-[250px]">id</th>
             <th>created</th>
             <th>title</th>
             <th>state</th>
@@ -29,11 +28,11 @@ export default function Jobs(props: {jobs: JobType[]}): JSX.Element {
         </thead>
         <tbody>
           {jobs.map((job: JobType, i: number) => {
-            const rowData = {
+            const jobData = {
               rowNumber: i,
               data: job,
             };
-            return <Row key={i} rowData={rowData} />;
+            return <JobRow key={i} jobData={jobData} />;
           })}
         </tbody>
       </table>
@@ -44,9 +43,7 @@ export default function Jobs(props: {jobs: JobType[]}): JSX.Element {
 export async function getStaticProps() {
   try {
     const response = await fetch("http://localhost:8008/job/all");
-    console.log("response", response);
     const jobs = await response.json();
-    console.log("response from fetch", jobs);
     return {
       props: {
         jobs: jobs,
