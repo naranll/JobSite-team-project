@@ -14,6 +14,7 @@ export default function Header(): JSX.Element {
   return (
     <div className="header center-element w-full h-[46px] md:h-[54px] container mx-auto">
       <Link href={`/`} className="header-logo">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/assets/logo.png" alt="5STAAS" width={170} />
       </Link>
       <div className="center-element gap-2">
